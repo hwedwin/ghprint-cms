@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:context="http://www.springframework.org/schema/context"
+	   xmlns:p="http://www.springframework.org/schema/p"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xmlns:mvc="http://www.springframework.org/schema/mvc"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans
+   http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+   http://www.springframework.org/schema/context
+   http://www.springframework.org/schema/context/spring-context-3.0.xsd
+   http://www.springframework.org/schema/mvc
+   http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
+    <!-- 自动扫描bean，把作了注解的类转换为bean -->
+    <context:component-scan base-package="com.ghprint.cms.controller"  use-default-filters="false">
+		<context:include-filter expression="org.springframework.stereotype.Controller" type="annotation"/>
+	</context:component-scan> 
+	
+	<mvc:annotation-driven conversion-service="conversionService"/>
+	
+	<!-- 处理 静态文件不能访问--> 
+	<mvc:default-servlet-handler/>
+	
+    <!-- json 自动转换功能的实现 --> 
+    <bean id="jsonHttpMessageConverter" class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter" />
+    <bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
+        <property name="messageConverters">
+            <list>
+                <!-- Support JSON --> 
+                <ref bean="jsonHttpMessageConverter" />  
+            </list>
+        </property>
+    </bean>
+
+    <mvc:interceptors>
+        <!-- 使用bean定义一个Interceptor，直接定义在mvc:interceptors根下面的Interceptor将拦截所有的请求 -->
+        <mvc:interceptor>
+            <mvc:mapping path="/**"/>
+            <bean id="StopWatchHandlerInterceptor" class="com.ghprint.cms.framework.Interceptor.StopWatchHandlerInterceptor"/>
+        </mvc:interceptor>
+    </mvc:interceptors>
+    <!-- 自定义转换器用于把字符串转化为数组 --> 
+    <bean id="conversionService"
+		class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
+	</bean>
+    <!-- 视图解析配置 -->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver"
+		p:order="100" p:viewClass="org.springframework.web.servlet.view.JstlView"
+		p:prefix="/WEB-INF/" p:suffix=".jsp" />
+
+    <!-- 文件上传所需的配置 -->
+	<bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<property name="defaultEncoding" value="UTF-8" /> <!-- 默认编码 (ISO-8859-1) -->
+		<property name="maxUploadSize" value="-1" /> <!-- 最大文件大小，-1为无限止(-1) -->
+		<property name="maxInMemorySize" value="10240" /> <!-- 最大内存大小 (10240)-->
+	</bean>
+	
+	<!-- 自定义异常处理 -->
+    <bean id="exceptionResolver" class="com.ghprint.cms.framework.exception.ExceptionHandler"/>
+</beans>
+    

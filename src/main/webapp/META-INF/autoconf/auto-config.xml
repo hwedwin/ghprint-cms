@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+
+
+    <!-- 数据库连接 -->
+    <group name="jdbc">
+        <!-- 测试 -->
+        <property name="jdbc.url" description="测试数据库地址"/>
+        <property name="jdbc.username"  description="测试数据库用户名"/>
+        <property name="jdbc.password" description="测试数据库密码"/>
+
+        <property name="jdbc.initialSize" defaultValue="1"/>
+        <property name="jdbc.minIdle" defaultValue="1"/>
+        <property name="jdbc.maxActive" defaultValue="20"/>
+        <property name="jdbc.maxWait" defaultValue="60000"/>
+        <property name="jdbc.timeBetweenEvictionRunsMillis" defaultValue="60000"/>
+        <property name="jdbc.minEvictableIdleTimeMillis" defaultValue="300000"/>
+        <property name="jdbc.validationQuery" defaultValue="SELECT 'x' FROM DUAL"/>
+        <property name="jdbc.testWhileIdle" defaultValue="true"/>
+        <property name="jdbc.testOnBorrow" defaultValue="false"/>
+        <property name="jdbc.testOnReturn" defaultValue="false"/>
+        <property name="jdbc.poolPreparedStatements" defaultValue="true"/>
+        <property name="jdbc.maxPoolPreparedStatementPerConnectionSize" defaultValue="20"/>
+        <property name="jdbc.filters" defaultValue="stat,slf4j,config"/>
+        <property name="jdbc.useOracleImplicitCache" defaultValue="false"/>
+    </group>
+
+
+
+    <!-- 日志 -->
+    <group name="log">
+        <property name="log.path" defaultValue="/data/ghprint/appLogs/ghprint-cms"/>
+        <property name="log.level" defaultValue="info"/>
+        <property name="log.app.name" defaultValue="ghprint-cms"/>
+    </group>
+
+    <!-- 文件生成配置 -->
+    <script>
+        <generate template="applicationContext.xml.vm" destfile="WEB-INF/classes/applicationContext.xml" charset="UTF-8"/>
+        <generate template="logback.xml.vm" destfile="WEB-INF/classes/logback.xml" charset="UTF-8"/>
+    </script>
+</config>
