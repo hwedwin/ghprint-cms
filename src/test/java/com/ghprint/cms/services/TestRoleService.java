@@ -26,5 +26,15 @@ public class TestRoleService {
         System.out.print(dataresult.getRows().get(0));
     }
 
+    @Test
+    public void testaddRoleinfo()throws  Exception{
+        TSysRole role = new TSysRole();
+        role.setRolename("测试管理员");
+        role.setRoledesc("测试案例");
+        role.setRolestatus("1");
+        String[] strArray={"140000008","140000009","140000010"};
+        roleService.addRoleInfo(role,strArray);
+    }
+
 
 }

@@ -1,5 +1,6 @@
 package com.ghprint.cms.services;
 
+import cn.com.bestpay.Response;
 import com.ghprint.cms.model.sys.TSysRole;
 import com.ghprint.cms.pagination.DataGridResult;
 
@@ -13,6 +14,7 @@ public interface RoleService {
     //查询角色列表
     public DataGridResult getRoleList(TSysRole tSysRole, Integer page , Integer rows);
 
-
+    //添加角色
+    public Response <String> addRoleInfo(TSysRole role,String ids[]);
 
 }
