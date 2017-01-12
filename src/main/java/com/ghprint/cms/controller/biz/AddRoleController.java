@@ -6,11 +6,13 @@ import com.ghprint.cms.model.sys.TSysRole;
 import com.ghprint.cms.services.RoleService;
 import com.ghprint.cms.utils.Constant;
 import com.ghprint.cms.utils.Response;
+import com.wordnik.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.Assert;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -29,16 +31,17 @@ public class AddRoleController extends BaseAction {
     @Autowired
     private RoleService roleService;
 
-    @RequestMapping(value = "/roleinfo/addroleinfo.do", method = RequestMethod.POST)
+    @RequestMapping(value = "/roleinfo/addroleinfo.do", method = RequestMethod.POST, produces = "application/json; charset=utf-8")
     @ResponseBody
-    public Response<String> response (HttpServletRequest request, HttpServletResponse response, TSysRole role,String ids[]){
+    @ApiOperation(value = "添加角色")
+    public Response<String> addroleinfo (HttpServletRequest request, HttpServletResponse response, @RequestBody TSysRole role,  String ids[]){
 
         Response <String> responses = new Response<>();
 
-        Assert.hasText(role.getRoleid(), "role 中 roleid  is null or 空字符串。");
         Assert.hasText(role.getRolename(), "role 中 rolename  is null or 空字符串。");
         Assert.hasText(role.getRoledesc(), "role 中 roledesc  is null or 空字符串。");
         logger.info("AddRoleinfo request Param :{}",role);
+        logger.info("AddRoleinfo request Param :{}",ids);
         try{
             if(ids.length>0 ){
                 roleService.addRoleInfo(role,ids);

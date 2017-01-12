@@ -116,7 +116,7 @@
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
         <property name="basePackage" value="com.ghprint.cms.serviceDao" />
     </bean>
-
+    <bean class="com.mangofactory.swagger.configuration.SpringSwaggerConfig" />
 
 </beans>
 

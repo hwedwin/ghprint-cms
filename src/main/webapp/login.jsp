@@ -10,7 +10,7 @@
 </head>
 <body class="index">
 <div class="login_box">
-    <form action="/login.do"  method="post">
+    <form action="login.do"  method="post">
         <table>
             <tr>
                 <td class="login_info">账号：</td>

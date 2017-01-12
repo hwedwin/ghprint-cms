@@ -58,7 +58,7 @@ public abstract class BaseAction  {
         }
 
         // 权限
-        Boolean flag = Boolean.FALSE;
+        Boolean flag = Boolean.TRUE;
         String authorityKey = this.getAuthorityId();
         logger.info("权限标示为:" + authorityKey);
         flag = this.getPrivilege(session, authorityKey);
