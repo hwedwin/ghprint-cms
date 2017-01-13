@@ -1,5 +1,6 @@
 package com.ghprint.cms.services;
 
+import cn.com.bestpay.Response;
 import com.ghprint.cms.model.sys.TSysRole;
 import com.ghprint.cms.pagination.DataGridResult;
 import org.junit.Test;
@@ -34,6 +35,13 @@ public class TestRoleService {
         role.setRolestatus("1");
         String[] strArray={"140000008","140000009","140000010"};
         roleService.addRoleInfo(role,strArray);
+    }
+
+    @Test
+    public  void testdelRoleinfo()throws Exception{
+        Integer roleid = 12;
+        Response< String > response = new Response<>();
+       response = roleService.deleteRoleInfo(roleid);
     }
 
 

@@ -20,7 +20,8 @@ public class Constant {
         PARAM_ERROR("100001","参数错误"),
         SYSTEM_ERROR("900000","系统异常"),
         LOGIN_ACCOUNT_NULL("110000","账号不存在"),
-        LOGIN_PASSWORD_ERROE("120000","密码不正确");
+        LOGIN_PASSWORD_ERROE("120000","密码不正确"),
+        LOGIN_TIMEOUT_ERROE("111111","登录超时");
 
         private String code;
         private String name;

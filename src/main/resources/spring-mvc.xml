@@ -58,5 +58,6 @@
 	<!-- 自定义异常处理 -->
     <bean id="exceptionResolver" class="com.ghprint.cms.framework.exception.ExceptionHandler"/>
 
+
 </beans>
     

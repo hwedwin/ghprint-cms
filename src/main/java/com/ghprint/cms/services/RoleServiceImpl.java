@@ -2,16 +2,16 @@ package com.ghprint.cms.services;
 
 import cn.com.bestpay.Response;
 import com.ghprint.cms.common.util.ExceptionConstant;
-import com.ghprint.cms.model.sys.TSysRole;
+import com.ghprint.cms.framework.exception.BusinessException;
+import com.ghprint.cms.model.sys.*;
 
 import java.util.Date;
 import java.util.List;
 
-import com.ghprint.cms.model.sys.TSysRoleExample;
-import com.ghprint.cms.model.sys.TSysRolePrivilege;
 import com.ghprint.cms.pagination.DataGridResult;
 import com.ghprint.cms.serviceDao.TSysRoleMapper;
 import com.ghprint.cms.serviceDao.TSysRolePrivilegeMapper;
+import com.ghprint.cms.serviceDao.TSysUserRoleMapper;
 import com.ghprint.cms.utils.Constant;
 import com.ghprint.cms.utils.SplicingCharacterUtil;
 import com.github.pagehelper.PageHelper;
@@ -35,6 +35,9 @@ public class RoleServiceImpl implements  RoleService {
 
     @Autowired
     private TSysRolePrivilegeMapper rolePrivilegeMapper;
+
+    @Autowired
+    private TSysUserRoleMapper userRoleMapper;
 
     @Override
     public DataGridResult getRoleList(TSysRole tSysRole, Integer page, Integer rows) {
@@ -86,5 +89,53 @@ public class RoleServiceImpl implements  RoleService {
             response.setErrorMsg(ex.toString());
             return response;
         }
+    }
+
+    @Override
+    public Response<String> deleteRoleInfo(Integer roleid) {
+        Response<String> response = new Response<>();
+        logger.info("enter into delRole of RoleImpl ");
+        try {
+            TSysRoleExample roleExample = new TSysRoleExample();
+            TSysUserRoleExample userRoleExample = new TSysUserRoleExample();
+            TSysRolePrivilegeExample rolePrivilegeExample = new TSysRolePrivilegeExample();
+            TSysUserRoleExample.Criteria  criteria =userRoleExample.createCriteria();
+            TSysRolePrivilegeExample.Criteria rolepricriteria = rolePrivilegeExample.createCriteria();
+            TSysRoleExample.Criteria rolecriteria = roleExample.createCriteria();
+            rolecriteria.andIdEqualTo(roleid);
+            criteria.andRoleidEqualTo(String.valueOf(roleid));
+            rolepricriteria.andRoleidEqualTo(String.valueOf(roleid));
+
+            List list=userRoleMapper.selectByExample(userRoleExample);
+            if ((list != null) && (list.size() > 0)) {
+                logger.info("该角色已经被使用，不能删除");
+                response.setErrorCode(Constant.errorCodeEnum.FAILURE.getCode());
+                response.setErrorMsg("该角色已经被使用，不能删除");
+                return response;
+            }
+            List<TSysRole> lists =  roleMapper.selectByExample(roleExample);
+            int res = 0;
+            if((lists != null) && (lists.size() > 0)) {
+                for(TSysRole role :lists ) {
+                    rolePrivilegeExample.clear();
+                    rolepricriteria=rolePrivilegeExample.createCriteria();
+                    rolepricriteria.andRoleidEqualTo(role.getRoleid());
+                     res = rolePrivilegeMapper.deleteByExample(rolePrivilegeExample);
+                }
+            }
+            logger.info("delete role_privilege succ!!");
+
+            // delete the instance
+            int result=roleMapper.deleteByExample(roleExample);
+            if(result > 0 && res >0){
+                response.setErrorCode(Constant.errorCodeEnum.SUCCESS.getCode());
+                response.setErrorMsg("删除角色成功");
+            }
+        } catch (Exception ex) {
+            logger.error("delRole exception.");
+            throw new BusinessException(Constant.errorCodeEnum.FAILURE.getCode(),ex.getMessage());
+        }
+        logger.info(" leave delRole of RoleImpl");
+        return response;
     }
 }

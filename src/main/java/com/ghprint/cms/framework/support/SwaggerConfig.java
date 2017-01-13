@@ -12,12 +12,11 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
-@Configuration
-@EnableSwagger
-@EnableWebMvc
-@ComponentScan(basePackages = {"com.ghprint.cms.controller"})
+//@Configuration
+//@EnableSwagger()
+//@EnableWebMvc
+//@ComponentScan(basePackages = {"com.ghprint.cms.controller"})
 public class SwaggerConfig {
-
 
 
     private SpringSwaggerConfig springSwaggerConfig;
@@ -30,7 +29,8 @@ public class SwaggerConfig {
     public SwaggerSpringMvcPlugin swaggerSpringMvcPlugin() {
         return new SwaggerSpringMvcPlugin(springSwaggerConfig)
                 .apiInfo(apiInfo())
-                .includePatterns(".*?");
+                .includePatterns(".*?")
+                .enable(false);
 
     }
     private ApiInfo apiInfo()

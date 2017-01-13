@@ -17,4 +17,8 @@ public interface RoleService {
     //添加角色
     public Response <String> addRoleInfo(TSysRole role,String ids[]);
 
+    //删除角色
+    public  Response<String> deleteRoleInfo(Integer roleid);
+
+
 }

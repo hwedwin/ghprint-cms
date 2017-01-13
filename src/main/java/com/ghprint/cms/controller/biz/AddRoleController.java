@@ -43,14 +43,21 @@ public class AddRoleController extends BaseAction {
         logger.info("AddRoleinfo request Param :{}",role);
         logger.info("AddRoleinfo request Param :{}",ids);
         try{
-            if(ids.length>0 ){
-                roleService.addRoleInfo(role,ids);
-                responses.setErrorCode(Constant.errorCodeEnum.SUCCESS.getCode());
-                responses.setErrorMsg(Constant.errorCodeEnum.SUCCESS.getName());
+            Boolean flag = super.execute(request, response);
+            if (flag) {
+                        if(ids.length>0 ){
+                            roleService.addRoleInfo(role,ids);
+                            responses.setErrorCode(Constant.errorCodeEnum.SUCCESS.getCode());
+                            responses.setErrorMsg(Constant.errorCodeEnum.SUCCESS.getName());
+                        }
+                        responses.setErrorCode(Constant.errorCodeEnum.PARAM_ERROR.getCode());
+                        responses.setErrorMsg(Constant.errorCodeEnum.PARAM_ERROR.getName());
+                        return  responses;
+            } else {
+                responses.setErrorCode(Constant.errorCodeEnum.LOGIN_TIMEOUT_ERROE.getCode());
+                responses.setErrorMsg(request.getAttribute("message").toString());
+                return responses;
             }
-            responses.setErrorCode(Constant.errorCodeEnum.PARAM_ERROR.getCode());
-            responses.setErrorMsg(Constant.errorCodeEnum.PARAM_ERROR.getName());
-            return  responses;
         }catch (IllegalArgumentException ex) {
             logger.info("参数错误  error: " + ex);
             responses.setErrorCode(Constant.errorCodeEnum.PARAM_ERROR.getCode());
