@@ -30,5 +30,4 @@ public interface TSysUserRoleMapper {
 
     int updateByPrimaryKey(TSysUserRole record);
 
-
 }

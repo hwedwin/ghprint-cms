@@ -178,4 +178,5 @@
       roleid = #{roleid,jdbcType=VARCHAR}
     where localid = #{localid,jdbcType=INTEGER}
   </update>
+
 </mapper>

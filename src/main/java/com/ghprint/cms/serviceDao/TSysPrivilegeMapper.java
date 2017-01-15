@@ -28,4 +28,6 @@ public interface TSysPrivilegeMapper {
     int updateByPrimaryKeySelective(TSysPrivilege record);
 
     int updateByPrimaryKey(TSysPrivilege record);
+
+    List getPrivilege(Integer roleid);
 }

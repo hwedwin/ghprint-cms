@@ -1,4 +1,4 @@
-package com.ghprint.cms.controller.biz;
+package com.ghprint.cms.controller.biz.Role;
 
 import com.ghprint.cms.common.AuthorityKey;
 import com.ghprint.cms.controller.BaseAction;

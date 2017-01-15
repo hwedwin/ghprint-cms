@@ -240,4 +240,14 @@
       grade = #{grade,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+  <!--   通过roleid获取该角色权限 -->
+  <select id="getPrivilege" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    r.PRIVILEGEID, PRIVILEGENAME, PRIVILEGEDESC, STATUS, CREATETIME, GRADE
+    from T_SYS_PRIVILEGE p ,  T_SYS_ROLE_PRIVILEGE r
+    where p.PRIVILEGEID = r.PRIVILEGEID
+    and r.ROLEID =  #{roleInfo.roleid,jdbcType=INTEGER}
+  </select>
+
 </mapper>
