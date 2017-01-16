@@ -4,6 +4,7 @@ import com.ghprint.cms.model.sys.OperateRoleInfo;
 import com.ghprint.cms.model.sys.OperatorInfoView;
 import com.ghprint.cms.model.sys.RolePrivilegeInfo;
 import com.ghprint.cms.model.sys.TSysUser;
+import com.ghprint.cms.pagination.DataGridResult;
 import com.ghprint.cms.serviceDao.LoginMapper;
 import com.ghprint.cms.serviceDao.TSysRolePrivilegeMapper;
 import com.ghprint.cms.serviceDao.TSysUserMapper;
@@ -70,5 +71,54 @@ public class TestUserService {
         }
 
 
+    }
+
+    @Test
+    public void testselectAllUser(){
+        userService.selectAllUser("");
+    }
+
+    @Test
+    public void testselectByParam(){
+        TSysUser user = new TSysUser();
+        user.setUsername("test");
+        DataGridResult dataGridResult =userService.selectByParam(user,1,3);
+        System.out.print(dataGridResult.getRows().get(1));
+    }
+
+    @Test
+    public void testdeluserinfo(){
+       System.out.print(userService.deleteUser(2));
+    }
+
+    @Test
+    public  void  testgetRolelist(){
+       List list = userService.getRolelist();
+        Iterator iter = list.iterator();
+        while(iter.hasNext()){
+            System.out.println(iter.next());
+        }
+    }
+
+    @Test
+    public  void testgetUserinfo(){
+        List    list=  userService.getUserinfo(1);
+        Iterator iter = list.iterator();
+        while(iter.hasNext()){
+            System.out.println(iter.next());
+        }
+    }
+
+    @Test
+    public  void testupdateRoleinfo(){
+        userService.updateRoleinfo(3,1);
+    }
+
+    @Test
+    public  void testresetPwd(){
+        TSysUser user = new TSysUser();
+        user.setId(3);
+        user.setPassword("123456");
+        userService.resetPwd(user);
     }
 }

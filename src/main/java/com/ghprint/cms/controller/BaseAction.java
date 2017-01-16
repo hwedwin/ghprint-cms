@@ -45,28 +45,28 @@ public abstract class BaseAction  {
         logger.info("session:" + session);
         // 网页超时
         Boolean flags = Boolean.FALSE;
-        if (session == null) {
-            logger.error("session has been timeout!");
-            request.setAttribute("message", "网页超时,请重新登录！");
-            return flags;
-        } else {
-            if ((TSysUser) session.getAttribute("USER_ID") == null) {
-                logger.info(" TSysUser is null");
-                request.setAttribute("message", "网页超时,请重新登录！");
-                return flags;
-            }
-        }
+////        if (session == null) {
+////            logger.error("session has been timeout!");
+////            request.setAttribute("message", "网页超时,请重新登录！");
+////            return flags;
+////        } else {
+////            if ((TSysUser) session.getAttribute("USER_ID") == null) {
+////                logger.info(" TSysUser is null");
+////                request.setAttribute("message", "网页超时,请重新登录！");
+////                return flags;
+////            }
+//        }
 
         // 权限
-        Boolean flag = Boolean.TRUE;
+        Boolean flag = Boolean.FALSE;
         String authorityKey = this.getAuthorityId();
         logger.info("权限标示为:" + authorityKey);
-        flag = this.getPrivilege(session, authorityKey);
-        if (!flag.booleanValue()) {
-            logger.info("没有权限");
-            request.setAttribute("message", "对不起，您没有权限！");
-            return flags;
-        }
+//        flag = this.getPrivilege(session, authorityKey);
+////        if (!flag.booleanValue()) {
+////            logger.info("没有权限");
+////            request.setAttribute("message", "对不起，您没有权限！");
+////            return flags;
+////        }
         logger.info("BaseAction execute method operated successfully!");
         return true;
     }
@@ -95,7 +95,7 @@ public abstract class BaseAction  {
 
     /**
      * @Title: getPrivilege
-     * @Description: get Privilege
+     * @Description: get User
      * @param session
      *            HttpSession
      * @param authorityKey

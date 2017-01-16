@@ -1,7 +1,9 @@
 package com.ghprint.cms.services;
 
+import com.ghprint.cms.model.sys.OperateRoleInfo;
 import com.ghprint.cms.model.sys.OperatorInfoView;
 import com.ghprint.cms.model.sys.TSysUser;
+import com.ghprint.cms.pagination.DataGridResult;
 
 import java.util.List;
 
@@ -40,7 +42,7 @@ public interface UserService {
      * @return String
      * @throws
      */
-    String selectByParam(TSysUser user, String page);
+    DataGridResult selectByParam(TSysUser user,  Integer page , Integer rows);
 
     /**
      *
@@ -101,7 +103,7 @@ public interface UserService {
      * @return void
      * @throws
      */
-    int deleteUser(String userId);
+    int deleteUser(Integer userId);
 
     /**
      *
@@ -153,11 +155,11 @@ public interface UserService {
      *
      * @Title: resetPwd
      * @Description: 重置密码
-     * @param users
+     * @param user
      * @author wjy
      * @throws
      */
-    void resetPwd(String users);
+    void resetPwd(TSysUser  user);
 
 
 
@@ -171,5 +173,15 @@ public interface UserService {
      */
     OperatorInfoView login (String account);
 
+    //获取角色
+    List getRolelist();
+
+    //查询用户明细
+    List  getUserinfo(Integer userid);
+
+    //授予角色
+    void updateRoleinfo(Integer userid , Integer roleid);
+
+    //修改密码
 
 }

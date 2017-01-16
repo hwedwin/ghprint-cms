@@ -1,5 +1,6 @@
 package com.ghprint.cms.serviceDao;
 
+import com.ghprint.cms.model.sys.OperateRoleInfo;
 import com.ghprint.cms.model.sys.TSysRole;
 import com.ghprint.cms.model.sys.TSysRoleExample;
 import org.apache.ibatis.annotations.Param;
@@ -29,5 +30,5 @@ public interface TSysRoleMapper {
 
     int updateByPrimaryKey(TSysRole record);
 
-
+    List  <OperateRoleInfo> getRolelist(Integer id);
 }

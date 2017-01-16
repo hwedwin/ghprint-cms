@@ -111,4 +111,20 @@ public class DataGridResult {
     public void setSuccess(boolean success) {
         this.success = success;
     }
+
+    @Override
+    public String toString() {
+        return "DataGridResult{" +
+                "everyPage=" + everyPage +
+                ", totalCount=" + totalCount +
+                ", totalPage=" + totalPage +
+                ", currentPage=" + currentPage +
+                ", beginIndex=" + beginIndex +
+                ", hasPrePage=" + hasPrePage +
+                ", hasNextPage=" + hasNextPage +
+                ", rows=" + rows +
+                ", message='" + message + '\'' +
+                ", success=" + success +
+                '}';
+    }
 }

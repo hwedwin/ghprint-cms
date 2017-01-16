@@ -255,7 +255,36 @@
       grade = #{grade,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
-
+  <resultMap id="ResultMap" type="com.ghprint.cms.model.sys.OperateRoleInfo" >
+    <id column="LOCALID" property="localid" jdbcType="INTEGER" />
+    <association property="operatorInfo" column="id" javaType="com.ghprint.cms.model.sys.TSysUser" >
+      <id column="id" property="id" jdbcType="INTEGER" />
+      <result column="userid" property="userid" jdbcType="VARCHAR"/>
+      <result column="username" property="username" jdbcType="VARCHAR" />
+      <result column="PHONE" property="phone" jdbcType="VARCHAR" />
+      <result column="EMAIL" property="email" jdbcType="VARCHAR" />
+      <result column="password" property="password" jdbcType="VARCHAR" />
+      <result column="createtime" property="createtime" jdbcType="DATE" />
+    </association>
+    <association property="roleInfo" column="ID" javaType="com.ghprint.cms.model.sys.TSysRole"  >
+      <id column="ID" property="id" jdbcType="INTEGER" />
+      <result column="ROLEID" property="roleid" jdbcType="VARCHAR"/>
+      <result column="ROLENAME" property="rolename" jdbcType="VARCHAR" />
+      <result column="ROLESTATUS" property="rolestatus" jdbcType="VARCHAR" />
+      <result column="ROLEDESC" property="roledesc" jdbcType="VARCHAR" />
+      <result column="CREATETIME" property="createtime" jdbcType="DATE" />
+      <result column="EDITTIME" property="edittime" jdbcType="DATE" />
+      <result column="GRADE" property="grade" jdbcType="VARCHAR" />
+    </association>
+  </resultMap>
+  <select id="getRolelist"  parameterType="java.lang.Integer"  resultMap="ResultMap">
+     select i.localid,o.*,r.*
+    FROM T_SYS_USER_ROLE i,T_SYS_ROLE r,T_SYS_USER o
+    where  i.USERID=o.ID
+    and i.ROLEID=r.ID
+    and r.ROLESTATUS = 1
+    and o.ID = #{id}
+  </select>
 
 
 </mapper>

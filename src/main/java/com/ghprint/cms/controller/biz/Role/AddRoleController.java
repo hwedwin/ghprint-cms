@@ -1,11 +1,11 @@
 package com.ghprint.cms.controller.biz.Role;
 
+import cn.com.bestpay.Response;
 import com.ghprint.cms.common.AuthorityKey;
 import com.ghprint.cms.controller.BaseAction;
 import com.ghprint.cms.model.sys.TSysRole;
 import com.ghprint.cms.services.RoleService;
 import com.ghprint.cms.utils.Constant;
-import com.ghprint.cms.utils.Response;
 import com.wordnik.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -34,7 +34,7 @@ public class AddRoleController extends BaseAction {
     @RequestMapping(value = "/roleinfo/addroleinfo.do", method = RequestMethod.POST, produces = "application/json; charset=utf-8")
     @ResponseBody
     @ApiOperation(value = "添加角色")
-    public Response<String> addroleinfo (HttpServletRequest request, HttpServletResponse response, @RequestBody TSysRole role,  String ids[]){
+    public Response<String> addroleinfo (HttpServletRequest request, HttpServletResponse response, @RequestBody TSysRole role, String ids[]){
 
         Response <String> responses = new Response<>();
 
@@ -49,9 +49,10 @@ public class AddRoleController extends BaseAction {
                             roleService.addRoleInfo(role,ids);
                             responses.setErrorCode(Constant.errorCodeEnum.SUCCESS.getCode());
                             responses.setErrorMsg(Constant.errorCodeEnum.SUCCESS.getName());
+                        }else {
+                            responses.setErrorCode(Constant.errorCodeEnum.PARAM_ERROR.getCode());
+                            responses.setErrorMsg(Constant.errorCodeEnum.PARAM_ERROR.getName());
                         }
-                        responses.setErrorCode(Constant.errorCodeEnum.PARAM_ERROR.getCode());
-                        responses.setErrorMsg(Constant.errorCodeEnum.PARAM_ERROR.getName());
                         return  responses;
             } else {
                 responses.setErrorCode(Constant.errorCodeEnum.LOGIN_TIMEOUT_ERROE.getCode());

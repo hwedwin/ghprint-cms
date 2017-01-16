@@ -50,6 +50,16 @@ public class RoleServiceImpl implements RoleService {
     public DataGridResult getRoleList(TSysRole tSysRole, Integer page, Integer rows) {
 
         TSysRoleExample roleExample = new TSysRoleExample();
+//        TSysRoleExample.Criteria criteria= roleExample.createCriteria();
+//        if(StringUtils.isNotBlank(tSysRole.getRoledesc())) {
+//            criteria.andRoledescLike(tSysRole.getRoledesc());
+//        }
+//        if(StringUtils.isNotBlank(tSysRole.getRoleid())) {
+//            criteria.andRoleidLike(tSysRole.getRoleid());
+//        }
+//        if(StringUtils.isNotBlank(tSysRole.getRolename())) {
+//            criteria.andRolenameLike(tSysRole.getRolename());
+//        }
         PageHelper.startPage(page, rows);
         List<TSysRole> rolelist = roleMapper.selectByExample(roleExample);
         DataGridResult dataGridResult = new DataGridResult();

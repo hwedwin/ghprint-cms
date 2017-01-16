@@ -2,14 +2,18 @@ package com.ghprint.cms.services;
 
 
 import com.alibaba.fastjson.JSON;
+import com.ghprint.cms.common.algorithm.MD5Util;
 import com.ghprint.cms.common.entity.PageData;
 import com.ghprint.cms.common.util.DictionaryConstant;
 import com.ghprint.cms.common.util.ToolUtils;
 import com.ghprint.cms.dao.sys.UserDao;
 import com.ghprint.cms.model.sys.*;
+import com.ghprint.cms.pagination.DataGridResult;
 import com.ghprint.cms.pagination.Page;
 import com.ghprint.cms.pagination.PageParameter;
 import com.ghprint.cms.serviceDao.*;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,6 +39,12 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private TSysRolePrivilegeMapper tSysRolePrivilegeMapper;
 
+    @Autowired
+    private  TSysUserRoleMapper userRoleMapper;
+
+    @Autowired
+    private  TSysRoleMapper roleMapper;
+
     @Override
     public TSysUser selectByAccount(String account) {
         TSysUserExample tSysUserExample = new TSysUserExample();
@@ -53,15 +63,20 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public String selectByParam(TSysUser user, String page) {
-        PageData<TSysUser> pageList = new PageData<TSysUser>();
-        PageParameter parameter = new PageParameter();
-        parameter.setCurrentPage(Integer.parseInt(page));
-        Page<TSysUser> p = new Page<TSysUser>(parameter);
-        p.setEntity(user);
-        pageList.setRows(userDao.selectByParam(p));
-        pageList.setTotal(p.getPage().getTotalCount());
-        return JSON.toJSONString(pageList);
+    public DataGridResult selectByParam(TSysUser user,  Integer page , Integer rows) {
+        TSysUserExample userExample = new TSysUserExample();
+        PageHelper.startPage(page, rows);
+        List<TSysUser> userList = tSysUserMapper.selectByExample(userExample);
+        DataGridResult dataGridResult = new DataGridResult();
+        dataGridResult.setRows(userList);
+        //取记录总条数
+        PageInfo<TSysUser> pageInfo = new PageInfo<>(userList);
+
+        dataGridResult.setCurrentPage(page);
+        dataGridResult.setEveryPage(rows);
+        dataGridResult.setTotalCount(pageInfo.getTotal());
+        dataGridResult.setTotalPage(pageInfo.getPages());
+        return dataGridResult;
     }
 
     @Override
@@ -105,10 +120,25 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public int deleteUser(String users) {
-        List<String> userIds = ToolUtils.getByStringNonRepeat(users, ";");
-        return userDao.deleteUser(userIds);
-        /*userDao.deleteUserRole(userIds);*/
+    public int deleteUser(Integer userId) {
+        try {
+            int  a=0;
+          TSysUser user=  tSysUserMapper.selectByPrimaryKey(userId);
+                    if(user == null){
+                        log.info("没有符合条件的记录");
+                        return  a;
+                    }else{
+                    tSysUserMapper.deleteByPrimaryKey(userId);
+                        TSysUserRoleExample userRoleExample = new TSysUserRoleExample();
+                        TSysUserRoleExample.Criteria criteria = userRoleExample.createCriteria();
+                        criteria.andUseridEqualTo(String.valueOf(userId));
+                        a =userRoleMapper.deleteByExample(userRoleExample);
+                        return  a;
+                    }
+
+        }catch (Exception e){
+            return  0;
+        }
     }
 
     @Override
@@ -135,8 +165,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void resetPwd(String users) {
-
+    public void resetPwd(TSysUser user) {
+        TSysUser u = new TSysUser();
+        u = tSysUserMapper.selectByPrimaryKey(user.getId());
+        u.setPassword(MD5Util.getMD5String(user.getPassword()));
+        tSysUserMapper.updateByPrimaryKey(u);
     }
 
     @Override
@@ -191,9 +224,33 @@ public class UserServiceImpl implements UserService {
             return null;
         }
 
+    @Override
+    public List getRolelist() {
+        TSysRoleExample roleExample = new TSysRoleExample();
+        List<TSysRole>  list = roleMapper.selectByExample(roleExample);
+        return list;
+    }
 
+    @Override
+    public List   getUserinfo(Integer userid) {
 
+        List  list = roleMapper.getRolelist(userid);
 
+        return  list;
+    }
 
+    @Override
+    public void updateRoleinfo(Integer userid, Integer roleid) {
+        TSysUserRoleExample userRoleExample = new TSysUserRoleExample();
+        TSysUserRoleExample.Criteria criteria = userRoleExample.createCriteria();
+        criteria.andUseridEqualTo(String.valueOf(userid));
+         userRoleMapper.deleteByExample(userRoleExample);
+        TSysUserRole userRole = new TSysUserRole();
+        userRole.setUserid(String.valueOf(userid));
+        userRole.setRoleid(String.valueOf(roleid));
+         userRoleMapper.insert(userRole);
 
     }
+
+
+}
