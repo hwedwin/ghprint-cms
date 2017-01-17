@@ -121,4 +121,12 @@ public class TestUserService {
         user.setPassword("123456");
         userService.resetPwd(user);
     }
+
+    @Test
+    public void testupdateUserInfo(){
+        TSysUser user = new TSysUser();
+        user = userService.selectByUserId(1);
+        user.setUsername("马云");
+        userService.updateUserInfo(user);
+    }
 }

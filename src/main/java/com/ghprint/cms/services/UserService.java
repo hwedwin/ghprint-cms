@@ -22,7 +22,7 @@ public interface UserService {
      */
     TSysUser selectByAccount(String account);
 
-
+    TSysUser selectByUserId(Integer userid);
 
     /**
      *
@@ -182,6 +182,6 @@ public interface UserService {
     //授予角色
     void updateRoleinfo(Integer userid , Integer roleid);
 
-    //修改密码
+
 
 }

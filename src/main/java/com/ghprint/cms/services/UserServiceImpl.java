@@ -58,6 +58,14 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public TSysUser selectByUserId(Integer userid) {
+        if(userid!= null){
+           return tSysUserMapper.selectByPrimaryKey(userid);
+        }
+        return  null;
+    }
+
+    @Override
     public List<TSysUser> selectAllUser(String order) {
         return userDao.selectAllUser(order);
     }
@@ -128,7 +136,7 @@ public class UserServiceImpl implements UserService {
                         log.info("没有符合条件的记录");
                         return  a;
                     }else{
-                    tSysUserMapper.deleteByPrimaryKey(userId);
+                        tSysUserMapper.deleteByPrimaryKey(userId);
                         TSysUserRoleExample userRoleExample = new TSysUserRoleExample();
                         TSysUserRoleExample.Criteria criteria = userRoleExample.createCriteria();
                         criteria.andUseridEqualTo(String.valueOf(userId));
@@ -137,6 +145,8 @@ public class UserServiceImpl implements UserService {
                     }
 
         }catch (Exception e){
+            log.error("DeleUsers exception:");
+            e.printStackTrace();
             return  0;
         }
     }
@@ -148,7 +158,9 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void updateUserInfo(TSysUser user) {
-        userDao.updateUser(user);
+        if(user != null && user.getId()!=null){
+            tSysUserMapper.updateByPrimaryKey(user);
+        }
     }
 
     @Override
@@ -168,8 +180,10 @@ public class UserServiceImpl implements UserService {
     public void resetPwd(TSysUser user) {
         TSysUser u = new TSysUser();
         u = tSysUserMapper.selectByPrimaryKey(user.getId());
-        u.setPassword(MD5Util.getMD5String(user.getPassword()));
-        tSysUserMapper.updateByPrimaryKey(u);
+        if(u!=null) {
+            u.setPassword(MD5Util.getMD5String(user.getPassword()));
+            tSysUserMapper.updateByPrimaryKey(u);
+        }
     }
 
     @Override
@@ -232,24 +246,23 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List   getUserinfo(Integer userid) {
-
+    public List getUserinfo(Integer userid) {
         List  list = roleMapper.getRolelist(userid);
-
-        return  list;
+        return  list.isEmpty()?null:list;
     }
 
     @Override
     public void updateRoleinfo(Integer userid, Integer roleid) {
-        TSysUserRoleExample userRoleExample = new TSysUserRoleExample();
-        TSysUserRoleExample.Criteria criteria = userRoleExample.createCriteria();
-        criteria.andUseridEqualTo(String.valueOf(userid));
-         userRoleMapper.deleteByExample(userRoleExample);
-        TSysUserRole userRole = new TSysUserRole();
-        userRole.setUserid(String.valueOf(userid));
-        userRole.setRoleid(String.valueOf(roleid));
-         userRoleMapper.insert(userRole);
-
+        if(userid!=null && roleid!=null) {
+            TSysUserRoleExample userRoleExample = new TSysUserRoleExample();
+            TSysUserRoleExample.Criteria criteria = userRoleExample.createCriteria();
+            criteria.andUseridEqualTo(String.valueOf(userid));
+            userRoleMapper.deleteByExample(userRoleExample);
+            TSysUserRole userRole = new TSysUserRole();
+            userRole.setUserid(String.valueOf(userid));
+            userRole.setRoleid(String.valueOf(roleid));
+            userRoleMapper.insert(userRole);
+        }
     }
 
 
