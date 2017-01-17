@@ -97,4 +97,6 @@ public class TestRoleService {
         String[] strArray={"150000007","150000009","150000011"};
         roleService.editRole(role,strArray);
     }
+
+
 }

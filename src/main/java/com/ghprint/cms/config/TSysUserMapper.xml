@@ -101,7 +101,7 @@
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.ghprint.cms.model.sys.TSysUser" >
+  <insert id="insert" parameterType="com.ghprint.cms.model.sys.TSysUser" useGeneratedKeys="true" keyProperty="id">
     insert into t_sys_user (id, userid, username, 
       email, phone, password, 
       createtime)

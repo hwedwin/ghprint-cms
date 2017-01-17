@@ -88,12 +88,16 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public int addUser(TSysUser user) {
+    public int addUser(TSysUser user,String id) {
+        if(id!=null) {
+            Integer userid = tSysUserMapper.insert(user);
+            TSysUserRole userRole = new TSysUserRole();
+            userRole.setRoleid(id);
+            userRole.setUserid(String.valueOf(user.getId()));
+            return   userRoleMapper.insert(userRole);
+        }
+        return 0;
 
-        //	String password = encoder.encode(user.getPassword());
-        //	user.setPassword(password);
-        return userDao.addUser(user);
-        //userDao.addUserRoleRelation(user);
     }
 
 
@@ -246,9 +250,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List getUserinfo(Integer userid) {
-        List  list = roleMapper.getRolelist(userid);
-        return  list.isEmpty()?null:list;
+    public OperateRoleInfo getUserinfo(Integer userid) {
+        return  roleMapper.getRoleInfo(userid);
     }
 
     @Override

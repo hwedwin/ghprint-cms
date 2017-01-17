@@ -33,7 +33,7 @@ public class TestUserService {
     @Test
     public void testAdd() throws Exception {
         TSysUser user = new TSysUser("test", "小李", "", "", "123456", new Date());
-        userService.addUser(user);
+        userService.addUser(user,"2");
     }
 
 
@@ -100,14 +100,14 @@ public class TestUserService {
         }
     }
 
-    @Test
-    public  void testgetUserinfo(){
-        List    list=  userService.getUserinfo(1);
-        Iterator iter = list.iterator();
-        while(iter.hasNext()){
-            System.out.println(iter.next());
-        }
-    }
+//    @Test
+//    public  void testgetUserinfo(){
+//        List    list=  userService.getUserinfo(1);
+//        Iterator iter = list.iterator();
+//        while(iter.hasNext()){
+//            System.out.println(iter.next());
+//        }
+//    }
 
     @Test
     public  void testupdateRoleinfo(){
@@ -128,5 +128,11 @@ public class TestUserService {
         user = userService.selectByUserId(1);
         user.setUsername("马云");
         userService.updateUserInfo(user);
+    }
+
+    @Test
+    public void testgetUserinfo(){
+        OperateRoleInfo operateRoleInfo = userService.getUserinfo(1);
+        System.out.print(operateRoleInfo);
     }
 }

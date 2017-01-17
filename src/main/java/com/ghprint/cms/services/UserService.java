@@ -52,7 +52,7 @@ public interface UserService {
      * @return void
      * @throws
      */
-    int addUser(TSysUser user);
+    int addUser(TSysUser user,String id);
 
     /**
      *
@@ -177,7 +177,7 @@ public interface UserService {
     List getRolelist();
 
     //查询用户明细
-    List  getUserinfo(Integer userid);
+    OperateRoleInfo  getUserinfo(Integer userid);
 
     //授予角色
     void updateRoleinfo(Integer userid , Integer roleid);

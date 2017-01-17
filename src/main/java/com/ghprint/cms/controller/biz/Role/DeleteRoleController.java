@@ -8,6 +8,7 @@ import com.ghprint.cms.utils.Constant;
 import com.wordnik.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
@@ -16,6 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Created by lenovo on 2017/1/12.
  */
+@Controller
 public class DeleteRoleController  extends BaseAction{
 
     private static Logger logger =  org.slf4j.LoggerFactory.getLogger(DeleteRoleController.class);

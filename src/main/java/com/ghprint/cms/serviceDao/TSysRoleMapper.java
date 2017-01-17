@@ -31,4 +31,6 @@ public interface TSysRoleMapper {
     int updateByPrimaryKey(TSysRole record);
 
     List  <OperateRoleInfo> getRolelist(Integer id);
+
+    OperateRoleInfo getRoleInfo(Integer id);
 }
