@@ -73,10 +73,7 @@ public class TestUserService {
 
     }
 
-    @Test
-    public void testselectAllUser(){
-        userService.selectAllUser("");
-    }
+
 
     @Test
     public void testselectByParam(){
@@ -88,7 +85,7 @@ public class TestUserService {
 
     @Test
     public void testdeluserinfo(){
-       System.out.print(userService.deleteUser(2));
+       System.out.print(userService.deleteUser(3));
     }
 
     @Test
@@ -100,24 +97,16 @@ public class TestUserService {
         }
     }
 
-//    @Test
-//    public  void testgetUserinfo(){
-//        List    list=  userService.getUserinfo(1);
-//        Iterator iter = list.iterator();
-//        while(iter.hasNext()){
-//            System.out.println(iter.next());
-//        }
-//    }
 
     @Test
     public  void testupdateRoleinfo(){
-        userService.updateRoleinfo(3,1);
+        userService.updateRoleinfo(2,1);
     }
 
     @Test
     public  void testresetPwd(){
         TSysUser user = new TSysUser();
-        user.setId(3);
+        user.setId(2);
         user.setPassword("123456");
         userService.resetPwd(user);
     }
@@ -125,7 +114,7 @@ public class TestUserService {
     @Test
     public void testupdateUserInfo(){
         TSysUser user = new TSysUser();
-        user = userService.selectByUserId(1);
+        user = userService.selectByUserId(2);
         user.setUsername("马云");
         userService.updateUserInfo(user);
     }

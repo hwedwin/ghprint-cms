@@ -82,7 +82,7 @@ public class TestRoleService {
 
     @Test
     public void testqueryRoleUserd()throws  Exception{
-       System.out.print( roleService.queryRoleUserd(3));
+       System.out.print( roleService.queryRoleUserd(2));
     }
 
     @Test
