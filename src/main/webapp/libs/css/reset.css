@@ -1,0 +1,65 @@
+abbr, article, aside, blockquote, body, dd, details, dl, dt, fieldset, figcaption, figure, footer, form, h1, h2, h3, h4, h5, h6, header, html, input, li, mark, meter, nav, ol, output, p, pre, progress, section, summary, td, time, ul {
+	margin: 0;
+	padding: 0
+}
+address, b, caption, cite, code, em, figcaption, h1, h2, h3, h4, h5, h6, i, pre, strong, th {
+	font-weight: 400;
+	font-style: normal
+}
+fieldset, iframe {
+	border: none
+}
+caption, th {
+	text-align: left
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0
+}
+ul {
+	list-style: none outside
+}
+ins {
+	text-decoration: none
+}
+article, aside, details, figcaption, figure, footer, header, nav, section, summary {
+	display: block
+}
+a img, img {
+	border: 0;
+    vertical-align: middle
+}
+:not(input, textarea) {
+	-webkit-touch-callout: none;
+	-webkit-user-select: none
+}
+input {
+	outline: 0;
+	-webkit-tap-highlight-color: transparent
+}
+body, html {
+	font-family: "Microsoft YaHei","arial";
+	-webkit-text-size-adjust: none;
+	text-size-adjust: none
+}
+a:focus, button, input:focus {
+	-webkit-tap-highlight-color: transparent
+}
+a, a:active, a:hover, a:link, a:visited {
+	text-decoration: none
+}
+.clearfix:after, .clearfix:before {
+	display: block;
+	overflow: hidden;
+	height: 0;
+	content: "\0020"
+}
+.clearfix:after {
+	clear: both
+}
+.clearfix {
+	zoom: 1
+}
+input{
+	font-family: "Microsoft YaHei","arial";
+}

@@ -1,0 +1,33 @@
+body{
+    margin: 0;
+    padding: 0;
+    background: #F4F4F4;
+    color:#808080;
+}
+
+/*mask航空公司弹框*/
+.flightMask{
+    background-color: rgba(0,0,0,0.5);
+    position: fixed;
+    left:0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 99999;
+}
+/*loading*/
+.loadingBox{
+    position: fixed;
+    width: 2.4rem;
+    height: 2.4rem;
+    top: 50%;
+    left: 50%;
+    margin-top: -1.2rem;
+    margin-left: -1.2rem;
+    border-radius: 0.1rem;
+    overflow: hidden;
+}
+.loadingBox img{
+    width: 100%;
+    height: 100%;
+}

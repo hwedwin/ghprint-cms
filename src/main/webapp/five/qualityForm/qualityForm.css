@@ -1,0 +1,186 @@
+body{
+    background: #0EA7D7;
+}
+
+.title{width: 80%;padding-left: 1rem;padding-top: 0.5rem;color: #fff;height: 1rem;line-height: 0.6rem;}
+
+.leftTitle{
+
+    font-size: 0.4rem;
+    text-align: center;
+    float: left;}
+
+.rightTitle{
+    float: right;
+}
+
+.orderSearch{
+    background: url(../../libs/img/order.png) no-repeat center;
+    width: 1rem;
+    height: 0.6rem;
+    background-size: 0.5rem;
+}
+
+.qualityFormIcon{
+    background: url(../../libs/img/qualityFormIcon.png) no-repeat center;
+    width: 1rem;
+    height: 0.6rem;
+    background-size: 0.5rem;
+}
+
+
+
+.role{
+    background: url(../../libs/img/User.png) no-repeat center;
+    width: 1rem;
+    height: 0.6rem;
+    background-size: 0.5rem;
+}
+
+.warehouse{
+    background: url(../../libs/img/warehouse.png) no-repeat center;
+    width: 1rem;
+    height: 0.6rem;
+    background-size: 0.5rem;
+}
+
+.DeleteButton{
+    background: url(../../libs/img/Delete.png) no-repeat center;
+    /* width: 1rem; */
+    height: 0.6rem;
+    background-size: 0.3rem;
+}
+
+
+.EditButton{
+    background: url(../../libs/img/Edit.png) no-repeat center;
+    /* width: 1rem; */
+    height: 0.6rem;
+    background-size: 0.3rem;
+}
+
+
+
+
+.Formtitle{
+    padding-left: 0.5rem;
+}
+
+.details{
+    background: #E9F3F9;
+}
+
+table{
+    margin: 0.3rem 0.4rem;
+}
+
+
+.search{
+    display: inline-block;
+    background: #0998CE;
+    color: #fff;
+    width: 1rem;
+    text-align: center;
+    border-radius: 0.1rem;
+    height: 0.4rem;
+    line-height: 0.4rem;
+}
+
+.sujectOption{
+    background: #FBEDCF;
+    border: 0.03rem solid #cacaca;
+    width: 4rem;
+    height: 0.5rem;
+    text-align: center;
+}
+
+.qualityForm{
+    background: #fff;
+    width: 14rem;
+    border-radius: 0.1rem;
+    position: absolute;
+    top: 16%;
+    left: 21%;
+    height: 7.5rem;
+    font-size: 0.3rem;
+    overflow: auto;
+}
+
+
+.qualityFormbutton{
+    text-align: center;
+    padding: 0.2rem;
+    border-top: 0.01rem solid #cacaca;
+}
+
+.qualityFormbutton span{
+    margin-right: 0.5rem;
+}
+
+.down{
+    width: 100%;
+    overflow: auto;
+}
+
+.heavy{
+    width: 1rem;
+    display: inline-block;
+    padding-left: 0.5rem;
+}
+
+.string{
+    width: 3rem;
+    height: 0.7rem;
+    display: inline-block;
+    padding: 0.3rem 0.5rem;
+}
+
+.bottom div{
+    display: inline-block;
+}
+.bottom input{
+    width: 0.5rem;
+}
+
+.bottom{
+    text-align: right;
+}
+
+.up{
+    padding: 0.2rem 1rem;
+}
+
+.selectOption{
+    height: 0.4rem;
+}
+
+.searchSuject{
+    margin-top: 0.1rem;
+}
+
+
+.options{
+    display: inline-block;
+    height: 0.4rem;
+}
+
+.pageCount{
+    width: 0.2rem;
+}
+
+.section {
+    color: #fff;
+    height: 1rem;
+    background: #0489BB;
+    padding-left: 1rem;
+    font-size: 0.25rem;
+}
+
+.section li{
+    float: left;
+    width: 2rem;
+}
+
+.sujectOptionng{
+    background: #fff;
+}
