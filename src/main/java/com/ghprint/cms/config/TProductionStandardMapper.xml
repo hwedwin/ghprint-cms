@@ -1,0 +1,370 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ghprint.cms.serviceDao.TProductionStandardMapper" >
+  <resultMap id="BaseResultMap" type="com.ghprint.cms.model.production.TProductionStandard" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="codeid" property="codeid" jdbcType="VARCHAR" />
+    <result column="printingmode" property="printingmode" jdbcType="VARCHAR" />
+    <result column="material" property="material" jdbcType="VARCHAR" />
+    <result column="crosswiseshrink" property="crosswiseshrink" jdbcType="INTEGER" />
+    <result column="portraitshrink" property="portraitshrink" jdbcType="INTEGER" />
+    <result column="companyid" property="companyid" jdbcType="INTEGER" />
+    <result column="productid" property="productid" jdbcType="INTEGER" />
+    <result column="printdataid" property="printdataid" jdbcType="INTEGER" />
+    <result column="procedureid" property="procedureid" jdbcType="INTEGER" />
+    <result column="procedureafterid" property="procedureafterid" jdbcType="INTEGER" />
+    <result column="packaging" property="packaging" jdbcType="INTEGER" />
+    <result column="note" property="note" jdbcType="VARCHAR" />
+    <result column="createtime" property="createtime" jdbcType="DATE" />
+    <result column="createauthor" property="createauthor" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, codeid, printingmode, material, crosswiseshrink, portraitshrink, companyid, productid, 
+    printdataid, procedureid, procedureafterid, packaging, note, createtime, createauthor
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ghprint.cms.model.production.TProductionStandardExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from t_production_standard
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_production_standard
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_production_standard
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.ghprint.cms.model.production.TProductionStandardExample" >
+    delete from t_production_standard
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.ghprint.cms.model.production.TProductionStandard" >
+    insert into t_production_standard (id, codeid, printingmode, 
+      material, crosswiseshrink, portraitshrink, 
+      companyid, productid, printdataid, 
+      procedureid, procedureafterid, packaging, 
+      note, createtime, createauthor
+      )
+    values (#{id,jdbcType=INTEGER}, #{codeid,jdbcType=VARCHAR}, #{printingmode,jdbcType=VARCHAR}, 
+      #{material,jdbcType=VARCHAR}, #{crosswiseshrink,jdbcType=INTEGER}, #{portraitshrink,jdbcType=INTEGER}, 
+      #{companyid,jdbcType=INTEGER}, #{productid,jdbcType=INTEGER}, #{printdataid,jdbcType=INTEGER}, 
+      #{procedureid,jdbcType=INTEGER}, #{procedureafterid,jdbcType=INTEGER}, #{packaging,jdbcType=INTEGER}, 
+      #{note,jdbcType=VARCHAR}, #{createtime,jdbcType=DATE}, #{createauthor,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.ghprint.cms.model.production.TProductionStandard" >
+    insert into t_production_standard
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="codeid != null" >
+        codeid,
+      </if>
+      <if test="printingmode != null" >
+        printingmode,
+      </if>
+      <if test="material != null" >
+        material,
+      </if>
+      <if test="crosswiseshrink != null" >
+        crosswiseshrink,
+      </if>
+      <if test="portraitshrink != null" >
+        portraitshrink,
+      </if>
+      <if test="companyid != null" >
+        companyid,
+      </if>
+      <if test="productid != null" >
+        productid,
+      </if>
+      <if test="printdataid != null" >
+        printdataid,
+      </if>
+      <if test="procedureid != null" >
+        procedureid,
+      </if>
+      <if test="procedureafterid != null" >
+        procedureafterid,
+      </if>
+      <if test="packaging != null" >
+        packaging,
+      </if>
+      <if test="note != null" >
+        note,
+      </if>
+      <if test="createtime != null" >
+        createtime,
+      </if>
+      <if test="createauthor != null" >
+        createauthor,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="codeid != null" >
+        #{codeid,jdbcType=VARCHAR},
+      </if>
+      <if test="printingmode != null" >
+        #{printingmode,jdbcType=VARCHAR},
+      </if>
+      <if test="material != null" >
+        #{material,jdbcType=VARCHAR},
+      </if>
+      <if test="crosswiseshrink != null" >
+        #{crosswiseshrink,jdbcType=INTEGER},
+      </if>
+      <if test="portraitshrink != null" >
+        #{portraitshrink,jdbcType=INTEGER},
+      </if>
+      <if test="companyid != null" >
+        #{companyid,jdbcType=INTEGER},
+      </if>
+      <if test="productid != null" >
+        #{productid,jdbcType=INTEGER},
+      </if>
+      <if test="printdataid != null" >
+        #{printdataid,jdbcType=INTEGER},
+      </if>
+      <if test="procedureid != null" >
+        #{procedureid,jdbcType=INTEGER},
+      </if>
+      <if test="procedureafterid != null" >
+        #{procedureafterid,jdbcType=INTEGER},
+      </if>
+      <if test="packaging != null" >
+        #{packaging,jdbcType=INTEGER},
+      </if>
+      <if test="note != null" >
+        #{note,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=DATE},
+      </if>
+      <if test="createauthor != null" >
+        #{createauthor,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.ghprint.cms.model.production.TProductionStandardExample" resultType="java.lang.Integer" >
+    select count(*) from t_production_standard
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update t_production_standard
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.codeid != null" >
+        codeid = #{record.codeid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.printingmode != null" >
+        printingmode = #{record.printingmode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.material != null" >
+        material = #{record.material,jdbcType=VARCHAR},
+      </if>
+      <if test="record.crosswiseshrink != null" >
+        crosswiseshrink = #{record.crosswiseshrink,jdbcType=INTEGER},
+      </if>
+      <if test="record.portraitshrink != null" >
+        portraitshrink = #{record.portraitshrink,jdbcType=INTEGER},
+      </if>
+      <if test="record.companyid != null" >
+        companyid = #{record.companyid,jdbcType=INTEGER},
+      </if>
+      <if test="record.productid != null" >
+        productid = #{record.productid,jdbcType=INTEGER},
+      </if>
+      <if test="record.printdataid != null" >
+        printdataid = #{record.printdataid,jdbcType=INTEGER},
+      </if>
+      <if test="record.procedureid != null" >
+        procedureid = #{record.procedureid,jdbcType=INTEGER},
+      </if>
+      <if test="record.procedureafterid != null" >
+        procedureafterid = #{record.procedureafterid,jdbcType=INTEGER},
+      </if>
+      <if test="record.packaging != null" >
+        packaging = #{record.packaging,jdbcType=INTEGER},
+      </if>
+      <if test="record.note != null" >
+        note = #{record.note,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createtime != null" >
+        createtime = #{record.createtime,jdbcType=DATE},
+      </if>
+      <if test="record.createauthor != null" >
+        createauthor = #{record.createauthor,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update t_production_standard
+    set id = #{record.id,jdbcType=INTEGER},
+      codeid = #{record.codeid,jdbcType=VARCHAR},
+      printingmode = #{record.printingmode,jdbcType=VARCHAR},
+      material = #{record.material,jdbcType=VARCHAR},
+      crosswiseshrink = #{record.crosswiseshrink,jdbcType=INTEGER},
+      portraitshrink = #{record.portraitshrink,jdbcType=INTEGER},
+      companyid = #{record.companyid,jdbcType=INTEGER},
+      productid = #{record.productid,jdbcType=INTEGER},
+      printdataid = #{record.printdataid,jdbcType=INTEGER},
+      procedureid = #{record.procedureid,jdbcType=INTEGER},
+      procedureafterid = #{record.procedureafterid,jdbcType=INTEGER},
+      packaging = #{record.packaging,jdbcType=INTEGER},
+      note = #{record.note,jdbcType=VARCHAR},
+      createtime = #{record.createtime,jdbcType=DATE},
+      createauthor = #{record.createauthor,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ghprint.cms.model.production.TProductionStandard" >
+    update t_production_standard
+    <set >
+      <if test="codeid != null" >
+        codeid = #{codeid,jdbcType=VARCHAR},
+      </if>
+      <if test="printingmode != null" >
+        printingmode = #{printingmode,jdbcType=VARCHAR},
+      </if>
+      <if test="material != null" >
+        material = #{material,jdbcType=VARCHAR},
+      </if>
+      <if test="crosswiseshrink != null" >
+        crosswiseshrink = #{crosswiseshrink,jdbcType=INTEGER},
+      </if>
+      <if test="portraitshrink != null" >
+        portraitshrink = #{portraitshrink,jdbcType=INTEGER},
+      </if>
+      <if test="companyid != null" >
+        companyid = #{companyid,jdbcType=INTEGER},
+      </if>
+      <if test="productid != null" >
+        productid = #{productid,jdbcType=INTEGER},
+      </if>
+      <if test="printdataid != null" >
+        printdataid = #{printdataid,jdbcType=INTEGER},
+      </if>
+      <if test="procedureid != null" >
+        procedureid = #{procedureid,jdbcType=INTEGER},
+      </if>
+      <if test="procedureafterid != null" >
+        procedureafterid = #{procedureafterid,jdbcType=INTEGER},
+      </if>
+      <if test="packaging != null" >
+        packaging = #{packaging,jdbcType=INTEGER},
+      </if>
+      <if test="note != null" >
+        note = #{note,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        createtime = #{createtime,jdbcType=DATE},
+      </if>
+      <if test="createauthor != null" >
+        createauthor = #{createauthor,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ghprint.cms.model.production.TProductionStandard" >
+    update t_production_standard
+    set codeid = #{codeid,jdbcType=VARCHAR},
+      printingmode = #{printingmode,jdbcType=VARCHAR},
+      material = #{material,jdbcType=VARCHAR},
+      crosswiseshrink = #{crosswiseshrink,jdbcType=INTEGER},
+      portraitshrink = #{portraitshrink,jdbcType=INTEGER},
+      companyid = #{companyid,jdbcType=INTEGER},
+      productid = #{productid,jdbcType=INTEGER},
+      printdataid = #{printdataid,jdbcType=INTEGER},
+      procedureid = #{procedureid,jdbcType=INTEGER},
+      procedureafterid = #{procedureafterid,jdbcType=INTEGER},
+      packaging = #{packaging,jdbcType=INTEGER},
+      note = #{note,jdbcType=VARCHAR},
+      createtime = #{createtime,jdbcType=DATE},
+      createauthor = #{createauthor,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

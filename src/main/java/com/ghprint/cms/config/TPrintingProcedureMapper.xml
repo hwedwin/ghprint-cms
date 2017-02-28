@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ghprint.cms.serviceDao.TPrintingProcedureMapper" >
+  <resultMap id="BaseResultMap" type="com.ghprint.cms.model.production.TPrintingProcedure" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="printdirect" property="printdirect" jdbcType="VARCHAR" />
+    <result column="specification" property="specification" jdbcType="VARCHAR" />
+    <result column="printamount" property="printamount" jdbcType="INTEGER" />
+    <result column="printweight" property="printweight" jdbcType="REAL" />
+    <result column="printmeter" property="printmeter" jdbcType="INTEGER" />
+    <result column="wastage" property="wastage" jdbcType="INTEGER" />
+    <result column="procedurenote" property="procedurenote" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, printdirect, specification, printamount, printweight, printmeter, wastage, procedurenote
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ghprint.cms.model.production.TPrintingProcedureExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from t_printing_procedure
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_printing_procedure
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_printing_procedure
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.ghprint.cms.model.production.TPrintingProcedureExample" >
+    delete from t_printing_procedure
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.ghprint.cms.model.production.TPrintingProcedure" >
+    insert into t_printing_procedure (id, printdirect, specification, 
+      printamount, printweight, printmeter, 
+      wastage, procedurenote)
+    values (#{id,jdbcType=INTEGER}, #{printdirect,jdbcType=VARCHAR}, #{specification,jdbcType=VARCHAR}, 
+      #{printamount,jdbcType=INTEGER}, #{printweight,jdbcType=REAL}, #{printmeter,jdbcType=INTEGER}, 
+      #{wastage,jdbcType=INTEGER}, #{procedurenote,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ghprint.cms.model.production.TPrintingProcedure" >
+    insert into t_printing_procedure
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="printdirect != null" >
+        printdirect,
+      </if>
+      <if test="specification != null" >
+        specification,
+      </if>
+      <if test="printamount != null" >
+        printamount,
+      </if>
+      <if test="printweight != null" >
+        printweight,
+      </if>
+      <if test="printmeter != null" >
+        printmeter,
+      </if>
+      <if test="wastage != null" >
+        wastage,
+      </if>
+      <if test="procedurenote != null" >
+        procedurenote,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="printdirect != null" >
+        #{printdirect,jdbcType=VARCHAR},
+      </if>
+      <if test="specification != null" >
+        #{specification,jdbcType=VARCHAR},
+      </if>
+      <if test="printamount != null" >
+        #{printamount,jdbcType=INTEGER},
+      </if>
+      <if test="printweight != null" >
+        #{printweight,jdbcType=REAL},
+      </if>
+      <if test="printmeter != null" >
+        #{printmeter,jdbcType=INTEGER},
+      </if>
+      <if test="wastage != null" >
+        #{wastage,jdbcType=INTEGER},
+      </if>
+      <if test="procedurenote != null" >
+        #{procedurenote,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.ghprint.cms.model.production.TPrintingProcedureExample" resultType="java.lang.Integer" >
+    select count(*) from t_printing_procedure
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update t_printing_procedure
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.printdirect != null" >
+        printdirect = #{record.printdirect,jdbcType=VARCHAR},
+      </if>
+      <if test="record.specification != null" >
+        specification = #{record.specification,jdbcType=VARCHAR},
+      </if>
+      <if test="record.printamount != null" >
+        printamount = #{record.printamount,jdbcType=INTEGER},
+      </if>
+      <if test="record.printweight != null" >
+        printweight = #{record.printweight,jdbcType=REAL},
+      </if>
+      <if test="record.printmeter != null" >
+        printmeter = #{record.printmeter,jdbcType=INTEGER},
+      </if>
+      <if test="record.wastage != null" >
+        wastage = #{record.wastage,jdbcType=INTEGER},
+      </if>
+      <if test="record.procedurenote != null" >
+        procedurenote = #{record.procedurenote,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update t_printing_procedure
+    set id = #{record.id,jdbcType=INTEGER},
+      printdirect = #{record.printdirect,jdbcType=VARCHAR},
+      specification = #{record.specification,jdbcType=VARCHAR},
+      printamount = #{record.printamount,jdbcType=INTEGER},
+      printweight = #{record.printweight,jdbcType=REAL},
+      printmeter = #{record.printmeter,jdbcType=INTEGER},
+      wastage = #{record.wastage,jdbcType=INTEGER},
+      procedurenote = #{record.procedurenote,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ghprint.cms.model.production.TPrintingProcedure" >
+    update t_printing_procedure
+    <set >
+      <if test="printdirect != null" >
+        printdirect = #{printdirect,jdbcType=VARCHAR},
+      </if>
+      <if test="specification != null" >
+        specification = #{specification,jdbcType=VARCHAR},
+      </if>
+      <if test="printamount != null" >
+        printamount = #{printamount,jdbcType=INTEGER},
+      </if>
+      <if test="printweight != null" >
+        printweight = #{printweight,jdbcType=REAL},
+      </if>
+      <if test="printmeter != null" >
+        printmeter = #{printmeter,jdbcType=INTEGER},
+      </if>
+      <if test="wastage != null" >
+        wastage = #{wastage,jdbcType=INTEGER},
+      </if>
+      <if test="procedurenote != null" >
+        procedurenote = #{procedurenote,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ghprint.cms.model.production.TPrintingProcedure" >
+    update t_printing_procedure
+    set printdirect = #{printdirect,jdbcType=VARCHAR},
+      specification = #{specification,jdbcType=VARCHAR},
+      printamount = #{printamount,jdbcType=INTEGER},
+      printweight = #{printweight,jdbcType=REAL},
+      printmeter = #{printmeter,jdbcType=INTEGER},
+      wastage = #{wastage,jdbcType=INTEGER},
+      procedurenote = #{procedurenote,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

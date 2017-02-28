@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ghprint.cms.serviceDao.TPrintingDataMapper" >
+  <resultMap id="BaseResultMap" type="com.ghprint.cms.model.production.TPrintingData" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="templatenum" property="templatenum" jdbcType="VARCHAR" />
+    <result column="printsize" property="printsize" jdbcType="INTEGER" />
+    <result column="templatelength" property="templatelength" jdbcType="INTEGER" />
+    <result column="templateperimeter" property="templateperimeter" jdbcType="INTEGER" />
+    <result column="spellcount" property="spellcount" jdbcType="VARCHAR" />
+    <result column="bankuncount" property="bankuncount" jdbcType="INTEGER" />
+    <result column="color" property="color" jdbcType="VARCHAR" />
+    <result column="printnote" property="printnote" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, templatenum, printsize, templatelength, templateperimeter, spellcount, bankuncount, 
+    color, printnote
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ghprint.cms.model.production.TPrintingDataExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from t_printing_data
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_printing_data
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_printing_data
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.ghprint.cms.model.production.TPrintingDataExample" >
+    delete from t_printing_data
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.ghprint.cms.model.production.TPrintingData" >
+    insert into t_printing_data (id, templatenum, printsize, 
+      templatelength, templateperimeter, spellcount, 
+      bankuncount, color, printnote
+      )
+    values (#{id,jdbcType=INTEGER}, #{templatenum,jdbcType=VARCHAR}, #{printsize,jdbcType=INTEGER}, 
+      #{templatelength,jdbcType=INTEGER}, #{templateperimeter,jdbcType=INTEGER}, #{spellcount,jdbcType=VARCHAR}, 
+      #{bankuncount,jdbcType=INTEGER}, #{color,jdbcType=VARCHAR}, #{printnote,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.ghprint.cms.model.production.TPrintingData" >
+    insert into t_printing_data
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="templatenum != null" >
+        templatenum,
+      </if>
+      <if test="printsize != null" >
+        printsize,
+      </if>
+      <if test="templatelength != null" >
+        templatelength,
+      </if>
+      <if test="templateperimeter != null" >
+        templateperimeter,
+      </if>
+      <if test="spellcount != null" >
+        spellcount,
+      </if>
+      <if test="bankuncount != null" >
+        bankuncount,
+      </if>
+      <if test="color != null" >
+        color,
+      </if>
+      <if test="printnote != null" >
+        printnote,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="templatenum != null" >
+        #{templatenum,jdbcType=VARCHAR},
+      </if>
+      <if test="printsize != null" >
+        #{printsize,jdbcType=INTEGER},
+      </if>
+      <if test="templatelength != null" >
+        #{templatelength,jdbcType=INTEGER},
+      </if>
+      <if test="templateperimeter != null" >
+        #{templateperimeter,jdbcType=INTEGER},
+      </if>
+      <if test="spellcount != null" >
+        #{spellcount,jdbcType=VARCHAR},
+      </if>
+      <if test="bankuncount != null" >
+        #{bankuncount,jdbcType=INTEGER},
+      </if>
+      <if test="color != null" >
+        #{color,jdbcType=VARCHAR},
+      </if>
+      <if test="printnote != null" >
+        #{printnote,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.ghprint.cms.model.production.TPrintingDataExample" resultType="java.lang.Integer" >
+    select count(*) from t_printing_data
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update t_printing_data
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.templatenum != null" >
+        templatenum = #{record.templatenum,jdbcType=VARCHAR},
+      </if>
+      <if test="record.printsize != null" >
+        printsize = #{record.printsize,jdbcType=INTEGER},
+      </if>
+      <if test="record.templatelength != null" >
+        templatelength = #{record.templatelength,jdbcType=INTEGER},
+      </if>
+      <if test="record.templateperimeter != null" >
+        templateperimeter = #{record.templateperimeter,jdbcType=INTEGER},
+      </if>
+      <if test="record.spellcount != null" >
+        spellcount = #{record.spellcount,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bankuncount != null" >
+        bankuncount = #{record.bankuncount,jdbcType=INTEGER},
+      </if>
+      <if test="record.color != null" >
+        color = #{record.color,jdbcType=VARCHAR},
+      </if>
+      <if test="record.printnote != null" >
+        printnote = #{record.printnote,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update t_printing_data
+    set id = #{record.id,jdbcType=INTEGER},
+      templatenum = #{record.templatenum,jdbcType=VARCHAR},
+      printsize = #{record.printsize,jdbcType=INTEGER},
+      templatelength = #{record.templatelength,jdbcType=INTEGER},
+      templateperimeter = #{record.templateperimeter,jdbcType=INTEGER},
+      spellcount = #{record.spellcount,jdbcType=VARCHAR},
+      bankuncount = #{record.bankuncount,jdbcType=INTEGER},
+      color = #{record.color,jdbcType=VARCHAR},
+      printnote = #{record.printnote,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ghprint.cms.model.production.TPrintingData" >
+    update t_printing_data
+    <set >
+      <if test="templatenum != null" >
+        templatenum = #{templatenum,jdbcType=VARCHAR},
+      </if>
+      <if test="printsize != null" >
+        printsize = #{printsize,jdbcType=INTEGER},
+      </if>
+      <if test="templatelength != null" >
+        templatelength = #{templatelength,jdbcType=INTEGER},
+      </if>
+      <if test="templateperimeter != null" >
+        templateperimeter = #{templateperimeter,jdbcType=INTEGER},
+      </if>
+      <if test="spellcount != null" >
+        spellcount = #{spellcount,jdbcType=VARCHAR},
+      </if>
+      <if test="bankuncount != null" >
+        bankuncount = #{bankuncount,jdbcType=INTEGER},
+      </if>
+      <if test="color != null" >
+        color = #{color,jdbcType=VARCHAR},
+      </if>
+      <if test="printnote != null" >
+        printnote = #{printnote,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ghprint.cms.model.production.TPrintingData" >
+    update t_printing_data
+    set templatenum = #{templatenum,jdbcType=VARCHAR},
+      printsize = #{printsize,jdbcType=INTEGER},
+      templatelength = #{templatelength,jdbcType=INTEGER},
+      templateperimeter = #{templateperimeter,jdbcType=INTEGER},
+      spellcount = #{spellcount,jdbcType=VARCHAR},
+      bankuncount = #{bankuncount,jdbcType=INTEGER},
+      color = #{color,jdbcType=VARCHAR},
+      printnote = #{printnote,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

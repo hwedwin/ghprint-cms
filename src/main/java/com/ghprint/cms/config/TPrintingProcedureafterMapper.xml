@@ -1,0 +1,465 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ghprint.cms.serviceDao.TPrintingProcedureafterMapper" >
+  <resultMap id="BaseResultMap" type="com.ghprint.cms.model.production.TPrintingProcedureafter" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="qualitycheck" property="qualitycheck" jdbcType="VARCHAR" />
+    <result column="splitsizr" property="splitsizr" jdbcType="INTEGER" />
+    <result column="transparentkeep" property="transparentkeep" jdbcType="INTEGER" />
+    <result column="mergesize" property="mergesize" jdbcType="VARCHAR" />
+    <result column="splithigh" property="splithigh" jdbcType="INTEGER" />
+    <result column="glueplace" property="glueplace" jdbcType="VARCHAR" />
+    <result column="foldplace" property="foldplace" jdbcType="VARCHAR" />
+    <result column="tearlinesize" property="tearlinesize" jdbcType="VARCHAR" />
+    <result column="tearlineplace" property="tearlineplace" jdbcType="VARCHAR" />
+    <result column="productstyle" property="productstyle" jdbcType="VARCHAR" />
+    <result column="scrolldirection" property="scrolldirection" jdbcType="INTEGER" />
+    <result column="scrolllength" property="scrolllength" jdbcType="VARCHAR" />
+    <result column="repeatscrollsize" property="repeatscrollsize" jdbcType="VARCHAR" />
+    <result column="proceduresum" property="proceduresum" jdbcType="VARCHAR" />
+    <result column="interfacecount" property="interfacecount" jdbcType="INTEGER" />
+    <result column="hemcount" property="hemcount" jdbcType="INTEGER" />
+    <result column="boxway" property="boxway" jdbcType="VARCHAR" />
+    <result column="boxsize" property="boxsize" jdbcType="VARCHAR" />
+    <result column="splitsum" property="splitsum" jdbcType="INTEGER" />
+    <result column="mould" property="mould" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, qualitycheck, splitsizr, transparentkeep, mergesize, splithigh, glueplace, foldplace, 
+    tearlinesize, tearlineplace, productstyle, scrolldirection, scrolllength, repeatscrollsize, 
+    proceduresum, interfacecount, hemcount, boxway, boxsize, splitsum, mould
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ghprint.cms.model.production.TPrintingProcedureafterExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from t_printing_procedureafter
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_printing_procedureafter
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_printing_procedureafter
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.ghprint.cms.model.production.TPrintingProcedureafterExample" >
+    delete from t_printing_procedureafter
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.ghprint.cms.model.production.TPrintingProcedureafter" >
+    insert into t_printing_procedureafter (id, qualitycheck, splitsizr, 
+      transparentkeep, mergesize, splithigh, 
+      glueplace, foldplace, tearlinesize, 
+      tearlineplace, productstyle, scrolldirection, 
+      scrolllength, repeatscrollsize, proceduresum, 
+      interfacecount, hemcount, boxway, 
+      boxsize, splitsum, mould
+      )
+    values (#{id,jdbcType=INTEGER}, #{qualitycheck,jdbcType=VARCHAR}, #{splitsizr,jdbcType=INTEGER}, 
+      #{transparentkeep,jdbcType=INTEGER}, #{mergesize,jdbcType=VARCHAR}, #{splithigh,jdbcType=INTEGER}, 
+      #{glueplace,jdbcType=VARCHAR}, #{foldplace,jdbcType=VARCHAR}, #{tearlinesize,jdbcType=VARCHAR}, 
+      #{tearlineplace,jdbcType=VARCHAR}, #{productstyle,jdbcType=VARCHAR}, #{scrolldirection,jdbcType=INTEGER}, 
+      #{scrolllength,jdbcType=VARCHAR}, #{repeatscrollsize,jdbcType=VARCHAR}, #{proceduresum,jdbcType=VARCHAR}, 
+      #{interfacecount,jdbcType=INTEGER}, #{hemcount,jdbcType=INTEGER}, #{boxway,jdbcType=VARCHAR}, 
+      #{boxsize,jdbcType=VARCHAR}, #{splitsum,jdbcType=INTEGER}, #{mould,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.ghprint.cms.model.production.TPrintingProcedureafter" >
+    insert into t_printing_procedureafter
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="qualitycheck != null" >
+        qualitycheck,
+      </if>
+      <if test="splitsizr != null" >
+        splitsizr,
+      </if>
+      <if test="transparentkeep != null" >
+        transparentkeep,
+      </if>
+      <if test="mergesize != null" >
+        mergesize,
+      </if>
+      <if test="splithigh != null" >
+        splithigh,
+      </if>
+      <if test="glueplace != null" >
+        glueplace,
+      </if>
+      <if test="foldplace != null" >
+        foldplace,
+      </if>
+      <if test="tearlinesize != null" >
+        tearlinesize,
+      </if>
+      <if test="tearlineplace != null" >
+        tearlineplace,
+      </if>
+      <if test="productstyle != null" >
+        productstyle,
+      </if>
+      <if test="scrolldirection != null" >
+        scrolldirection,
+      </if>
+      <if test="scrolllength != null" >
+        scrolllength,
+      </if>
+      <if test="repeatscrollsize != null" >
+        repeatscrollsize,
+      </if>
+      <if test="proceduresum != null" >
+        proceduresum,
+      </if>
+      <if test="interfacecount != null" >
+        interfacecount,
+      </if>
+      <if test="hemcount != null" >
+        hemcount,
+      </if>
+      <if test="boxway != null" >
+        boxway,
+      </if>
+      <if test="boxsize != null" >
+        boxsize,
+      </if>
+      <if test="splitsum != null" >
+        splitsum,
+      </if>
+      <if test="mould != null" >
+        mould,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="qualitycheck != null" >
+        #{qualitycheck,jdbcType=VARCHAR},
+      </if>
+      <if test="splitsizr != null" >
+        #{splitsizr,jdbcType=INTEGER},
+      </if>
+      <if test="transparentkeep != null" >
+        #{transparentkeep,jdbcType=INTEGER},
+      </if>
+      <if test="mergesize != null" >
+        #{mergesize,jdbcType=VARCHAR},
+      </if>
+      <if test="splithigh != null" >
+        #{splithigh,jdbcType=INTEGER},
+      </if>
+      <if test="glueplace != null" >
+        #{glueplace,jdbcType=VARCHAR},
+      </if>
+      <if test="foldplace != null" >
+        #{foldplace,jdbcType=VARCHAR},
+      </if>
+      <if test="tearlinesize != null" >
+        #{tearlinesize,jdbcType=VARCHAR},
+      </if>
+      <if test="tearlineplace != null" >
+        #{tearlineplace,jdbcType=VARCHAR},
+      </if>
+      <if test="productstyle != null" >
+        #{productstyle,jdbcType=VARCHAR},
+      </if>
+      <if test="scrolldirection != null" >
+        #{scrolldirection,jdbcType=INTEGER},
+      </if>
+      <if test="scrolllength != null" >
+        #{scrolllength,jdbcType=VARCHAR},
+      </if>
+      <if test="repeatscrollsize != null" >
+        #{repeatscrollsize,jdbcType=VARCHAR},
+      </if>
+      <if test="proceduresum != null" >
+        #{proceduresum,jdbcType=VARCHAR},
+      </if>
+      <if test="interfacecount != null" >
+        #{interfacecount,jdbcType=INTEGER},
+      </if>
+      <if test="hemcount != null" >
+        #{hemcount,jdbcType=INTEGER},
+      </if>
+      <if test="boxway != null" >
+        #{boxway,jdbcType=VARCHAR},
+      </if>
+      <if test="boxsize != null" >
+        #{boxsize,jdbcType=VARCHAR},
+      </if>
+      <if test="splitsum != null" >
+        #{splitsum,jdbcType=INTEGER},
+      </if>
+      <if test="mould != null" >
+        #{mould,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.ghprint.cms.model.production.TPrintingProcedureafterExample" resultType="java.lang.Integer" >
+    select count(*) from t_printing_procedureafter
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update t_printing_procedureafter
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.qualitycheck != null" >
+        qualitycheck = #{record.qualitycheck,jdbcType=VARCHAR},
+      </if>
+      <if test="record.splitsizr != null" >
+        splitsizr = #{record.splitsizr,jdbcType=INTEGER},
+      </if>
+      <if test="record.transparentkeep != null" >
+        transparentkeep = #{record.transparentkeep,jdbcType=INTEGER},
+      </if>
+      <if test="record.mergesize != null" >
+        mergesize = #{record.mergesize,jdbcType=VARCHAR},
+      </if>
+      <if test="record.splithigh != null" >
+        splithigh = #{record.splithigh,jdbcType=INTEGER},
+      </if>
+      <if test="record.glueplace != null" >
+        glueplace = #{record.glueplace,jdbcType=VARCHAR},
+      </if>
+      <if test="record.foldplace != null" >
+        foldplace = #{record.foldplace,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tearlinesize != null" >
+        tearlinesize = #{record.tearlinesize,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tearlineplace != null" >
+        tearlineplace = #{record.tearlineplace,jdbcType=VARCHAR},
+      </if>
+      <if test="record.productstyle != null" >
+        productstyle = #{record.productstyle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.scrolldirection != null" >
+        scrolldirection = #{record.scrolldirection,jdbcType=INTEGER},
+      </if>
+      <if test="record.scrolllength != null" >
+        scrolllength = #{record.scrolllength,jdbcType=VARCHAR},
+      </if>
+      <if test="record.repeatscrollsize != null" >
+        repeatscrollsize = #{record.repeatscrollsize,jdbcType=VARCHAR},
+      </if>
+      <if test="record.proceduresum != null" >
+        proceduresum = #{record.proceduresum,jdbcType=VARCHAR},
+      </if>
+      <if test="record.interfacecount != null" >
+        interfacecount = #{record.interfacecount,jdbcType=INTEGER},
+      </if>
+      <if test="record.hemcount != null" >
+        hemcount = #{record.hemcount,jdbcType=INTEGER},
+      </if>
+      <if test="record.boxway != null" >
+        boxway = #{record.boxway,jdbcType=VARCHAR},
+      </if>
+      <if test="record.boxsize != null" >
+        boxsize = #{record.boxsize,jdbcType=VARCHAR},
+      </if>
+      <if test="record.splitsum != null" >
+        splitsum = #{record.splitsum,jdbcType=INTEGER},
+      </if>
+      <if test="record.mould != null" >
+        mould = #{record.mould,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update t_printing_procedureafter
+    set id = #{record.id,jdbcType=INTEGER},
+      qualitycheck = #{record.qualitycheck,jdbcType=VARCHAR},
+      splitsizr = #{record.splitsizr,jdbcType=INTEGER},
+      transparentkeep = #{record.transparentkeep,jdbcType=INTEGER},
+      mergesize = #{record.mergesize,jdbcType=VARCHAR},
+      splithigh = #{record.splithigh,jdbcType=INTEGER},
+      glueplace = #{record.glueplace,jdbcType=VARCHAR},
+      foldplace = #{record.foldplace,jdbcType=VARCHAR},
+      tearlinesize = #{record.tearlinesize,jdbcType=VARCHAR},
+      tearlineplace = #{record.tearlineplace,jdbcType=VARCHAR},
+      productstyle = #{record.productstyle,jdbcType=VARCHAR},
+      scrolldirection = #{record.scrolldirection,jdbcType=INTEGER},
+      scrolllength = #{record.scrolllength,jdbcType=VARCHAR},
+      repeatscrollsize = #{record.repeatscrollsize,jdbcType=VARCHAR},
+      proceduresum = #{record.proceduresum,jdbcType=VARCHAR},
+      interfacecount = #{record.interfacecount,jdbcType=INTEGER},
+      hemcount = #{record.hemcount,jdbcType=INTEGER},
+      boxway = #{record.boxway,jdbcType=VARCHAR},
+      boxsize = #{record.boxsize,jdbcType=VARCHAR},
+      splitsum = #{record.splitsum,jdbcType=INTEGER},
+      mould = #{record.mould,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ghprint.cms.model.production.TPrintingProcedureafter" >
+    update t_printing_procedureafter
+    <set >
+      <if test="qualitycheck != null" >
+        qualitycheck = #{qualitycheck,jdbcType=VARCHAR},
+      </if>
+      <if test="splitsizr != null" >
+        splitsizr = #{splitsizr,jdbcType=INTEGER},
+      </if>
+      <if test="transparentkeep != null" >
+        transparentkeep = #{transparentkeep,jdbcType=INTEGER},
+      </if>
+      <if test="mergesize != null" >
+        mergesize = #{mergesize,jdbcType=VARCHAR},
+      </if>
+      <if test="splithigh != null" >
+        splithigh = #{splithigh,jdbcType=INTEGER},
+      </if>
+      <if test="glueplace != null" >
+        glueplace = #{glueplace,jdbcType=VARCHAR},
+      </if>
+      <if test="foldplace != null" >
+        foldplace = #{foldplace,jdbcType=VARCHAR},
+      </if>
+      <if test="tearlinesize != null" >
+        tearlinesize = #{tearlinesize,jdbcType=VARCHAR},
+      </if>
+      <if test="tearlineplace != null" >
+        tearlineplace = #{tearlineplace,jdbcType=VARCHAR},
+      </if>
+      <if test="productstyle != null" >
+        productstyle = #{productstyle,jdbcType=VARCHAR},
+      </if>
+      <if test="scrolldirection != null" >
+        scrolldirection = #{scrolldirection,jdbcType=INTEGER},
+      </if>
+      <if test="scrolllength != null" >
+        scrolllength = #{scrolllength,jdbcType=VARCHAR},
+      </if>
+      <if test="repeatscrollsize != null" >
+        repeatscrollsize = #{repeatscrollsize,jdbcType=VARCHAR},
+      </if>
+      <if test="proceduresum != null" >
+        proceduresum = #{proceduresum,jdbcType=VARCHAR},
+      </if>
+      <if test="interfacecount != null" >
+        interfacecount = #{interfacecount,jdbcType=INTEGER},
+      </if>
+      <if test="hemcount != null" >
+        hemcount = #{hemcount,jdbcType=INTEGER},
+      </if>
+      <if test="boxway != null" >
+        boxway = #{boxway,jdbcType=VARCHAR},
+      </if>
+      <if test="boxsize != null" >
+        boxsize = #{boxsize,jdbcType=VARCHAR},
+      </if>
+      <if test="splitsum != null" >
+        splitsum = #{splitsum,jdbcType=INTEGER},
+      </if>
+      <if test="mould != null" >
+        mould = #{mould,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ghprint.cms.model.production.TPrintingProcedureafter" >
+    update t_printing_procedureafter
+    set qualitycheck = #{qualitycheck,jdbcType=VARCHAR},
+      splitsizr = #{splitsizr,jdbcType=INTEGER},
+      transparentkeep = #{transparentkeep,jdbcType=INTEGER},
+      mergesize = #{mergesize,jdbcType=VARCHAR},
+      splithigh = #{splithigh,jdbcType=INTEGER},
+      glueplace = #{glueplace,jdbcType=VARCHAR},
+      foldplace = #{foldplace,jdbcType=VARCHAR},
+      tearlinesize = #{tearlinesize,jdbcType=VARCHAR},
+      tearlineplace = #{tearlineplace,jdbcType=VARCHAR},
+      productstyle = #{productstyle,jdbcType=VARCHAR},
+      scrolldirection = #{scrolldirection,jdbcType=INTEGER},
+      scrolllength = #{scrolllength,jdbcType=VARCHAR},
+      repeatscrollsize = #{repeatscrollsize,jdbcType=VARCHAR},
+      proceduresum = #{proceduresum,jdbcType=VARCHAR},
+      interfacecount = #{interfacecount,jdbcType=INTEGER},
+      hemcount = #{hemcount,jdbcType=INTEGER},
+      boxway = #{boxway,jdbcType=VARCHAR},
+      boxsize = #{boxsize,jdbcType=VARCHAR},
+      splitsum = #{splitsum,jdbcType=INTEGER},
+      mould = #{mould,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
