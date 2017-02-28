@@ -122,5 +122,14 @@ public class CommonConstant {
 	 * 非法字符
 	 */
 	public static final int ILLEGAL_CHARACTERS=999;
-	
+
+
+	/**
+	 * 通用状态
+	 */
+	public static final String STATUS = "status";
+	public static final String STATUS_FAIL = "2";// 非正常
+	public static final String STATUS_NORMAL = "1";// 正常
+
+
 }
