@@ -8,7 +8,7 @@
         </layout>
     </appender>
     <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>/data/ghprint/appLogs/ghprint-cms/ghprint-cms.log</file>
+        <file>/data/appLogs/ghprint-cms/ghprint-cms.log</file>
         <Encoding>UTF-8</Encoding>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <FileNamePattern>/data/ghprint/appLogs/ghprint-cms/ghprint-cms.%d{yyyy-MM-dd}.log</FileNamePattern>

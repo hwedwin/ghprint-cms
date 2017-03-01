@@ -29,7 +29,7 @@
 
     <!-- 日志 -->
     <group name="log">
-        <property name="log.path" defaultValue="/data/ghprint/appLogs/ghprint-cms"/>
+        <property name="log.path" defaultValue="/data/appLogs/ghprint-cms"/>
         <property name="log.level" defaultValue="info"/>
         <property name="log.app.name" defaultValue="ghprint-cms"/>
     </group>

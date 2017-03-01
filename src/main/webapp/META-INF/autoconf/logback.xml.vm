@@ -19,5 +19,6 @@
     </appender>
     <root level="${log.level}">
         <appender-ref ref="FILE"/>
+        <appender-ref ref="STDOUT"/>
     </root>
 </configuration>

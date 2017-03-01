@@ -1,38 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.ghprint.cms.serviceDao.LoginMapper" >
-  <!--<resultMap id="BaseResultMap" type="com.bestpay.yzfca.ca.pojo.OperatorInfo" >-->
-  <!--<id column="OPERATORID" property="operatorid" jdbcType="INTEGER" />-->
-  <!--<result column="OPERATORDN" property="operatordn" jdbcType="VARCHAR" />-->
-  <!--<result column="OPERATORTYPE" property="operatortype" jdbcType="VARCHAR" />-->
-  <!--<result column="STATUS" property="status" jdbcType="DECIMAL" />-->
-  <!--<result column="INSERTTIME" property="inserttime" jdbcType="TIMESTAMP" />-->
-  <!--<result column="CERTSN" property="certsn" jdbcType="VARCHAR" />-->
-  <!--<result column="OPERATORNAME" property="operatorname" jdbcType="VARCHAR" />-->
-  <!--<result column="CERTTYPE" property="certtype" jdbcType="VARCHAR" />-->
-  <!--<result column="CERTNO" property="certno" jdbcType="VARCHAR" />-->
-  <!--<result column="PHONE" property="phone" jdbcType="VARCHAR" />-->
-  <!--<result column="MOBILEPHONE" property="mobilephone" jdbcType="VARCHAR" />-->
-  <!--<result column="EMAIL" property="email" jdbcType="VARCHAR" />-->
-  <!--<result column="UKEYNO" property="ukeyno" jdbcType="VARCHAR" />-->
-  <!--<result column="PARENTID" property="parentid" jdbcType="DECIMAL" />-->
-  <!--<result column="GROUPID" property="groupid" jdbcType="DECIMAL" />-->
-  <!--<result column="CAID" property="caid" jdbcType="DECIMAL" />-->
-  <!--<result column="CERT" property="cert" jdbcType="CLOB" />-->
 
-  <!--</resultMap>-->
-  <!--
-  <resultMap type="com.bestpay.yzfca.ca.pojo.RoleInfo" id="RoleResultMap">
-  <id column="ROLEID" property="roleid" jdbcType="DECIMAL" />
-    <result column="ROLENAME" property="rolename" jdbcType="VARCHAR" />
-    <result column="ROLESTATUTS" property="rolestatuts" jdbcType="CHAR" />
-    <result column="ROLEDESC" property="roledesc" jdbcType="VARCHAR" />
-    <result column="INSERTTIME" property="inserttime" jdbcType="TIMESTAMP" />
-    <result column="EDITTIME" property="edittime" jdbcType="TIMESTAMP" />
-    <result column="GRADE" property="grade" jdbcType="CHAR" />
-    <result column="CAID" property="caid" jdbcType="DECIMAL" />
-  </resultMap>
-  --><resultMap id="ResultMap" type="com.ghprint.cms.model.sys.OperateRoleInfo" >
+ <resultMap id="ResultMap" type="com.ghprint.cms.model.sys.OperateRoleInfo" >
   <id column="LOCALID" property="localid" jdbcType="INTEGER" />
   <association property="operatorInfo" column="id" javaType="com.ghprint.cms.model.sys.TSysUser" >
     <id column="id" property="id" jdbcType="INTEGER" />
