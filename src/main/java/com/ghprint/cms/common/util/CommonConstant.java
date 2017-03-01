@@ -8,10 +8,6 @@ public class CommonConstant {
 
 	public static final String UPLOAD_PATH = "upload";
 
-	/**
-	 * 
-	 */
-	public static final String MOBILEREG = ConfigReader.readConfig(COMMON_PATH, "mobileReg");
 
 	/**
 	 * 每页显示数目
@@ -68,10 +64,6 @@ public class CommonConstant {
 	 */
 	public static final String LOGIN_VERIFY_CODE = "LOGIN_VERIFY_CODE";
 
-	/**
-	 * 安全卫士随机银子
-	 */
-	public static final String PASSGUARD_RANDOM_KEY = "RANDOM_KEY";
 
 	/**
 	 * 图片文件
@@ -92,32 +84,7 @@ public class CommonConstant {
 	 * fastdfs访问路径
 	 */
 	public static final String FASTDFS_WEB_URL = ConfigReader.readConfig(COMMON_PATH, "FASTDFS_WEB_URL");
-	/**
-	 * 个人公用群组
-	 */
-	public static final int PERSONAL_PUBLIC_GROUP = 1;
-	/**
-	 * 个人内测群组
-	 */
-	public static final int PERSONAL_PRIVATE_GROUP = 2;
-	/**
-	 * 企业公用群组
-	 */
-	public static final int ENTERPRISE_PUBLIC_GROUP = 3;
-	/**
-	 * 企业内测群组
-	 */
-	public static final int ENTERPRISE_PRIVATE_GROUP = 4;
-	
-	/**
-	 * 个人账户
-	 */
-	public static final int VM_PERSONAL_ACCOUNT=1;
-	/**
-	 * 企业账户
-	 */
-	public static final int VM_ENTERPRISE_ACCOUNT=2;
-	
+
 	/**
 	 * 非法字符
 	 */

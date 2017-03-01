@@ -3,14 +3,11 @@ package com.ghprint.cms.services;
 
 import com.alibaba.fastjson.JSON;
 import com.ghprint.cms.common.algorithm.MD5Util;
-import com.ghprint.cms.common.entity.PageData;
-import com.ghprint.cms.common.util.DictionaryConstant;
+import com.ghprint.cms.common.util.CommonConstant;
 import com.ghprint.cms.common.util.ToolUtils;
 import com.ghprint.cms.dao.sys.UserDao;
 import com.ghprint.cms.model.sys.*;
 import com.ghprint.cms.pagination.DataGridResult;
-import com.ghprint.cms.pagination.Page;
-import com.ghprint.cms.pagination.PageParameter;
 import com.ghprint.cms.serviceDao.*;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -213,7 +210,7 @@ public class UserServiceImpl implements UserService {
                                 .get(i);
                         if (info1.getRoleInfo().getRolestatus() != null
                                 && !info1.getRoleInfo().getRolestatus().equals(
-                                DictionaryConstant.STATUS_FAIL)) {
+                                CommonConstant.STATUS_FAIL)) {
                             List prilist = tSysRolePrivilegeMapper.queryRoleList(info1.getRoleInfo().getRoleid());
                             if (prilist != null && prilist.size() > 0) {
                                 for (int j = 0; j < prilist.size(); j++) {
