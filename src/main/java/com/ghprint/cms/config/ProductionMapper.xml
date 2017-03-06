@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.ghprint.cms.serviceDao.ProductionMapper">
+
+    <resultMap id="ResultMap" type="com.ghprint.cms.model.production.ProductionInfoView">
+        <association property="TProductionStandard"  column=""  javaType="com.ghprint.cms.model.production.TProductionStandard"  >
+            <id property="id" column="id" jdbcType="INTEGER"/>
+            <result property="codeid" column="codeid" jdbcType="VARCHAR"></result>
+            <result></result>
+        </association>
+    </resultMap>
+</mapper>

@@ -35,7 +35,7 @@ public class UpdateUsersController  extends BaseAction{
 
     @RequestMapping(value = "/userinfo/updateuserinfo.do", method = RequestMethod.POST, produces = "application/json; charset=utf-8")
     @ResponseBody
-    public Response<String> updateuserinfo (HttpServletRequest request, HttpServletResponse response, @RequestBody TSysUser user) {
+    public Response<String> updateuserinfo (HttpServletRequest request, HttpServletResponse response,  TSysUser user) {
 
         Response<String> responses = new Response<>();
 

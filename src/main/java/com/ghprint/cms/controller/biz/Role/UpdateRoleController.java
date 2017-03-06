@@ -34,7 +34,7 @@ public class UpdateRoleController extends BaseAction {
     @RequestMapping(value = "/roleinfo/updateroleinfo.do", method = RequestMethod.POST, produces = "application/json; charset=utf-8")
     @ResponseBody
     @ApiOperation(value = "更新角色")
-    public Response<String> updateroleinfo (HttpServletRequest request, HttpServletResponse response, @RequestBody TSysRole role, String ids[]) {
+    public Response<String> updateroleinfo (HttpServletRequest request, HttpServletResponse response,  TSysRole role, String ids[]) {
 
         Response<String> responses = new Response<>();
 

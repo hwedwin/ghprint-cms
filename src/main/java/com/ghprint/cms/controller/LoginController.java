@@ -91,6 +91,34 @@ public class LoginController {
     }
 
 
+    /**
+     * 注销
+     *
 
-
+     * @return 跳转页面
+     * @throws ServletException
+     * @throws IOException
+     */
+    @RequestMapping(value = "/logout.do", method = RequestMethod.GET)
+    @ResponseBody
+    public Response<String> logout(HttpServletRequest request) throws ServletException, IOException {
+        Response<String> response = new Response<>();
+        try {
+        String account=request.getParameter("userAccount");
+             log.info("传入参数{}",account);
+            request.getSession().invalidate();
+            log.info("注销成功");
+            response.setErrorCode(Constant.errorCodeEnum.SUCCESS.getCode());
+            response.setErrorMsg(Constant.errorCodeEnum.SUCCESS.getName());
+            response.setResult("logout success!");
+            return  response;
+        } catch (Exception e) {
+            log.error("logout_Exception:{}",e.toString());
+            e.printStackTrace();
+            response.setErrorCode(Constant.errorCodeEnum.SYSTEM_ERROR.getCode());
+            response.setErrorMsg(Constant.errorCodeEnum.SYSTEM_ERROR.getName());
+            response.setResult(e.toString());
+            return response;
+        }
+    }
 }
