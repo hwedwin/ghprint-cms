@@ -7,6 +7,8 @@ import java.io.Serializable;
  */
 public class ProductionInfoView implements Serializable {
 
+   
+
     private TProductionStandard productionStandard;
 
     private  TCustomerInfo customerInfo;
@@ -69,5 +71,17 @@ public class ProductionInfoView implements Serializable {
         this.printingProcedureafter = printingProcedureafter;
     }
 
+   
 
+    @Override
+    public String toString() {
+        return "ProductionInfoView{" +
+                "productionStandard=" + productionStandard +
+                ", customerInfo=" + customerInfo +
+                ", productInfo=" + productInfo +
+                ", printingData=" + printingData +
+                ", printingProcedure=" + printingProcedure +
+                ", printingProcedureafter=" + printingProcedureafter +
+                '}';
+    }
 }

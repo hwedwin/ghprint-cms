@@ -2,6 +2,7 @@ package com.ghprint.cms.controller.biz.User;
 
 import cn.com.bestpay.Response;
 import com.ghprint.cms.common.AuthorityKey;
+import com.ghprint.cms.common.algorithm.MD5Util;
 import com.ghprint.cms.controller.BaseAction;
 import com.ghprint.cms.model.sys.GradePrivilegeView;
 import com.ghprint.cms.model.sys.TSysRole;
@@ -22,6 +23,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -76,6 +78,8 @@ public class AddUsersController extends BaseAction{
             Boolean flag = super.execute(request, response);
             if (flag) {
                 if(StringUtils.isNotBlank(uid)){
+                    user.setCreatetime(new Date());
+                    user.setPassword(MD5Util.getMD5String(user.getPassword()).toUpperCase());
                     userService.addUser(user,uid);
                     responses.setErrorCode(Constant.errorCodeEnum.SUCCESS.getCode());
                     responses.setErrorMsg(Constant.errorCodeEnum.SUCCESS.getName());

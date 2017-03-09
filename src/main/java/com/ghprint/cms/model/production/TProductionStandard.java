@@ -152,4 +152,25 @@ public class TProductionStandard {
     public void setCreateauthor(String createauthor) {
         this.createauthor = createauthor == null ? null : createauthor.trim();
     }
+
+    @Override
+    public String toString() {
+        return "TProductionStandard{" +
+                "id=" + id +
+                ", codeid='" + codeid + '\'' +
+                ", printingmode='" + printingmode + '\'' +
+                ", material='" + material + '\'' +
+                ", crosswiseshrink=" + crosswiseshrink +
+                ", portraitshrink=" + portraitshrink +
+                ", companyid=" + companyid +
+                ", productid=" + productid +
+                ", printdataid=" + printdataid +
+                ", procedureid=" + procedureid +
+                ", procedureafterid=" + procedureafterid +
+                ", packaging=" + packaging +
+                ", note='" + note + '\'' +
+                ", createtime=" + createtime +
+                ", createauthor='" + createauthor + '\'' +
+                '}';
+    }
 }

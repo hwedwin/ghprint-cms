@@ -3,11 +3,96 @@
 
 <mapper namespace="com.ghprint.cms.serviceDao.ProductionMapper">
 
-    <resultMap id="ResultMap" type="com.ghprint.cms.model.production.ProductionInfoView">
-        <association property="TProductionStandard"  column=""  javaType="com.ghprint.cms.model.production.TProductionStandard"  >
-            <id property="id" column="id" jdbcType="INTEGER"/>
-            <result property="codeid" column="codeid" jdbcType="VARCHAR"></result>
-            <result></result>
+
+
+        <resultMap id="ResultMap" type="com.ghprint.cms.model.production.ProductionInfoView">
+        <association property="productionStandard"  javaType="com.ghprint.cms.model.production.TProductionStandard"  >
+        <id property="id" column="id" jdbcType="INTEGER"/>
+        <result property="codeid" column="codeid" jdbcType="VARCHAR"/>
+        <result property="printingmode" column="printingmode" jdbcType="VARCHAR"/>
+        <result property="material" column="material" jdbcType="VARCHAR"/>
+        <result property="crosswiseshrink" column="crosswiseshrink" jdbcType="INTEGER"/>
+        <result property="portraitshrink" column="portraitshrink" jdbcType="INTEGER"/>
+        <result property="packaging" column="packaging" jdbcType="INTEGER"/>
+        <result property="note"  column="note" jdbcType="VARCHAR"/>
+        <result property="createtime" column="createtime" jdbcType="DATE"/>
+        <result property="createauthor" column="createauthor" jdbcType="VARCHAR"/>
+        </association>
+        <association property="customerInfo" column="id" javaType="com.ghprint.cms.model.production.TCustomerInfo">
+        <id property="id" column="id" jdbcType="INTEGER"/>
+        <result property="companycode" column="companycode" jdbcType="VARCHAR"/>
+        <result property="companyname" column="companyname" jdbcType="VARCHAR"/>
+        </association>
+        <association property="productInfo" javaType="com.ghprint.cms.model.production.TProductInfo">
+        <id property="id" column="id" jdbcType="INTEGER"/>
+        <result property="productcode" column="productcode" jdbcType="VARCHAR"/>
+        <result property="productname" column="productname" jdbcType="VARCHAR"/>
+        <result property="productmaterial" column="productmaterial" jdbcType="VARCHAR"/>
+        <result property="weight" column="weight" jdbcType="FLOAT"/>
+        <result property="specification" column="specification" jdbcType="VARCHAR"/>
+        </association>
+        <association property="printingData"   javaType="com.ghprint.cms.model.production.TPrintingData">
+        <id property="id" column="id" jdbcType="INTEGER"/>
+        <result property="templatenum" column="templatenum" jdbcType="VARCHAR"/>
+        <result property="printsize" column="printsize" jdbcType="INTEGER"/>
+        <result property="templatelength" column="templatelength" jdbcType="INTEGER"/>
+        <result property="templateperimeter" column="templateperimeter" jdbcType="INTEGER"/>
+        <result property="spellcount" column="spellcount" jdbcType="VARCHAR"/>
+        <result property="bankuncount" column="bankuncount" jdbcType="INTEGER"/>
+        <result property="color" column="color" jdbcType="VARCHAR"/>
+        <result property="printnote" column="printnote" jdbcType="VARCHAR"/>
+        </association>
+        <association property="printingProcedure" javaType="com.ghprint.cms.model.production.TPrintingProcedure">
+        <id property="id" column="id" jdbcType="INTEGER"/>
+        <result property="printdirect" column="printdirect" jdbcType="VARCHAR"/>
+        <result property="specification" column="specification" jdbcType="VARCHAR"/>
+        <result property="printamount" column="printamount" jdbcType="INTEGER"/>
+        <result property="printweight" column="printweight" jdbcType="FLOAT"/>
+        <result property="printmeter" column="printmeter" jdbcType="INTEGER"/>
+        <result property="wastage" column="wastage" jdbcType="INTEGER"/>
+        <result property="procedurenote" column="procedurenote" jdbcType="VARCHAR"/>
+        </association>
+        <association property="printingProcedureafter" javaType="com.ghprint.cms.model.production.TPrintingProcedureafter">
+        <id property="id" column="id" jdbcType="INTEGER"/>
+        <result property="qualitycheck" column="qualitycheck" jdbcType="VARCHAR"/>
+        <result property="splitsizr" column="splitsizr" jdbcType="INTEGER"/>
+        <result property="transparentkeep" column="transparentkeep" jdbcType="INTEGER"/>
+        <result property="mergesize" column="mergesize" jdbcType="VARCHAR"/>
+        <result property="splithigh" column="splithigh" jdbcType="INTEGER"/>
+        <result property="glueplace" column="glueplace" jdbcType="INTEGER"/>
+        <result property="foldplace" column="foldplace" jdbcType="VARCHAR"/>
+        <result property="tearlinesize" column="tearlinesize" jdbcType="VARCHAR"/>
+        <result property="tearlineplace" column="tearlineplace" jdbcType="VARCHAR"/>
+        <result property="productstyle" column="productstyle" jdbcType="VARCHAR"/>
+        <result property="scrolldirection" column="scrolldirection" jdbcType="INTEGER"/>
+        <result property="scrolllength"  column="scrolllength" jdbcType="VARCHAR"/>
+        <result property="repeatscrollsize" column="repeatscrollsize" jdbcType="VARCHAR"/>
+        <result property="proceduresum" column="proceduresum" jdbcType="VARCHAR"/>
+        <result property="interfacecount" column="interfacecount" jdbcType="INTEGER"/>
+        <result property="hemcount" column="hemcount" jdbcType="INTEGER"/>
+        <result property="boxway" column="boxway" jdbcType="VARCHAR"/>
+        <result property="boxsize" column="boxsize" jdbcType="VARCHAR"/>
+        <result property="splitsum" column="splitsum" jdbcType="INTEGER"/>
+        <result property="mould" column="mould" jdbcType="VARCHAR"/>
         </association>
     </resultMap>
+    <sql id="Base_Column_List" >
+    a.*,b.*,c.*,d.*,e.*,f.*
+    </sql>
+    <select id="selectlist" resultMap="ResultMap"  parameterType="java.lang.Integer">
+    SELECT
+    <include refid="Base_Column_List"/>
+    FROM  t_production_standard a
+    LEFT JOIN t_customer_info b
+    ON a.`companyid` = b.`id`
+    LEFT JOIN t_product_info c
+    ON a.`productid` = c.`id`
+    LEFT JOIN t_printing_data d
+    ON a.`printdataid` = d.`id`
+    LEFT JOIN t_printing_procedure e
+    ON a.`procedureid` = e.`id`
+    LEFT JOIN t_printing_procedureafter f
+    ON a.`procedureafterid`  = f.`id`
+    GROUP BY a.`productid` ORDER BY b.`companyname` limit #{pageOffset,jdbcType=INTEGER},#{pageSize,jdbcType=INTEGER}
+    </select>
 </mapper>
