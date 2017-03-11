@@ -90,4 +90,19 @@ public class TPrintingData {
     public void setPrintnote(String printnote) {
         this.printnote = printnote == null ? null : printnote.trim();
     }
+
+    @Override
+    public String toString() {
+        return "TPrintingData{" +
+                "id=" + id +
+                ", templatenum='" + templatenum + '\'' +
+                ", printsize=" + printsize +
+                ", templatelength=" + templatelength +
+                ", templateperimeter=" + templateperimeter +
+                ", spellcount='" + spellcount + '\'' +
+                ", bankuncount=" + bankuncount +
+                ", color='" + color + '\'' +
+                ", printnote='" + printnote + '\'' +
+                '}';
+    }
 }

@@ -86,7 +86,7 @@ public class TSysUser {
 
     @Override
     public String toString() {
-        return "TSysUser{" +
+        return "TSysUs{" +
                 "id=" + id +
                 ", userid='" + userid + '\'' +
                 ", username='" + username + '\'' +

@@ -2,9 +2,6 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 
 <mapper namespace="com.ghprint.cms.serviceDao.ProductionMapper">
-
-
-
         <resultMap id="ResultMap" type="com.ghprint.cms.model.production.ProductionInfoView">
         <association property="productionStandard"  javaType="com.ghprint.cms.model.production.TProductionStandard"  >
         <id property="id" column="id" jdbcType="INTEGER"/>
@@ -79,7 +76,7 @@
     <sql id="Base_Column_List" >
     a.*,b.*,c.*,d.*,e.*,f.*
     </sql>
-    <select id="selectlist" resultMap="ResultMap"  parameterType="java.lang.Integer">
+    <select id="selectlist" resultMap="ResultMap"  parameterType="java.lang.String">
     SELECT
     <include refid="Base_Column_List"/>
     FROM  t_production_standard a
@@ -93,6 +90,28 @@
     ON a.`procedureid` = e.`id`
     LEFT JOIN t_printing_procedureafter f
     ON a.`procedureafterid`  = f.`id`
-    GROUP BY a.`productid` ORDER BY b.`companyname` limit #{pageOffset,jdbcType=INTEGER},#{pageSize,jdbcType=INTEGER}
+        <where>
+            <if test="key != null and value != null">
+                ${key} = #{value}
+            </if>
+        </where>
+    GROUP BY a.`productid` ORDER BY b.`companyname`
+    limit #{pageOffset,jdbcType=INTEGER},#{pageSize,jdbcType=INTEGER}
+    </select>
+    <select id="getlistcount" resultType="java.lang.Integer" >
+        SELECT
+        count(1)
+        FROM  t_production_standard a
+        LEFT JOIN t_customer_info b
+        ON a.`companyid` = b.`id`
+        LEFT JOIN t_product_info c
+        ON a.`productid` = c.`id`
+        LEFT JOIN t_printing_data d
+        ON a.`printdataid` = d.`id`
+        LEFT JOIN t_printing_procedure e
+        ON a.`procedureid` = e.`id`
+        LEFT JOIN t_printing_procedureafter f
+        ON a.`procedureafterid`  = f.`id`
+        GROUP BY a.`productid` ORDER BY b.`companyname`
     </select>
 </mapper>

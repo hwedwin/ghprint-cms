@@ -80,4 +80,18 @@ public class TPrintingProcedure {
     public void setProcedurenote(String procedurenote) {
         this.procedurenote = procedurenote == null ? null : procedurenote.trim();
     }
+
+    @Override
+    public String toString() {
+        return "TPrintingProcedure{" +
+                "id=" + id +
+                ", printdirect='" + printdirect + '\'' +
+                ", specification='" + specification + '\'' +
+                ", printamount=" + printamount +
+                ", printweight=" + printweight +
+                ", printmeter=" + printmeter +
+                ", wastage=" + wastage +
+                ", procedurenote='" + procedurenote + '\'' +
+                '}';
+    }
 }

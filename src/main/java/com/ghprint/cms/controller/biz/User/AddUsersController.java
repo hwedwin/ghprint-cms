@@ -71,7 +71,7 @@ public class AddUsersController extends BaseAction{
         Assert.hasText(user.getUsername(), "user 中 username  is null or 空字符串。");
         Assert.hasText(user.getPassword(), "user 中 userpassword  is null or 空字符串。");
         Assert.hasText(user.getUserid(), "user 中 userId  is null or 空字符串。");
-        Assert.hasText(uid, "id is null or 空字符串。");
+        Assert.hasText(uid, "uid is null or 空字符串。");
         logger.info("AddRoleinfo request Param :{}",user);
         logger.info("AddRoleinfo request Param :{}",uid);
         try{

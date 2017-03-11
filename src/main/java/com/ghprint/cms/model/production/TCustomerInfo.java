@@ -30,4 +30,13 @@ public class TCustomerInfo {
     public void setCompanyname(String companyname) {
         this.companyname = companyname == null ? null : companyname.trim();
     }
+
+    @Override
+    public String toString() {
+        return "TCustomerInfo{" +
+                "id=" + id +
+                ", companycode=" + companycode +
+                ", companyname='" + companyname + '\'' +
+                '}';
+    }
 }

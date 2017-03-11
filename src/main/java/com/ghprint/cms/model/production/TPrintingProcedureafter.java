@@ -210,4 +210,31 @@ public class TPrintingProcedureafter {
     public void setMould(String mould) {
         this.mould = mould == null ? null : mould.trim();
     }
+
+    @Override
+    public String toString() {
+        return "TPrintingProcedureafter{" +
+                "id=" + id +
+                ", qualitycheck='" + qualitycheck + '\'' +
+                ", splitsizr=" + splitsizr +
+                ", transparentkeep=" + transparentkeep +
+                ", mergesize='" + mergesize + '\'' +
+                ", splithigh=" + splithigh +
+                ", glueplace='" + glueplace + '\'' +
+                ", foldplace='" + foldplace + '\'' +
+                ", tearlinesize='" + tearlinesize + '\'' +
+                ", tearlineplace='" + tearlineplace + '\'' +
+                ", productstyle='" + productstyle + '\'' +
+                ", scrolldirection=" + scrolldirection +
+                ", scrolllength='" + scrolllength + '\'' +
+                ", repeatscrollsize='" + repeatscrollsize + '\'' +
+                ", proceduresum='" + proceduresum + '\'' +
+                ", interfacecount=" + interfacecount +
+                ", hemcount=" + hemcount +
+                ", boxway='" + boxway + '\'' +
+                ", boxsize='" + boxsize + '\'' +
+                ", splitsum=" + splitsum +
+                ", mould='" + mould + '\'' +
+                '}';
+    }
 }

@@ -70,4 +70,17 @@ public class TProductInfo {
     public void setSpecification(String specification) {
         this.specification = specification == null ? null : specification.trim();
     }
+
+    @Override
+    public String toString() {
+        return "TProductInfo{" +
+                "id=" + id +
+                ", customerid=" + customerid +
+                ", productcode='" + productcode + '\'' +
+                ", productname='" + productname + '\'' +
+                ", productmaterial='" + productmaterial + '\'' +
+                ", weight=" + weight +
+                ", specification='" + specification + '\'' +
+                '}';
+    }
 }

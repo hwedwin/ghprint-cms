@@ -38,8 +38,8 @@ public class LoginController {
      */
     @RequestMapping(value = "/login.do", method = RequestMethod.POST)
     @ResponseBody
-    public Response<String> login(HttpServletRequest request) throws ServletException, IOException {
-        Response<String> response = new Response<>();
+    public Response<TSysUser> login(HttpServletRequest request) throws ServletException, IOException {
+        Response<TSysUser> response = new Response<>();
         try {
 
             String password=request.getParameter("userPassword");
@@ -72,7 +72,7 @@ public class LoginController {
                 log.info("权限列表authorityList={}",authorityList);
                 response.setErrorCode(Constant.errorCodeEnum.SUCCESS.getCode());
                 response.setErrorMsg(Constant.errorCodeEnum.SUCCESS.getName());
-                response.setResult(sysUser.toString());
+                response.setResult(sysUser);
                 return response;
             } else {
                 //发送失败
@@ -85,7 +85,6 @@ public class LoginController {
             e.printStackTrace();
             response.setErrorCode(Constant.errorCodeEnum.SYSTEM_ERROR.getCode());
             response.setErrorMsg(Constant.errorCodeEnum.SYSTEM_ERROR.getName());
-            response.setResult(e.toString());
             return response;
         }
     }
