@@ -1,7 +1,9 @@
 package com.ghprint.cms.controller.biz.User;
 
+import cn.com.bestpay.Response;
 import com.ghprint.cms.common.AuthorityKey;
 import com.ghprint.cms.controller.BaseAction;
+import com.ghprint.cms.model.sys.OperateRoleInfo;
 import com.ghprint.cms.model.sys.TSysRole;
 import com.ghprint.cms.model.sys.TSysUser;
 import com.ghprint.cms.pagination.DataGridResult;
@@ -62,6 +64,37 @@ public class QueryUserlistController extends BaseAction{
             dataGridResult.setMessage(Constant.errorCodeEnum.PARAM_ERROR.getName());
             return dataGridResult;
         }
+    }
+
+    @RequestMapping(value = "/userinfo/getroleinfo.do", method = RequestMethod.GET)
+    @ResponseBody
+    public Response<String> getroleinfo(HttpServletRequest request, HttpServletResponse response, Integer uid){
+        Assert.hasText(String.valueOf(uid), "uid  is null or 空字符串。");
+        Response <String> responses = new Response<>();
+        try {
+            Boolean flag = super.execute(request, response);
+            logger.info("queryuserlist request Param:{}", uid);
+            if (flag) {
+                OperateRoleInfo operateRoleInfo = userService.getUserinfo(uid);
+
+                responses.setErrorCode(Constant.errorCodeEnum.SUCCESS.getCode());
+                responses.setErrorMsg(Constant.errorCodeEnum.SUCCESS.getName());
+                responses.setResult(operateRoleInfo.getRoleInfo().getRolename());
+                return  responses;
+            } else {
+                responses.setErrorCode(Constant.errorCodeEnum.LOGIN_TIMEOUT_ERROE.getCode());
+                responses.setErrorMsg(request.getAttribute("message").toString());
+                return responses;
+            }
+
+        }catch (Exception e) {
+            logger.error("系统异常  error: " + e);
+            responses.setErrorCode(Constant.errorCodeEnum.SYSTEM_ERROR.getCode());
+            responses.setErrorMsg(Constant.errorCodeEnum.SYSTEM_ERROR.getName());
+            return responses;
+        }
+
+
     }
 
     @Override

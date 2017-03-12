@@ -1,10 +1,11 @@
-package com.ghprint.cms.services;
+package com.ghprint.cms.services.impl;
 
 import com.ghprint.cms.common.util.CommonConstant;
 import com.ghprint.cms.model.sys.DictItemVO;
 import com.ghprint.cms.model.sys.TDictionaryInfo;
 import com.ghprint.cms.model.sys.TDictionaryInfoExample;
 import com.ghprint.cms.serviceDao.TDictionaryInfoMapper;
+import com.ghprint.cms.services.DictUnVersalService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

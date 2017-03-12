@@ -71,6 +71,18 @@ public class TProductInfo {
         this.specification = specification == null ? null : specification.trim();
     }
 
+    public TProductInfo() {
+    }
+
+    public TProductInfo(Integer customerid, String productcode, String productname, String productmaterial, Float weight, String specification) {
+        this.customerid = customerid;
+        this.productcode = productcode;
+        this.productname = productname;
+        this.productmaterial = productmaterial;
+        this.weight = weight;
+        this.specification = specification;
+    }
+
     @Override
     public String toString() {
         return "TProductInfo{" +

@@ -1,9 +1,6 @@
 package com.ghprint.cms.services;
 
-import com.ghprint.cms.model.sys.OperateRoleInfo;
-import com.ghprint.cms.model.sys.OperatorInfoView;
-import com.ghprint.cms.model.sys.RolePrivilegeInfo;
-import com.ghprint.cms.model.sys.TSysUser;
+import com.ghprint.cms.model.sys.*;
 import com.ghprint.cms.pagination.DataGridResult;
 import com.ghprint.cms.serviceDao.LoginMapper;
 import com.ghprint.cms.serviceDao.TSysRolePrivilegeMapper;
@@ -73,7 +70,17 @@ public class TestUserService {
 
     }
 
-
+    @Test
+    public  void testusermapper(){
+        //创建一个spring容器
+        ApplicationContext applicationContext = new ClassPathXmlApplicationContext("classpath:applicationContext.xml");
+        TSysUserMapper userMapper = applicationContext.getBean(TSysUserMapper.class);
+        List<UserInfo> list = userMapper.getUserInfolist();
+        Iterator iterator = list.iterator();
+        while (iterator.hasNext()) {
+            System.out.println(iterator.next());
+        }
+    }
 
     @Test
     public void testselectByParam(){

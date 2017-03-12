@@ -211,6 +211,32 @@ public class TPrintingProcedureafter {
         this.mould = mould == null ? null : mould.trim();
     }
 
+    public TPrintingProcedureafter() {
+    }
+
+    public TPrintingProcedureafter(String qualitycheck, Integer splitsizr, Integer transparentkeep, String mergesize, Integer splithigh, String glueplace, String foldplace, String tearlinesize, String tearlineplace, String productstyle, Integer scrolldirection, String scrolllength, String repeatscrollsize, String proceduresum, Integer interfacecount, Integer hemcount, String boxway, String boxsize, Integer splitsum, String mould) {
+        this.qualitycheck = qualitycheck;
+        this.splitsizr = splitsizr;
+        this.transparentkeep = transparentkeep;
+        this.mergesize = mergesize;
+        this.splithigh = splithigh;
+        this.glueplace = glueplace;
+        this.foldplace = foldplace;
+        this.tearlinesize = tearlinesize;
+        this.tearlineplace = tearlineplace;
+        this.productstyle = productstyle;
+        this.scrolldirection = scrolldirection;
+        this.scrolllength = scrolllength;
+        this.repeatscrollsize = repeatscrollsize;
+        this.proceduresum = proceduresum;
+        this.interfacecount = interfacecount;
+        this.hemcount = hemcount;
+        this.boxway = boxway;
+        this.boxsize = boxsize;
+        this.splitsum = splitsum;
+        this.mould = mould;
+    }
+
     @Override
     public String toString() {
         return "TPrintingProcedureafter{" +

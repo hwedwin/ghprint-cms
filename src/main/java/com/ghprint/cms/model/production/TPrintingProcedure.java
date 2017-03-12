@@ -81,6 +81,19 @@ public class TPrintingProcedure {
         this.procedurenote = procedurenote == null ? null : procedurenote.trim();
     }
 
+    public TPrintingProcedure() {
+    }
+
+    public TPrintingProcedure(String printdirect, String specification, Integer printamount, Float printweight, Integer printmeter, Integer wastage, String procedurenote) {
+        this.printdirect = printdirect;
+        this.specification = specification;
+        this.printamount = printamount;
+        this.printweight = printweight;
+        this.printmeter = printmeter;
+        this.wastage = wastage;
+        this.procedurenote = procedurenote;
+    }
+
     @Override
     public String toString() {
         return "TPrintingProcedure{" +

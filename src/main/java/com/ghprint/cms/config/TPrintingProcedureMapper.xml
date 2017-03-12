@@ -111,6 +111,9 @@
       #{wastage,jdbcType=INTEGER}, #{procedurenote,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.ghprint.cms.model.production.TPrintingProcedure" >
+    <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
     insert into t_printing_procedure
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >

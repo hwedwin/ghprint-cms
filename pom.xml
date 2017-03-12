@@ -14,7 +14,7 @@
         <project.build.finalName>${project.artifactId}</project.build.finalName>
         <project.build.outputDirectory>${project.basedir}/target</project.build.outputDirectory>
         <maven.build.timestamp.format>yyMMdd</maven.build.timestamp.format>
-        <runtime.version>1.8</runtime.version>
+        <runtime.version>1.7</runtime.version>
         <maven-compiler.version>3.1</maven-compiler.version>
         <autoconfig-plugin-version>1.2</autoconfig-plugin-version>
         <spring.version>4.0.3.RELEASE</spring.version>
@@ -273,8 +273,8 @@
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <configuration>
-                    <source>1.8</source>
-                    <target>1.8</target>
+                    <source>${runtime.version}</source>
+                    <target>${runtime.version}</target>
                     <encoding>UTF-8</encoding>
                     <skip>true</skip>
                 </configuration>

@@ -91,6 +91,20 @@ public class TPrintingData {
         this.printnote = printnote == null ? null : printnote.trim();
     }
 
+    public TPrintingData() {
+    }
+
+    public TPrintingData(String printnote, String color, Integer bankuncount, String spellcount, Integer templateperimeter, Integer templatelength, Integer printsize, String templatenum) {
+        this.printnote = printnote;
+        this.color = color;
+        this.bankuncount = bankuncount;
+        this.spellcount = spellcount;
+        this.templateperimeter = templateperimeter;
+        this.templatelength = templatelength;
+        this.printsize = printsize;
+        this.templatenum = templatenum;
+    }
+
     @Override
     public String toString() {
         return "TPrintingData{" +

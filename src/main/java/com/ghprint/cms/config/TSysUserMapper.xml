@@ -240,4 +240,15 @@
       createtime = #{createtime,jdbcType=DATE}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+  <resultMap id="UserInfo" type="com.ghprint.cms.model.sys.UserInfo">
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="rolename" property="rolename" jdbcType="VARCHAR" />
+    <association property="tSysUser" resultMap="BaseResultMap"/>
+  </resultMap>
+
+
+  <select id="getUserInfolist" resultMap="UserInfo">
+    SELECT a.*,rolename  from t_sys_user a ,t_sys_user_role b, t_sys_role c where a.id = b.userid and c.id = b.roleid
+  </select>
 </mapper>

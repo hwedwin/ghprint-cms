@@ -31,6 +31,14 @@ public class TCustomerInfo {
         this.companyname = companyname == null ? null : companyname.trim();
     }
 
+    public TCustomerInfo(Integer companycode, String companyname) {
+        this.companycode = companycode;
+        this.companyname = companyname;
+    }
+
+    public TCustomerInfo() {
+    }
+
     @Override
     public String toString() {
         return "TCustomerInfo{" +

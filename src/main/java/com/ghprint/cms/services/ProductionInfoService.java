@@ -1,5 +1,6 @@
 package com.ghprint.cms.services;
 
+import com.ghprint.cms.model.production.ProductionInfoView;
 import com.ghprint.cms.pagination.DataGridResult;
 
 /**
@@ -7,8 +8,8 @@ import com.ghprint.cms.pagination.DataGridResult;
  */
 public interface ProductionInfoService {
 
-    //根据产品ID查询某种产品相应的生产质量标准
-
+    //增加生产标准
+    public ProductionInfoView addProductionitems(ProductionInfoView productionInfoView);
 
     //查询现有的所有生产质量标准
     public DataGridResult  getProductionList(String key , String value,Integer page , Integer rows);

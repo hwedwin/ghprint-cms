@@ -153,6 +153,21 @@ public class TProductionStandard {
         this.createauthor = createauthor == null ? null : createauthor.trim();
     }
 
+    public TProductionStandard() {
+    }
+
+    public TProductionStandard(String codeid, String printingmode, String material, Integer crosswiseshrink, Integer portraitshrink, Integer packaging, String note, Date createtime, String createauthor) {
+        this.codeid = codeid;
+        this.printingmode = printingmode;
+        this.material = material;
+        this.crosswiseshrink = crosswiseshrink;
+        this.portraitshrink = portraitshrink;
+        this.packaging = packaging;
+        this.note = note;
+        this.createtime = createtime;
+        this.createauthor = createauthor;
+    }
+
     @Override
     public String toString() {
         return "TProductionStandard{" +

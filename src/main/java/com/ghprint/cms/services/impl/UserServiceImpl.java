@@ -1,4 +1,4 @@
-package com.ghprint.cms.services;
+package com.ghprint.cms.services.impl;
 
 
 import com.alibaba.fastjson.JSON;
@@ -9,6 +9,7 @@ import com.ghprint.cms.dao.sys.UserDao;
 import com.ghprint.cms.model.sys.*;
 import com.ghprint.cms.pagination.DataGridResult;
 import com.ghprint.cms.serviceDao.*;
+import com.ghprint.cms.services.UserService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.slf4j.Logger;
@@ -71,11 +72,11 @@ public class UserServiceImpl implements UserService {
     public DataGridResult selectByParam(TSysUser user,  Integer page , Integer rows) {
         TSysUserExample userExample = new TSysUserExample();
         PageHelper.startPage(page, rows);
-        List<TSysUser> userList = tSysUserMapper.selectByExample(userExample);
+        List<UserInfo> userList = tSysUserMapper.getUserInfolist();
         DataGridResult dataGridResult = new DataGridResult();
         dataGridResult.setRows(userList);
         //取记录总条数
-        PageInfo<TSysUser> pageInfo = new PageInfo<>(userList);
+        PageInfo<UserInfo> pageInfo = new PageInfo<>(userList);
 
         dataGridResult.setCurrentPage(page);
         dataGridResult.setEveryPage(rows);

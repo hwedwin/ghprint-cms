@@ -1,4 +1,4 @@
-package com.ghprint.cms.services;
+package com.ghprint.cms.services.impl;
 
 import cn.com.bestpay.Response;
 import com.ghprint.cms.common.util.ExceptionConstant;
@@ -15,6 +15,7 @@ import com.ghprint.cms.serviceDao.TSysPrivilegeMapper;
 import com.ghprint.cms.serviceDao.TSysRoleMapper;
 import com.ghprint.cms.serviceDao.TSysRolePrivilegeMapper;
 import com.ghprint.cms.serviceDao.TSysUserRoleMapper;
+import com.ghprint.cms.services.RoleService;
 import com.ghprint.cms.utils.Constant;
 import com.ghprint.cms.utils.ResultView;
 import com.ghprint.cms.utils.SplicingCharacterUtil;
