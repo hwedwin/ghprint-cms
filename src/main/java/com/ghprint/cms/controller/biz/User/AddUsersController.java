@@ -68,13 +68,14 @@ public class AddUsersController extends BaseAction{
     @ResponseBody
     public Response<String> addruserinfo(HttpServletRequest request, HttpServletResponse response,  TSysUser user, String uid){
         Response <String> responses = new Response<>();
-        Assert.hasText(user.getUsername(), "user 中 username  is null or 空字符串。");
-        Assert.hasText(user.getPassword(), "user 中 userpassword  is null or 空字符串。");
-        Assert.hasText(user.getUserid(), "user 中 userId  is null or 空字符串。");
-        Assert.hasText(uid, "uid is null or 空字符串。");
-        logger.info("AddRoleinfo request Param :{}",user);
-        logger.info("AddRoleinfo request Param :{}",uid);
+
         try{
+            Assert.hasText(user.getUsername(), "user 中 username  is null or 空字符串。");
+            Assert.hasText(user.getPassword(), "user 中 userpassword  is null or 空字符串。");
+            Assert.hasText(user.getUserid(), "user 中 userId  is null or 空字符串。");
+            Assert.hasText(uid, "uid is null or 空字符串。");
+            logger.info("AddRoleinfo request Param :{}",user);
+            logger.info("AddRoleinfo request Param :{}",uid);
             Boolean flag = super.execute(request, response);
             if (flag) {
                 if(StringUtils.isNotBlank(uid)){

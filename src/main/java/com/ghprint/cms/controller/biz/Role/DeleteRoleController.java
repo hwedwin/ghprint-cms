@@ -30,9 +30,10 @@ public class DeleteRoleController  extends BaseAction{
     @ApiOperation(value = "删除角色")
     public Response<String> deleteRoleinfo(HttpServletRequest request, HttpServletResponse response, @RequestParam Integer roleid){
         Response<String> responses = new Response<>();
-        Assert.hasText(String.valueOf(roleid), "roleid  is null or 空字符串。");
-        logger.info("enter into execute of DelRoleAction ");
+
         try {
+            Assert.hasText(String.valueOf(roleid), "roleid  is null or 空字符串。");
+            logger.info("enter into execute of DelRoleAction ");
             Boolean flag = super.execute(request, response);
 
             logger.info("delete roleinfo request Param:{}",roleid);

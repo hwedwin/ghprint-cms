@@ -8,4 +8,5 @@ import com.ghprint.cms.model.production.TProductionStandard;
 public interface ProductionStandardService {
 
     public  Integer addProductionStandardService(TProductionStandard productionStandard);
+
 }

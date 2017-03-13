@@ -37,9 +37,10 @@ public class UpdatePreRoleController extends BaseAction {
     public Response<RoleInfoView> editpreroleinfo(HttpServletRequest request, HttpServletResponse response, @RequestParam Integer roleid) {
         logger.info("enter into execute of EditPreRoleAction ");
         Response<RoleInfoView> responses = new Response<>();
-        Assert.hasText(roleid.toString(), "roleid  is null or 空字符串。");
-        logger.info("EditPreRoleinfo request Param :{}", roleid);
+
         try {
+            Assert.hasText(roleid.toString(), "roleid  is null or 空字符串。");
+            logger.info("EditPreRoleinfo request Param :{}", roleid);
             Boolean flag = super.execute(request, response);
             if (flag) {
                 if (roleid == null || roleid.equals("")) {

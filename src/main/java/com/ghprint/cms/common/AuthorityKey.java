@@ -234,4 +234,8 @@ public class AuthorityKey {
 	 */
 	public static String GENFGER_CERT = "140000015";
 
+	/*
+	* 生产标准增加
+	* */
+	public  static  String PRODUCTION_ADD="120000001";
 }

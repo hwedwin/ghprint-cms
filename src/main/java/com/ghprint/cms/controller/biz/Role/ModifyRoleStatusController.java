@@ -36,11 +36,12 @@ public class ModifyRoleStatusController  extends BaseAction {
 
         Response<String> responses = new Response<>();
 
-        Assert.hasText(roleid.toString(), "roleid  is null or 空字符串。");
-        Assert.hasText(status, "status  is null or 空字符串。");
-        logger.info("UPDATERoleStatus request Param :{}", roleid.toString());
-        logger.info("UPDATERoleStatus request Param :{}", status);
+
         try {
+            Assert.hasText(roleid.toString(), "roleid  is null or 空字符串。");
+            Assert.hasText(status, "status  is null or 空字符串。");
+            logger.info("UPDATERoleStatus request Param :{}", roleid.toString());
+            logger.info("UPDATERoleStatus request Param :{}", status);
             Boolean flag = super.execute(request, response);
             if (flag) {
                 if (roleid!=null && StringUtils.isNotBlank(status)) {

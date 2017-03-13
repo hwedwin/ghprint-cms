@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
-    <property name="LOG_HOME" value="/data/ghprint/appLogs/ghprint-cms/"/>
+    <property name="LOG_HOME" value="/data/appLogs/ghprint-cms/"/>
     <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
         <Encoding>UTF-8</Encoding>
         <layout class="ch.qos.logback.classic.PatternLayout">
@@ -11,7 +11,7 @@
         <file>/data/appLogs/ghprint-cms/ghprint-cms.log</file>
         <Encoding>UTF-8</Encoding>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <FileNamePattern>/data/ghprint/appLogs/ghprint-cms/ghprint-cms.%d{yyyy-MM-dd}.log</FileNamePattern>
+            <FileNamePattern>/data/appLogs/ghprint-cms/ghprint-cms.%d{yyyy-MM-dd}.log</FileNamePattern>
         </rollingPolicy>
         <layout class="ch.qos.logback.classic.PatternLayout">
             <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{15} - %L - %msg%n</pattern>

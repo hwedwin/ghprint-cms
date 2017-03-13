@@ -38,9 +38,10 @@ public class QueryUserlistController extends BaseAction{
         // 检查参数
         DataGridResult dataGridResult = new DataGridResult();
 
-        Assert.hasText(String.valueOf(page), "page  is null or 空字符串。");
-        Assert.hasText(String.valueOf(rows), "rows  is null or 空字符串。");
         try {
+
+            Assert.hasText(String.valueOf(page), "page  is null or 空字符串。");
+            Assert.hasText(String.valueOf(rows), "rows  is null or 空字符串。");
             Boolean flag = super.execute(request, response);
             logger.info("queryuserlist request Param:{}", user);
             if (flag) {

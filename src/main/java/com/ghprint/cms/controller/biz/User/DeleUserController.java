@@ -31,9 +31,10 @@ public class DeleUserController extends BaseAction  {
     public Response<String> deleteUsersinfo(HttpServletRequest request, HttpServletResponse response, @RequestParam Integer userid){
 
         Response<String> responses = new Response<>();
-        Assert.hasText(String.valueOf(userid), "userid  is null or 空字符串。");
-        logger.info("enter into execute of DelUsersAction ");
+
         try {
+            Assert.hasText(String.valueOf(userid), "userid  is null or 空字符串。");
+            logger.info("enter into execute of DelUsersAction ");
             Boolean flag = super.execute(request, response);
 
             logger.info("delete userinfo request Param:{}",userid);

@@ -19,8 +19,8 @@
 		<setting name="useGeneratedKeys" value="false" />
 		<!-- 指定MyBatis如何自动映射列到字段/属性。 -->
 		<setting name="autoMappingBehavior" value="PARTIAL" />
-		<!-- 打印查询语句 -->
-		<setting name="logImpl" value="STDOUT_LOGGING" />
+		<!--&lt;!&ndash; 打印查询语句 &ndash;&gt;-->
+		<!--<setting name="logImpl" value="STDOUT_LOGGING" />-->
 		<!-- 配置默认的执行器。 -->
 		<setting name="defaultExecutorType" value="SIMPLE" />
 	</settings>

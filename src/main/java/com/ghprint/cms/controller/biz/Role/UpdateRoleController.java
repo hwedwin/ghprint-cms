@@ -38,11 +38,12 @@ public class UpdateRoleController extends BaseAction {
 
         Response<String> responses = new Response<>();
 
-        Assert.hasText(role.getRolename(), "role 中 rolename  is null or 空字符串。");
-        Assert.hasText(role.getRoledesc(), "role 中 roledesc  is null or 空字符串。");
-        logger.info("UPDATERoleinfo request Param :{}", role);
-        logger.info("UPDATERoleinfo request Param :{}", ids);
+
         try {
+            Assert.hasText(role.getRolename(), "role 中 rolename  is null or 空字符串。");
+            Assert.hasText(role.getRoledesc(), "role 中 roledesc  is null or 空字符串。");
+            logger.info("UPDATERoleinfo request Param :{}", role);
+            logger.info("UPDATERoleinfo request Param :{}", ids);
             Boolean flag = super.execute(request, response);
             if (flag) {
                 if (ids.length > 0) {

@@ -109,11 +109,12 @@ public class UpdateUsersController  extends BaseAction{
     @ResponseBody
     public  Response<String> UpdateUserPassword(HttpServletRequest request, HttpServletResponse response,@RequestParam String newpassword ,@RequestParam String oldpassword,@RequestParam Integer userid){
         Response<String> responses = new Response<>();
-        Assert.hasText(String.valueOf(newpassword), "newpassword is null or 空字符串。");
-        Assert.hasText(String.valueOf(oldpassword), "oldpassword is null or 空字符串。");
-        Assert.hasText(String.valueOf(userid), "oldpassword is null or 空字符串。");
-        logger.info("SetUsersRoleShip request Param :{}","OLD:"+ oldpassword +"& NEW:"+ newpassword+"&"+userid );
+
         try {
+            Assert.hasText(String.valueOf(newpassword), "newpassword is null or 空字符串。");
+            Assert.hasText(String.valueOf(oldpassword), "oldpassword is null or 空字符串。");
+            Assert.hasText(String.valueOf(userid), "oldpassword is null or 空字符串。");
+            logger.info("SetUsersRoleShip request Param :{}","OLD:"+ oldpassword +"& NEW:"+ newpassword+"&"+userid );
             Boolean flag = super.execute(request, response);
             if (flag) {
                 OperateRoleInfo operateRoleInfo = userService.getUserinfo(userid);

@@ -4,6 +4,7 @@ import com.ghprint.cms.model.production.ProductionInfoView;
 import com.ghprint.cms.pagination.DataGridResult;
 
 /**
+ * 生产标准模块业务
  * Created by Administrator on 2017/3/1.
  */
 public interface ProductionInfoService {
