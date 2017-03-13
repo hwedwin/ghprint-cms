@@ -80,7 +80,8 @@ public class AddUsersController extends BaseAction{
                 if(StringUtils.isNotBlank(uid)){
                     user.setCreatetime(new Date());
                     user.setPassword(MD5Util.getMD5String(user.getPassword()).toUpperCase());
-                    userService.addUser(user,uid);
+                    Integer record =userService.addUser(user,uid);
+                    responses.setResult("record");
                     responses.setErrorCode(Constant.errorCodeEnum.SUCCESS.getCode());
                     responses.setErrorMsg(Constant.errorCodeEnum.SUCCESS.getName());
                 }else {

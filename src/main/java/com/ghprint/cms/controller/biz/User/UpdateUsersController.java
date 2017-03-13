@@ -47,6 +47,7 @@ public class UpdateUsersController  extends BaseAction{
             Boolean flag = super.execute(request, response);
             if (flag) {
                     userService.updateUserInfo(user);
+                    responses.setResult("success");
                     responses.setErrorCode(Constant.errorCodeEnum.SUCCESS.getCode());
                     responses.setErrorMsg(Constant.errorCodeEnum.SUCCESS.getName());
                     return responses;
@@ -80,6 +81,7 @@ public class UpdateUsersController  extends BaseAction{
             Boolean flag = super.execute(request, response);
             if (flag) {
                 userService.updateRoleinfo(userid,roleid);
+                responses.setResult("success");
                 responses.setErrorCode(Constant.errorCodeEnum.SUCCESS.getCode());
                 responses.setErrorMsg(Constant.errorCodeEnum.SUCCESS.getName());
                 return responses;
@@ -125,6 +127,7 @@ public class UpdateUsersController  extends BaseAction{
                     user = userService.selectByUserId(userid);
                     user.setPassword(MD5Util.getMD5String(newpassword));
                     userService.resetPwd(user);
+                    responses.setResult("success");
                     responses.setErrorCode(Constant.errorCodeEnum.SUCCESS.getCode());
                     responses.setErrorMsg(Constant.errorCodeEnum.SUCCESS.getName());
                     return responses;
