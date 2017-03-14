@@ -43,7 +43,10 @@ public class TestDictUnVersalService {
     public  void testProdctionInit(){
         List <DictItemVO> packaging= dictUnVersalService.findDictItems("packaging");
         List <DictItemVO> printingmode = dictUnVersalService.findDictItems("printingmode");
-        ProductionInit productionInit = new ProductionInit(packaging,printingmode);
+        List <DictItemVO> productstyle = dictUnVersalService.findDictItems("productstyle");
+        List <DictItemVO> scrolldirection = dictUnVersalService.findDictItems("scrolldirection");
+        List <DictItemVO> splitsum = dictUnVersalService.findDictItems("splitsum");
+        ProductionInit productionInit = new ProductionInit(packaging,printingmode,productstyle,scrolldirection,splitsum);
         String jsonString = JSON.toJSONString(productionInit);
         System.out.println("jsonString:" + jsonString);
     }

@@ -95,12 +95,17 @@ public class ProductionInfoServiceImpl implements ProductionInfoService {
        List<ProductionInfoView> list =productionMapper.selectlist(pageOffset,rows,key,value);
         if(list != null ) {
             dataGridResult.setRows(list);
-            Integer sum = productionMapper.getlistcount();
+            Integer sum = productionMapper.getlistcount(key,value);
             dataGridResult.setTotalCount(sum);
             dataGridResult.setCurrentPage(page);
             dataGridResult.setEveryPage(rows);
             dataGridResult.setTotalPage(sum / rows);
         }
         return dataGridResult;
+    }
+
+    @Override
+    public Integer delProductionitems(Integer pid) {
+        return null;
     }
 }

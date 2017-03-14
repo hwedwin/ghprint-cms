@@ -13,6 +13,6 @@ public interface ProductionMapper {
     //根据产品ID查询一种生产标准
     List<ProductionInfoView> selectlist(@Param("pageOffset")Integer pageOffset,@Param("pageSize") Integer pageSize,@Param("key")String key,@Param("value")String value);
     //获取总记录数
-    Integer getlistcount();
+    Integer getlistcount(@Param("key")String key,@Param("value")String value);
 
 }

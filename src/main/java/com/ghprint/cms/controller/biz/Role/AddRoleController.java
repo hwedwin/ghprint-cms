@@ -33,7 +33,7 @@ public class AddRoleController extends BaseAction {
 
     @RequestMapping(value = "/roleinfo/addroleinfo.do", method = RequestMethod.POST, produces = "application/json; charset=utf-8")
     @ResponseBody
-    @ApiOperation(value = "添加角色")
+    //@ApiOperation(value = "添加角色")
     public Response<String> addroleinfo (HttpServletRequest request, HttpServletResponse response,  TSysRole role, String ids[]){
 
         Response <String> responses = new Response<>();

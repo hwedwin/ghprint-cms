@@ -27,7 +27,7 @@ public class DeleteRoleController  extends BaseAction{
 
     @RequestMapping(value = "/roleinfo/deleteroleinfo.do", method = RequestMethod.GET, produces = "application/json; charset=utf-8")
     @ResponseBody
-    @ApiOperation(value = "删除角色")
+    //@ApiOperation(value = "删除角色")
     public Response<String> deleteRoleinfo(HttpServletRequest request, HttpServletResponse response, @RequestParam Integer roleid){
         Response<String> responses = new Response<>();
 

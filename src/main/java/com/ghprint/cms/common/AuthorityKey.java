@@ -230,9 +230,9 @@ public class AuthorityKey {
 	 */
 	public static String AUDIT_LOG = "140000007";
 	/**
-	 * 签发外部证书
+	 * 生产标准查询
 	 */
-	public static String GENFGER_CERT = "140000015";
+	public static String PRODUCTION_SELECT = "120000002";
 
 	/*
 	* 生产标准增加

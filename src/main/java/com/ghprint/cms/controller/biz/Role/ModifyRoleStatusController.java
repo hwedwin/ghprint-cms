@@ -31,7 +31,7 @@ public class ModifyRoleStatusController  extends BaseAction {
 
     @RequestMapping(value = "/roleinfo/updaterolestatus.do", method = RequestMethod.GET, produces = "application/json; charset=utf-8")
     @ResponseBody
-    @ApiOperation(value = "更新角色状态")
+    //@ApiOperation(value = "更新角色状态")
     public Response<String> updaterolestatus (HttpServletRequest request, HttpServletResponse response, @RequestParam Integer roleid,@RequestParam String  status) {
 
         Response<String> responses = new Response<>();

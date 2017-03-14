@@ -33,7 +33,7 @@ public class UpdatePreRoleController extends BaseAction {
 
     @RequestMapping(value = "/roleinfo/editpreroleinfo.do", method = RequestMethod.GET, produces = "application/json; charset=utf-8")
     @ResponseBody
-    @ApiOperation(value = "加载编辑角色")
+   // @ApiOperation(value = "加载编辑角色")
     public Response<RoleInfoView> editpreroleinfo(HttpServletRequest request, HttpServletResponse response, @RequestParam Integer roleid) {
         logger.info("enter into execute of EditPreRoleAction ");
         Response<RoleInfoView> responses = new Response<>();

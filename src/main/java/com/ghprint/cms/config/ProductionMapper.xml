@@ -95,10 +95,10 @@
                 ${key} = #{value}
             </if>
         </where>
-    GROUP BY a.`productid` ORDER BY b.`companyname`
+    ORDER BY b.`companyname`
     limit #{pageOffset,jdbcType=INTEGER},#{pageSize,jdbcType=INTEGER}
     </select>
-    <select id="getlistcount" resultType="java.lang.Integer" >
+    <select id="getlistcount" resultType="java.lang.Integer"  parameterType="java.lang.String">
         SELECT
         count(1)
         FROM  t_production_standard a
@@ -112,6 +112,11 @@
         ON a.`procedureid` = e.`id`
         LEFT JOIN t_printing_procedureafter f
         ON a.`procedureafterid`  = f.`id`
-        GROUP BY a.`productid` ORDER BY b.`companyname`
+        <where>
+            <if test="key != null and value != null">
+                ${key} = #{value}
+            </if>
+        </where>
+       ORDER BY b.`companyname`
     </select>
 </mapper>

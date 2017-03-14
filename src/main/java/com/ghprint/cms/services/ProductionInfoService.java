@@ -14,4 +14,10 @@ public interface ProductionInfoService {
 
     //查询现有的所有生产质量标准
     public DataGridResult  getProductionList(String key , String value,Integer page , Integer rows);
+
+    //删除一条生产标准
+    public  Integer  delProductionitems(Integer pid);
+
+
+    //删除一条生产标准以及设计关联表
 }

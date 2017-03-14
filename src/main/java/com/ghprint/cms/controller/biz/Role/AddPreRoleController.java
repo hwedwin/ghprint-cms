@@ -31,7 +31,7 @@ public class AddPreRoleController  extends BaseAction {
 
     @RequestMapping(value = "/roleinfo/addpreroleinfo.do", method = RequestMethod.GET, produces = "application/json; charset=utf-8")
     @ResponseBody
-    @ApiOperation(value = "加载添加角色")
+    //@ApiOperation(value = "加载添加角色")
     public Response<List> addpreroleinfo (HttpServletRequest request, HttpServletResponse response){
 
         Response <List> responses = new Response<>();

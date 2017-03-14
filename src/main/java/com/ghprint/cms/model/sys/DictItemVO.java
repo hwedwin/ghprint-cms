@@ -6,17 +6,7 @@ import java.io.Serializable;
 public class DictItemVO implements Serializable{
     private String itemName;
     private String itemValue;
-    private int flag;
 
-    public int getFlag()
-	{
-		return flag;
-	}
-
-	public void setFlag(int flag)
-	{
-		this.flag = flag;
-	}
 
 	public DictItemVO() {};
 
@@ -58,9 +48,7 @@ public class DictItemVO implements Serializable{
         retValue = "DictItemVO ( "
             + super.toString() + TAB
             + "itemName = " + this.itemName + TAB
-            + "itemValue = " + this.itemValue + TAB
-            + "flag = " + this.flag + TAB
-            + " )";
+            + "itemValue = " + this.itemValue + TAB + " )";
     
         return retValue;
     }
