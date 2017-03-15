@@ -9,4 +9,5 @@ import com.ghprint.cms.model.production.TCustomerInfo;
 public interface CustomerInfoService {
 
     public  Integer addCustomerInfo(TCustomerInfo customerInfo);
+    public  Integer updateCustomerInfo(TCustomerInfo customerInfo);
 }

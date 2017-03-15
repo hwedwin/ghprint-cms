@@ -7,7 +7,7 @@ import java.io.Serializable;
  */
 public class ProductionInfoView implements Serializable {
 
-   
+     private  Integer Pid;
 
     private TProductionStandard productionStandard;
 
@@ -71,12 +71,19 @@ public class ProductionInfoView implements Serializable {
         this.printingProcedureafter = printingProcedureafter;
     }
 
-   
+    public Integer getPid() {
+        return Pid;
+    }
+
+    public void setPid(Integer pid) {
+        Pid = pid;
+    }
 
     @Override
     public String toString() {
         return "ProductionInfoView{" +
-                "productionStandard=" + productionStandard +
+                "Pid=" + Pid +
+                ", productionStandard=" + productionStandard +
                 ", customerInfo=" + customerInfo +
                 ", productInfo=" + productInfo +
                 ", printingData=" + printingData +

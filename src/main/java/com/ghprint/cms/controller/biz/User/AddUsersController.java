@@ -82,9 +82,10 @@ public class AddUsersController extends BaseAction{
                     user.setCreatetime(new Date());
                     user.setPassword(MD5Util.getMD5String(user.getPassword()).toUpperCase());
                     Integer record =userService.addUser(user,uid);
-                    responses.setResult("record");
+
                     responses.setErrorCode(Constant.errorCodeEnum.SUCCESS.getCode());
                     responses.setErrorMsg(Constant.errorCodeEnum.SUCCESS.getName());
+                    responses.setResult(String.valueOf(record));
                 }else {
                     responses.setErrorCode(Constant.errorCodeEnum.PARAM_ERROR.getCode());
                     responses.setErrorMsg(Constant.errorCodeEnum.PARAM_ERROR.getName());

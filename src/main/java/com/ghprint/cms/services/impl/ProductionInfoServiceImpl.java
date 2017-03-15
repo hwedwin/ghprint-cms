@@ -4,6 +4,7 @@ import com.ghprint.cms.model.production.ProductionInfoView;
 import com.ghprint.cms.pagination.DataGridResult;
 import com.ghprint.cms.serviceDao.*;
 import com.ghprint.cms.services.*;
+import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -106,6 +107,19 @@ public class ProductionInfoServiceImpl implements ProductionInfoService {
 
     @Override
     public Integer delProductionitems(Integer pid) {
+        return productionStandardService.delProductionStandardService(pid);
+    }
+
+    @Override
+    public ProductionInfoView getProductionitem(Integer pid) {
+        if(pid != null){
+            productionMapper.getOneitem(pid);
+        }
+        return  null;
+    }
+
+    @Override
+    public Integer updateProductionitems(ProductionInfoView productionInfoView) {
         return null;
     }
 }

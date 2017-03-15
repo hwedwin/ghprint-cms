@@ -221,14 +221,14 @@ public class AuthorityKey {
 	 */
 	public static final String DATA_RECOVER = "130000086";
 	/**
-	 * 手工发布证书
+	 * 生产质量标准修改
 	 */
-	public static String DEPLOYCERT = "140000011";
+	public static String PRODUCTION_UPDATE= "120000004";
 
 	/**
-	 * 审计日志
+	 * 生产质量标准删除
 	 */
-	public static String AUDIT_LOG = "140000007";
+	public static String PRODUCTION_DELETE = "120000003";
 	/**
 	 * 生产标准查询
 	 */

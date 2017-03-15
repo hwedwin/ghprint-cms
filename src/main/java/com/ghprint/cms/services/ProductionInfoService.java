@@ -18,6 +18,10 @@ public interface ProductionInfoService {
     //删除一条生产标准
     public  Integer  delProductionitems(Integer pid);
 
+    //根据Id获取一种生产标准
+    public ProductionInfoView getProductionitem(Integer pid);
 
-    //删除一条生产标准以及设计关联表
+    //根据ID修改现有的生产标准
+    public  Integer  updateProductionitems(ProductionInfoView productionInfoView);
+
 }

@@ -40,9 +40,10 @@ public class DeleUserController extends BaseAction  {
             logger.info("delete userinfo request Param:{}",userid);
             if (flag) {
                 if(userid!= null && userid > 0){
-                    responses.setResult(String.valueOf(userService.deleteUser(userid)));
+
                     responses.setErrorCode(Constant.errorCodeEnum.SUCCESS.getCode());
                     responses.setErrorMsg(Constant.errorCodeEnum.SUCCESS.getName());
+                    responses.setResult(String.valueOf(userService.deleteUser(userid)));
                     return responses;
                 }
                 else{

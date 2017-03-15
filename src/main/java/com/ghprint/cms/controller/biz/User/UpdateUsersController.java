@@ -41,15 +41,16 @@ public class UpdateUsersController  extends BaseAction{
 
         Assert.hasText(user.getUsername(), "user 中 username  is null or 空字符串。");
         Assert.hasText(user.getPassword(), "user 中 userpassword  is null or 空字符串。");
-        Assert.hasText(user.getUserid(), "user 中 userId  is null or 空字符串。");
+        Assert.hasText(String.valueOf(user.getId()), "user 中 Id  is null or 空字符串。");
         logger.info("UPDATEUsersinfo request Param :{}", user);
         try {
             Boolean flag = super.execute(request, response);
             if (flag) {
                     userService.updateUserInfo(user);
-                    responses.setResult("success");
+
                     responses.setErrorCode(Constant.errorCodeEnum.SUCCESS.getCode());
                     responses.setErrorMsg(Constant.errorCodeEnum.SUCCESS.getName());
+                    responses.setResult("success");
                     return responses;
             } else {
                 responses.setErrorCode(Constant.errorCodeEnum.LOGIN_TIMEOUT_ERROE.getCode());

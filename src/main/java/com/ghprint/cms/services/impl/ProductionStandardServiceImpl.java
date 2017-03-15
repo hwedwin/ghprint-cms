@@ -19,4 +19,10 @@ public class ProductionStandardServiceImpl  implements ProductionStandardService
         Integer record = productionStandardMapper.insertSelective(productionStandard);
         return record;
     }
+
+    @Override
+    public Integer delProductionStandardService(Integer pid) {
+        Integer redcord = productionStandardMapper.deleteByPrimaryKey(pid);
+        return  redcord;
+    }
 }

@@ -19,4 +19,10 @@ public class CustomerInfoServiceImpl implements CustomerInfoService {
        Integer record  = customerInfoMapper.insertSelective(customerInfo);
         return record;
     }
+
+    @Override
+    public Integer updateCustomerInfo(TCustomerInfo customerInfo) {
+       Integer record = customerInfoMapper.updateByPrimaryKeySelective(customerInfo);
+        return  record;
+    }
 }

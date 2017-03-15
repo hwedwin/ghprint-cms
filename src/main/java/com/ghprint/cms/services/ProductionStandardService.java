@@ -9,4 +9,6 @@ public interface ProductionStandardService {
 
     public  Integer addProductionStandardService(TProductionStandard productionStandard);
 
+    public  Integer delProductionStandardService(Integer pid);
+
 }

@@ -3,6 +3,7 @@
 
 <mapper namespace="com.ghprint.cms.serviceDao.ProductionMapper">
         <resultMap id="ResultMap" type="com.ghprint.cms.model.production.ProductionInfoView">
+            <id property="Pid" column="id" jdbcType="INTEGER"/>
         <association property="productionStandard"  javaType="com.ghprint.cms.model.production.TProductionStandard"  >
         <id property="id" column="id" jdbcType="INTEGER"/>
         <result property="codeid" column="codeid" jdbcType="VARCHAR"/>
@@ -119,4 +120,24 @@
         </where>
        ORDER BY b.`companyname`
     </select>
+
+    <select id="getOneitem" resultMap="ResultMap" parameterType="java.lang.Integer">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM  t_production_standard a
+        LEFT JOIN t_customer_info b
+        ON a.`companyid` = b.`id`
+        LEFT JOIN t_product_info c
+        ON a.`productid` = c.`id`
+        LEFT JOIN t_printing_data d
+        ON a.`printdataid` = d.`id`
+        LEFT JOIN t_printing_procedure e
+        ON a.`procedureid` = e.`id`
+        LEFT JOIN t_printing_procedureafter f
+        ON a.`procedureafterid`  = f.`id`
+        where a.id = #{pid,jdbcType=INTEGER}
+
+    </select>
+
+
 </mapper>
