@@ -25,4 +25,16 @@ public class CustomerInfoServiceImpl implements CustomerInfoService {
        Integer record = customerInfoMapper.updateByPrimaryKeySelective(customerInfo);
         return  record;
     }
+
+    @Override
+    public TCustomerInfo getCustomerInfobyId(Integer cid) {
+      TCustomerInfo customerInfo =  customerInfoMapper.selectByPrimaryKey(cid);
+        return customerInfo!=null?customerInfo:null;
+    }
+
+    @Override
+    public Integer delCustomerInfobyId(Integer cid) {
+        Integer record = customerInfoMapper.deleteByPrimaryKey(cid);
+        return  record;
+    }
 }

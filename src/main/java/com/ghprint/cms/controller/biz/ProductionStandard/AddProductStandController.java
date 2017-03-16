@@ -35,9 +35,9 @@ public class AddProductStandController extends BaseAction{
     private DictUnVersalService dictUnVersalService;
 
 
-    @RequestMapping(value = "/product/addpreproduct.do", method = RequestMethod.GET, produces = "application/json; charset=utf-8")
+    @RequestMapping(value = "/product/Preproduct.do", method = RequestMethod.GET, produces = "application/json; charset=utf-8")
     @ResponseBody
-    @ApiOperation(value = "添加生产质量标准初始化")
+    @ApiOperation(value = "添加修改生产质量标准初始化")
     public Response<ProductionInit>   addpreproduct(HttpServletRequest request, HttpServletResponse response){
         Response <ProductionInit> responses = new Response<>();
         try {
@@ -60,9 +60,9 @@ public class AddProductStandController extends BaseAction{
                 return responses;
             }
         }catch (Exception e) {
-            log.error("添加生产标准初始化失败=:", e);
+            log.error("添加修改生产标准初始化失败=:", e);
             responses.setErrorCode(Constant.errorCodeEnum.FAILURE.getCode());
-            responses.setErrorMsg("添加生产标准初始化异常");
+            responses.setErrorMsg("添加修改生产标准初始化异常");
             return  responses;
         }
 

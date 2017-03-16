@@ -1,6 +1,6 @@
 package com.ghprint.cms.services.impl;
 
-import com.ghprint.cms.model.production.ProductionInfoView;
+import com.ghprint.cms.model.production.*;
 import com.ghprint.cms.pagination.DataGridResult;
 import com.ghprint.cms.serviceDao.*;
 import com.ghprint.cms.services.*;
@@ -112,14 +112,73 @@ public class ProductionInfoServiceImpl implements ProductionInfoService {
 
     @Override
     public ProductionInfoView getProductionitem(Integer pid) {
+        ProductionInfoView p = new ProductionInfoView();
         if(pid != null){
-            productionMapper.getOneitem(pid);
+         p  =   productionMapper.getOneitem(pid);
+            p.getCustomerInfo().setId(p.getProductionStandard().getCompanyid());
+            p.getPrintingProcedure().setId(p.getProductionStandard().getProcedureid());
+            p.getPrintingProcedureafter().setId(p.getProductionStandard().getProcedureafterid());
+            p.getPrintingData().setId(p.getProductionStandard().getPrintdataid());
+            p.getProductInfo().setId(p.getProductionStandard().getProductid());
         }
-        return  null;
+        return  p;
     }
 
     @Override
     public Integer updateProductionitems(ProductionInfoView productionInfoView) {
-        return null;
+        Integer record = 0;
+
+        try {
+            if (productionInfoView.getPid() != null) {
+                TCustomerInfo customerInfo = productionInfoView.getCustomerInfo();
+                TProductInfo productInfo = productionInfoView.getProductInfo();
+                TPrintingData printingData = productionInfoView.getPrintingData();
+                TPrintingProcedure printingProcedure = productionInfoView.getPrintingProcedure();
+                TPrintingProcedureafter printingProcedureafter = productionInfoView.getPrintingProcedureafter();
+                TProductionStandard productionStandard = productionInfoView.getProductionStandard();
+                logger.info("Service request param:{}", productionInfoView.toString());
+                logger.info("1---UPDATE  CustomerInfo by ID:{}----", productionInfoView.getCustomerInfo().getId());
+                if (customerInfo.getId() != null) {
+                    record += customerInfoService.updateCustomerInfo(customerInfo);
+                }
+                logger.info("1===UPDATE  CustomerInfo record:{}====", record);
+                logger.info("2---UPDATE  ProductionInfo by ID:{}----", productionInfoView.getProductInfo().getId());
+                if (productInfo.getId() != null) {
+                    record += productionService.updateProduction(productInfo);
+                }
+                logger.info("2===UPDATE  ProdutionInfo record:{}====", record);
+                logger.info("3---UPDATE  PrintingProcedure by ID:{}----", productionInfoView.getPrintingProcedure().getId());
+                if (printingProcedure.getId() != null) {
+                    record += printingProcedureService.updataPrintingProcedure(printingProcedure);
+                }
+                logger.info("3===UPDATE  PrintingProcedure record:{}====", record);
+                logger.info("4---UPDATE  PrintingData by ID:{}----", productionInfoView.getPrintingData().getId());
+                if (printingData.getId() != null) {
+                    record += printingDataService.updatePrintingData(printingData);
+                }
+                logger.info("4===UPDATE  PrintingData record:{}====", record);
+                logger.info("5---UPDATE  PrintingProceduceafter by ID:{}----", productionInfoView.getPrintingProcedureafter().getId());
+                if (printingProcedureafter.getId() != null) {
+                    record += printingProcedureafterService.updatePrintingProcedureafter(printingProcedureafter);
+                }
+                logger.info("5===UPDATE  PrintingProcedureafter record:{}====", record);
+                logger.info("6---UPDATE  ProductionStandard by ID:{}----", productionInfoView.getProductionStandard().getId());
+                if (productionStandard.getId() != null) {
+                    productionStandard.setProductid(productInfo.getId());
+                    productionStandard.setPrintdataid(printingData.getId());
+                    productionStandard.setCompanyid(customerInfo.getId());
+                    productionStandard.setProcedureid(printingProcedure.getId());
+                    productionStandard.setProcedureafterid(printingProcedureafter.getId());
+                    record += productionStandardService.updateProductionStandardService(productionStandard);
+                }
+                logger.info("6===UPDATE  ProductionStandard record:{}====", record);
+
+                logger.info("00000===updateProductionitems FINISH!!====");
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+            logger.error("===updateProductionitems FAIL:{}====",e);
+        }
+        return record;
     }
 }

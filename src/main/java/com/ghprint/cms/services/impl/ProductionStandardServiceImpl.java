@@ -25,4 +25,16 @@ public class ProductionStandardServiceImpl  implements ProductionStandardService
         Integer redcord = productionStandardMapper.deleteByPrimaryKey(pid);
         return  redcord;
     }
+
+    @Override
+    public Integer updateProductionStandardService(TProductionStandard productionStandard) {
+        Integer record = productionStandardMapper.updateByPrimaryKeySelective(productionStandard);
+        return record;
+    }
+
+    @Override
+    public TProductionStandard getProductionStandardService(Integer pid) {
+        TProductionStandard productionStandard = productionStandardMapper.selectByPrimaryKey(pid);
+        return productionStandard!=null?productionStandard:null;
+    }
 }

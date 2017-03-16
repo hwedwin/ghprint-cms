@@ -8,4 +8,7 @@ import com.ghprint.cms.model.production.TPrintingData;
 public interface PrintingDataService {
 
     public  Integer addPrintingData(TPrintingData printingData);
+    public  Integer delPrintingData(Integer pid);
+    public  Integer updatePrintingData(TPrintingData printingData);
+    public  TPrintingData getPrintingData(Integer pid);
 }

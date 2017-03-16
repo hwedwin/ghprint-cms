@@ -21,4 +21,22 @@ public class PrintingProcedureafterServiceImpl implements PrintingProcedureafter
         Integer record = printingProcedureafterMapper.insertSelective(printingProcedureafter);
         return  record;
     }
+
+    @Override
+    public Integer delPrintingProcedureafter(Integer pid) {
+        Integer record  = printingProcedureafterMapper.deleteByPrimaryKey(pid);
+        return record;
+    }
+
+    @Override
+    public Integer updatePrintingProcedureafter(TPrintingProcedureafter printingProcedureafter) {
+        Integer record = printingProcedureafterMapper.updateByPrimaryKeySelective(printingProcedureafter);
+        return record;
+    }
+
+    @Override
+    public TPrintingProcedureafter getPrintingProcedureafterbyId(Integer pid) {
+        TPrintingProcedureafter printingProcedureafter = printingProcedureafterMapper.selectByPrimaryKey(pid);
+        return  printingProcedureafter!=null?printingProcedureafter:null;
+    }
 }

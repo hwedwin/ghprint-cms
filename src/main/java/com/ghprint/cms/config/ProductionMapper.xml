@@ -11,6 +11,11 @@
         <result property="material" column="material" jdbcType="VARCHAR"/>
         <result property="crosswiseshrink" column="crosswiseshrink" jdbcType="INTEGER"/>
         <result property="portraitshrink" column="portraitshrink" jdbcType="INTEGER"/>
+            <result property="companyid" column="companyid" jdbcType="INTEGER"/>
+            <result property="productid" column="productid" jdbcType="INTEGER"/>
+            <result property="printdataid" column="printdataid" jdbcType="INTEGER"/>
+            <result property="procedureid" column="procedureid" jdbcType="INTEGER"/>
+            <result property="procedureafterid" column="procedureafterid" jdbcType="INTEGER"/>
         <result property="packaging" column="packaging" jdbcType="INTEGER"/>
         <result property="note"  column="note" jdbcType="VARCHAR"/>
         <result property="createtime" column="createtime" jdbcType="DATE"/>
@@ -23,6 +28,7 @@
         </association>
         <association property="productInfo" javaType="com.ghprint.cms.model.production.TProductInfo">
         <id property="id" column="id" jdbcType="INTEGER"/>
+            <result property="customerid" column="customerid" jdbcType="INTEGER"/>
         <result property="productcode" column="productcode" jdbcType="VARCHAR"/>
         <result property="productname" column="productname" jdbcType="VARCHAR"/>
         <result property="productmaterial" column="productmaterial" jdbcType="VARCHAR"/>

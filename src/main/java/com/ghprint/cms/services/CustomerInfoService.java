@@ -10,4 +10,6 @@ public interface CustomerInfoService {
 
     public  Integer addCustomerInfo(TCustomerInfo customerInfo);
     public  Integer updateCustomerInfo(TCustomerInfo customerInfo);
+    public  TCustomerInfo getCustomerInfobyId(Integer cid);
+    public  Integer delCustomerInfobyId(Integer cid);
 }

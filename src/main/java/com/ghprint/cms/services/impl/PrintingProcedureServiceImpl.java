@@ -22,4 +22,22 @@ public class PrintingProcedureServiceImpl implements PrintingProcedureService {
         Integer record = printingProcedureMapper.insertSelective(printingProcedure);
         return record;
     }
+
+    @Override
+    public Integer delPrintingProcedure(Integer pid) {
+        Integer redord = printingProcedureMapper.deleteByPrimaryKey(pid);
+        return  redord;
+    }
+
+    @Override
+    public Integer updataPrintingProcedure(TPrintingProcedure printingProcedure) {
+        Integer record = printingProcedureMapper.updateByPrimaryKeySelective(printingProcedure);
+        return  record;
+    }
+
+    @Override
+    public TPrintingProcedure getPrintingProcedurebyId(Integer pid) {
+        TPrintingProcedure printingProcedure = printingProcedureMapper.selectByPrimaryKey(pid);
+        return  printingProcedure;
+    }
 }

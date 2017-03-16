@@ -9,4 +9,7 @@ import com.ghprint.cms.model.production.TProductInfo;
 public interface  ProductionService {
 
     public  Integer addProduction(TProductInfo productInfo);
+    public  Integer delProduction(Integer pid);
+    public  Integer updateProduction(TProductInfo productInfo);
+    public  TProductInfo getProductionbyId(Integer pid);
 }

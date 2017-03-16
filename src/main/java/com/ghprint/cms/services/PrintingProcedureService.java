@@ -9,5 +9,8 @@ import com.ghprint.cms.model.production.TPrintingProcedure;
 public interface PrintingProcedureService {
 
     public  Integer addPrintingProcedure(TPrintingProcedure printingProcedure);
+    public  Integer delPrintingProcedure(Integer pid);
+    public  Integer updataPrintingProcedure(TPrintingProcedure printingProcedure);
+    public  TPrintingProcedure getPrintingProcedurebyId(Integer pid);
 
 }

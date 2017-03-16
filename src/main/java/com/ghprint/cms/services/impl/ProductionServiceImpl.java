@@ -22,4 +22,22 @@ public class ProductionServiceImpl implements ProductionService {
         Integer record = productInfoMapper.insertSelective(productInfo);
         return  record;
     }
+
+    @Override
+    public Integer delProduction(Integer pid) {
+       Integer record = productInfoMapper.deleteByPrimaryKey(pid);
+        return record;
+    }
+
+    @Override
+    public Integer updateProduction(TProductInfo productInfo) {
+        Integer record = productInfoMapper.updateByPrimaryKeySelective(productInfo);
+        return  record;
+    }
+
+    @Override
+    public TProductInfo getProductionbyId(Integer pid) {
+        TProductInfo productInfo = productInfoMapper.selectByPrimaryKey(pid);
+        return productInfo!=null?productInfo:null;
+    }
 }

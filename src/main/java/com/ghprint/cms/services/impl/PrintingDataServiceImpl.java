@@ -20,4 +20,22 @@ public class PrintingDataServiceImpl implements PrintingDataService {
         Integer record = printingDataMapper.insertSelective(printingData);
         return  record;
     }
+
+    @Override
+    public Integer delPrintingData(Integer pid) {
+        Integer record  = printingDataMapper.deleteByPrimaryKey(pid);
+        return record;
+    }
+
+    @Override
+    public Integer updatePrintingData(TPrintingData printingData) {
+        Integer record  = printingDataMapper.updateByPrimaryKeySelective(printingData);
+        return record;
+    }
+
+    @Override
+    public TPrintingData getPrintingData(Integer pid) {
+        TPrintingData printingData = printingDataMapper.selectByPrimaryKey(pid);
+        return printingData!=null?printingData:null;
+    }
 }
