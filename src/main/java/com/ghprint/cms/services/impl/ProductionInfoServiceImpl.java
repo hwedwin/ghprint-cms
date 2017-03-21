@@ -100,7 +100,7 @@ public class ProductionInfoServiceImpl implements ProductionInfoService {
             dataGridResult.setTotalCount(sum);
             dataGridResult.setCurrentPage(page);
             dataGridResult.setEveryPage(rows);
-            dataGridResult.setTotalPage(sum / rows);
+            dataGridResult.setTotalPage((sum-1)/rows+1);
         }
         return dataGridResult;
     }
