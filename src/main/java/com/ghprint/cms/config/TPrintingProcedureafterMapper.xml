@@ -23,6 +23,7 @@
     <result column="boxsize" property="boxsize" jdbcType="VARCHAR" />
     <result column="splitsum" property="splitsum" jdbcType="INTEGER" />
     <result column="mould" property="mould" jdbcType="VARCHAR" />
+    <result column="note" property="note" jdbcType="VARCHAR"/>
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -85,7 +86,7 @@
   <sql id="Base_Column_List" >
     id, qualitycheck, splitsizr, transparentkeep, mergesize, splithigh, glueplace, foldplace, 
     tearlinesize, tearlineplace, productstyle, scrolldirection, scrolllength, repeatscrollsize, 
-    proceduresum, interfacecount, hemcount, boxway, boxsize, splitsum, mould
+    proceduresum, interfacecount, hemcount, boxway, boxsize, splitsum, mould,note
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ghprint.cms.model.production.TPrintingProcedureafterExample" >
     select
@@ -124,7 +125,7 @@
       tearlineplace, productstyle, scrolldirection, 
       scrolllength, repeatscrollsize, proceduresum, 
       interfacecount, hemcount, boxway, 
-      boxsize, splitsum, mould
+      boxsize, splitsum, mould,note
       )
     values (#{id,jdbcType=INTEGER}, #{qualitycheck,jdbcType=VARCHAR}, #{splitsizr,jdbcType=INTEGER}, 
       #{transparentkeep,jdbcType=INTEGER}, #{mergesize,jdbcType=VARCHAR}, #{splithigh,jdbcType=INTEGER}, 
@@ -132,7 +133,7 @@
       #{tearlineplace,jdbcType=VARCHAR}, #{productstyle,jdbcType=VARCHAR}, #{scrolldirection,jdbcType=INTEGER}, 
       #{scrolllength,jdbcType=VARCHAR}, #{repeatscrollsize,jdbcType=VARCHAR}, #{proceduresum,jdbcType=VARCHAR}, 
       #{interfacecount,jdbcType=INTEGER}, #{hemcount,jdbcType=INTEGER}, #{boxway,jdbcType=VARCHAR}, 
-      #{boxsize,jdbcType=VARCHAR}, #{splitsum,jdbcType=INTEGER}, #{mould,jdbcType=VARCHAR}
+      #{boxsize,jdbcType=VARCHAR}, #{splitsum,jdbcType=INTEGER}, #{mould,jdbcType=VARCHAR}, #{note,jdbcType=VARCHAR}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.ghprint.cms.model.production.TPrintingProcedureafter" >
@@ -204,6 +205,9 @@
       <if test="mould != null" >
         mould,
       </if>
+      <if test="note != null" >
+        note,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -268,6 +272,9 @@
       </if>
       <if test="mould != null" >
         #{mould,jdbcType=VARCHAR},
+      </if>
+      <if test="note != null" >
+        #{note,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -343,6 +350,9 @@
       <if test="record.mould != null" >
         mould = #{record.mould,jdbcType=VARCHAR},
       </if>
+      <if test="record.note != null" >
+        note = #{record.note,jdbcType=VARCHAR},
+      </if>
     </set>
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -370,7 +380,8 @@
       boxway = #{record.boxway,jdbcType=VARCHAR},
       boxsize = #{record.boxsize,jdbcType=VARCHAR},
       splitsum = #{record.splitsum,jdbcType=INTEGER},
-      mould = #{record.mould,jdbcType=VARCHAR}
+      mould = #{record.mould,jdbcType=VARCHAR},
+    note = #{record.note,jdbcType=VARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -438,6 +449,9 @@
       <if test="mould != null" >
         mould = #{mould,jdbcType=VARCHAR},
       </if>
+      <if test="note != null" >
+        note = #{note,jdbcType=VARCHAR},
+      </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
@@ -462,7 +476,8 @@
       boxway = #{boxway,jdbcType=VARCHAR},
       boxsize = #{boxsize,jdbcType=VARCHAR},
       splitsum = #{splitsum,jdbcType=INTEGER},
-      mould = #{mould,jdbcType=VARCHAR}
+      mould = #{mould,jdbcType=VARCHAR},
+       note = #{note,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

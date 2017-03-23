@@ -78,6 +78,7 @@
         <result property="boxsize" column="boxsize" jdbcType="VARCHAR"/>
         <result property="splitsum" column="splitsum" jdbcType="INTEGER"/>
         <result property="mould" column="mould" jdbcType="VARCHAR"/>
+            <result property="note" column="note" jdbcType="VARCHAR"/>
         </association>
     </resultMap>
     <sql id="Base_Column_List" >

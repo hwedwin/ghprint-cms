@@ -43,6 +43,8 @@ public class TPrintingProcedureafter {
 
     private String mould;
 
+    private  String note;
+
     public Integer getId() {
         return id;
     }
@@ -211,10 +213,18 @@ public class TPrintingProcedureafter {
         this.mould = mould == null ? null : mould.trim();
     }
 
+    public String getNote() {
+        return note;
+    }
+
+    public void setNote(String note) {
+        this.note = note;
+    }
+
     public TPrintingProcedureafter() {
     }
 
-    public TPrintingProcedureafter(String qualitycheck, Integer splitsizr, Integer transparentkeep, String mergesize, Integer splithigh, String glueplace, String foldplace, String tearlinesize, String tearlineplace, String productstyle, Integer scrolldirection, String scrolllength, String repeatscrollsize, String proceduresum, Integer interfacecount, Integer hemcount, String boxway, String boxsize, Integer splitsum, String mould) {
+    public TPrintingProcedureafter(String qualitycheck, Integer splitsizr, Integer transparentkeep, String mergesize, Integer splithigh, String glueplace, String foldplace, String tearlinesize, String tearlineplace, String productstyle, Integer scrolldirection, String scrolllength, String repeatscrollsize, String proceduresum, Integer interfacecount, Integer hemcount, String boxway, String boxsize, Integer splitsum, String mould, String note) {
         this.qualitycheck = qualitycheck;
         this.splitsizr = splitsizr;
         this.transparentkeep = transparentkeep;
@@ -235,6 +245,7 @@ public class TPrintingProcedureafter {
         this.boxsize = boxsize;
         this.splitsum = splitsum;
         this.mould = mould;
+        this.note = note;
     }
 
     @Override
@@ -261,6 +272,7 @@ public class TPrintingProcedureafter {
                 ", boxsize='" + boxsize + '\'' +
                 ", splitsum=" + splitsum +
                 ", mould='" + mould + '\'' +
+                ", note='" + note + '\'' +
                 '}';
     }
 }
