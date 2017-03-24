@@ -1,0 +1,290 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ghprint.cms.serviceDao.TMaterialStockMapper" >
+  <resultMap id="BaseResultMap" type="com.ghprint.cms.model.stock.TMaterialStock" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="provider" property="provider" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="specification" property="specification" jdbcType="VARCHAR" />
+    <result column="ply" property="ply" jdbcType="REAL" />
+    <result column="portrait" property="portrait" jdbcType="VARCHAR" />
+    <result column="infeed" property="infeed" jdbcType="INTEGER" />
+    <result column="packages" property="packages" jdbcType="INTEGER" />
+    <result column="price" property="price" jdbcType="REAL" />
+    <result column="amount" property="amount" jdbcType="REAL" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, provider, name, specification, ply, portrait, infeed, packages, price, amount
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ghprint.cms.model.stock.TMaterialStockExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from t_material_stock
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_material_stock
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_material_stock
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.ghprint.cms.model.stock.TMaterialStockExample" >
+    delete from t_material_stock
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.ghprint.cms.model.stock.TMaterialStock" >
+    insert into t_material_stock (id, provider, name, 
+      specification, ply, portrait, 
+      infeed, packages, price, 
+      amount)
+    values (#{id,jdbcType=INTEGER}, #{provider,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+      #{specification,jdbcType=VARCHAR}, #{ply,jdbcType=REAL}, #{portrait,jdbcType=VARCHAR}, 
+      #{infeed,jdbcType=INTEGER}, #{packages,jdbcType=INTEGER}, #{price,jdbcType=REAL}, 
+      #{amount,jdbcType=REAL})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ghprint.cms.model.stock.TMaterialStock" >
+    insert into t_material_stock
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="provider != null" >
+        provider,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="specification != null" >
+        specification,
+      </if>
+      <if test="ply != null" >
+        ply,
+      </if>
+      <if test="portrait != null" >
+        portrait,
+      </if>
+      <if test="infeed != null" >
+        infeed,
+      </if>
+      <if test="packages != null" >
+        packages,
+      </if>
+      <if test="price != null" >
+        price,
+      </if>
+      <if test="amount != null" >
+        amount,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="provider != null" >
+        #{provider,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="specification != null" >
+        #{specification,jdbcType=VARCHAR},
+      </if>
+      <if test="ply != null" >
+        #{ply,jdbcType=REAL},
+      </if>
+      <if test="portrait != null" >
+        #{portrait,jdbcType=VARCHAR},
+      </if>
+      <if test="infeed != null" >
+        #{infeed,jdbcType=INTEGER},
+      </if>
+      <if test="packages != null" >
+        #{packages,jdbcType=INTEGER},
+      </if>
+      <if test="price != null" >
+        #{price,jdbcType=REAL},
+      </if>
+      <if test="amount != null" >
+        #{amount,jdbcType=REAL},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.ghprint.cms.model.stock.TMaterialStockExample" resultType="java.lang.Integer" >
+    select count(*) from t_material_stock
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update t_material_stock
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.provider != null" >
+        provider = #{record.provider,jdbcType=VARCHAR},
+      </if>
+      <if test="record.name != null" >
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.specification != null" >
+        specification = #{record.specification,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ply != null" >
+        ply = #{record.ply,jdbcType=REAL},
+      </if>
+      <if test="record.portrait != null" >
+        portrait = #{record.portrait,jdbcType=VARCHAR},
+      </if>
+      <if test="record.infeed != null" >
+        infeed = #{record.infeed,jdbcType=INTEGER},
+      </if>
+      <if test="record.packages != null" >
+        packages = #{record.packages,jdbcType=INTEGER},
+      </if>
+      <if test="record.price != null" >
+        price = #{record.price,jdbcType=REAL},
+      </if>
+      <if test="record.amount != null" >
+        amount = #{record.amount,jdbcType=REAL},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update t_material_stock
+    set id = #{record.id,jdbcType=INTEGER},
+      provider = #{record.provider,jdbcType=VARCHAR},
+      name = #{record.name,jdbcType=VARCHAR},
+      specification = #{record.specification,jdbcType=VARCHAR},
+      ply = #{record.ply,jdbcType=REAL},
+      portrait = #{record.portrait,jdbcType=VARCHAR},
+      infeed = #{record.infeed,jdbcType=INTEGER},
+      packages = #{record.packages,jdbcType=INTEGER},
+      price = #{record.price,jdbcType=REAL},
+      amount = #{record.amount,jdbcType=REAL}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ghprint.cms.model.stock.TMaterialStock" >
+    update t_material_stock
+    <set >
+      <if test="provider != null" >
+        provider = #{provider,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="specification != null" >
+        specification = #{specification,jdbcType=VARCHAR},
+      </if>
+      <if test="ply != null" >
+        ply = #{ply,jdbcType=REAL},
+      </if>
+      <if test="portrait != null" >
+        portrait = #{portrait,jdbcType=VARCHAR},
+      </if>
+      <if test="infeed != null" >
+        infeed = #{infeed,jdbcType=INTEGER},
+      </if>
+      <if test="packages != null" >
+        packages = #{packages,jdbcType=INTEGER},
+      </if>
+      <if test="price != null" >
+        price = #{price,jdbcType=REAL},
+      </if>
+      <if test="amount != null" >
+        amount = #{amount,jdbcType=REAL},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ghprint.cms.model.stock.TMaterialStock" >
+    update t_material_stock
+    set provider = #{provider,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      specification = #{specification,jdbcType=VARCHAR},
+      ply = #{ply,jdbcType=REAL},
+      portrait = #{portrait,jdbcType=VARCHAR},
+      infeed = #{infeed,jdbcType=INTEGER},
+      packages = #{packages,jdbcType=INTEGER},
+      price = #{price,jdbcType=REAL},
+      amount = #{amount,jdbcType=REAL}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

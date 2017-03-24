@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ghprint.cms.serviceDao.TProductionStockMapper" >
+  <resultMap id="BaseResultMap" type="com.ghprint.cms.model.stock.TProductionStock" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="customerid" property="customerid" jdbcType="INTEGER" />
+    <result column="stockid" property="stockid" jdbcType="VARCHAR" />
+    <result column="stockname" property="stockname" jdbcType="VARCHAR" />
+    <result column="color" property="color" jdbcType="VARCHAR" />
+    <result column="count" property="count" jdbcType="INTEGER" />
+    <result column="boxcount" property="boxcount" jdbcType="INTEGER" />
+    <result column="remain" property="remain" jdbcType="INTEGER" />
+    <result column="stocksum" property="stocksum" jdbcType="INTEGER" />
+    <result column="price" property="price" jdbcType="REAL" />
+    <result column="amount" property="amount" jdbcType="REAL" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, customerid, stockid, stockname, color, count, boxcount, remain, stocksum, price, 
+    amount
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ghprint.cms.model.stock.TProductionStockExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from t_production_stock
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_production_stock
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_production_stock
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.ghprint.cms.model.stock.TProductionStockExample" >
+    delete from t_production_stock
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.ghprint.cms.model.stock.TProductionStock" >
+    insert into t_production_stock (id, customerid, stockid, 
+      stockname, color, count, 
+      boxcount, remain, stocksum, 
+      price, amount)
+    values (#{id,jdbcType=INTEGER}, #{customerid,jdbcType=INTEGER}, #{stockid,jdbcType=VARCHAR}, 
+      #{stockname,jdbcType=VARCHAR}, #{color,jdbcType=VARCHAR}, #{count,jdbcType=INTEGER}, 
+      #{boxcount,jdbcType=INTEGER}, #{remain,jdbcType=INTEGER}, #{stocksum,jdbcType=INTEGER}, 
+      #{price,jdbcType=REAL}, #{amount,jdbcType=REAL})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ghprint.cms.model.stock.TProductionStock" >
+    insert into t_production_stock
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="customerid != null" >
+        customerid,
+      </if>
+      <if test="stockid != null" >
+        stockid,
+      </if>
+      <if test="stockname != null" >
+        stockname,
+      </if>
+      <if test="color != null" >
+        color,
+      </if>
+      <if test="count != null" >
+        count,
+      </if>
+      <if test="boxcount != null" >
+        boxcount,
+      </if>
+      <if test="remain != null" >
+        remain,
+      </if>
+      <if test="stocksum != null" >
+        stocksum,
+      </if>
+      <if test="price != null" >
+        price,
+      </if>
+      <if test="amount != null" >
+        amount,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="customerid != null" >
+        #{customerid,jdbcType=INTEGER},
+      </if>
+      <if test="stockid != null" >
+        #{stockid,jdbcType=VARCHAR},
+      </if>
+      <if test="stockname != null" >
+        #{stockname,jdbcType=VARCHAR},
+      </if>
+      <if test="color != null" >
+        #{color,jdbcType=VARCHAR},
+      </if>
+      <if test="count != null" >
+        #{count,jdbcType=INTEGER},
+      </if>
+      <if test="boxcount != null" >
+        #{boxcount,jdbcType=INTEGER},
+      </if>
+      <if test="remain != null" >
+        #{remain,jdbcType=INTEGER},
+      </if>
+      <if test="stocksum != null" >
+        #{stocksum,jdbcType=INTEGER},
+      </if>
+      <if test="price != null" >
+        #{price,jdbcType=REAL},
+      </if>
+      <if test="amount != null" >
+        #{amount,jdbcType=REAL},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.ghprint.cms.model.stock.TProductionStockExample" resultType="java.lang.Integer" >
+    select count(*) from t_production_stock
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update t_production_stock
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.customerid != null" >
+        customerid = #{record.customerid,jdbcType=INTEGER},
+      </if>
+      <if test="record.stockid != null" >
+        stockid = #{record.stockid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.stockname != null" >
+        stockname = #{record.stockname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.color != null" >
+        color = #{record.color,jdbcType=VARCHAR},
+      </if>
+      <if test="record.count != null" >
+        count = #{record.count,jdbcType=INTEGER},
+      </if>
+      <if test="record.boxcount != null" >
+        boxcount = #{record.boxcount,jdbcType=INTEGER},
+      </if>
+      <if test="record.remain != null" >
+        remain = #{record.remain,jdbcType=INTEGER},
+      </if>
+      <if test="record.stocksum != null" >
+        stocksum = #{record.stocksum,jdbcType=INTEGER},
+      </if>
+      <if test="record.price != null" >
+        price = #{record.price,jdbcType=REAL},
+      </if>
+      <if test="record.amount != null" >
+        amount = #{record.amount,jdbcType=REAL},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update t_production_stock
+    set id = #{record.id,jdbcType=INTEGER},
+      customerid = #{record.customerid,jdbcType=INTEGER},
+      stockid = #{record.stockid,jdbcType=VARCHAR},
+      stockname = #{record.stockname,jdbcType=VARCHAR},
+      color = #{record.color,jdbcType=VARCHAR},
+      count = #{record.count,jdbcType=INTEGER},
+      boxcount = #{record.boxcount,jdbcType=INTEGER},
+      remain = #{record.remain,jdbcType=INTEGER},
+      stocksum = #{record.stocksum,jdbcType=INTEGER},
+      price = #{record.price,jdbcType=REAL},
+      amount = #{record.amount,jdbcType=REAL}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ghprint.cms.model.stock.TProductionStock" >
+    update t_production_stock
+    <set >
+      <if test="customerid != null" >
+        customerid = #{customerid,jdbcType=INTEGER},
+      </if>
+      <if test="stockid != null" >
+        stockid = #{stockid,jdbcType=VARCHAR},
+      </if>
+      <if test="stockname != null" >
+        stockname = #{stockname,jdbcType=VARCHAR},
+      </if>
+      <if test="color != null" >
+        color = #{color,jdbcType=VARCHAR},
+      </if>
+      <if test="count != null" >
+        count = #{count,jdbcType=INTEGER},
+      </if>
+      <if test="boxcount != null" >
+        boxcount = #{boxcount,jdbcType=INTEGER},
+      </if>
+      <if test="remain != null" >
+        remain = #{remain,jdbcType=INTEGER},
+      </if>
+      <if test="stocksum != null" >
+        stocksum = #{stocksum,jdbcType=INTEGER},
+      </if>
+      <if test="price != null" >
+        price = #{price,jdbcType=REAL},
+      </if>
+      <if test="amount != null" >
+        amount = #{amount,jdbcType=REAL},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ghprint.cms.model.stock.TProductionStock" >
+    update t_production_stock
+    set customerid = #{customerid,jdbcType=INTEGER},
+      stockid = #{stockid,jdbcType=VARCHAR},
+      stockname = #{stockname,jdbcType=VARCHAR},
+      color = #{color,jdbcType=VARCHAR},
+      count = #{count,jdbcType=INTEGER},
+      boxcount = #{boxcount,jdbcType=INTEGER},
+      remain = #{remain,jdbcType=INTEGER},
+      stocksum = #{stocksum,jdbcType=INTEGER},
+      price = #{price,jdbcType=REAL},
+      amount = #{amount,jdbcType=REAL}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
