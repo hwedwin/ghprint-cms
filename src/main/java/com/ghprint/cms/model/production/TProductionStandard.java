@@ -1,5 +1,8 @@
 package com.ghprint.cms.model.production;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.util.Date;
 
 public class TProductionStandard {
@@ -29,6 +32,8 @@ public class TProductionStandard {
 
     private String note;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @JsonFormat(pattern="yyyy-MM-dd",timezone = "GMT+8")
     private Date createtime;
 
     private String createauthor;
