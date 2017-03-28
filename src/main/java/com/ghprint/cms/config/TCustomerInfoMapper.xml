@@ -181,4 +181,11 @@
       companyname = #{companyname,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+  <select id="selectCustomers" resultMap="BaseResultMap">
+    SELECT
+    <include refid="Base_Column_List" />
+    from t_customer_info
+    GROUP  BY  companycode ORDER BY  companycode
+  </select>
 </mapper>

@@ -99,8 +99,8 @@
     LEFT JOIN t_printing_procedureafter f
     ON a.`procedureafterid`  = f.`id`
         <where>
-            <if test="key != null and value != null">
-                ${key} = #{value}
+            <if test="key != null and key !=''  and value != null and value !=''">
+                ${key} like CONCAT('%',#{value},'%')
             </if>
         </where>
     ORDER BY b.`companyname`
@@ -121,8 +121,8 @@
         LEFT JOIN t_printing_procedureafter f
         ON a.`procedureafterid`  = f.`id`
         <where>
-            <if test="key != null and value != null">
-                ${key} = #{value}
+            <if test="key != null and key !=''  and value != null and value !=''">
+                ${key} like CONCAT('%',#{value},'%')
             </if>
         </where>
        ORDER BY b.`companyname`

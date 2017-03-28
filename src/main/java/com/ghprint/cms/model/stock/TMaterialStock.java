@@ -21,6 +21,8 @@ public class TMaterialStock {
 
     private Float amount;
 
+    private Integer materialsum;
+
     public Integer getId() {
         return id;
     }
@@ -99,5 +101,13 @@ public class TMaterialStock {
 
     public void setAmount(Float amount) {
         this.amount = amount;
+    }
+
+    public Integer getMaterialsum() {
+        return materialsum;
+    }
+
+    public void setMaterialsum(Integer materialsum) {
+        this.materialsum = materialsum;
     }
 }

@@ -27,4 +27,9 @@ public interface TProductionStockMapper {
     int updateByPrimaryKeySelective(TProductionStock record);
 
     int updateByPrimaryKey(TProductionStock record);
+
+    List<TProductionStock> selectlist(@Param("pageOffset")Integer pageOffset,@Param("pageSize") Integer pageSize,@Param("key")String key,@Param("value")String value);
+
+    //获取总记录数
+    Integer getlistcount(@Param("key")String key,@Param("value")String value);
 }

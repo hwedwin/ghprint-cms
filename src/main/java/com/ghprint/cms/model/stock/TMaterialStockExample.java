@@ -743,6 +743,66 @@ public class TMaterialStockExample {
             addCriterion("amount not between", value1, value2, "amount");
             return (Criteria) this;
         }
+
+        public Criteria andMaterialsumIsNull() {
+            addCriterion("materialsum is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andMaterialsumIsNotNull() {
+            addCriterion("materialsum is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andMaterialsumEqualTo(Integer value) {
+            addCriterion("materialsum =", value, "materialsum");
+            return (Criteria) this;
+        }
+
+        public Criteria andMaterialsumNotEqualTo(Integer value) {
+            addCriterion("materialsum <>", value, "materialsum");
+            return (Criteria) this;
+        }
+
+        public Criteria andMaterialsumGreaterThan(Integer value) {
+            addCriterion("materialsum >", value, "materialsum");
+            return (Criteria) this;
+        }
+
+        public Criteria andMaterialsumGreaterThanOrEqualTo(Integer value) {
+            addCriterion("materialsum >=", value, "materialsum");
+            return (Criteria) this;
+        }
+
+        public Criteria andMaterialsumLessThan(Integer value) {
+            addCriterion("materialsum <", value, "materialsum");
+            return (Criteria) this;
+        }
+
+        public Criteria andMaterialsumLessThanOrEqualTo(Integer value) {
+            addCriterion("materialsum <=", value, "materialsum");
+            return (Criteria) this;
+        }
+
+        public Criteria andMaterialsumIn(List<Integer> values) {
+            addCriterion("materialsum in", values, "materialsum");
+            return (Criteria) this;
+        }
+
+        public Criteria andMaterialsumNotIn(List<Integer> values) {
+            addCriterion("materialsum not in", values, "materialsum");
+            return (Criteria) this;
+        }
+
+        public Criteria andMaterialsumBetween(Integer value1, Integer value2) {
+            addCriterion("materialsum between", value1, value2, "materialsum");
+            return (Criteria) this;
+        }
+
+        public Criteria andMaterialsumNotBetween(Integer value1, Integer value2) {
+            addCriterion("materialsum not between", value1, value2, "materialsum");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

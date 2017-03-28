@@ -27,7 +27,7 @@ public class TestRoleService {
     public void testgetRolelist() throws Exception {
         DataGridResult dataresult = new DataGridResult();
         TSysRole role = new TSysRole();
-        role.setRolename("房管1");
+        role.setRolename("操作员");
         dataresult = roleService.getRoleList(role,1,1);
         System.out.print(dataresult.getRows().get(0));
     }

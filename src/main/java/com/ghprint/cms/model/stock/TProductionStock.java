@@ -110,4 +110,37 @@ public class TProductionStock {
     public void setAmount(Float amount) {
         this.amount = amount;
     }
+
+    public TProductionStock(Integer customerid, String stockid, String stockname, String color, Integer count, Integer boxcount, Integer remain, Integer stocksum, Float price, Float amount) {
+        this.customerid = customerid;
+        this.stockid = stockid;
+        this.stockname = stockname;
+        this.color = color;
+        this.count = count;
+        this.boxcount = boxcount;
+        this.remain = remain;
+        this.stocksum = stocksum;
+        this.price = price;
+        this.amount = amount;
+    }
+
+    public TProductionStock() {
+    }
+
+    @Override
+    public String toString() {
+        return "TProductionStock{" +
+                "id=" + id +
+                ", customerid=" + customerid +
+                ", stockid='" + stockid + '\'' +
+                ", stockname='" + stockname + '\'' +
+                ", color='" + color + '\'' +
+                ", count=" + count +
+                ", boxcount=" + boxcount +
+                ", remain=" + remain +
+                ", stocksum=" + stocksum +
+                ", price=" + price +
+                ", amount=" + amount +
+                '}';
+    }
 }

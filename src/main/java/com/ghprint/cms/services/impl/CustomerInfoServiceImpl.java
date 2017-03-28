@@ -6,6 +6,8 @@ import com.ghprint.cms.services.CustomerInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * Created by Administrator on 2017/3/12.
  */
@@ -36,5 +38,11 @@ public class CustomerInfoServiceImpl implements CustomerInfoService {
     public Integer delCustomerInfobyId(Integer cid) {
         Integer record = customerInfoMapper.deleteByPrimaryKey(cid);
         return  record;
+    }
+
+    @Override
+    public List<TCustomerInfo> selectCustomers() {
+        List<TCustomerInfo> list = customerInfoMapper.selectCustomers();
+        return list;
     }
 }

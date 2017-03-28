@@ -303,4 +303,27 @@
       amount = #{amount,jdbcType=REAL}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  <select id="selectlist" resultMap="BaseResultMap" parameterType="java.lang.String">
+    SELECT
+    <include refid="Base_Column_List" />
+    FROM  t_production_stock p
+    <where>
+      <if test="key != null and key !=''  and value != null and value !=''">
+        ${key} like CONCAT('%',#{value},'%')
+      </if>
+    </where>
+    ORDER BY p.`stockid`
+    limit #{pageOffset,jdbcType=INTEGER},#{pageSize,jdbcType=INTEGER}
+  </select>
+  <select id="getlistcount" resultType="java.lang.Integer"  parameterType="java.lang.String">
+    SELECT
+    count(1)
+    FROM  t_production_stock p
+    <where>
+      <if test="key != null and key !=''  and value != null and value !=''">
+        ${key} like CONCAT('%',#{value},'%')
+      </if>
+    </where>
+    ORDER BY p.`stockid`
+  </select>
 </mapper>

@@ -27,4 +27,6 @@ public interface TCustomerInfoMapper {
     int updateByPrimaryKeySelective(TCustomerInfo record);
 
     int updateByPrimaryKey(TCustomerInfo record);
+
+    List<TCustomerInfo> selectCustomers();
 }
