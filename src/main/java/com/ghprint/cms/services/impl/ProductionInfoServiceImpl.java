@@ -171,6 +171,7 @@ public class ProductionInfoServiceImpl implements ProductionInfoService {
                     productionStandard.setProcedureafterid(printingProcedureafter.getId());
                     record += productionStandardService.updateProductionStandardService(productionStandard);
                 }
+
                 logger.info("6===UPDATE  ProductionStandard record:{}====", record);
 
                 logger.info("00000===updateProductionitems FINISH!!====");

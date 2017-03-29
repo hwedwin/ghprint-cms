@@ -66,9 +66,14 @@ public class UpdateProductStandController extends BaseAction {
             Boolean flag = super.execute(request, response);
             if (flag) {
                 Integer record = productionInfoService.updateProductionitems(prod);
-                responses.setErrorCode(Constant.errorCodeEnum.SUCCESS.getCode());
-                responses.setErrorMsg(Constant.errorCodeEnum.SUCCESS.getName());
-                responses.setResult(String.valueOf(record));
+                if(record==6) {
+                    responses.setErrorCode(Constant.errorCodeEnum.SUCCESS.getCode());
+                    responses.setErrorMsg(Constant.errorCodeEnum.SUCCESS.getName());
+                    responses.setResult(String.valueOf(record));
+                }else{
+                    responses.setErrorCode(Constant.errorCodeEnum.FAILURE.getCode());
+                    responses.setErrorMsg("修改生产标准记录异常");
+                }
                 return responses;
             } else {
                 responses.setErrorCode(Constant.errorCodeEnum.LOGIN_TIMEOUT_ERROE.getCode());
