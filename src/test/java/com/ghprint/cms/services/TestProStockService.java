@@ -1,5 +1,6 @@
 package com.ghprint.cms.services;
 
+import com.alibaba.fastjson.JSON;
 import com.ghprint.cms.model.production.TCustomerInfo;
 import com.ghprint.cms.model.stock.TProductionStock;
 import com.ghprint.cms.pagination.DataGridResult;
@@ -43,5 +44,15 @@ public class TestProStockService {
     public  void testupdataStocksum(){
        Integer sum =   proStockService.updataStocksum(1,300);
         System.out.println(sum);
+    }
+
+    @Test
+    public  void testupdateStocks(){
+        TProductionStock productionStock = proStockService.getProStockbyId(1);
+        productionStock.setColor("黑");
+        String jsonString = JSON.toJSONString(productionStock);
+        System.out.println(jsonString);
+        Integer i = proStockService.updateProStock(productionStock);
+
     }
 }

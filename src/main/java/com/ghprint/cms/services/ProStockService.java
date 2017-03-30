@@ -16,6 +16,8 @@ public interface ProStockService {
     public  Integer updateProStock(TProductionStock productionStock);
     public  TProductionStock getProStockbyId(Integer sid);
     public DataGridResult selectProStocks(String key , String value , Integer page, Integer rows);
-    //更新库存
-    public  Integer updataStocksum(Integer sid , Integer count);
+    //加库存
+    public  Integer addStocksum(Integer sid , Integer count);
+    //减库存
+    public  Integer subStocksum(Integer sid , Integer count);
 }

@@ -1,4 +1,4 @@
-package com.ghprint.cms.controller.Stocks;
+package com.ghprint.cms.controller.biz.Stocks;
 
 import cn.com.bestpay.Response;
 import com.ghprint.cms.common.AuthorityKey;
