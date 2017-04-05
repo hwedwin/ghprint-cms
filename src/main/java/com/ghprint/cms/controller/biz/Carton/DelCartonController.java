@@ -1,9 +1,9 @@
-package com.ghprint.cms.controller.biz.Stocks;
+package com.ghprint.cms.controller.biz.Carton;
 
 import cn.com.bestpay.Response;
 import com.ghprint.cms.common.AuthorityKey;
 import com.ghprint.cms.controller.BaseAction;
-import com.ghprint.cms.services.ProStockService;
+import com.ghprint.cms.services.CartonStockService;
 import com.ghprint.cms.utils.Constant;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,28 +16,26 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Created by Administrator on 2017/3/30.
+ * Created by Administrator on 2017/4/5.
  */
 @RestController
 @RequestMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-public class DelStocksController extends BaseAction {
-
-    private static Logger log = LoggerFactory.getLogger(DelStocksController.class);
+public class DelCartonController  extends BaseAction {
+    private static Logger log = LoggerFactory.getLogger(DelCartonController.class);
 
     @Autowired
-    private ProStockService proStockService;
+    private CartonStockService cartonStockService ;
 
-
-    @RequestMapping(value = "/prostocks/delprostocks.do", method = RequestMethod.GET, produces = "application/json; charset=utf-8")
+    @RequestMapping(value = "/cartonstocks/delcartonstocks.do", method = RequestMethod.GET, produces = "application/json; charset=utf-8")
     @ResponseBody
-    public Response<String> prostockdelel(HttpServletRequest request, HttpServletResponse response, @RequestParam(value = "sid") Integer sid) {
+    public Response<String> cartonstockdelel(HttpServletRequest request, HttpServletResponse response, @RequestParam(value = "cid") Integer cid) {
         Response<String> responses = new Response<>();
         try {
-            Assert.hasText(String.valueOf(sid), "sid  is null or 空字符串。");
-            log.info("prostockdelel request param:{}", sid);
+            Assert.hasText(String.valueOf(cid), "cid  is null or 空字符串。");
+            log.info("cartonstockdelel request param:{}", cid);
             Boolean flag = super.execute(request, response);
             if (flag) {
-                Integer record = proStockService.delProStock(sid);
+                Integer record = cartonStockService.delCartonStocks(cid);
                 if (record > 0) {
                     responses.setErrorCode(Constant.errorCodeEnum.SUCCESS.getCode());
                     responses.setErrorMsg(Constant.errorCodeEnum.SUCCESS.getName());
@@ -45,7 +43,7 @@ public class DelStocksController extends BaseAction {
                 } else {
                     responses.setErrorCode(Constant.errorCodeEnum.PARAM_ERROR.getCode());
                     responses.setErrorMsg(Constant.errorCodeEnum.PARAM_ERROR.getName());
-                    log.info("prostockdelel delete fail ,no this record");
+                    log.info("cartonstockdelel delete fail ,no this record");
                 }
                 return responses;
 
@@ -55,9 +53,9 @@ public class DelStocksController extends BaseAction {
                 return responses;
             }
         } catch (Exception e) {
-            log.error("删除成品库存失败=:", e);
+            log.error("删除纸箱库存失败=:", e);
             responses.setErrorCode(Constant.errorCodeEnum.FAILURE.getCode());
-            responses.setErrorMsg("删除成品库存异常");
+            responses.setErrorMsg("删除纸箱库存异常");
             return responses;
         }
 
@@ -67,6 +65,6 @@ public class DelStocksController extends BaseAction {
 
     @Override
     public String getAuthorityId() {
-        return AuthorityKey.PROSTOCKS_DEL;
+        return AuthorityKey.CARTONSTOCKS_DEL;
     }
 }

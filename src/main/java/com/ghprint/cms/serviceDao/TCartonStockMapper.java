@@ -27,4 +27,8 @@ public interface TCartonStockMapper {
     int updateByPrimaryKeySelective(TCartonStock record);
 
     int updateByPrimaryKey(TCartonStock record);
+
+    List <TCartonStock> selectlist(@Param("pageOffset")Integer pageOffset,@Param("pageSize") Integer pageSize,@Param("key")String key,@Param("value")String value);
+
+    Integer getlistcount(@Param("key")String key,@Param("value")String value);
 }
