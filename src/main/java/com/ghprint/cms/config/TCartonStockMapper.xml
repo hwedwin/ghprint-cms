@@ -5,7 +5,7 @@
     <id column="id" property="id" jdbcType="INTEGER" />
     <result column="boxsize" property="boxsize" jdbcType="VARCHAR" />
     <result column="count" property="count" jdbcType="INTEGER" />
-    <result column="packages" property="packages" jdbcType="VARCHAR" />
+    <result column="packages" property="packages" jdbcType="INTEGER" />
     <result column="price" property="price" jdbcType="REAL" />
     <result column="amount" property="amount" jdbcType="REAL" />
   </resultMap>
@@ -85,7 +85,7 @@
     </if>
   </select>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select 
+    select
     <include refid="Base_Column_List" />
     from t_carton_stock
     where id = #{id,jdbcType=INTEGER}
@@ -101,10 +101,10 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.ghprint.cms.model.stock.TCartonStock" >
-    insert into t_carton_stock (id, boxsize, count, 
-      packages, price, amount)
-    values (#{id,jdbcType=INTEGER}, #{boxsize,jdbcType=VARCHAR}, #{count,jdbcType=INTEGER}, 
-      #{packages,jdbcType=VARCHAR}, #{price,jdbcType=REAL}, #{amount,jdbcType=REAL})
+    insert into t_carton_stock (id, boxsize, count,
+    packages, price, amount)
+    values (#{id,jdbcType=INTEGER}, #{boxsize,jdbcType=VARCHAR}, #{count,jdbcType=INTEGER},
+    #{packages,jdbcType=INTEGER}, #{price,jdbcType=REAL}, #{amount,jdbcType=REAL})
   </insert>
   <insert id="insertSelective" parameterType="com.ghprint.cms.model.stock.TCartonStock" >
     insert into t_carton_stock
@@ -139,7 +139,7 @@
         #{count,jdbcType=INTEGER},
       </if>
       <if test="packages != null" >
-        #{packages,jdbcType=VARCHAR},
+        #{packages,jdbcType=INTEGER},
       </if>
       <if test="price != null" >
         #{price,jdbcType=REAL},
@@ -168,7 +168,7 @@
         count = #{record.count,jdbcType=INTEGER},
       </if>
       <if test="record.packages != null" >
-        packages = #{record.packages,jdbcType=VARCHAR},
+        packages = #{record.packages,jdbcType=INTEGER},
       </if>
       <if test="record.price != null" >
         price = #{record.price,jdbcType=REAL},
@@ -184,11 +184,11 @@
   <update id="updateByExample" parameterType="map" >
     update t_carton_stock
     set id = #{record.id,jdbcType=INTEGER},
-      boxsize = #{record.boxsize,jdbcType=VARCHAR},
-      count = #{record.count,jdbcType=INTEGER},
-      packages = #{record.packages,jdbcType=VARCHAR},
-      price = #{record.price,jdbcType=REAL},
-      amount = #{record.amount,jdbcType=REAL}
+    boxsize = #{record.boxsize,jdbcType=VARCHAR},
+    count = #{record.count,jdbcType=INTEGER},
+    packages = #{record.packages,jdbcType=INTEGER},
+    price = #{record.price,jdbcType=REAL},
+    amount = #{record.amount,jdbcType=REAL}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -203,7 +203,7 @@
         count = #{count,jdbcType=INTEGER},
       </if>
       <if test="packages != null" >
-        packages = #{packages,jdbcType=VARCHAR},
+        packages = #{packages,jdbcType=INTEGER},
       </if>
       <if test="price != null" >
         price = #{price,jdbcType=REAL},
@@ -218,7 +218,7 @@
     update t_carton_stock
     set boxsize = #{boxsize,jdbcType=VARCHAR},
       count = #{count,jdbcType=INTEGER},
-      packages = #{packages,jdbcType=VARCHAR},
+      packages = #{packages,jdbcType=INTEGER},
       price = #{price,jdbcType=REAL},
       amount = #{amount,jdbcType=REAL}
     where id = #{id,jdbcType=INTEGER}

@@ -1,6 +1,7 @@
 package com.ghprint.cms.services.impl;
 
 import com.ghprint.cms.model.stock.TCartonStock;
+import com.ghprint.cms.model.stock.TProductionStock;
 import com.ghprint.cms.pagination.DataGridResult;
 import com.ghprint.cms.serviceDao.TCartonStockMapper;
 import com.ghprint.cms.services.CartonStockService;
@@ -60,11 +61,26 @@ public class CartonStockServiceImpl implements CartonStockService {
 
     @Override
     public Integer addStockCount(Integer cid, Integer count) {
-        return null;
+        TCartonStock cartonStock = this.getCartonStockbyId(cid);
+        Integer sum = 0 ;
+        if(count>0){
+            sum   = cartonStock.getPackages()+ count;
+            cartonStock.setPackages(sum);
+            cartonStockMapper.updateByPrimaryKeySelective(cartonStock);
+        }
+        return  sum ;
     }
 
     @Override
     public Integer subStockCount(Integer cid, Integer count) {
-        return null;
+        TCartonStock cartonStock = this.getCartonStockbyId(cid);
+        if(count<=cartonStock.getPackages()&& cartonStock.getPackages()>0&&count>0){
+            Integer sum = cartonStock.getPackages()- count;
+            cartonStock.setPackages(sum);
+            cartonStockMapper.updateByPrimaryKeySelective(cartonStock);
+            return  sum ;
+        }else{
+            return -1;
+        }
     }
 }

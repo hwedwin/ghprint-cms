@@ -93,6 +93,76 @@ public class UpdateCartonController extends BaseAction {
         }
     }
 
+    @RequestMapping(value = "/cartonstocks/addstocksum.do", method = RequestMethod.GET, produces = "application/json; charset=utf-8")
+    @ResponseBody
+    public  Response<String> addcartonstocksum(HttpServletRequest request, HttpServletResponse response,@RequestParam(value = "cid") Integer cid ,@RequestParam(value = "sum") Integer sum)
+    {
+        Response<String> responses = new Response<>();
+        try {
+            Assert.hasText(String.valueOf(cid), "sid  is null or 空字符串。");
+            Assert.hasText(String.valueOf(sum), "sum  is null or 空字符串。");
+            log.info("addcartonstocksum request param:{},{}", cid,sum);
+            Boolean flag = super.execute(request, response);
+            if (flag) {
+                Integer record = cartonStockService.addStockCount(cid,sum);
+                if (record > 0) {
+                    responses.setErrorCode(Constant.errorCodeEnum.SUCCESS.getCode());
+                    responses.setErrorMsg(Constant.errorCodeEnum.SUCCESS.getName());
+                    responses.setResult(String.valueOf(record));
+                } else {
+                    responses.setErrorCode(Constant.errorCodeEnum.FAILURE.getCode());
+                    responses.setErrorMsg("增加纸箱库存数量异常");
+                }
+                return responses;
+            } else {
+                responses.setErrorCode(Constant.errorCodeEnum.LOGIN_TIMEOUT_ERROE.getCode());
+                responses.setErrorMsg(request.getAttribute("message").toString());
+                return responses;
+            }
+        } catch (Exception e) {
+            log.error("增加纸箱库存数量失败=:", e);
+            responses.setErrorCode(Constant.errorCodeEnum.FAILURE.getCode());
+            responses.setErrorMsg("增加纸箱库存数量异常");
+            return responses;
+        }
+    }
+
+    @RequestMapping(value = "/cartonstocks/substocksum.do", method = RequestMethod.GET, produces = "application/json; charset=utf-8")
+    @ResponseBody
+    public  Response<String> subcartonstocksum(HttpServletRequest request, HttpServletResponse response,@RequestParam(value = "cid") Integer cid ,@RequestParam(value = "sum") Integer sum)
+    {
+        Response<String> responses = new Response<>();
+        try {
+            Assert.hasText(String.valueOf(cid), "cid  is null or 空字符串。");
+            Assert.hasText(String.valueOf(sum), "sum  is null or 空字符串。");
+            log.info("subcartonstocksum request param:{},{}", cid,sum);
+            Boolean flag = super.execute(request, response);
+            if (flag) {
+                Integer record = cartonStockService.subStockCount(cid,sum);
+                if (record > 0) {
+                    responses.setErrorCode(Constant.errorCodeEnum.SUCCESS.getCode());
+                    responses.setErrorMsg(Constant.errorCodeEnum.SUCCESS.getName());
+                    responses.setResult(String.valueOf(record));
+                } else if (record ==-1) {
+                    responses.setErrorCode(Constant.errorCodeEnum.FAILURE.getCode());
+                    responses.setErrorMsg("纸箱库存数量不足");
+                }else {
+                    responses.setErrorCode(Constant.errorCodeEnum.FAILURE.getCode());
+                    responses.setErrorMsg("减少箱库存数量异常");
+                }
+                return responses;
+            } else {
+                responses.setErrorCode(Constant.errorCodeEnum.LOGIN_TIMEOUT_ERROE.getCode());
+                responses.setErrorMsg(request.getAttribute("message").toString());
+                return responses;
+            }
+        } catch (Exception e) {
+            log.error("减少箱库存数量失败=:", e);
+            responses.setErrorCode(Constant.errorCodeEnum.FAILURE.getCode());
+            responses.setErrorMsg("减少箱库存数量异常");
+            return responses;
+        }
+    }
 
     @Override
     public String getAuthorityId() {

@@ -7,7 +7,7 @@ public class TCartonStock {
 
     private Integer count;
 
-    private String packages;
+    private Integer packages;
 
     private Float price;
 
@@ -37,12 +37,12 @@ public class TCartonStock {
         this.count = count;
     }
 
-    public String getPackages() {
+    public Integer getPackages() {
         return packages;
     }
 
-    public void setPackages(String packages) {
-        this.packages = packages == null ? null : packages.trim();
+    public void setPackages(Integer packages) {
+        this.packages = packages;
     }
 
     public Float getPrice() {

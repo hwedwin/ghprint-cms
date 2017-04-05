@@ -304,62 +304,52 @@ public class TCartonStockExample {
             return (Criteria) this;
         }
 
-        public Criteria andPackagesEqualTo(String value) {
+        public Criteria andPackagesEqualTo(Integer value) {
             addCriterion("packages =", value, "packages");
             return (Criteria) this;
         }
 
-        public Criteria andPackagesNotEqualTo(String value) {
+        public Criteria andPackagesNotEqualTo(Integer value) {
             addCriterion("packages <>", value, "packages");
             return (Criteria) this;
         }
 
-        public Criteria andPackagesGreaterThan(String value) {
+        public Criteria andPackagesGreaterThan(Integer value) {
             addCriterion("packages >", value, "packages");
             return (Criteria) this;
         }
 
-        public Criteria andPackagesGreaterThanOrEqualTo(String value) {
+        public Criteria andPackagesGreaterThanOrEqualTo(Integer value) {
             addCriterion("packages >=", value, "packages");
             return (Criteria) this;
         }
 
-        public Criteria andPackagesLessThan(String value) {
+        public Criteria andPackagesLessThan(Integer value) {
             addCriterion("packages <", value, "packages");
             return (Criteria) this;
         }
 
-        public Criteria andPackagesLessThanOrEqualTo(String value) {
+        public Criteria andPackagesLessThanOrEqualTo(Integer value) {
             addCriterion("packages <=", value, "packages");
             return (Criteria) this;
         }
 
-        public Criteria andPackagesLike(String value) {
-            addCriterion("packages like", value, "packages");
-            return (Criteria) this;
-        }
-
-        public Criteria andPackagesNotLike(String value) {
-            addCriterion("packages not like", value, "packages");
-            return (Criteria) this;
-        }
-
-        public Criteria andPackagesIn(List<String> values) {
+        public Criteria andPackagesIn(List<Integer> values) {
             addCriterion("packages in", values, "packages");
             return (Criteria) this;
         }
 
-        public Criteria andPackagesNotIn(List<String> values) {
+        public Criteria andPackagesNotIn(List<Integer> values) {
             addCriterion("packages not in", values, "packages");
             return (Criteria) this;
         }
 
-        public Criteria andPackagesBetween(String value1, String value2) {
+        public Criteria andPackagesBetween(Integer value1, Integer value2) {
             addCriterion("packages between", value1, value2, "packages");
             return (Criteria) this;
         }
 
-        public Criteria andPackagesNotBetween(String value1, String value2) {
+        public Criteria andPackagesNotBetween(Integer value1, Integer value2) {
             addCriterion("packages not between", value1, value2, "packages");
             return (Criteria) this;
         }
