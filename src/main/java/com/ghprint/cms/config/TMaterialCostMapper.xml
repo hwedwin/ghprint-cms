@@ -6,9 +6,9 @@
     <result column="stockid" property="stockid" jdbcType="INTEGER" />
     <result column="name" property="name" jdbcType="VARCHAR" />
     <result column="income" property="income" jdbcType="REAL" />
-    <result column="out" property="out" jdbcType="REAL" />
-    <result column="sum" property="sum" jdbcType="REAL" />
-    <result column="date" property="date" jdbcType="DATE" />
+    <result column="outcount" property="outcount" jdbcType="REAL" />
+    <result column="sumcount" property="sumcount" jdbcType="REAL" />
+    <result column="insertime" property="insertime" jdbcType="DATE" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -69,7 +69,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, stockid, name, income, out, sum, date
+    id, stockid, name, income, outcount, sumcount, insertime
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ghprint.cms.model.stock.TMaterialCostExample" >
     select
@@ -103,11 +103,11 @@
   </delete>
   <insert id="insert" parameterType="com.ghprint.cms.model.stock.TMaterialCost" >
     insert into t_material_cost (id, stockid, name, 
-      income, out, sum, date
-      )
+      income, outcount, sumcount, 
+      insertime)
     values (#{id,jdbcType=INTEGER}, #{stockid,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, 
-      #{income,jdbcType=REAL}, #{out,jdbcType=REAL}, #{sum,jdbcType=REAL}, #{date,jdbcType=DATE}
-      )
+      #{income,jdbcType=REAL}, #{outcount,jdbcType=REAL}, #{sumcount,jdbcType=REAL}, 
+      #{insertime,jdbcType=DATE})
   </insert>
   <insert id="insertSelective" parameterType="com.ghprint.cms.model.stock.TMaterialCost" >
     insert into t_material_cost
@@ -124,14 +124,14 @@
       <if test="income != null" >
         income,
       </if>
-      <if test="out != null" >
-        out,
+      <if test="outcount != null" >
+        outcount,
       </if>
-      <if test="sum != null" >
-        sum,
+      <if test="sumcount != null" >
+        sumcount,
       </if>
-      <if test="date != null" >
-        date,
+      <if test="insertime != null" >
+        insertime,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
@@ -147,14 +147,14 @@
       <if test="income != null" >
         #{income,jdbcType=REAL},
       </if>
-      <if test="out != null" >
-        #{out,jdbcType=REAL},
+      <if test="outcount != null" >
+        #{outcount,jdbcType=REAL},
       </if>
-      <if test="sum != null" >
-        #{sum,jdbcType=REAL},
+      <if test="sumcount != null" >
+        #{sumcount,jdbcType=REAL},
       </if>
-      <if test="date != null" >
-        #{date,jdbcType=DATE},
+      <if test="insertime != null" >
+        #{insertime,jdbcType=DATE},
       </if>
     </trim>
   </insert>
@@ -179,14 +179,14 @@
       <if test="record.income != null" >
         income = #{record.income,jdbcType=REAL},
       </if>
-      <if test="record.out != null" >
-        out = #{record.out,jdbcType=REAL},
+      <if test="record.outcount != null" >
+        outcount = #{record.outcount,jdbcType=REAL},
       </if>
-      <if test="record.sum != null" >
-        sum = #{record.sum,jdbcType=REAL},
+      <if test="record.sumcount != null" >
+        sumcount = #{record.sumcount,jdbcType=REAL},
       </if>
-      <if test="record.date != null" >
-        date = #{record.date,jdbcType=DATE},
+      <if test="record.insertime != null" >
+        insertime = #{record.insertime,jdbcType=DATE},
       </if>
     </set>
     <if test="_parameter != null" >
@@ -199,9 +199,9 @@
       stockid = #{record.stockid,jdbcType=INTEGER},
       name = #{record.name,jdbcType=VARCHAR},
       income = #{record.income,jdbcType=REAL},
-      out = #{record.out,jdbcType=REAL},
-      sum = #{record.sum,jdbcType=REAL},
-      date = #{record.date,jdbcType=DATE}
+      outcount = #{record.outcount,jdbcType=REAL},
+      sumcount = #{record.sumcount,jdbcType=REAL},
+      insertime = #{record.insertime,jdbcType=DATE}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -218,14 +218,14 @@
       <if test="income != null" >
         income = #{income,jdbcType=REAL},
       </if>
-      <if test="out != null" >
-        out = #{out,jdbcType=REAL},
+      <if test="outcount != null" >
+        outcount = #{outcount,jdbcType=REAL},
       </if>
-      <if test="sum != null" >
-        sum = #{sum,jdbcType=REAL},
+      <if test="sumcount != null" >
+        sumcount = #{sumcount,jdbcType=REAL},
       </if>
-      <if test="date != null" >
-        date = #{date,jdbcType=DATE},
+      <if test="insertime != null" >
+        insertime = #{insertime,jdbcType=DATE},
       </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
@@ -235,9 +235,9 @@
     set stockid = #{stockid,jdbcType=INTEGER},
       name = #{name,jdbcType=VARCHAR},
       income = #{income,jdbcType=REAL},
-      out = #{out,jdbcType=REAL},
-      sum = #{sum,jdbcType=REAL},
-      date = #{date,jdbcType=DATE}
+      outcount = #{outcount,jdbcType=REAL},
+      sumcount = #{sumcount,jdbcType=REAL},
+      insertime = #{insertime,jdbcType=DATE}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

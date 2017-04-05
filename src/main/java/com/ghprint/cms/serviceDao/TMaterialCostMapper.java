@@ -27,4 +27,6 @@ public interface TMaterialCostMapper {
     int updateByPrimaryKeySelective(TMaterialCost record);
 
     int updateByPrimaryKey(TMaterialCost record);
+
+
 }

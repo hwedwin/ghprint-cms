@@ -382,183 +382,183 @@ public class TMaterialCostExample {
             return (Criteria) this;
         }
 
-        public Criteria andOutIsNull() {
-            addCriterion("out is null");
+        public Criteria andOutcountIsNull() {
+            addCriterion("outcount is null");
             return (Criteria) this;
         }
 
-        public Criteria andOutIsNotNull() {
-            addCriterion("out is not null");
+        public Criteria andOutcountIsNotNull() {
+            addCriterion("outcount is not null");
             return (Criteria) this;
         }
 
-        public Criteria andOutEqualTo(Float value) {
-            addCriterion("out =", value, "out");
+        public Criteria andOutcountEqualTo(Float value) {
+            addCriterion("outcount =", value, "outcount");
             return (Criteria) this;
         }
 
-        public Criteria andOutNotEqualTo(Float value) {
-            addCriterion("out <>", value, "out");
+        public Criteria andOutcountNotEqualTo(Float value) {
+            addCriterion("outcount <>", value, "outcount");
             return (Criteria) this;
         }
 
-        public Criteria andOutGreaterThan(Float value) {
-            addCriterion("out >", value, "out");
+        public Criteria andOutcountGreaterThan(Float value) {
+            addCriterion("outcount >", value, "outcount");
             return (Criteria) this;
         }
 
-        public Criteria andOutGreaterThanOrEqualTo(Float value) {
-            addCriterion("out >=", value, "out");
+        public Criteria andOutcountGreaterThanOrEqualTo(Float value) {
+            addCriterion("outcount >=", value, "outcount");
             return (Criteria) this;
         }
 
-        public Criteria andOutLessThan(Float value) {
-            addCriterion("out <", value, "out");
+        public Criteria andOutcountLessThan(Float value) {
+            addCriterion("outcount <", value, "outcount");
             return (Criteria) this;
         }
 
-        public Criteria andOutLessThanOrEqualTo(Float value) {
-            addCriterion("out <=", value, "out");
+        public Criteria andOutcountLessThanOrEqualTo(Float value) {
+            addCriterion("outcount <=", value, "outcount");
             return (Criteria) this;
         }
 
-        public Criteria andOutIn(List<Float> values) {
-            addCriterion("out in", values, "out");
+        public Criteria andOutcountIn(List<Float> values) {
+            addCriterion("outcount in", values, "outcount");
             return (Criteria) this;
         }
 
-        public Criteria andOutNotIn(List<Float> values) {
-            addCriterion("out not in", values, "out");
+        public Criteria andOutcountNotIn(List<Float> values) {
+            addCriterion("outcount not in", values, "outcount");
             return (Criteria) this;
         }
 
-        public Criteria andOutBetween(Float value1, Float value2) {
-            addCriterion("out between", value1, value2, "out");
+        public Criteria andOutcountBetween(Float value1, Float value2) {
+            addCriterion("outcount between", value1, value2, "outcount");
             return (Criteria) this;
         }
 
-        public Criteria andOutNotBetween(Float value1, Float value2) {
-            addCriterion("out not between", value1, value2, "out");
+        public Criteria andOutcountNotBetween(Float value1, Float value2) {
+            addCriterion("outcount not between", value1, value2, "outcount");
             return (Criteria) this;
         }
 
-        public Criteria andSumIsNull() {
-            addCriterion("sum is null");
+        public Criteria andSumcountIsNull() {
+            addCriterion("sumcount is null");
             return (Criteria) this;
         }
 
-        public Criteria andSumIsNotNull() {
-            addCriterion("sum is not null");
+        public Criteria andSumcountIsNotNull() {
+            addCriterion("sumcount is not null");
             return (Criteria) this;
         }
 
-        public Criteria andSumEqualTo(Float value) {
-            addCriterion("sum =", value, "sum");
+        public Criteria andSumcountEqualTo(Float value) {
+            addCriterion("sumcount =", value, "sumcount");
             return (Criteria) this;
         }
 
-        public Criteria andSumNotEqualTo(Float value) {
-            addCriterion("sum <>", value, "sum");
+        public Criteria andSumcountNotEqualTo(Float value) {
+            addCriterion("sumcount <>", value, "sumcount");
             return (Criteria) this;
         }
 
-        public Criteria andSumGreaterThan(Float value) {
-            addCriterion("sum >", value, "sum");
+        public Criteria andSumcountGreaterThan(Float value) {
+            addCriterion("sumcount >", value, "sumcount");
             return (Criteria) this;
         }
 
-        public Criteria andSumGreaterThanOrEqualTo(Float value) {
-            addCriterion("sum >=", value, "sum");
+        public Criteria andSumcountGreaterThanOrEqualTo(Float value) {
+            addCriterion("sumcount >=", value, "sumcount");
             return (Criteria) this;
         }
 
-        public Criteria andSumLessThan(Float value) {
-            addCriterion("sum <", value, "sum");
+        public Criteria andSumcountLessThan(Float value) {
+            addCriterion("sumcount <", value, "sumcount");
             return (Criteria) this;
         }
 
-        public Criteria andSumLessThanOrEqualTo(Float value) {
-            addCriterion("sum <=", value, "sum");
+        public Criteria andSumcountLessThanOrEqualTo(Float value) {
+            addCriterion("sumcount <=", value, "sumcount");
             return (Criteria) this;
         }
 
-        public Criteria andSumIn(List<Float> values) {
-            addCriterion("sum in", values, "sum");
+        public Criteria andSumcountIn(List<Float> values) {
+            addCriterion("sumcount in", values, "sumcount");
             return (Criteria) this;
         }
 
-        public Criteria andSumNotIn(List<Float> values) {
-            addCriterion("sum not in", values, "sum");
+        public Criteria andSumcountNotIn(List<Float> values) {
+            addCriterion("sumcount not in", values, "sumcount");
             return (Criteria) this;
         }
 
-        public Criteria andSumBetween(Float value1, Float value2) {
-            addCriterion("sum between", value1, value2, "sum");
+        public Criteria andSumcountBetween(Float value1, Float value2) {
+            addCriterion("sumcount between", value1, value2, "sumcount");
             return (Criteria) this;
         }
 
-        public Criteria andSumNotBetween(Float value1, Float value2) {
-            addCriterion("sum not between", value1, value2, "sum");
+        public Criteria andSumcountNotBetween(Float value1, Float value2) {
+            addCriterion("sumcount not between", value1, value2, "sumcount");
             return (Criteria) this;
         }
 
-        public Criteria andDateIsNull() {
-            addCriterion("date is null");
+        public Criteria andInsertimeIsNull() {
+            addCriterion("insertime is null");
             return (Criteria) this;
         }
 
-        public Criteria andDateIsNotNull() {
-            addCriterion("date is not null");
+        public Criteria andInsertimeIsNotNull() {
+            addCriterion("insertime is not null");
             return (Criteria) this;
         }
 
-        public Criteria andDateEqualTo(Date value) {
-            addCriterionForJDBCDate("date =", value, "date");
+        public Criteria andInsertimeEqualTo(Date value) {
+            addCriterionForJDBCDate("insertime =", value, "insertime");
             return (Criteria) this;
         }
 
-        public Criteria andDateNotEqualTo(Date value) {
-            addCriterionForJDBCDate("date <>", value, "date");
+        public Criteria andInsertimeNotEqualTo(Date value) {
+            addCriterionForJDBCDate("insertime <>", value, "insertime");
             return (Criteria) this;
         }
 
-        public Criteria andDateGreaterThan(Date value) {
-            addCriterionForJDBCDate("date >", value, "date");
+        public Criteria andInsertimeGreaterThan(Date value) {
+            addCriterionForJDBCDate("insertime >", value, "insertime");
             return (Criteria) this;
         }
 
-        public Criteria andDateGreaterThanOrEqualTo(Date value) {
-            addCriterionForJDBCDate("date >=", value, "date");
+        public Criteria andInsertimeGreaterThanOrEqualTo(Date value) {
+            addCriterionForJDBCDate("insertime >=", value, "insertime");
             return (Criteria) this;
         }
 
-        public Criteria andDateLessThan(Date value) {
-            addCriterionForJDBCDate("date <", value, "date");
+        public Criteria andInsertimeLessThan(Date value) {
+            addCriterionForJDBCDate("insertime <", value, "insertime");
             return (Criteria) this;
         }
 
-        public Criteria andDateLessThanOrEqualTo(Date value) {
-            addCriterionForJDBCDate("date <=", value, "date");
+        public Criteria andInsertimeLessThanOrEqualTo(Date value) {
+            addCriterionForJDBCDate("insertime <=", value, "insertime");
             return (Criteria) this;
         }
 
-        public Criteria andDateIn(List<Date> values) {
-            addCriterionForJDBCDate("date in", values, "date");
+        public Criteria andInsertimeIn(List<Date> values) {
+            addCriterionForJDBCDate("insertime in", values, "insertime");
             return (Criteria) this;
         }
 
-        public Criteria andDateNotIn(List<Date> values) {
-            addCriterionForJDBCDate("date not in", values, "date");
+        public Criteria andInsertimeNotIn(List<Date> values) {
+            addCriterionForJDBCDate("insertime not in", values, "insertime");
             return (Criteria) this;
         }
 
-        public Criteria andDateBetween(Date value1, Date value2) {
-            addCriterionForJDBCDate("date between", value1, value2, "date");
+        public Criteria andInsertimeBetween(Date value1, Date value2) {
+            addCriterionForJDBCDate("insertime between", value1, value2, "insertime");
             return (Criteria) this;
         }
 
-        public Criteria andDateNotBetween(Date value1, Date value2) {
-            addCriterionForJDBCDate("date not between", value1, value2, "date");
+        public Criteria andInsertimeNotBetween(Date value1, Date value2) {
+            addCriterionForJDBCDate("insertime not between", value1, value2, "insertime");
             return (Criteria) this;
         }
     }

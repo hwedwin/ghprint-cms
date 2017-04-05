@@ -64,6 +64,7 @@
             <tx:method name="save*" propagation="REQUIRED" read-only="false"/>
             <tx:method name="add*" propagation="REQUIRED" read-only="false"/>
             <tx:method name="delete*" propagation="REQUIRED" read-only="false"/>
+            <tx:method name="del*" propagation="REQUIRED" read-only="false"/>
             <tx:method name="update*" propagation="REQUIRED" read-only="false"/>
             <tx:method name="edit*" propagation="REQUIRED" read-only="false"/>
             <tx:method name="batch*" propagation="REQUIRED" read-only="false"/>

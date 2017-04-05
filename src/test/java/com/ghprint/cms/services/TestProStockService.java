@@ -42,7 +42,7 @@ public class TestProStockService {
 
     @Test
     public  void testupdataStocksum(){
-       Integer sum =   proStockService.updataStocksum(1,300);
+       Integer sum =   proStockService.addStocksum(1,300);
         System.out.println(sum);
     }
 

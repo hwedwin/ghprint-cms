@@ -11,11 +11,11 @@ public class TMaterialCost {
 
     private Float income;
 
-    private Float out;
+    private Float outcount;
 
-    private Float sum;
+    private Float sumcount;
 
-    private Date date;
+    private Date insertime;
 
     public Integer getId() {
         return id;
@@ -49,27 +49,52 @@ public class TMaterialCost {
         this.income = income;
     }
 
-    public Float getOut() {
-        return out;
+    public Float getOutcount() {
+        return outcount;
     }
 
-    public void setOut(Float out) {
-        this.out = out;
+    public void setOutcount(Float outcount) {
+        this.outcount = outcount;
     }
 
-    public Float getSum() {
-        return sum;
+    public Float getSumcount() {
+        return sumcount;
     }
 
-    public void setSum(Float sum) {
-        this.sum = sum;
+    public void setSumcount(Float sumcount) {
+        this.sumcount = sumcount;
     }
 
-    public Date getDate() {
-        return date;
+    public Date getInsertime() {
+        return insertime;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
+    public void setInsertime(Date insertime) {
+        this.insertime = insertime;
+    }
+
+    public TMaterialCost() {
+    }
+
+    public TMaterialCost(Integer stockid, String name, Float income, Float outcount, Float sumcount, Date insertime) {
+        this.stockid = stockid;
+        this.name = name;
+        this.income = income;
+        this.outcount = outcount;
+        this.sumcount = sumcount;
+        this.insertime = insertime;
+    }
+
+    @Override
+    public String toString() {
+        return "TMaterialCost{" +
+                "id=" + id +
+                ", stockid=" + stockid +
+                ", name='" + name + '\'' +
+                ", income=" + income +
+                ", outcount=" + outcount +
+                ", sumcount=" + sumcount +
+                ", insertime=" + insertime +
+                '}';
     }
 }
