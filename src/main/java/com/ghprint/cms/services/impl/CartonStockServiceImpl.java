@@ -79,7 +79,10 @@ public class CartonStockServiceImpl implements CartonStockService {
             cartonStock.setPackages(sum);
             cartonStockMapper.updateByPrimaryKeySelective(cartonStock);
             return  sum ;
-        }else{
+        }else if(count> cartonStock.getPackages()) {
+            Integer sum = cartonStock.getPackages()- count;
+            return  sum;
+        } else{
             return -1;
         }
     }

@@ -17,11 +17,11 @@ public class TProductionStock {
 
     private Integer remain;
 
-    private Integer stocksum;
+    private Integer stocksum=0;
 
-    private Float price;
+    private Float price=0f;
 
-    private Float amount;
+    private Float amount=0f;
 
     public Integer getId() {
         return id;

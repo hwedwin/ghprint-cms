@@ -17,11 +17,11 @@ public class TMaterialStock {
 
     private Integer packages;
 
-    private Float price;
+    private Float price=0f;
 
-    private Float amount;
+    private Float amount=0f;
 
-    private Integer materialsum;
+    private Float materialsum=0f;
 
     public Integer getId() {
         return id;
@@ -103,11 +103,44 @@ public class TMaterialStock {
         this.amount = amount;
     }
 
-    public Integer getMaterialsum() {
+    public Float getMaterialsum() {
         return materialsum;
     }
 
-    public void setMaterialsum(Integer materialsum) {
+    public void setMaterialsum(Float materialsum) {
         this.materialsum = materialsum;
+    }
+
+    public TMaterialStock() {
+    }
+
+    public TMaterialStock(String provider, String name, String specification, Float ply, String portrait, Integer infeed, Integer packages, Float price, Float amount, Float materialsum) {
+        this.provider = provider;
+        this.name = name;
+        this.specification = specification;
+        this.ply = ply;
+        this.portrait = portrait;
+        this.infeed = infeed;
+        this.packages = packages;
+        this.price = price;
+        this.amount = amount;
+        this.materialsum = materialsum;
+    }
+
+    @Override
+    public String toString() {
+        return "TMaterialStock{" +
+                "id=" + id +
+                ", provider='" + provider + '\'' +
+                ", name='" + name + '\'' +
+                ", specification='" + specification + '\'' +
+                ", ply=" + ply +
+                ", portrait='" + portrait + '\'' +
+                ", infeed=" + infeed +
+                ", packages=" + packages +
+                ", price=" + price +
+                ", amount=" + amount +
+                ", materialsum=" + materialsum +
+                '}';
     }
 }

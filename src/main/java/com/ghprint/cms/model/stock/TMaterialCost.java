@@ -9,11 +9,11 @@ public class TMaterialCost {
 
     private String name;
 
-    private Float income;
+    private Float income=0f;
 
-    private Float outcount;
+    private Float outcount=0f;
 
-    private Float sumcount;
+    private Float sumcount=0f;
 
     private Date insertime;
 
@@ -75,6 +75,14 @@ public class TMaterialCost {
 
     public TMaterialCost() {
     }
+
+    public TMaterialCost(Integer stockid, String name,Float sumcount) {
+        this.stockid = stockid;
+        this.name = name;
+        this.sumcount = sumcount;
+        this.insertime= new Date();
+    }
+
 
     public TMaterialCost(Integer stockid, String name, Float income, Float outcount, Float sumcount, Date insertime) {
         this.stockid = stockid;

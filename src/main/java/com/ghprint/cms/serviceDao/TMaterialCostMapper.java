@@ -28,5 +28,6 @@ public interface TMaterialCostMapper {
 
     int updateByPrimaryKey(TMaterialCost record);
 
+    List<TMaterialCost> selectitems(@Param("stockid")Integer stockid,@Param("startime")String startime ,@Param("endtime")String endtime);
 
 }

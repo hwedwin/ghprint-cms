@@ -754,52 +754,52 @@ public class TMaterialStockExample {
             return (Criteria) this;
         }
 
-        public Criteria andMaterialsumEqualTo(Integer value) {
+        public Criteria andMaterialsumEqualTo(Float value) {
             addCriterion("materialsum =", value, "materialsum");
             return (Criteria) this;
         }
 
-        public Criteria andMaterialsumNotEqualTo(Integer value) {
+        public Criteria andMaterialsumNotEqualTo(Float value) {
             addCriterion("materialsum <>", value, "materialsum");
             return (Criteria) this;
         }
 
-        public Criteria andMaterialsumGreaterThan(Integer value) {
+        public Criteria andMaterialsumGreaterThan(Float value) {
             addCriterion("materialsum >", value, "materialsum");
             return (Criteria) this;
         }
 
-        public Criteria andMaterialsumGreaterThanOrEqualTo(Integer value) {
+        public Criteria andMaterialsumGreaterThanOrEqualTo(Float value) {
             addCriterion("materialsum >=", value, "materialsum");
             return (Criteria) this;
         }
 
-        public Criteria andMaterialsumLessThan(Integer value) {
+        public Criteria andMaterialsumLessThan(Float value) {
             addCriterion("materialsum <", value, "materialsum");
             return (Criteria) this;
         }
 
-        public Criteria andMaterialsumLessThanOrEqualTo(Integer value) {
+        public Criteria andMaterialsumLessThanOrEqualTo(Float value) {
             addCriterion("materialsum <=", value, "materialsum");
             return (Criteria) this;
         }
 
-        public Criteria andMaterialsumIn(List<Integer> values) {
+        public Criteria andMaterialsumIn(List<Float> values) {
             addCriterion("materialsum in", values, "materialsum");
             return (Criteria) this;
         }
 
-        public Criteria andMaterialsumNotIn(List<Integer> values) {
+        public Criteria andMaterialsumNotIn(List<Float> values) {
             addCriterion("materialsum not in", values, "materialsum");
             return (Criteria) this;
         }
 
-        public Criteria andMaterialsumBetween(Integer value1, Integer value2) {
+        public Criteria andMaterialsumBetween(Float value1, Float value2) {
             addCriterion("materialsum between", value1, value2, "materialsum");
             return (Criteria) this;
         }
 
-        public Criteria andMaterialsumNotBetween(Integer value1, Integer value2) {
+        public Criteria andMaterialsumNotBetween(Float value1, Float value2) {
             addCriterion("materialsum not between", value1, value2, "materialsum");
             return (Criteria) this;
         }

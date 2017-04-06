@@ -9,9 +9,9 @@ public class TCartonStock {
 
     private Integer packages;
 
-    private Float price;
+    private Float price=0f;
 
-    private Float amount;
+    private Float amount=0f;
 
     public Integer getId() {
         return id;

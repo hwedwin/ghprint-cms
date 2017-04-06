@@ -47,6 +47,12 @@ public class TestProStockService {
     }
 
     @Test
+    public  void testsubStocksum(){
+        Integer sum =   proStockService.subStocksum(1,300);
+        System.out.println(sum);
+    }
+
+    @Test
     public  void testupdateStocks(){
         TProductionStock productionStock = proStockService.getProStockbyId(1);
         productionStock.setColor("黑");

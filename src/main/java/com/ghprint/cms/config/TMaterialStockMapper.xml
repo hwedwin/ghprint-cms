@@ -12,7 +12,7 @@
     <result column="packages" property="packages" jdbcType="INTEGER" />
     <result column="price" property="price" jdbcType="REAL" />
     <result column="amount" property="amount" jdbcType="REAL" />
-    <result column="materialsum" property="materialsum" jdbcType="INTEGER" />
+    <result column="materialsum" property="materialsum" jdbcType="REAL" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -114,9 +114,12 @@
     values (#{id,jdbcType=INTEGER}, #{provider,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
       #{specification,jdbcType=VARCHAR}, #{ply,jdbcType=REAL}, #{portrait,jdbcType=VARCHAR}, 
       #{infeed,jdbcType=INTEGER}, #{packages,jdbcType=INTEGER}, #{price,jdbcType=REAL}, 
-      #{amount,jdbcType=REAL}, #{materialsum,jdbcType=INTEGER})
+      #{amount,jdbcType=REAL}, #{materialsum,jdbcType=REAL})
   </insert>
   <insert id="insertSelective" parameterType="com.ghprint.cms.model.stock.TMaterialStock" >
+    <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
     insert into t_material_stock
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -185,7 +188,7 @@
         #{amount,jdbcType=REAL},
       </if>
       <if test="materialsum != null" >
-        #{materialsum,jdbcType=INTEGER},
+        #{materialsum,jdbcType=REAL},
       </if>
     </trim>
   </insert>
@@ -229,7 +232,7 @@
         amount = #{record.amount,jdbcType=REAL},
       </if>
       <if test="record.materialsum != null" >
-        materialsum = #{record.materialsum,jdbcType=INTEGER},
+        materialsum = #{record.materialsum,jdbcType=REAL},
       </if>
     </set>
     <if test="_parameter != null" >
@@ -248,7 +251,7 @@
       packages = #{record.packages,jdbcType=INTEGER},
       price = #{record.price,jdbcType=REAL},
       amount = #{record.amount,jdbcType=REAL},
-      materialsum = #{record.materialsum,jdbcType=INTEGER}
+      materialsum = #{record.materialsum,jdbcType=REAL}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -284,7 +287,7 @@
         amount = #{amount,jdbcType=REAL},
       </if>
       <if test="materialsum != null" >
-        materialsum = #{materialsum,jdbcType=INTEGER},
+        materialsum = #{materialsum,jdbcType=REAL},
       </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
@@ -300,7 +303,7 @@
       packages = #{packages,jdbcType=INTEGER},
       price = #{price,jdbcType=REAL},
       amount = #{amount,jdbcType=REAL},
-      materialsum = #{materialsum,jdbcType=INTEGER}
+      materialsum = #{materialsum,jdbcType=REAL}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

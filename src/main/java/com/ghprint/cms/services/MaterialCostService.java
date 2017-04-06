@@ -20,11 +20,11 @@ public interface MaterialCostService {
         /*
         * 获取某种材料某段时间收支记录
         * */
-        public List<TMaterialCost> selectitems(Integer stockid , Date StartDate , Date EndDate);
+        public List<TMaterialCost> selectitems(Integer stockid , String StartDate , String EndDate);
         /*
         * 重置某种材料收支记录
         * */
-        public  Integer  updateitemset(Integer stockid );
+        public  TMaterialCost  updateitemset(Integer stockid );
         /*
         * 某种材料最新总库存数目
         * */
