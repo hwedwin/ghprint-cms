@@ -28,7 +28,7 @@ public class ProductionStandardServiceImpl  implements ProductionStandardService
 
     @Override
     public Integer updateProductionStandardService(TProductionStandard productionStandard) {
-        Integer record = productionStandardMapper.updateByPrimaryKeySelective(productionStandard);
+        Integer record = productionStandardMapper.updateByPrimaryKey(productionStandard);
         return record;
     }
 

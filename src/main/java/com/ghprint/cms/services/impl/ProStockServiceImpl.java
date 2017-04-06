@@ -32,7 +32,7 @@ public class ProStockServiceImpl implements ProStockService {
 
     @Override
     public Integer updateProStock(TProductionStock productionStock) {
-       Integer record = productionStockMapper.updateByPrimaryKeySelective(productionStock);
+       Integer record = productionStockMapper.updateByPrimaryKey(productionStock);
         return  record;
     }
 

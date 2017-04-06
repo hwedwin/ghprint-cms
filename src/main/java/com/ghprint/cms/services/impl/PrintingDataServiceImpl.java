@@ -29,7 +29,7 @@ public class PrintingDataServiceImpl implements PrintingDataService {
 
     @Override
     public Integer updatePrintingData(TPrintingData printingData) {
-        Integer record  = printingDataMapper.updateByPrimaryKeySelective(printingData);
+        Integer record  = printingDataMapper.updateByPrimaryKey(printingData);
         return record;
     }
 

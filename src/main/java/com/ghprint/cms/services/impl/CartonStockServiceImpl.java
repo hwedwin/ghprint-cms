@@ -33,7 +33,7 @@ public class CartonStockServiceImpl implements CartonStockService {
 
     @Override
     public Integer updateCartonStocks(TCartonStock cartonStock) {
-        Integer record = cartonStockMapper.updateByPrimaryKeySelective(cartonStock);
+        Integer record = cartonStockMapper.updateByPrimaryKey(cartonStock);
         return record;
     }
 

@@ -30,7 +30,7 @@ public class PrintingProcedureafterServiceImpl implements PrintingProcedureafter
 
     @Override
     public Integer updatePrintingProcedureafter(TPrintingProcedureafter printingProcedureafter) {
-        Integer record = printingProcedureafterMapper.updateByPrimaryKeySelective(printingProcedureafter);
+        Integer record = printingProcedureafterMapper.updateByPrimaryKey(printingProcedureafter);
         return record;
     }
 

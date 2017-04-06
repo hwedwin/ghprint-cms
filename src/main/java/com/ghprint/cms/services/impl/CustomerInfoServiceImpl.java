@@ -24,7 +24,7 @@ public class CustomerInfoServiceImpl implements CustomerInfoService {
 
     @Override
     public Integer updateCustomerInfo(TCustomerInfo customerInfo) {
-       Integer record = customerInfoMapper.updateByPrimaryKeySelective(customerInfo);
+       Integer record = customerInfoMapper.updateByPrimaryKey(customerInfo);
         return  record;
     }
 

@@ -31,7 +31,7 @@ public class ProductionServiceImpl implements ProductionService {
 
     @Override
     public Integer updateProduction(TProductInfo productInfo) {
-        Integer record = productInfoMapper.updateByPrimaryKeySelective(productInfo);
+        Integer record = productInfoMapper.updateByPrimaryKey(productInfo);
         return  record;
     }
 

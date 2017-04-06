@@ -31,7 +31,7 @@ public class PrintingProcedureServiceImpl implements PrintingProcedureService {
 
     @Override
     public Integer updataPrintingProcedure(TPrintingProcedure printingProcedure) {
-        Integer record = printingProcedureMapper.updateByPrimaryKeySelective(printingProcedure);
+        Integer record = printingProcedureMapper.updateByPrimaryKey(printingProcedure);
         return  record;
     }
 
