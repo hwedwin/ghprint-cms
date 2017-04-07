@@ -87,4 +87,21 @@ public class AuthorityKey {
 	* 纸箱库存查询
 	* */
 	public  static  String CARTONSTOCKS_SELECT="140000004";
+
+	/*
+	* 原料库存新增
+	* */
+	public  static  String MATERIALSTOCK_ADD="150000001";
+	/*
+	* 原料库存删除
+	* */
+	public  static  String MATERIALSTOCK_DEL="150000002";
+	/*
+	* 原料库存修改
+	* */
+	public  static  String MATERIALSTOCK_UPDATE="150000003";
+	/*
+	* 原料库存查询
+	* */
+	public  static  String MATERIALSTOCK_SELECT="150000004";
 }

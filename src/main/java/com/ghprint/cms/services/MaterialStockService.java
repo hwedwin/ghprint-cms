@@ -27,9 +27,9 @@ public interface MaterialStockService {
     public  TMaterialStock getMaterialStockById(Integer mid);
    /*加库存
     */
-    public  Integer addMaterialStocksum(Integer mid , Integer count);
+    public  Float addMaterialStocksum(Integer mid , Float count);
     /*减库存
     */
-    public  Integer subMaterialStocksum(Integer mid , Integer count);
+    public  Float subMaterialStocksum(Integer mid , Float count);
 
 }

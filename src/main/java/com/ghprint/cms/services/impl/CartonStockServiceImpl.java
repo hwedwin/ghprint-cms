@@ -63,7 +63,7 @@ public class CartonStockServiceImpl implements CartonStockService {
     public Integer addStockCount(Integer cid, Integer count) {
         TCartonStock cartonStock = this.getCartonStockbyId(cid);
         Integer sum = 0 ;
-        if(count>0){
+        if(count>0&&cartonStock!=null){
             sum   = cartonStock.getPackages()+ count;
             cartonStock.setPackages(sum);
             cartonStockMapper.updateByPrimaryKeySelective(cartonStock);
@@ -74,12 +74,12 @@ public class CartonStockServiceImpl implements CartonStockService {
     @Override
     public Integer subStockCount(Integer cid, Integer count) {
         TCartonStock cartonStock = this.getCartonStockbyId(cid);
-        if(count<=cartonStock.getPackages()&& cartonStock.getPackages()>0&&count>0){
+        if(count<=cartonStock.getPackages()&& cartonStock.getPackages()>0&&count>0&&cartonStock!=null){
             Integer sum = cartonStock.getPackages()- count;
             cartonStock.setPackages(sum);
             cartonStockMapper.updateByPrimaryKeySelective(cartonStock);
             return  sum ;
-        }else if(count> cartonStock.getPackages()) {
+        }else if(count> cartonStock.getPackages()&&cartonStock!=null) {
             Integer sum = cartonStock.getPackages()- count;
             return  sum;
         } else{

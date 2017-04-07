@@ -27,4 +27,8 @@ public interface TMaterialStockMapper {
     int updateByPrimaryKeySelective(TMaterialStock record);
 
     int updateByPrimaryKey(TMaterialStock record);
+
+    List <TMaterialStock> selectlist(@Param("pageOffset")Integer pageOffset,@Param("pageSize") Integer pageSize,@Param("key")String key,@Param("value")String value);
+
+    Integer getlistcount(@Param("key")String key,@Param("value")String value);
 }

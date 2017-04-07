@@ -1,6 +1,7 @@
 package com.ghprint.cms.services;
 
 import com.ghprint.cms.model.stock.TMaterialCost;
+import com.ghprint.cms.model.stock.TMaterialStock;
 
 import java.util.Date;
 import java.util.List;
@@ -29,5 +30,12 @@ public interface MaterialCostService {
         * 某种材料最新总库存数目
         * */
         public  Integer selectsum(Integer stockid);
+        /*增加一条收入记录
+        * */
+        public  Integer addincomeitems(TMaterialStock materialStock);
+        /*增加一条支出记录
+        * */
+        public  Integer addoutitems(TMaterialStock materialStock);
+
 
 }

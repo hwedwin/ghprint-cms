@@ -143,10 +143,7 @@ public class UpdateStocksController extends BaseAction {
                     responses.setErrorCode(Constant.errorCodeEnum.SUCCESS.getCode());
                     responses.setErrorMsg(Constant.errorCodeEnum.SUCCESS.getName());
                     responses.setResult(String.valueOf(record));
-                } else if (record ==-1) {
-                    responses.setErrorCode(Constant.errorCodeEnum.FAILURE.getCode());
-                    responses.setErrorMsg("成品库存数量不足");
-                }else {
+                } else {
                     responses.setErrorCode(Constant.errorCodeEnum.FAILURE.getCode());
                     responses.setErrorMsg("减少成品库存数量异常");
                 }

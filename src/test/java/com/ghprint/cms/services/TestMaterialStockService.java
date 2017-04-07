@@ -1,5 +1,6 @@
 package com.ghprint.cms.services;
 
+import com.alibaba.fastjson.JSON;
 import com.ghprint.cms.model.stock.TMaterialStock;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -20,14 +21,15 @@ public class TestMaterialStockService {
     @Test
     public  void testaddMaterialStock(){
         TMaterialStock materialStock = new TMaterialStock("供应商","PVC材料","材料规格",5.5f,"1-2",55,3,100f,100f,300f);
-        System.out.println(materialStock);
-        Integer stock = materialStockService.addMaterialStock(materialStock);
-        System.out.println(stock);
+        String jsonString = JSON.toJSONString(materialStock);
+        System.out.println(jsonString);
+//        Integer stock = materialStockService.addMaterialStock(materialStock);
+//        System.out.println(stock);
     }
 
     @Test
     public  void testdelMaterialStock(){
-        Integer stock = materialStockService.delMaterialStock(2);
+        Integer stock = materialStockService.delMaterialStock(4);
         System.out.println(stock);
     }
 
@@ -40,5 +42,18 @@ public class TestMaterialStockService {
         Integer stock = materialStockService.updateMaterialStock(materialStock);
         TMaterialStock materialStocks = materialStockService.getMaterialStockById(materialStock.getId());
         System.out.println("修改记录数:"+stock+",修改后:"+materialStocks);
+    }
+
+
+    @Test
+    public  void testaddMaterialStocksum(){
+        Float stocksum = materialStockService.addMaterialStocksum(5, 100f);
+        System.out.println(stocksum);
+    }
+
+    @Test
+    public  void testsubMaterialStocksum(){
+        Float stocksum = materialStockService.subMaterialStocksum(5, 100f);
+        System.out.println(stocksum);
     }
 }

@@ -62,7 +62,7 @@ public class ProStockServiceImpl implements ProStockService {
     public Integer addStocksum(Integer sid, Integer count) {
         TProductionStock productionStock = this.getProStockbyId(sid);
         Integer sum = 0 ;
-        if(count>0){
+        if(count>0&&productionStock!=null){
             sum   = productionStock.getStocksum() + count;
             productionStock.setStocksum(sum);
             productionStockMapper.updateByPrimaryKeySelective(productionStock);
@@ -73,12 +73,12 @@ public class ProStockServiceImpl implements ProStockService {
     @Override
     public Integer subStocksum(Integer sid, Integer count) {
         TProductionStock productionStock = this.getProStockbyId(sid);
-        if(count<=productionStock.getStocksum()&& productionStock.getStocksum()>0&&count>0){
+        if(count<=productionStock.getStocksum()&& productionStock.getStocksum()>0&&count>0&&productionStock!=null){
             Integer sum = productionStock.getStocksum() - count;
             productionStock.setStocksum(sum);
             productionStockMapper.updateByPrimaryKeySelective(productionStock);
             return  sum ;
-        }else if(count > productionStock.getStocksum()) {
+        }else if(count > productionStock.getStocksum()&&productionStock!=null) {
             Integer sum = productionStock.getStocksum() - count;
             return  sum;
         }else {

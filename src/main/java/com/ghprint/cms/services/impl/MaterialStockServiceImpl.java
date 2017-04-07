@@ -9,6 +9,8 @@ import com.ghprint.cms.services.MaterialStockService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * Created by Administrator on 2017/4/6.
  */
@@ -25,11 +27,10 @@ public class MaterialStockServiceImpl  implements MaterialStockService{
     public Integer addMaterialStock(TMaterialStock materialStock) {
         Integer record = materialStockMapper.insertSelective(materialStock);
         if(record>0) {
-            TMaterialCost materialCost = new TMaterialCost(materialStock.getId(), materialStock.getName(), materialStock.getMaterialsum());
-            materialCost.setIncome(materialStock.getMaterialsum());
-            record += materialCostService.additems(materialCost);
+            record += materialCostService.addincomeitems(materialStock);
         }
         return record;
+
     }
 
     @Override
@@ -63,7 +64,18 @@ public class MaterialStockServiceImpl  implements MaterialStockService{
 
     @Override
     public DataGridResult selectMaterialStockList(String key, String value, Integer page, Integer rows) {
-        return null;
+        Integer pageOffset = (page-1)*rows;
+        List<TMaterialStock> list = materialStockMapper.selectlist(pageOffset,rows,key,value);
+        DataGridResult dataGridResult = new DataGridResult();
+        if(list!=null) {
+            dataGridResult.setRows(list);
+            Integer sum = materialStockMapper.getlistcount(key,value);
+            dataGridResult.setTotalCount(sum);
+            dataGridResult.setCurrentPage(page);
+            dataGridResult.setEveryPage(rows);
+            dataGridResult.setTotalPage((sum-1)/rows+1);
+        }
+        return dataGridResult;
     }
 
     @Override
@@ -73,12 +85,31 @@ public class MaterialStockServiceImpl  implements MaterialStockService{
     }
 
     @Override
-    public Integer addMaterialStocksum(Integer mid, Integer count) {
-        return null;
+    public Float addMaterialStocksum(Integer mid, Float count) {
+        TMaterialStock materialStock = this.getMaterialStockById(mid);
+        Float sum = 0f ;
+        if(count>0 && materialStock!=null){
+            sum   = materialStock.getMaterialsum()+ count;
+            materialStock.setMaterialsum(sum);
+            Integer record = materialStockMapper.updateByPrimaryKeySelective(materialStock);
+             record += materialCostService.addincomeitems(materialStock);
+        }
+        return  sum ;
     }
 
     @Override
-    public Integer subMaterialStocksum(Integer mid, Integer count) {
-        return null;
+    public Float subMaterialStocksum(Integer mid, Float count) {
+        TMaterialStock  materialStock= this.getMaterialStockById(mid);
+        if(count<=materialStock.getMaterialsum()&& materialStock.getMaterialsum()>0&&count>0&& materialStock!=null){
+            Float sum = materialStock.getMaterialsum()- count;
+            materialStock.setMaterialsum(sum);
+            materialStockMapper.updateByPrimaryKeySelective(materialStock);
+            return  sum ;
+        }else if(count> materialStock.getMaterialsum()&& materialStock!=null) {
+            Float sum = materialStock.getMaterialsum()- count;
+            return  sum;
+        } else{
+            return -1f;
+        }
     }
 }

@@ -1,10 +1,10 @@
-package com.ghprint.cms.controller.biz.Carton;
+package com.ghprint.cms.controller.biz.Material;
 
 import cn.com.bestpay.Response;
 import com.ghprint.cms.common.AuthorityKey;
 import com.ghprint.cms.controller.BaseAction;
-import com.ghprint.cms.model.stock.TCartonStock;
-import com.ghprint.cms.services.CartonStockService;
+import com.ghprint.cms.model.stock.TMaterialStock;
+import com.ghprint.cms.services.MaterialStockService;
 import com.ghprint.cms.utils.Constant;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,33 +17,33 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Created by Administrator on 2017/4/5.
+ * Created by Administrator on 2017/4/7.
  */
 @RestController
 @RequestMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-public class UpdateCartonController extends BaseAction {
-    private static Logger log = LoggerFactory.getLogger(UpdateCartonController.class);
+public class UpdateMaterialController extends BaseAction {
+    private static Logger log = LoggerFactory.getLogger(UpdateMaterialController.class);
     @Autowired
-    private CartonStockService cartonStockService;
+    private MaterialStockService materialStockService;
 
-    @RequestMapping(value = "/cartonstocks/editcartonstocks.do", method = RequestMethod.GET, produces = "application/json; charset=utf-8")
+    @RequestMapping(value = "/materialstocks/editmaterialstocks.do", method = RequestMethod.GET, produces = "application/json; charset=utf-8")
     @ResponseBody
-    public Response<TCartonStock> cartonstockedit(HttpServletRequest request, HttpServletResponse response, @RequestParam(value = "cid") Integer cid) {
-        Response<TCartonStock> responses = new Response<>();
+    public Response<TMaterialStock> MaterialStocEdit(HttpServletRequest request, HttpServletResponse response, @RequestParam(value = "mid") Integer mid) {
+        Response<TMaterialStock> responses = new Response<>();
         try {
-            Assert.hasText(String.valueOf(cid), "cid  is null or 空字符串。");
-            log.info("cartonstockedit request param:{}", cid);
+            Assert.hasText(String.valueOf(mid), "mid  is null or 空字符串。");
+            log.info("MaterialStocEdit request param:{}", mid);
             Boolean flag = super.execute(request, response);
             if (flag) {
-                TCartonStock cartonStock = cartonStockService.getCartonStockbyId(cid);
-                if (cartonStock != null) {
+                TMaterialStock materialStock = materialStockService.getMaterialStockById(mid);
+                if (materialStock != null) {
                     responses.setErrorCode(Constant.errorCodeEnum.SUCCESS.getCode());
                     responses.setErrorMsg(Constant.errorCodeEnum.SUCCESS.getName());
-                    responses.setResult(cartonStock);
+                    responses.setResult(materialStock);
                 } else {
                     responses.setErrorCode(Constant.errorCodeEnum.PARAM_ERROR.getCode());
                     responses.setErrorMsg(Constant.errorCodeEnum.PARAM_ERROR.getName());
-                    log.info("cartonstockedit edit fail ,no this record");
+                    log.info("MaterialStocEdit edit fail ,no this record");
                 }
                 return responses;
             } else {
@@ -52,32 +52,32 @@ public class UpdateCartonController extends BaseAction {
                 return responses;
             }
         } catch (Exception e) {
-            log.error("编辑纸箱库存初始化失败=:", e);
+            log.error("编辑原材料库存初始化失败=:", e);
             responses.setErrorCode(Constant.errorCodeEnum.FAILURE.getCode());
-            responses.setErrorMsg("编辑纸箱库存初始化异常");
+            responses.setErrorMsg("编辑原材料库存初始化异常");
             return responses;
         }
 
     }
 
 
-    @RequestMapping(value = "/cartonstocks/updatecartonstocks.do", method = RequestMethod.POST, produces = "application/json; charset=utf-8")
+    @RequestMapping(value = "/materialstocks/updatematerialstocks.do", method = RequestMethod.POST, produces = "application/json; charset=utf-8")
     @ResponseBody
-    public Response<String> cartonstocksupdate(HttpServletRequest request, HttpServletResponse response, @RequestBody TCartonStock cartonStock) {
+    public Response<String> MaterialStockUpdate(HttpServletRequest request, HttpServletResponse response, @RequestBody TMaterialStock materialStock) {
         Response<String> responses = new Response<>();
         try {
-            Assert.hasText(String.valueOf(cartonStock.getId()), " 主键 id  is null or 空字符串。");
-            log.info("cartonstocksupdate request param:{}", cartonStock.toString());
+            Assert.hasText(String.valueOf(materialStock.getId()), " 主键 id  is null or 空字符串。");
+            log.info("MaterialStockUpdate request param:{}", materialStock.toString());
             Boolean flag = super.execute(request, response);
             if (flag) {
-                Integer record = cartonStockService.updateCartonStocks(cartonStock);
+                Integer record = materialStockService.updateMaterialStock(materialStock);
                 if (record > 0) {
                     responses.setErrorCode(Constant.errorCodeEnum.SUCCESS.getCode());
                     responses.setErrorMsg(Constant.errorCodeEnum.SUCCESS.getName());
                     responses.setResult(String.valueOf(record));
                 } else {
                     responses.setErrorCode(Constant.errorCodeEnum.FAILURE.getCode());
-                    responses.setErrorMsg("修改纸箱库存记录异常");
+                    responses.setErrorMsg("修改原材料库存记录异常");
                 }
                 return responses;
             } else {
@@ -86,32 +86,32 @@ public class UpdateCartonController extends BaseAction {
                 return responses;
             }
         } catch (Exception e) {
-            log.error("修改纸箱库存记录失败=:", e);
+            log.error("修改原材料库存记录失败=:", e);
             responses.setErrorCode(Constant.errorCodeEnum.FAILURE.getCode());
-            responses.setErrorMsg("修改纸箱库存记录异常");
+            responses.setErrorMsg("修改原材料库存记录异常");
             return responses;
         }
     }
 
-    @RequestMapping(value = "/cartonstocks/addstocksum.do", method = RequestMethod.GET, produces = "application/json; charset=utf-8")
+    @RequestMapping(value = "/materialstocks/addstocksum.do", method = RequestMethod.GET, produces = "application/json; charset=utf-8")
     @ResponseBody
-    public  Response<String> addcartonstocksum(HttpServletRequest request, HttpServletResponse response,@RequestParam(value = "cid") Integer cid ,@RequestParam(value = "sum") Integer sum)
+    public  Response<String> AddMaterialStockSum(HttpServletRequest request, HttpServletResponse response,@RequestParam(value = "mid") Integer mid ,@RequestParam(value = "sum") Float sum)
     {
         Response<String> responses = new Response<>();
         try {
-            Assert.hasText(String.valueOf(cid), "sid  is null or 空字符串。");
+            Assert.hasText(String.valueOf(mid), "mid  is null or 空字符串。");
             Assert.hasText(String.valueOf(sum), "sum  is null or 空字符串。");
-            log.info("addcartonstocksum request param:{},{}", cid,sum);
+            log.info("AddMaterialStockSum request param:{},{}", mid,sum);
             Boolean flag = super.execute(request, response);
             if (flag) {
-                Integer record = cartonStockService.addStockCount(cid,sum);
+                float record = materialStockService.addMaterialStocksum(mid,sum);
                 if (record > 0) {
                     responses.setErrorCode(Constant.errorCodeEnum.SUCCESS.getCode());
                     responses.setErrorMsg(Constant.errorCodeEnum.SUCCESS.getName());
                     responses.setResult(String.valueOf(record));
                 } else {
                     responses.setErrorCode(Constant.errorCodeEnum.FAILURE.getCode());
-                    responses.setErrorMsg("增加纸箱库存数量异常");
+                    responses.setErrorMsg("增加原材料库存数量异常");
                 }
                 return responses;
             } else {
@@ -120,32 +120,32 @@ public class UpdateCartonController extends BaseAction {
                 return responses;
             }
         } catch (Exception e) {
-            log.error("增加纸箱库存数量失败=:", e);
+            log.error("增加原材料库存数量失败=:", e);
             responses.setErrorCode(Constant.errorCodeEnum.FAILURE.getCode());
-            responses.setErrorMsg("增加纸箱库存数量异常");
+            responses.setErrorMsg("增加原材料库存数量异常");
             return responses;
         }
     }
 
-    @RequestMapping(value = "/cartonstocks/substocksum.do", method = RequestMethod.GET, produces = "application/json; charset=utf-8")
+    @RequestMapping(value = "/materialstocks/substocksum.do", method = RequestMethod.GET, produces = "application/json; charset=utf-8")
     @ResponseBody
-    public  Response<String> subcartonstocksum(HttpServletRequest request, HttpServletResponse response,@RequestParam(value = "cid") Integer cid ,@RequestParam(value = "sum") Integer sum)
+    public  Response<String> SubMaterialStockSum(HttpServletRequest request, HttpServletResponse response,@RequestParam(value = "mid") Integer mid ,@RequestParam(value = "sum") Float sum)
     {
         Response<String> responses = new Response<>();
         try {
-            Assert.hasText(String.valueOf(cid), "cid  is null or 空字符串。");
+            Assert.hasText(String.valueOf(mid), "cid  is null or 空字符串。");
             Assert.hasText(String.valueOf(sum), "sum  is null or 空字符串。");
-            log.info("subcartonstocksum request param:{},{}", cid,sum);
+            log.info("SubMaterialStockSum request param:{},{}", mid,sum);
             Boolean flag = super.execute(request, response);
             if (flag) {
-                Integer record = cartonStockService.subStockCount(cid,sum);
+                float record = materialStockService.subMaterialStocksum(mid,sum);
                 if (record > 0) {
                     responses.setErrorCode(Constant.errorCodeEnum.SUCCESS.getCode());
                     responses.setErrorMsg(Constant.errorCodeEnum.SUCCESS.getName());
                     responses.setResult(String.valueOf(record));
                 } else {
                     responses.setErrorCode(Constant.errorCodeEnum.FAILURE.getCode());
-                    responses.setErrorMsg("减少纸箱库存数量异常");
+                    responses.setErrorMsg("减少原材料库存数量异常");
                 }
                 return responses;
             } else {
@@ -154,15 +154,16 @@ public class UpdateCartonController extends BaseAction {
                 return responses;
             }
         } catch (Exception e) {
-            log.error("减少纸箱库存数量失败=:", e);
+            log.error("减少原材料库存数量失败=:", e);
             responses.setErrorCode(Constant.errorCodeEnum.FAILURE.getCode());
-            responses.setErrorMsg("减少纸箱库存数量异常");
+            responses.setErrorMsg("减少原材料库存数量异常");
             return responses;
         }
     }
+
 
     @Override
     public String getAuthorityId() {
-        return AuthorityKey.CARTONSTOCKS_UPDATE;
+        return AuthorityKey.MATERIALSTOCK_UPDATE;
     }
 }

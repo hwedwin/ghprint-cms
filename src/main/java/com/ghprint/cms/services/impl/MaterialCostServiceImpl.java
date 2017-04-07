@@ -2,6 +2,7 @@ package com.ghprint.cms.services.impl;
 
 import com.ghprint.cms.model.stock.TMaterialCost;
 import com.ghprint.cms.model.stock.TMaterialCostExample;
+import com.ghprint.cms.model.stock.TMaterialStock;
 import com.ghprint.cms.serviceDao.TMaterialCostMapper;
 import com.ghprint.cms.services.MaterialCostService;
 import com.ghprint.cms.utils.DateUtil;
@@ -72,5 +73,21 @@ public class MaterialCostServiceImpl implements MaterialCostService {
         }else {
             return  0;
         }
+    }
+
+    @Override
+    public Integer addincomeitems(TMaterialStock materialStock) {
+        TMaterialCost materialCost = new TMaterialCost(materialStock.getId(), materialStock.getName(), materialStock.getMaterialsum());
+        materialCost.setIncome(materialStock.getMaterialsum());
+        Integer record = this.additems(materialCost);
+        return record;
+    }
+
+    @Override
+    public Integer addoutitems(TMaterialStock materialStock) {
+        TMaterialCost materialCost = new TMaterialCost(materialStock.getId(), materialStock.getName(), materialStock.getMaterialsum());
+        materialCost.setOutcount(materialStock.getMaterialsum());
+        Integer record = this.additems(materialCost);
+        return record;
     }
 }
