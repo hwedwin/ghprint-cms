@@ -314,62 +314,52 @@ public class TMaterialStockExample {
             return (Criteria) this;
         }
 
-        public Criteria andSpecificationEqualTo(String value) {
+        public Criteria andSpecificationEqualTo(Float value) {
             addCriterion("specification =", value, "specification");
             return (Criteria) this;
         }
 
-        public Criteria andSpecificationNotEqualTo(String value) {
+        public Criteria andSpecificationNotEqualTo(Float value) {
             addCriterion("specification <>", value, "specification");
             return (Criteria) this;
         }
 
-        public Criteria andSpecificationGreaterThan(String value) {
+        public Criteria andSpecificationGreaterThan(Float value) {
             addCriterion("specification >", value, "specification");
             return (Criteria) this;
         }
 
-        public Criteria andSpecificationGreaterThanOrEqualTo(String value) {
+        public Criteria andSpecificationGreaterThanOrEqualTo(Float value) {
             addCriterion("specification >=", value, "specification");
             return (Criteria) this;
         }
 
-        public Criteria andSpecificationLessThan(String value) {
+        public Criteria andSpecificationLessThan(Float value) {
             addCriterion("specification <", value, "specification");
             return (Criteria) this;
         }
 
-        public Criteria andSpecificationLessThanOrEqualTo(String value) {
+        public Criteria andSpecificationLessThanOrEqualTo(Float value) {
             addCriterion("specification <=", value, "specification");
             return (Criteria) this;
         }
 
-        public Criteria andSpecificationLike(String value) {
-            addCriterion("specification like", value, "specification");
-            return (Criteria) this;
-        }
-
-        public Criteria andSpecificationNotLike(String value) {
-            addCriterion("specification not like", value, "specification");
-            return (Criteria) this;
-        }
-
-        public Criteria andSpecificationIn(List<String> values) {
+        public Criteria andSpecificationIn(List<Float> values) {
             addCriterion("specification in", values, "specification");
             return (Criteria) this;
         }
 
-        public Criteria andSpecificationNotIn(List<String> values) {
+        public Criteria andSpecificationNotIn(List<Float> values) {
             addCriterion("specification not in", values, "specification");
             return (Criteria) this;
         }
 
-        public Criteria andSpecificationBetween(String value1, String value2) {
+        public Criteria andSpecificationBetween(Float value1, Float value2) {
             addCriterion("specification between", value1, value2, "specification");
             return (Criteria) this;
         }
 
-        public Criteria andSpecificationNotBetween(String value1, String value2) {
+        public Criteria andSpecificationNotBetween(Float value1, Float value2) {
             addCriterion("specification not between", value1, value2, "specification");
             return (Criteria) this;
         }

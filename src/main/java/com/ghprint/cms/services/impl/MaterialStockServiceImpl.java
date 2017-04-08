@@ -27,7 +27,7 @@ public class MaterialStockServiceImpl  implements MaterialStockService{
     public Integer addMaterialStock(TMaterialStock materialStock) {
         Integer record = materialStockMapper.insertSelective(materialStock);
         if(record>0) {
-            record += materialCostService.addincomeitems(materialStock);
+            record += materialCostService.addincomeitems(materialStock,materialStock.getMaterialsum());
         }
         return record;
 
@@ -92,7 +92,7 @@ public class MaterialStockServiceImpl  implements MaterialStockService{
             sum   = materialStock.getMaterialsum()+ count;
             materialStock.setMaterialsum(sum);
             Integer record = materialStockMapper.updateByPrimaryKeySelective(materialStock);
-             record += materialCostService.addincomeitems(materialStock);
+             record += materialCostService.addincomeitems(materialStock,count);
         }
         return  sum ;
     }
@@ -100,14 +100,12 @@ public class MaterialStockServiceImpl  implements MaterialStockService{
     @Override
     public Float subMaterialStocksum(Integer mid, Float count) {
         TMaterialStock  materialStock= this.getMaterialStockById(mid);
-        if(count<=materialStock.getMaterialsum()&& materialStock.getMaterialsum()>0&&count>0&& materialStock!=null){
+        if(count>0&& materialStock!=null){
             Float sum = materialStock.getMaterialsum()- count;
             materialStock.setMaterialsum(sum);
-            materialStockMapper.updateByPrimaryKeySelective(materialStock);
+            Integer record =materialStockMapper.updateByPrimaryKeySelective(materialStock);
+            record += materialCostService.addoutitems(materialStock,count);
             return  sum ;
-        }else if(count> materialStock.getMaterialsum()&& materialStock!=null) {
-            Float sum = materialStock.getMaterialsum()- count;
-            return  sum;
         } else{
             return -1f;
         }

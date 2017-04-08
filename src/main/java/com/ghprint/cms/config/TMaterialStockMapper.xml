@@ -5,7 +5,7 @@
     <id column="id" property="id" jdbcType="INTEGER" />
     <result column="provider" property="provider" jdbcType="VARCHAR" />
     <result column="name" property="name" jdbcType="VARCHAR" />
-    <result column="specification" property="specification" jdbcType="VARCHAR" />
+    <result column="specification" property="specification" jdbcType="REAL" />
     <result column="ply" property="ply" jdbcType="REAL" />
     <result column="portrait" property="portrait" jdbcType="VARCHAR" />
     <result column="infeed" property="infeed" jdbcType="INTEGER" />
@@ -73,7 +73,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, provider, name, specification, ply, portrait, infeed, packages, price, amount, 
+    id, provider, name, specification, ply, portrait, infeed, packages, price, amount,
     materialsum
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ghprint.cms.model.stock.TMaterialStockExample" >
@@ -91,7 +91,7 @@
     </if>
   </select>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select 
+    select
     <include refid="Base_Column_List" />
     from t_material_stock
     where id = #{id,jdbcType=INTEGER}
@@ -107,14 +107,14 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.ghprint.cms.model.stock.TMaterialStock" >
-    insert into t_material_stock (id, provider, name, 
-      specification, ply, portrait, 
-      infeed, packages, price, 
-      amount, materialsum)
-    values (#{id,jdbcType=INTEGER}, #{provider,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
-      #{specification,jdbcType=VARCHAR}, #{ply,jdbcType=REAL}, #{portrait,jdbcType=VARCHAR}, 
-      #{infeed,jdbcType=INTEGER}, #{packages,jdbcType=INTEGER}, #{price,jdbcType=REAL}, 
-      #{amount,jdbcType=REAL}, #{materialsum,jdbcType=REAL})
+    insert into t_material_stock (id, provider, name,
+    specification, ply, portrait,
+    infeed, packages, price,
+    amount, materialsum)
+    values (#{id,jdbcType=INTEGER}, #{provider,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR},
+    #{specification,jdbcType=REAL}, #{ply,jdbcType=REAL}, #{portrait,jdbcType=VARCHAR},
+    #{infeed,jdbcType=INTEGER}, #{packages,jdbcType=INTEGER}, #{price,jdbcType=REAL},
+    #{amount,jdbcType=REAL}, #{materialsum,jdbcType=REAL})
   </insert>
   <insert id="insertSelective" parameterType="com.ghprint.cms.model.stock.TMaterialStock" >
     <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
@@ -167,7 +167,7 @@
         #{name,jdbcType=VARCHAR},
       </if>
       <if test="specification != null" >
-        #{specification,jdbcType=VARCHAR},
+        #{specification,jdbcType=REAL},
       </if>
       <if test="ply != null" >
         #{ply,jdbcType=REAL},
@@ -211,7 +211,7 @@
         name = #{record.name,jdbcType=VARCHAR},
       </if>
       <if test="record.specification != null" >
-        specification = #{record.specification,jdbcType=VARCHAR},
+        specification = #{record.specification,jdbcType=REAL},
       </if>
       <if test="record.ply != null" >
         ply = #{record.ply,jdbcType=REAL},
@@ -242,16 +242,16 @@
   <update id="updateByExample" parameterType="map" >
     update t_material_stock
     set id = #{record.id,jdbcType=INTEGER},
-      provider = #{record.provider,jdbcType=VARCHAR},
-      name = #{record.name,jdbcType=VARCHAR},
-      specification = #{record.specification,jdbcType=VARCHAR},
-      ply = #{record.ply,jdbcType=REAL},
-      portrait = #{record.portrait,jdbcType=VARCHAR},
-      infeed = #{record.infeed,jdbcType=INTEGER},
-      packages = #{record.packages,jdbcType=INTEGER},
-      price = #{record.price,jdbcType=REAL},
-      amount = #{record.amount,jdbcType=REAL},
-      materialsum = #{record.materialsum,jdbcType=REAL}
+    provider = #{record.provider,jdbcType=VARCHAR},
+    name = #{record.name,jdbcType=VARCHAR},
+    specification = #{record.specification,jdbcType=REAL},
+    ply = #{record.ply,jdbcType=REAL},
+    portrait = #{record.portrait,jdbcType=VARCHAR},
+    infeed = #{record.infeed,jdbcType=INTEGER},
+    packages = #{record.packages,jdbcType=INTEGER},
+    price = #{record.price,jdbcType=REAL},
+    amount = #{record.amount,jdbcType=REAL},
+    materialsum = #{record.materialsum,jdbcType=REAL}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -266,7 +266,7 @@
         name = #{name,jdbcType=VARCHAR},
       </if>
       <if test="specification != null" >
-        specification = #{specification,jdbcType=VARCHAR},
+        specification = #{specification,jdbcType=REAL},
       </if>
       <if test="ply != null" >
         ply = #{ply,jdbcType=REAL},
@@ -296,7 +296,7 @@
     update t_material_stock
     set provider = #{provider,jdbcType=VARCHAR},
       name = #{name,jdbcType=VARCHAR},
-      specification = #{specification,jdbcType=VARCHAR},
+      specification = #{specification,jdbcType=REAL},
       ply = #{ply,jdbcType=REAL},
       portrait = #{portrait,jdbcType=VARCHAR},
       infeed = #{infeed,jdbcType=INTEGER},

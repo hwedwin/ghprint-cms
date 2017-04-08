@@ -80,6 +80,8 @@ public class ProStockServiceImpl implements ProStockService {
             return  sum ;
         }else if(count > productionStock.getStocksum()&&productionStock!=null) {
             Integer sum = productionStock.getStocksum() - count;
+            productionStock.setStocksum(0);
+            productionStockMapper.updateByPrimaryKeySelective(productionStock);
             return  sum;
         }else {
             return -1;

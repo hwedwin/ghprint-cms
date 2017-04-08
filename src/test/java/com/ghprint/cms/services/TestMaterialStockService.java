@@ -20,24 +20,24 @@ public class TestMaterialStockService {
 
     @Test
     public  void testaddMaterialStock(){
-        TMaterialStock materialStock = new TMaterialStock("供应商","PVC材料","材料规格",5.5f,"1-2",55,3,100f,100f,300f);
+        TMaterialStock materialStock = new TMaterialStock("供应商","PVC材料",5.5f,5.5f,"1-2",55,3,100f,100f,300f);
         String jsonString = JSON.toJSONString(materialStock);
         System.out.println(jsonString);
-//        Integer stock = materialStockService.addMaterialStock(materialStock);
-//        System.out.println(stock);
+        Integer stock = materialStockService.addMaterialStock(materialStock);
+        System.out.println(stock);
     }
 
     @Test
     public  void testdelMaterialStock(){
-        Integer stock = materialStockService.delMaterialStock(4);
+        Integer stock = materialStockService.delMaterialStock(10);
         System.out.println(stock);
     }
 
     @Test
     public  void testupdateMaterialStock(){
-        TMaterialStock materialStock = materialStockService.getMaterialStockById(3);
+        TMaterialStock materialStock = materialStockService.getMaterialStockById(12);
         System.out.println("修改前:"+materialStock);
-        materialStock.setMaterialsum(-100f);
+        materialStock.setMaterialsum(100f);
         materialStock.setName("阿里巴巴");
         Integer stock = materialStockService.updateMaterialStock(materialStock);
         TMaterialStock materialStocks = materialStockService.getMaterialStockById(materialStock.getId());
@@ -47,13 +47,13 @@ public class TestMaterialStockService {
 
     @Test
     public  void testaddMaterialStocksum(){
-        Float stocksum = materialStockService.addMaterialStocksum(5, 100f);
+        Float stocksum = materialStockService.addMaterialStocksum(12, 100f);
         System.out.println(stocksum);
     }
 
     @Test
     public  void testsubMaterialStocksum(){
-        Float stocksum = materialStockService.subMaterialStocksum(5, 100f);
+        Float stocksum = materialStockService.subMaterialStocksum(12, 200f);
         System.out.println(stocksum);
     }
 }

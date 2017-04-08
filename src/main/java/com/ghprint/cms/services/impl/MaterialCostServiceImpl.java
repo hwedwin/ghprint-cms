@@ -76,17 +76,17 @@ public class MaterialCostServiceImpl implements MaterialCostService {
     }
 
     @Override
-    public Integer addincomeitems(TMaterialStock materialStock) {
+    public Integer addincomeitems(TMaterialStock materialStock ,Float count) {
         TMaterialCost materialCost = new TMaterialCost(materialStock.getId(), materialStock.getName(), materialStock.getMaterialsum());
-        materialCost.setIncome(materialStock.getMaterialsum());
+        materialCost.setIncome(count);
         Integer record = this.additems(materialCost);
         return record;
     }
 
     @Override
-    public Integer addoutitems(TMaterialStock materialStock) {
+    public Integer addoutitems(TMaterialStock materialStock,Float count) {
         TMaterialCost materialCost = new TMaterialCost(materialStock.getId(), materialStock.getName(), materialStock.getMaterialsum());
-        materialCost.setOutcount(materialStock.getMaterialsum());
+        materialCost.setOutcount(count);
         Integer record = this.additems(materialCost);
         return record;
     }

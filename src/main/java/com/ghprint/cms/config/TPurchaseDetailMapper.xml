@@ -1,0 +1,694 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ghprint.cms.serviceDao.TPurchaseDetailMapper" >
+  <resultMap id="BaseResultMap" type="com.ghprint.cms.model.order.TPurchaseDetail" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="companyid" property="companyid" jdbcType="INTEGER" />
+    <result column="productid" property="productid" jdbcType="INTEGER" />
+    <result column="stockid" property="stockid" jdbcType="INTEGER" />
+    <result column="standardid" property="standardid" jdbcType="INTEGER" />
+    <result column="spellcount" property="spellcount" jdbcType="INTEGER" />
+    <result column="proportion" property="proportion" jdbcType="REAL" />
+    <result column="height" property="height" jdbcType="REAL" />
+    <result column="thickness" property="thickness" jdbcType="REAL" />
+    <result column="materialsum" property="materialsum" jdbcType="REAL" />
+    <result column="purchasebuy" property="purchasebuy" jdbcType="REAL" />
+    <result column="ordercount" property="ordercount" jdbcType="INTEGER" />
+    <result column="stockcount" property="stockcount" jdbcType="INTEGER" />
+    <result column="productsum" property="productsum" jdbcType="INTEGER" />
+    <result column="orderdate" property="orderdate" jdbcType="DATE" />
+    <result column="deline" property="deline" jdbcType="DATE" />
+    <result column="print" property="print" jdbcType="INTEGER" />
+    <result column="open" property="open" jdbcType="INTEGER" />
+    <result column="merge" property="merge" jdbcType="INTEGER" />
+    <result column="cut" property="cut" jdbcType="INTEGER" />
+    <result column="stable" property="stable" jdbcType="INTEGER" />
+    <result column="repeat" property="repeat" jdbcType="INTEGER" />
+    <result column="delivery" property="delivery" jdbcType="VARCHAR" />
+    <result column="logistics" property="logistics" jdbcType="VARCHAR" />
+    <result column="express" property="express" jdbcType="VARCHAR" />
+    <result column="expressnum" property="expressnum" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="result" property="result" jdbcType="VARCHAR" />
+    <result column="insertime" property="insertime" jdbcType="DATE" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, companyid, productid, stockid, standardid, spellcount, proportion, height, thickness, 
+    materialsum, purchasebuy, ordercount, stockcount, productsum, orderdate, deline, 
+    print, open, merge, cut, stable, repeat, delivery, logistics, express, expressnum, 
+    status, result, insertime
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ghprint.cms.model.order.TPurchaseDetailExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from t_purchase_detail
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_purchase_detail
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_purchase_detail
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.ghprint.cms.model.order.TPurchaseDetailExample" >
+    delete from t_purchase_detail
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.ghprint.cms.model.order.TPurchaseDetail" >
+    insert into t_purchase_detail (id, companyid, productid, 
+      stockid, standardid, spellcount, 
+      proportion, height, thickness, 
+      materialsum, purchasebuy, ordercount, 
+      stockcount, productsum, orderdate, 
+      deline, print, open, merge, 
+      cut, stable, repeat, 
+      delivery, logistics, express, 
+      expressnum, status, result, 
+      insertime)
+    values (#{id,jdbcType=INTEGER}, #{companyid,jdbcType=INTEGER}, #{productid,jdbcType=INTEGER}, 
+      #{stockid,jdbcType=INTEGER}, #{standardid,jdbcType=INTEGER}, #{spellcount,jdbcType=INTEGER}, 
+      #{proportion,jdbcType=REAL}, #{height,jdbcType=REAL}, #{thickness,jdbcType=REAL}, 
+      #{materialsum,jdbcType=REAL}, #{purchasebuy,jdbcType=REAL}, #{ordercount,jdbcType=INTEGER}, 
+      #{stockcount,jdbcType=INTEGER}, #{productsum,jdbcType=INTEGER}, #{orderdate,jdbcType=DATE}, 
+      #{deline,jdbcType=DATE}, #{print,jdbcType=INTEGER}, #{open,jdbcType=INTEGER}, #{merge,jdbcType=INTEGER}, 
+      #{cut,jdbcType=INTEGER}, #{stable,jdbcType=INTEGER}, #{repeat,jdbcType=INTEGER}, 
+      #{delivery,jdbcType=VARCHAR}, #{logistics,jdbcType=VARCHAR}, #{express,jdbcType=VARCHAR}, 
+      #{expressnum,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, #{result,jdbcType=VARCHAR}, 
+      #{insertime,jdbcType=DATE})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ghprint.cms.model.order.TPurchaseDetail" >
+    insert into t_purchase_detail
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="companyid != null" >
+        companyid,
+      </if>
+      <if test="productid != null" >
+        productid,
+      </if>
+      <if test="stockid != null" >
+        stockid,
+      </if>
+      <if test="standardid != null" >
+        standardid,
+      </if>
+      <if test="spellcount != null" >
+        spellcount,
+      </if>
+      <if test="proportion != null" >
+        proportion,
+      </if>
+      <if test="height != null" >
+        height,
+      </if>
+      <if test="thickness != null" >
+        thickness,
+      </if>
+      <if test="materialsum != null" >
+        materialsum,
+      </if>
+      <if test="purchasebuy != null" >
+        purchasebuy,
+      </if>
+      <if test="ordercount != null" >
+        ordercount,
+      </if>
+      <if test="stockcount != null" >
+        stockcount,
+      </if>
+      <if test="productsum != null" >
+        productsum,
+      </if>
+      <if test="orderdate != null" >
+        orderdate,
+      </if>
+      <if test="deline != null" >
+        deline,
+      </if>
+      <if test="print != null" >
+        print,
+      </if>
+      <if test="open != null" >
+        open,
+      </if>
+      <if test="merge != null" >
+        merge,
+      </if>
+      <if test="cut != null" >
+        cut,
+      </if>
+      <if test="stable != null" >
+        stable,
+      </if>
+      <if test="repeat != null" >
+        repeat,
+      </if>
+      <if test="delivery != null" >
+        delivery,
+      </if>
+      <if test="logistics != null" >
+        logistics,
+      </if>
+      <if test="express != null" >
+        express,
+      </if>
+      <if test="expressnum != null" >
+        expressnum,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="result != null" >
+        result,
+      </if>
+      <if test="insertime != null" >
+        insertime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="companyid != null" >
+        #{companyid,jdbcType=INTEGER},
+      </if>
+      <if test="productid != null" >
+        #{productid,jdbcType=INTEGER},
+      </if>
+      <if test="stockid != null" >
+        #{stockid,jdbcType=INTEGER},
+      </if>
+      <if test="standardid != null" >
+        #{standardid,jdbcType=INTEGER},
+      </if>
+      <if test="spellcount != null" >
+        #{spellcount,jdbcType=INTEGER},
+      </if>
+      <if test="proportion != null" >
+        #{proportion,jdbcType=REAL},
+      </if>
+      <if test="height != null" >
+        #{height,jdbcType=REAL},
+      </if>
+      <if test="thickness != null" >
+        #{thickness,jdbcType=REAL},
+      </if>
+      <if test="materialsum != null" >
+        #{materialsum,jdbcType=REAL},
+      </if>
+      <if test="purchasebuy != null" >
+        #{purchasebuy,jdbcType=REAL},
+      </if>
+      <if test="ordercount != null" >
+        #{ordercount,jdbcType=INTEGER},
+      </if>
+      <if test="stockcount != null" >
+        #{stockcount,jdbcType=INTEGER},
+      </if>
+      <if test="productsum != null" >
+        #{productsum,jdbcType=INTEGER},
+      </if>
+      <if test="orderdate != null" >
+        #{orderdate,jdbcType=DATE},
+      </if>
+      <if test="deline != null" >
+        #{deline,jdbcType=DATE},
+      </if>
+      <if test="print != null" >
+        #{print,jdbcType=INTEGER},
+      </if>
+      <if test="open != null" >
+        #{open,jdbcType=INTEGER},
+      </if>
+      <if test="merge != null" >
+        #{merge,jdbcType=INTEGER},
+      </if>
+      <if test="cut != null" >
+        #{cut,jdbcType=INTEGER},
+      </if>
+      <if test="stable != null" >
+        #{stable,jdbcType=INTEGER},
+      </if>
+      <if test="repeat != null" >
+        #{repeat,jdbcType=INTEGER},
+      </if>
+      <if test="delivery != null" >
+        #{delivery,jdbcType=VARCHAR},
+      </if>
+      <if test="logistics != null" >
+        #{logistics,jdbcType=VARCHAR},
+      </if>
+      <if test="express != null" >
+        #{express,jdbcType=VARCHAR},
+      </if>
+      <if test="expressnum != null" >
+        #{expressnum,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="result != null" >
+        #{result,jdbcType=VARCHAR},
+      </if>
+      <if test="insertime != null" >
+        #{insertime,jdbcType=DATE},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.ghprint.cms.model.order.TPurchaseDetailExample" resultType="java.lang.Integer" >
+    select count(*) from t_purchase_detail
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update t_purchase_detail
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.companyid != null" >
+        companyid = #{record.companyid,jdbcType=INTEGER},
+      </if>
+      <if test="record.productid != null" >
+        productid = #{record.productid,jdbcType=INTEGER},
+      </if>
+      <if test="record.stockid != null" >
+        stockid = #{record.stockid,jdbcType=INTEGER},
+      </if>
+      <if test="record.standardid != null" >
+        standardid = #{record.standardid,jdbcType=INTEGER},
+      </if>
+      <if test="record.spellcount != null" >
+        spellcount = #{record.spellcount,jdbcType=INTEGER},
+      </if>
+      <if test="record.proportion != null" >
+        proportion = #{record.proportion,jdbcType=REAL},
+      </if>
+      <if test="record.height != null" >
+        height = #{record.height,jdbcType=REAL},
+      </if>
+      <if test="record.thickness != null" >
+        thickness = #{record.thickness,jdbcType=REAL},
+      </if>
+      <if test="record.materialsum != null" >
+        materialsum = #{record.materialsum,jdbcType=REAL},
+      </if>
+      <if test="record.purchasebuy != null" >
+        purchasebuy = #{record.purchasebuy,jdbcType=REAL},
+      </if>
+      <if test="record.ordercount != null" >
+        ordercount = #{record.ordercount,jdbcType=INTEGER},
+      </if>
+      <if test="record.stockcount != null" >
+        stockcount = #{record.stockcount,jdbcType=INTEGER},
+      </if>
+      <if test="record.productsum != null" >
+        productsum = #{record.productsum,jdbcType=INTEGER},
+      </if>
+      <if test="record.orderdate != null" >
+        orderdate = #{record.orderdate,jdbcType=DATE},
+      </if>
+      <if test="record.deline != null" >
+        deline = #{record.deline,jdbcType=DATE},
+      </if>
+      <if test="record.print != null" >
+        print = #{record.print,jdbcType=INTEGER},
+      </if>
+      <if test="record.open != null" >
+        open = #{record.open,jdbcType=INTEGER},
+      </if>
+      <if test="record.merge != null" >
+        merge = #{record.merge,jdbcType=INTEGER},
+      </if>
+      <if test="record.cut != null" >
+        cut = #{record.cut,jdbcType=INTEGER},
+      </if>
+      <if test="record.stable != null" >
+        stable = #{record.stable,jdbcType=INTEGER},
+      </if>
+      <if test="record.repeat != null" >
+        repeat = #{record.repeat,jdbcType=INTEGER},
+      </if>
+      <if test="record.delivery != null" >
+        delivery = #{record.delivery,jdbcType=VARCHAR},
+      </if>
+      <if test="record.logistics != null" >
+        logistics = #{record.logistics,jdbcType=VARCHAR},
+      </if>
+      <if test="record.express != null" >
+        express = #{record.express,jdbcType=VARCHAR},
+      </if>
+      <if test="record.expressnum != null" >
+        expressnum = #{record.expressnum,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null" >
+        status = #{record.status,jdbcType=INTEGER},
+      </if>
+      <if test="record.result != null" >
+        result = #{record.result,jdbcType=VARCHAR},
+      </if>
+      <if test="record.insertime != null" >
+        insertime = #{record.insertime,jdbcType=DATE},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update t_purchase_detail
+    set id = #{record.id,jdbcType=INTEGER},
+      companyid = #{record.companyid,jdbcType=INTEGER},
+      productid = #{record.productid,jdbcType=INTEGER},
+      stockid = #{record.stockid,jdbcType=INTEGER},
+      standardid = #{record.standardid,jdbcType=INTEGER},
+      spellcount = #{record.spellcount,jdbcType=INTEGER},
+      proportion = #{record.proportion,jdbcType=REAL},
+      height = #{record.height,jdbcType=REAL},
+      thickness = #{record.thickness,jdbcType=REAL},
+      materialsum = #{record.materialsum,jdbcType=REAL},
+      purchasebuy = #{record.purchasebuy,jdbcType=REAL},
+      ordercount = #{record.ordercount,jdbcType=INTEGER},
+      stockcount = #{record.stockcount,jdbcType=INTEGER},
+      productsum = #{record.productsum,jdbcType=INTEGER},
+      orderdate = #{record.orderdate,jdbcType=DATE},
+      deline = #{record.deline,jdbcType=DATE},
+      print = #{record.print,jdbcType=INTEGER},
+      open = #{record.open,jdbcType=INTEGER},
+      merge = #{record.merge,jdbcType=INTEGER},
+      cut = #{record.cut,jdbcType=INTEGER},
+      stable = #{record.stable,jdbcType=INTEGER},
+      repeat = #{record.repeat,jdbcType=INTEGER},
+      delivery = #{record.delivery,jdbcType=VARCHAR},
+      logistics = #{record.logistics,jdbcType=VARCHAR},
+      express = #{record.express,jdbcType=VARCHAR},
+      expressnum = #{record.expressnum,jdbcType=VARCHAR},
+      status = #{record.status,jdbcType=INTEGER},
+      result = #{record.result,jdbcType=VARCHAR},
+      insertime = #{record.insertime,jdbcType=DATE}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ghprint.cms.model.order.TPurchaseDetail" >
+    update t_purchase_detail
+    <set >
+      <if test="companyid != null" >
+        companyid = #{companyid,jdbcType=INTEGER},
+      </if>
+      <if test="productid != null" >
+        productid = #{productid,jdbcType=INTEGER},
+      </if>
+      <if test="stockid != null" >
+        stockid = #{stockid,jdbcType=INTEGER},
+      </if>
+      <if test="standardid != null" >
+        standardid = #{standardid,jdbcType=INTEGER},
+      </if>
+      <if test="spellcount != null" >
+        spellcount = #{spellcount,jdbcType=INTEGER},
+      </if>
+      <if test="proportion != null" >
+        proportion = #{proportion,jdbcType=REAL},
+      </if>
+      <if test="height != null" >
+        height = #{height,jdbcType=REAL},
+      </if>
+      <if test="thickness != null" >
+        thickness = #{thickness,jdbcType=REAL},
+      </if>
+      <if test="materialsum != null" >
+        materialsum = #{materialsum,jdbcType=REAL},
+      </if>
+      <if test="purchasebuy != null" >
+        purchasebuy = #{purchasebuy,jdbcType=REAL},
+      </if>
+      <if test="ordercount != null" >
+        ordercount = #{ordercount,jdbcType=INTEGER},
+      </if>
+      <if test="stockcount != null" >
+        stockcount = #{stockcount,jdbcType=INTEGER},
+      </if>
+      <if test="productsum != null" >
+        productsum = #{productsum,jdbcType=INTEGER},
+      </if>
+      <if test="orderdate != null" >
+        orderdate = #{orderdate,jdbcType=DATE},
+      </if>
+      <if test="deline != null" >
+        deline = #{deline,jdbcType=DATE},
+      </if>
+      <if test="print != null" >
+        print = #{print,jdbcType=INTEGER},
+      </if>
+      <if test="open != null" >
+        open = #{open,jdbcType=INTEGER},
+      </if>
+      <if test="merge != null" >
+        merge = #{merge,jdbcType=INTEGER},
+      </if>
+      <if test="cut != null" >
+        cut = #{cut,jdbcType=INTEGER},
+      </if>
+      <if test="stable != null" >
+        stable = #{stable,jdbcType=INTEGER},
+      </if>
+      <if test="repeat != null" >
+        repeat = #{repeat,jdbcType=INTEGER},
+      </if>
+      <if test="delivery != null" >
+        delivery = #{delivery,jdbcType=VARCHAR},
+      </if>
+      <if test="logistics != null" >
+        logistics = #{logistics,jdbcType=VARCHAR},
+      </if>
+      <if test="express != null" >
+        express = #{express,jdbcType=VARCHAR},
+      </if>
+      <if test="expressnum != null" >
+        expressnum = #{expressnum,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="result != null" >
+        result = #{result,jdbcType=VARCHAR},
+      </if>
+      <if test="insertime != null" >
+        insertime = #{insertime,jdbcType=DATE},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ghprint.cms.model.order.TPurchaseDetail" >
+    update t_purchase_detail
+    set companyid = #{companyid,jdbcType=INTEGER},
+      productid = #{productid,jdbcType=INTEGER},
+      stockid = #{stockid,jdbcType=INTEGER},
+      standardid = #{standardid,jdbcType=INTEGER},
+      spellcount = #{spellcount,jdbcType=INTEGER},
+      proportion = #{proportion,jdbcType=REAL},
+      height = #{height,jdbcType=REAL},
+      thickness = #{thickness,jdbcType=REAL},
+      materialsum = #{materialsum,jdbcType=REAL},
+      purchasebuy = #{purchasebuy,jdbcType=REAL},
+      ordercount = #{ordercount,jdbcType=INTEGER},
+      stockcount = #{stockcount,jdbcType=INTEGER},
+      productsum = #{productsum,jdbcType=INTEGER},
+      orderdate = #{orderdate,jdbcType=DATE},
+      deline = #{deline,jdbcType=DATE},
+      print = #{print,jdbcType=INTEGER},
+      open = #{open,jdbcType=INTEGER},
+      merge = #{merge,jdbcType=INTEGER},
+      cut = #{cut,jdbcType=INTEGER},
+      stable = #{stable,jdbcType=INTEGER},
+      repeat = #{repeat,jdbcType=INTEGER},
+      delivery = #{delivery,jdbcType=VARCHAR},
+      logistics = #{logistics,jdbcType=VARCHAR},
+      express = #{express,jdbcType=VARCHAR},
+      expressnum = #{expressnum,jdbcType=VARCHAR},
+      status = #{status,jdbcType=INTEGER},
+      result = #{result,jdbcType=VARCHAR},
+      insertime = #{insertime,jdbcType=DATE}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <resultMap id="ResultMap" type="com.ghprint.cms.model.order.OrderInfo">
+    <id property="oid" column="id" jdbcType="INTEGER"/>
+    <result property="companycode" column="companycode" jdbcType="VARCHAR"/>
+    <result property="companyname" column="companyname" jdbcType="VARCHAR"/>
+    <result column="stockid" property="stockid" jdbcType="VARCHAR" />
+    <result column="stockname" property="stockname" jdbcType="VARCHAR" />
+    <result column="color" property="color" jdbcType="VARCHAR" />
+    <result column="provider" property="provider" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="specification" property="specification" jdbcType="REAL" />
+    <result column="standardid" property="standardid" jdbcType="INTEGER" />
+    <result column="spellcount" property="spellcount" jdbcType="INTEGER" />
+    <result column="proportion" property="proportion" jdbcType="REAL" />
+    <result column="height" property="height" jdbcType="REAL" />
+    <result column="thickness" property="thickness" jdbcType="REAL" />
+    <result column="materialsum" property="materialsum" jdbcType="REAL" />
+    <result column="purchasebuy" property="purchasebuy" jdbcType="REAL" />
+    <result column="ordercount" property="ordercount" jdbcType="INTEGER" />
+    <result column="stockcount" property="stockcount" jdbcType="INTEGER" />
+    <result column="productsum" property="productsum" jdbcType="INTEGER" />
+    <result column="orderdate" property="orderdate" jdbcType="DATE" />
+    <result column="deline" property="deline" jdbcType="DATE" />
+    <result column="print" property="print" jdbcType="INTEGER" />
+    <result column="open" property="open" jdbcType="INTEGER" />
+    <result column="merge" property="merge" jdbcType="INTEGER" />
+    <result column="cut" property="cut" jdbcType="INTEGER" />
+    <result column="stable" property="stable" jdbcType="INTEGER" />
+    <result column="repeat" property="repeat" jdbcType="INTEGER" />
+    <result column="delivery" property="delivery" jdbcType="VARCHAR" />
+    <result column="logistics" property="logistics" jdbcType="VARCHAR" />
+    <result column="express" property="express" jdbcType="VARCHAR" />
+    <result column="expressnum" property="expressnum" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="result" property="result" jdbcType="VARCHAR" />
+    <result column="insertime" property="insertime" jdbcType="DATE" />
+  </resultMap>
+  <sql id="Base_Column_List_base" >
+     t.id, t.standardid ,b.companycode ,b.companyname, c.stockid ,c.stockname ,c.color ,d.provider,d.name,d.specification,
+    t.spellcount, t.proportion, t.height, t.thickness,
+    t.materialsum, t.purchasebuy,t.ordercount, t.stockcount, t.productsum, t.orderdate, t.deline,
+    t.print, t.open, t.merge, t.cut, t.stable, t.repeat, t.delivery, t.logistics, t.express, t.expressnum,
+    t.status, t.result, t.insertime
+  </sql>
+  <select id="selectlist" resultMap="ResultMap"  parameterType="java.lang.String">
+  SELECT
+    <include refid="Base_Column_List_base"/>
+   FROM t_purchase_detail t
+    LEFT JOIN t_customer_info b
+    ON t.companyid = b.id
+     LEFT JOIN  t_production_stock  c
+     ON  t.productid = c.id
+     LEFT JOIN  t_material_stock d
+     ON  t.stockid = d.id
+    <where>
+      t.status = 1
+      <if test="key != null and key !=''  and value != null and value !=''">
+       AND ${key} like CONCAT('%',#{value},'%')
+      </if>
+    </where>
+    ORDER BY t.deline, t.orderdate
+    limit #{pageOffset,jdbcType=INTEGER},#{pageSize,jdbcType=INTEGER}
+  </select>
+
+  <select id="getlistcount" resultType="java.lang.Integer"  parameterType="java.lang.String">
+    SELECT
+    count(1)
+    FROM t_purchase_detail t
+    LEFT JOIN t_customer_info b
+    ON t.companyid = b.id
+    LEFT JOIN  t_production_stock  c
+    ON  t.productid = c.id
+    LEFT JOIN  t_material_stock d
+    ON  t.stockid = d.id
+
+    <where>
+      t.status = 1
+      <if test="key != null and key !=''  and value != null and value !=''">
+       AND ${key} like CONCAT('%',#{value},'%')
+      </if>
+
+    </where>
+    ORDER BY t.deline, t.orderdate
+  </select>
+
+  <select id="getOneitem" resultMap="ResultMap" parameterType="java.lang.Integer">
+  SELECT
+  <include refid="Base_Column_List_base"/>
+  FROM t_purchase_detail t
+  LEFT JOIN t_customer_info b
+  ON t.companyid = b.id
+  LEFT JOIN  t_production_stock  c
+  ON  t.productid = c.id
+  LEFT JOIN  t_material_stock d
+  ON  t.stockid = d.id
+
+    <where>
+      t.status = 1
+      <if test="id != null">
+        and t.id =  #{id,jdbcType=INTEGER}
+      </if>
+    </where>
+  </select>
+
+</mapper>

@@ -32,10 +32,10 @@ public interface MaterialCostService {
         public  Integer selectsum(Integer stockid);
         /*增加一条收入记录
         * */
-        public  Integer addincomeitems(TMaterialStock materialStock);
+        public  Integer addincomeitems(TMaterialStock materialStock ,Float count);
         /*增加一条支出记录
         * */
-        public  Integer addoutitems(TMaterialStock materialStock);
+        public  Integer addoutitems(TMaterialStock materialStock ,Float count);
 
 
 }

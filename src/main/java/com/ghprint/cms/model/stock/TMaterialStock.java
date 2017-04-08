@@ -7,7 +7,7 @@ public class TMaterialStock {
 
     private String name;
 
-    private String specification;
+    private Float specification;
 
     private Float ply;
 
@@ -17,11 +17,11 @@ public class TMaterialStock {
 
     private Integer packages;
 
-    private Float price=0f;
+    private Float price;
 
-    private Float amount=0f;
+    private Float amount;
 
-    private Float materialsum=0f;
+    private Float materialsum;
 
     public Integer getId() {
         return id;
@@ -47,12 +47,12 @@ public class TMaterialStock {
         this.name = name == null ? null : name.trim();
     }
 
-    public String getSpecification() {
+    public Float getSpecification() {
         return specification;
     }
 
-    public void setSpecification(String specification) {
-        this.specification = specification == null ? null : specification.trim();
+    public void setSpecification(Float specification) {
+        this.specification = specification;
     }
 
     public Float getPly() {
@@ -114,7 +114,7 @@ public class TMaterialStock {
     public TMaterialStock() {
     }
 
-    public TMaterialStock(String provider, String name, String specification, Float ply, String portrait, Integer infeed, Integer packages, Float price, Float amount, Float materialsum) {
+    public TMaterialStock(String provider, String name, Float specification, Float ply, String portrait, Integer infeed, Integer packages, Float price, Float amount, Float materialsum) {
         this.provider = provider;
         this.name = name;
         this.specification = specification;
