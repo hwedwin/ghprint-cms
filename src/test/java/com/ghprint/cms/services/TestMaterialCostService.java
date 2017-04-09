@@ -56,4 +56,12 @@ public class TestMaterialCostService {
         System.out.println(selectsum);
     }
 
+    @Test
+    public  void testgetOneitem(){
+        TMaterialCost cost = materialCostService.getOneitemById(51);
+        System.out.println(cost);
+        TMaterialCost oneitem = materialCostService.getOneitem(11, cost.getInsertime());
+        System.out.println(oneitem);
+    }
+
 }

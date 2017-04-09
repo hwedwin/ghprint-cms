@@ -16,4 +16,6 @@ public interface ProductionMapper {
     Integer getlistcount(@Param("key")String key,@Param("value")String value);
     //根据产品ID查询一种生产标准
     ProductionInfoView getOneitem(@Param("pid") Integer pid);
+    //查询所有
+    List<ProductionInfoView> selectAllist();
 }

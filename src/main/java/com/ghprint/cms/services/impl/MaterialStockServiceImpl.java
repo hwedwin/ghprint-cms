@@ -2,6 +2,7 @@ package com.ghprint.cms.services.impl;
 
 import com.ghprint.cms.model.stock.TMaterialCost;
 import com.ghprint.cms.model.stock.TMaterialStock;
+import com.ghprint.cms.model.stock.TMaterialStockExample;
 import com.ghprint.cms.pagination.DataGridResult;
 import com.ghprint.cms.serviceDao.TMaterialStockMapper;
 import com.ghprint.cms.services.MaterialCostService;
@@ -109,5 +110,12 @@ public class MaterialStockServiceImpl  implements MaterialStockService{
         } else{
             return -1f;
         }
+    }
+
+    @Override
+    public List<TMaterialStock> selectAllist() {
+        TMaterialStockExample example = new TMaterialStockExample();
+        List<TMaterialStock> list = materialStockMapper.selectByExample(example);
+        return list;
     }
 }

@@ -1,21 +1,21 @@
 package com.ghprint.cms.services.impl;
 
-import com.ghprint.cms.model.order.OrderInfo;
-import com.ghprint.cms.model.order.OrderView;
-import com.ghprint.cms.model.order.TPurchaseDetail;
+import com.ghprint.cms.model.order.*;
+import com.ghprint.cms.model.production.ProductionInfoView;
+import com.ghprint.cms.model.production.ProductionInit;
+import com.ghprint.cms.model.production.TCustomerInfo;
 import com.ghprint.cms.model.stock.TMaterialStock;
 import com.ghprint.cms.model.stock.TProductionStock;
 import com.ghprint.cms.pagination.DataGridResult;
 import com.ghprint.cms.serviceDao.TPurchaseDetailMapper;
-import com.ghprint.cms.services.MaterialStockService;
-import com.ghprint.cms.services.OrderService;
-import com.ghprint.cms.services.ProStockService;
+import com.ghprint.cms.services.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -35,6 +35,12 @@ public class OrderServiceImpl implements OrderService {
 
     @Autowired
     private ProStockService proStockService;
+
+    @Autowired
+    private CustomerInfoService customerInfoService;
+
+    @Autowired
+    private ProductionInfoService productionInfoService;
 
     @Override
     public OrderView addOrderItem(TPurchaseDetail order) {
@@ -99,8 +105,55 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public OrderView updateOrderItem(TPurchaseDetail order) {
-        return null;
+    public Integer updateOrderItem(OrderEdit order) {
+        TPurchaseDetail detail = purchaseDetailMapper.selectByPrimaryKey(order.getId());
+        if(order.getCompanyid()!=null) {
+            detail.setCompanyid(order.getCompanyid());
+        }
+        if(order.getStandardid()!=null){
+            detail.setStandardid(order.getStandardid());
+        }
+        if(order.getOrderdate()!=null){
+            detail.setOrderdate(order.getOrderdate());
+        }
+        if(order.getDeline()!=null){
+            detail.setDeline(order.getDeline());
+        }
+        if(order.getPrint()!=null){
+            detail.setPrint(order.getPrint());
+        }
+        if(order.getOpen()!=null){
+            detail.setOpen(order.getOpen());
+        }
+        if(order.getMerge()!=null){
+            detail.setMerge(order.getMerge());
+        }
+        if(order.getCut()!=null){
+            detail.setCut(order.getCut());
+        }
+        if(order.getStable()!=null){
+            detail.setStable(order.getStable());
+        }
+        if(order.getRepeat()!=null){
+            detail.setRepeat(order.getRepeat());
+        }
+        if(order.getDelivery()!=null){
+            detail.setDelivery(order.getDelivery());
+        }
+        if(order.getLogistics()!=null){
+            detail.setLogistics(order.getLogistics());
+        }
+        if(order.getExpress()!=null){
+            detail.setExpress(order.getExpress());
+        }
+        if(order.getExpressnum()!=null){
+            detail.setExpressnum(order.getExpressnum());
+        }
+        if(order.getResult()!=null){
+            detail.setResult(order.getResult());
+        }
+        Integer key = purchaseDetailMapper.updateByPrimaryKey(detail);
+        return key;
     }
 
     @Override
@@ -190,5 +243,75 @@ public class OrderServiceImpl implements OrderService {
             return null;
         }
         return orderView;
+    }
+
+    @Override
+    public OrderInit getProductionInit(Boolean company, Boolean product, Boolean material, Boolean standard) {
+        OrderInit orderInit = new OrderInit();
+        List<OrderDictionary> list1 = new ArrayList<>();
+        List<OrderDictionary> list2 = new ArrayList<>();
+        List<OrderDictionary> list3 = new ArrayList<>();
+        List<OrderDictionary> list4 = new ArrayList<>();
+        if(company){
+            List<TCustomerInfo> customerInfos = customerInfoService.selectCustomers();
+            if(customerInfos.size()>0){
+                for(int i = 0;i<customerInfos.size();i++){
+                    OrderDictionary orderDictionary = new OrderDictionary();
+                    orderDictionary.setId(customerInfos.get(i).getId());
+                    orderDictionary.setNote1(customerInfos.get(i).getCompanycode().toString());
+                    orderDictionary.setNote2(customerInfos.get(i).getCompanyname());
+                    list1.add(orderDictionary);
+                }
+            }
+            orderInit.setCompany(list1);
+        }
+
+
+        if(product){
+            List<TProductionStock> productionStocks = proStockService.selectAllist();
+            if(productionStocks.size()>0){
+                for(int i = 0;i<productionStocks.size();i++){
+                    OrderDictionary orderDictionary = new OrderDictionary();
+                    orderDictionary.setId(productionStocks.get(i).getId());
+                    orderDictionary.setNote1(productionStocks.get(i).getStockid().toString());
+                    orderDictionary.setNote2(productionStocks.get(i).getStockname());
+                    orderDictionary.setNote3(productionStocks.get(i).getColor());
+                    list2.add(orderDictionary);
+                }
+            }
+            orderInit.setProduct(list2);
+        }
+
+
+        if(material){
+            List<TMaterialStock> materialStocks = materialStockService.selectAllist();
+            if(materialStocks.size()>0){
+                for(int i = 0;i<materialStocks.size();i++){
+                    OrderDictionary orderDictionary = new OrderDictionary();
+                    orderDictionary.setId(materialStocks.get(i).getId());
+                    orderDictionary.setNote1(materialStocks.get(i).getName().toString());
+                    orderDictionary.setNote2(materialStocks.get(i).getProvider());
+                    orderDictionary.setNote3(materialStocks.get(i).getSpecification().toString());
+                    list3.add(orderDictionary);
+                }
+            }
+            orderInit.setMaterial(list3);
+        }
+
+        if(standard){
+            List<ProductionInfoView> productionInfoViews = productionInfoService.selectAllist();
+            if(productionInfoViews.size()>0){
+                for(int i = 0;i<productionInfoViews.size();i++){
+                    OrderDictionary orderDictionary = new OrderDictionary();
+                    orderDictionary.setId(productionInfoViews.get(i).getPid());
+                    orderDictionary.setNote1(productionInfoViews.get(i).getProductionStandard().getPrintingmode());
+                    orderDictionary.setNote2(productionInfoViews.get(i).getProductionStandard().getMaterial());
+                    orderDictionary.setNote3(productionInfoViews.get(i).getProductionStandard().getNote());
+                    list4.add(orderDictionary);
+                }
+            }
+            orderInit.setStandard(list4);
+        }
+        return orderInit;
     }
 }

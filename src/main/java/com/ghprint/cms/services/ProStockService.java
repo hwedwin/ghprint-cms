@@ -20,4 +20,6 @@ public interface ProStockService {
     public  Integer addStocksum(Integer sid , Integer count);
     //减库存
     public  Integer subStocksum(Integer sid , Integer count);
+
+    public List<TProductionStock> selectAllist();
 }

@@ -182,4 +182,10 @@ public class ProductionInfoServiceImpl implements ProductionInfoService {
         }
         return record;
     }
+
+    @Override
+    public List<ProductionInfoView> selectAllist() {
+        List<ProductionInfoView> views = productionMapper.selectAllist();
+        return views;
+    }
 }

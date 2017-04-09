@@ -1,6 +1,8 @@
 package com.ghprint.cms.services;
 
+import com.alibaba.fastjson.JSON;
 import com.ghprint.cms.model.order.OrderInfo;
+import com.ghprint.cms.model.order.OrderInit;
 import com.ghprint.cms.model.order.OrderView;
 import com.ghprint.cms.model.order.TPurchaseDetail;
 import com.ghprint.cms.pagination.DataGridResult;
@@ -69,5 +71,13 @@ public class TestOrderService {
     public  void testgetOrderItemById(){
         OrderInfo orderInfo = orderService.getOrderItemById(19);
         System.out.println(orderInfo);
+    }
+
+    @Test
+    public  void testgetProductionInit(){
+        OrderInit productionInit = orderService.getProductionInit(true, true, true, true);
+
+        String jsonString = JSON.toJSONString(productionInit);
+            System.out.println(jsonString);
     }
 }

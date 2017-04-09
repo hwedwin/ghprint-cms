@@ -31,5 +31,7 @@ public interface MaterialStockService {
     /*减库存
     */
     public  Float subMaterialStocksum(Integer mid , Float count);
-
+    /*查询整个列表
+    * */
+    public  List<TMaterialStock> selectAllist();
 }

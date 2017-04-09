@@ -2,6 +2,8 @@ package com.ghprint.cms.serviceDao;
 
 import com.ghprint.cms.model.stock.TMaterialCost;
 import com.ghprint.cms.model.stock.TMaterialCostExample;
+
+import java.util.Date;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
@@ -30,4 +32,5 @@ public interface TMaterialCostMapper {
 
     List<TMaterialCost> selectitems(@Param("stockid")Integer stockid,@Param("startime")String startime ,@Param("endtime")String endtime);
 
+    List<TMaterialCost>  getOneitem(@Param("stockid")Integer stockid,@Param("insertime")Date insertime);
 }

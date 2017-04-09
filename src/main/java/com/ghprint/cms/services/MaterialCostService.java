@@ -36,6 +36,14 @@ public interface MaterialCostService {
         /*增加一条支出记录
         * */
         public  Integer addoutitems(TMaterialStock materialStock ,Float count);
+        /*
+        * 获取某种材料某个时间收支记录
+        * */
+        public TMaterialCost getOneitem(Integer stockid , Date insertime);
+          /*
+        * 获取id获取收支记录
+        * */
+          public TMaterialCost getOneitemById(Integer mid);
 
 
 }

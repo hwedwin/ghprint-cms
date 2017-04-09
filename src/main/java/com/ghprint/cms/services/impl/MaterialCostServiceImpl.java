@@ -90,4 +90,16 @@ public class MaterialCostServiceImpl implements MaterialCostService {
         Integer record = this.additems(materialCost);
         return record;
     }
+
+    @Override
+    public TMaterialCost getOneitem(Integer stockid, Date insertime) {
+        List<TMaterialCost> oneitem = materialCostMapper.getOneitem(stockid, insertime);
+        return oneitem==null?null:oneitem.get(0);
+    }
+
+    @Override
+    public TMaterialCost getOneitemById(Integer mid) {
+        TMaterialCost oneitem = materialCostMapper.selectByPrimaryKey(mid);
+        return  oneitem==null?null:oneitem;
+    }
 }

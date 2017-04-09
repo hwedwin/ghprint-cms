@@ -3,6 +3,8 @@ package com.ghprint.cms.services;
 import com.ghprint.cms.model.production.ProductionInfoView;
 import com.ghprint.cms.pagination.DataGridResult;
 
+import java.util.List;
+
 /**
  * 生产标准模块业务
  * Created by Administrator on 2017/3/1.
@@ -23,5 +25,8 @@ public interface ProductionInfoService {
 
     //根据ID修改现有的生产标准
     public  Integer  updateProductionitems(ProductionInfoView productionInfoView);
+
+    //查询所有列表
+    public List<ProductionInfoView> selectAllist();
 
 }

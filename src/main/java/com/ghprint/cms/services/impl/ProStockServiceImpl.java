@@ -1,6 +1,7 @@
 package com.ghprint.cms.services.impl;
 
 import com.ghprint.cms.model.stock.TProductionStock;
+import com.ghprint.cms.model.stock.TProductionStockExample;
 import com.ghprint.cms.pagination.DataGridResult;
 import com.ghprint.cms.serviceDao.TProductionStockMapper;
 import com.ghprint.cms.services.ProStockService;
@@ -86,5 +87,12 @@ public class ProStockServiceImpl implements ProStockService {
         }else {
             return -1;
         }
+    }
+
+    @Override
+    public List<TProductionStock> selectAllist() {
+        TProductionStockExample example = new TProductionStockExample();
+        List<TProductionStock> productionStocks = productionStockMapper.selectByExample(example);
+        return productionStocks;
     }
 }

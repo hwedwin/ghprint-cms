@@ -1,8 +1,6 @@
 package com.ghprint.cms.services;
 
-import com.ghprint.cms.model.order.OrderInfo;
-import com.ghprint.cms.model.order.OrderView;
-import com.ghprint.cms.model.order.TPurchaseDetail;
+import com.ghprint.cms.model.order.*;
 import com.ghprint.cms.pagination.DataGridResult;
 
 /**
@@ -18,7 +16,7 @@ public interface OrderService {
     public Integer delOrderItem(Integer orderId);
     /*修改订单
     * */
-    public  OrderView updateOrderItem(TPurchaseDetail order);
+    public  Integer updateOrderItem(OrderEdit order);
     /*查询订单列表
     * */
     public DataGridResult selectOrderList(String key , String value , Integer page, Integer rows);
@@ -34,4 +32,7 @@ public interface OrderService {
     /*检查原材料库存是否足够
     * */
     public  OrderView CheckMaterialStocks(Integer stockid , Float sub);
+    /*字典
+    * */
+    public OrderInit getProductionInit(Boolean company , Boolean product , Boolean material , Boolean standard);
 }

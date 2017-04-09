@@ -146,5 +146,21 @@
 
     </select>
 
+    <select id="selectAllist" resultMap="ResultMap"  parameterType="java.lang.String">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM  t_production_standard a
+        LEFT JOIN t_customer_info b
+        ON a.`companyid` = b.`id`
+        LEFT JOIN t_product_info c
+        ON a.`productid` = c.`id`
+        LEFT JOIN t_printing_data d
+        ON a.`printdataid` = d.`id`
+        LEFT JOIN t_printing_procedure e
+        ON a.`procedureid` = e.`id`
+        LEFT JOIN t_printing_procedureafter f
+        ON a.`procedureafterid`  = f.`id`
+        ORDER BY b.`companyname`
+    </select>
 
 </mapper>
