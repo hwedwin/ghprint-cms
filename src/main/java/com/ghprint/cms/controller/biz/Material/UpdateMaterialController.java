@@ -28,11 +28,11 @@ public class UpdateMaterialController extends BaseAction {
 
     @RequestMapping(value = "/materialstocks/editmaterialstocks.do", method = RequestMethod.GET, produces = "application/json; charset=utf-8")
     @ResponseBody
-    public Response<TMaterialStock> MaterialStocEdit(HttpServletRequest request, HttpServletResponse response, @RequestParam(value = "mid") Integer mid) {
+    public Response<TMaterialStock> MaterialStockEdit(HttpServletRequest request, HttpServletResponse response, @RequestParam(value = "mid") Integer mid) {
         Response<TMaterialStock> responses = new Response<>();
         try {
             Assert.hasText(String.valueOf(mid), "mid  is null or 空字符串。");
-            log.info("MaterialStocEdit request param:{}", mid);
+            log.info("MaterialStockEdit request param:{}", mid);
             Boolean flag = super.execute(request, response);
             if (flag) {
                 TMaterialStock materialStock = materialStockService.getMaterialStockById(mid);

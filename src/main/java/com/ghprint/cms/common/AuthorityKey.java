@@ -104,4 +104,25 @@ public class AuthorityKey {
 	* 原料库存查询
 	* */
 	public  static  String MATERIALSTOCK_SELECT="150000004";
+
+	/*
+	* 订单新增
+	* */
+	public  static  String ORDER_ADD="160000001";
+	/*
+	* 订单删除
+	* */
+	public  static  String ORDER_DEL="160000002";
+	/*
+	* 订单修改
+	* */
+	public  static  String ORDER_UPDATE="160000003";
+	/*
+	* 订单查询
+	* */
+	public  static  String ORDER_SELECT="160000004";
+	/*
+	* 订单参数构造器
+	* */
+	public  static  String ORDER_INIT="160000005";
 }
