@@ -91,10 +91,10 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, companyid, productid, stockid, standardid, spellcount, proportion, height, thickness, 
-    materialsum, purchasebuy, ordercount, stockcount, productsum, orderdate, deline, 
-    print, open, merge, cut, stable, repeat, delivery, logistics, express, expressnum, 
-    status, result, insertime
+    t.id, t.companyid, t.productid, t.stockid, t.standardid, t.spellcount, t.proportion, t.height, t.thickness,
+    t.materialsum, t.purchasebuy, t.ordercount, t.stockcount, t.productsum, t.orderdate, t.deline,
+    t.print, t.open,t. merge, t.cut, t.stable, t.repeat, t.delivery, t.logistics, t.express, t.expressnum,
+    t.status, t.result, t.insertime
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ghprint.cms.model.order.TPurchaseDetailExample" >
     select
@@ -102,7 +102,7 @@
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from t_purchase_detail
+    from t_purchase_detail t
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
@@ -113,7 +113,7 @@
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
-    from t_purchase_detail
+    from t_purchase_detail t
     where id = #{id,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
@@ -149,6 +149,9 @@
       #{insertime,jdbcType=DATE})
   </insert>
   <insert id="insertSelective" parameterType="com.ghprint.cms.model.order.TPurchaseDetail" >
+    <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
     insert into t_purchase_detail
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -431,129 +434,129 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map" >
-    update t_purchase_detail
-    set id = #{record.id,jdbcType=INTEGER},
-      companyid = #{record.companyid,jdbcType=INTEGER},
-      productid = #{record.productid,jdbcType=INTEGER},
-      stockid = #{record.stockid,jdbcType=INTEGER},
-      standardid = #{record.standardid,jdbcType=INTEGER},
-      spellcount = #{record.spellcount,jdbcType=INTEGER},
-      proportion = #{record.proportion,jdbcType=REAL},
-      height = #{record.height,jdbcType=REAL},
-      thickness = #{record.thickness,jdbcType=REAL},
-      materialsum = #{record.materialsum,jdbcType=REAL},
-      purchasebuy = #{record.purchasebuy,jdbcType=REAL},
-      ordercount = #{record.ordercount,jdbcType=INTEGER},
-      stockcount = #{record.stockcount,jdbcType=INTEGER},
-      productsum = #{record.productsum,jdbcType=INTEGER},
-      orderdate = #{record.orderdate,jdbcType=DATE},
-      deline = #{record.deline,jdbcType=DATE},
-      print = #{record.print,jdbcType=INTEGER},
-      open = #{record.open,jdbcType=INTEGER},
-      merge = #{record.merge,jdbcType=INTEGER},
-      cut = #{record.cut,jdbcType=INTEGER},
-      stable = #{record.stable,jdbcType=INTEGER},
-      repeat = #{record.repeat,jdbcType=INTEGER},
-      delivery = #{record.delivery,jdbcType=VARCHAR},
-      logistics = #{record.logistics,jdbcType=VARCHAR},
-      express = #{record.express,jdbcType=VARCHAR},
-      expressnum = #{record.expressnum,jdbcType=VARCHAR},
-      status = #{record.status,jdbcType=INTEGER},
-      result = #{record.result,jdbcType=VARCHAR},
-      insertime = #{record.insertime,jdbcType=DATE}
+    update t_purchase_detail t
+    set t.id = #{record.id,jdbcType=INTEGER},
+    t.companyid = #{record.companyid,jdbcType=INTEGER},
+    t.productid = #{record.productid,jdbcType=INTEGER},
+    t.stockid = #{record.stockid,jdbcType=INTEGER},
+    t.standardid = #{record.standardid,jdbcType=INTEGER},
+    t.spellcount = #{record.spellcount,jdbcType=INTEGER},
+    t.proportion = #{record.proportion,jdbcType=REAL},
+    t.height = #{record.height,jdbcType=REAL},
+    t.thickness = #{record.thickness,jdbcType=REAL},
+    t.materialsum = #{record.materialsum,jdbcType=REAL},
+    t.purchasebuy = #{record.purchasebuy,jdbcType=REAL},
+    t.ordercount = #{record.ordercount,jdbcType=INTEGER},
+    t.stockcount = #{record.stockcount,jdbcType=INTEGER},
+    t.productsum = #{record.productsum,jdbcType=INTEGER},
+    t.orderdate = #{record.orderdate,jdbcType=DATE},
+    t.deline = #{record.deline,jdbcType=DATE},
+    t.print = #{record.print,jdbcType=INTEGER},
+    t.open = #{record.open,jdbcType=INTEGER},
+    t.merge = #{record.merge,jdbcType=INTEGER},
+    t.cut = #{record.cut,jdbcType=INTEGER},
+    t.stable = #{record.stable,jdbcType=INTEGER},
+    t.repeat = #{record.repeat,jdbcType=INTEGER},
+    t.delivery = #{record.delivery,jdbcType=VARCHAR},
+    t.logistics = #{record.logistics,jdbcType=VARCHAR},
+    t.express = #{record.express,jdbcType=VARCHAR},
+    t.expressnum = #{record.expressnum,jdbcType=VARCHAR},
+    t.status = #{record.status,jdbcType=INTEGER},
+    t.result = #{record.result,jdbcType=VARCHAR},
+    t.insertime = #{record.insertime,jdbcType=DATE}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
   <update id="updateByPrimaryKeySelective" parameterType="com.ghprint.cms.model.order.TPurchaseDetail" >
-    update t_purchase_detail
+    update t_purchase_detail t
     <set >
       <if test="companyid != null" >
-        companyid = #{companyid,jdbcType=INTEGER},
+        t.companyid = #{companyid,jdbcType=INTEGER},
       </if>
       <if test="productid != null" >
-        productid = #{productid,jdbcType=INTEGER},
+        t.productid = #{productid,jdbcType=INTEGER},
       </if>
       <if test="stockid != null" >
-        stockid = #{stockid,jdbcType=INTEGER},
+        t.stockid = #{stockid,jdbcType=INTEGER},
       </if>
       <if test="standardid != null" >
-        standardid = #{standardid,jdbcType=INTEGER},
+        t.standardid = #{standardid,jdbcType=INTEGER},
       </if>
       <if test="spellcount != null" >
-        spellcount = #{spellcount,jdbcType=INTEGER},
+        t.spellcount = #{spellcount,jdbcType=INTEGER},
       </if>
       <if test="proportion != null" >
-        proportion = #{proportion,jdbcType=REAL},
+        t.proportion = #{proportion,jdbcType=REAL},
       </if>
       <if test="height != null" >
-        height = #{height,jdbcType=REAL},
+        t.height = #{height,jdbcType=REAL},
       </if>
       <if test="thickness != null" >
-        thickness = #{thickness,jdbcType=REAL},
+        t.thickness = #{thickness,jdbcType=REAL},
       </if>
       <if test="materialsum != null" >
-        materialsum = #{materialsum,jdbcType=REAL},
+        t.materialsum = #{materialsum,jdbcType=REAL},
       </if>
       <if test="purchasebuy != null" >
-        purchasebuy = #{purchasebuy,jdbcType=REAL},
+        t.purchasebuy = #{purchasebuy,jdbcType=REAL},
       </if>
       <if test="ordercount != null" >
-        ordercount = #{ordercount,jdbcType=INTEGER},
+        t.ordercount = #{ordercount,jdbcType=INTEGER},
       </if>
       <if test="stockcount != null" >
-        stockcount = #{stockcount,jdbcType=INTEGER},
+        t.stockcount = #{stockcount,jdbcType=INTEGER},
       </if>
       <if test="productsum != null" >
-        productsum = #{productsum,jdbcType=INTEGER},
+        t.productsum = #{productsum,jdbcType=INTEGER},
       </if>
       <if test="orderdate != null" >
-        orderdate = #{orderdate,jdbcType=DATE},
+        t.orderdate = #{orderdate,jdbcType=DATE},
       </if>
       <if test="deline != null" >
-        deline = #{deline,jdbcType=DATE},
+        t.deline = #{deline,jdbcType=DATE},
       </if>
       <if test="print != null" >
-        print = #{print,jdbcType=INTEGER},
+        t.print = #{print,jdbcType=INTEGER},
       </if>
       <if test="open != null" >
-        open = #{open,jdbcType=INTEGER},
+        t.open = #{open,jdbcType=INTEGER},
       </if>
       <if test="merge != null" >
-        merge = #{merge,jdbcType=INTEGER},
+        t.merge = #{merge,jdbcType=INTEGER},
       </if>
       <if test="cut != null" >
-        cut = #{cut,jdbcType=INTEGER},
+        t.cut = #{cut,jdbcType=INTEGER},
       </if>
       <if test="stable != null" >
-        stable = #{stable,jdbcType=INTEGER},
+        t.stable = #{stable,jdbcType=INTEGER},
       </if>
       <if test="repeat != null" >
-        repeat = #{repeat,jdbcType=INTEGER},
+        t.repeat = #{repeat,jdbcType=INTEGER},
       </if>
       <if test="delivery != null" >
-        delivery = #{delivery,jdbcType=VARCHAR},
+        t.delivery = #{delivery,jdbcType=VARCHAR},
       </if>
       <if test="logistics != null" >
-        logistics = #{logistics,jdbcType=VARCHAR},
+        t.logistics = #{logistics,jdbcType=VARCHAR},
       </if>
       <if test="express != null" >
-        express = #{express,jdbcType=VARCHAR},
+        t.express = #{express,jdbcType=VARCHAR},
       </if>
       <if test="expressnum != null" >
-        expressnum = #{expressnum,jdbcType=VARCHAR},
+        t.expressnum = #{expressnum,jdbcType=VARCHAR},
       </if>
       <if test="status != null" >
-        status = #{status,jdbcType=INTEGER},
+        t.status = #{status,jdbcType=INTEGER},
       </if>
       <if test="result != null" >
-        result = #{result,jdbcType=VARCHAR},
+        t.result = #{result,jdbcType=VARCHAR},
       </if>
       <if test="insertime != null" >
-        insertime = #{insertime,jdbcType=DATE},
+        t.insertime = #{insertime,jdbcType=DATE},
       </if>
     </set>
-    where id = #{id,jdbcType=INTEGER}
+    where t.id = #{id,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.ghprint.cms.model.order.TPurchaseDetail" >
     update t_purchase_detail

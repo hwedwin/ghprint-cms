@@ -1,10 +1,7 @@
 package com.ghprint.cms.services;
 
 import com.alibaba.fastjson.JSON;
-import com.ghprint.cms.model.order.OrderInfo;
-import com.ghprint.cms.model.order.OrderInit;
-import com.ghprint.cms.model.order.OrderView;
-import com.ghprint.cms.model.order.TPurchaseDetail;
+import com.ghprint.cms.model.order.*;
 import com.ghprint.cms.pagination.DataGridResult;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -53,8 +50,10 @@ public class TestOrderService {
 
     @Test
     public  void  testaddOrderItem(){
-        TPurchaseDetail O = new TPurchaseDetail(1,4,11,1,1,1f,1f,1f,100,new Date(), new Date());
-        OrderView orderView = orderService.addOrderItem(O);
+        TPurchaseDetail O = new TPurchaseDetail();
+       // OrderView orderView = orderService.addOrderItem(O);
+        String jsonString = JSON.toJSONString(O);
+        System.out.println(jsonString);
     }
 
     @Test
@@ -79,5 +78,19 @@ public class TestOrderService {
 
         String jsonString = JSON.toJSONString(productionInit);
             System.out.println(jsonString);
+    }
+
+    @Test
+    public  void testdelOrder(){
+        Integer item = orderService.delOrderItem(26);
+        System.out.println(item);
+    }
+
+    @Test
+    public  void testupdateOrderItem(){
+        OrderEdit orderEdit = new OrderEdit(23,3, 3, new Date(), new Date(), 1,1, 1,1, 1,1,  "delivery",  "logistics",  "express",  "expressnum",  "result");
+        Integer item = orderService.updateOrderItem(orderEdit);
+        String jsonString = JSON.toJSONString(orderEdit);
+        System.out.println(jsonString);
     }
 }

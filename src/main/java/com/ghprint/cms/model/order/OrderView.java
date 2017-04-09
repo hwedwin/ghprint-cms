@@ -1,11 +1,15 @@
 package com.ghprint.cms.model.order;
 
+import java.util.Date;
+
 /**
  * Created by Administrator on 2017/4/8.
  */
 public class OrderView {
 
+    private Integer id;
 
+    private Integer orderid;
     //原材料库存量
     private Float materialsum=0f;
     //原材料采购量
@@ -26,6 +30,9 @@ public class OrderView {
     private  Integer nowprosum=0;
     //操作后原材料库存量
     private  Float nowmaterialsum = 0f;
+
+    private Date insertime ;
+
     public OrderView() {
     }
 
@@ -112,10 +119,36 @@ public class OrderView {
         this.nowmaterialsum = nowmaterialsum;
     }
 
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public Integer getOrderid() {
+        return orderid;
+    }
+
+    public void setOrderid(Integer orderid) {
+        this.orderid = orderid;
+    }
+
+    public Date getInsertime() {
+        return insertime;
+    }
+
+    public void setInsertime(Date insertime) {
+        this.insertime = insertime;
+    }
+
     @Override
     public String toString() {
         return "OrderView{" +
-                "materialsum=" + materialsum +
+                "id=" + id +
+                ", orderId=" + orderid +
+                ", materialsum=" + materialsum +
                 ", purchasebuy=" + purchasebuy +
                 ", materialneed=" + materialneed +
                 ", stockcount=" + stockcount +
@@ -125,6 +158,7 @@ public class OrderView {
                 ", proflag=" + proflag +
                 ", nowprosum=" + nowprosum +
                 ", nowmaterialsum=" + nowmaterialsum +
+                ", insertime=" + insertime +
                 '}';
     }
 }

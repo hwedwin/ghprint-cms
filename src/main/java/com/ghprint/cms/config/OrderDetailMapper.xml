@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ghprint.cms.serviceDao.OrderDetailMapper">
+    <resultMap id="BaseResultMap" type="com.ghprint.cms.model.order.OrderView" >
+        <id column="id" property="id" jdbcType="INTEGER" />
+        <result column="orderid" property="orderid" jdbcType="INTEGER" />
+        <result column="materialsum" property="materialsum" jdbcType="REAL"/>
+        <result column="purchasebuy" property="purchasebuy" jdbcType="REAL"/>
+        <result column="materialneed" property="materialneed" jdbcType="REAL"/>
+        <result column="nowmaterialsum" property="nowmaterialsum" jdbcType="REAL"/>
+        <result column="stockcount" property="stockcount" jdbcType="INTEGER" />
+        <result column="productsum" property="productsum" jdbcType="INTEGER" />
+        <result column="prodneed" property="prodneed" jdbcType="INTEGER" />
+        <result column="proflag" property="proflag" jdbcType="INTEGER" />
+        <result column="materialflag" property="materialflag" jdbcType="INTEGER" />
+        <result column="insertime" property="insertime" jdbcType="TIMESTAMP"/>
+    </resultMap>
+    <sql id="Base_Column_List" >
+        id, orderid ,materialsum, purchasebuy, materialneed, nowmaterialsum, stockcount,productsum,prodneed,proflag,materialflag,insertime
+    </sql>
+    <select id="selectlist" resultMap="BaseResultMap" parameterType="java.lang.String">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM  t_order_detail t
+        <where>
+            <if test="key != null and key !=''  and value != null and value !=''">
+                ${key} like CONCAT('%',#{value},'%')
+            </if>
+        </where>
+        ORDER BY t.insertime
+        limit #{pageOffset,jdbcType=INTEGER},#{pageSize,jdbcType=INTEGER}
+    </select>
+    <select id="getlistcount" resultType="java.lang.Integer"  parameterType="java.lang.String">
+        SELECT
+        count(1)
+        FROM  t_order_detail t
+        <where>
+            <if test="key != null and key !=''  and value != null and value !=''">
+                ${key} like CONCAT('%',#{value},'%')
+            </if>
+        </where>
+        ORDER BY t.insertime
+    </select>
+    <insert id="insertSelective" parameterType="com.ghprint.cms.model.order.OrderView" >
+        insert into t_order_detail
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                id,
+            </if>
+            <if test="orderid != null" >
+                orderid,
+            </if>
+            <if test="materialsum != null" >
+                materialsum,
+            </if>
+            <if test="purchasebuy != null" >
+                purchasebuy,
+            </if>
+            <if test="materialneed != null" >
+                materialneed,
+            </if>
+            <if test="nowmaterialsum != null" >
+                nowmaterialsum,
+            </if>
+            <if test="stockcount != null" >
+                stockcount,
+            </if>
+            <if test="productsum != null" >
+                productsum,
+            </if>
+            <if test="prodneed != null" >
+                prodneed,
+            </if>
+            <if test="proflag != null" >
+                proflag,
+            </if>
+            <if test="materialflag != null" >
+                materialflag,
+            </if>
+            <if test="insertime != null" >
+                insertime,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="orderid != null" >
+                #{orderid,jdbcType=INTEGER},
+            </if>
+            <if test="materialsum != null" >
+                #{materialsum,jdbcType=REAL},
+            </if>
+            <if test="purchasebuy != null" >
+                #{purchasebuy,jdbcType=REAL},
+            </if>
+            <if test="materialneed != null" >
+                #{materialneed,jdbcType=REAL},
+            </if>
+            <if test="nowmaterialsum != null" >
+                #{nowmaterialsum,jdbcType=REAL},
+            </if>
+            <if test="stockcount != null" >
+                #{stockcount,jdbcType=INTEGER},
+            </if>
+            <if test="productsum != null" >
+                #{productsum,jdbcType=INTEGER},
+            </if>
+            <if test="prodneed != null" >
+                #{prodneed,jdbcType=INTEGER},
+            </if>
+            <if test="proflag != null" >
+                #{proflag,jdbcType=INTEGER},
+            </if>
+            <if test="materialflag != null" >
+                #{materialflag,jdbcType=INTEGER},
+            </if>
+            <if test="insertime != null" >
+                #{insertime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    </mapper>

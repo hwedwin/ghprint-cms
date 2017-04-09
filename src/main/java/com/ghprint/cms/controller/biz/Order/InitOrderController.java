@@ -10,6 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -35,6 +36,10 @@ public class InitOrderController extends BaseAction {
             ){
         Response<OrderInit> responses = new Response<>();
         try {
+            Assert.hasText(company.toString(), "company  is null or 空字符串。");
+            Assert.hasText(product.toString(), "company  is null or 空字符串。");
+            Assert.hasText(material.toString(), "company  is null or 空字符串。");
+            Assert.hasText(standard.toString(), "company  is null or 空字符串。");
             Boolean flag = super.execute(request, response);
             if (flag) {
                 OrderInit orderInit = orderService.getProductionInit(company, product, material, standard);

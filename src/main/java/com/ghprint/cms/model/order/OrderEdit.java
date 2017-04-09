@@ -166,6 +166,28 @@ public class OrderEdit {
         this.id = id;
     }
 
+    public OrderEdit() {
+    }
+
+    public OrderEdit(Integer id, Integer companyid, Integer standardid, Date orderdate, Date deline, Integer print, Integer open, Integer merge, Integer cut, Integer stable, Integer repeat, String delivery, String logistics, String express, String expressnum, String result) {
+        this.id = id;
+        this.companyid = companyid;
+        this.standardid = standardid;
+        this.orderdate = orderdate;
+        this.deline = deline;
+        this.print = print;
+        this.open = open;
+        this.merge = merge;
+        this.cut = cut;
+        this.stable = stable;
+        this.repeat = repeat;
+        this.delivery = delivery;
+        this.logistics = logistics;
+        this.express = express;
+        this.expressnum = expressnum;
+        this.result = result;
+    }
+
     @Override
     public String toString() {
         return "OrderEdit{" +

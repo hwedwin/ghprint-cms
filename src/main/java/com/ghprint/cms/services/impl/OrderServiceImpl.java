@@ -9,6 +9,7 @@ import com.ghprint.cms.model.stock.TProductionStock;
 import com.ghprint.cms.pagination.DataGridResult;
 import com.ghprint.cms.serviceDao.TPurchaseDetailMapper;
 import com.ghprint.cms.services.*;
+import com.ghprint.cms.utils.DateUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,6 +42,9 @@ public class OrderServiceImpl implements OrderService {
 
     @Autowired
     private ProductionInfoService productionInfoService;
+
+    @Autowired
+    private  OrderDetailService orderDetailService;
 
     @Override
     public OrderView addOrderItem(TPurchaseDetail order) {
@@ -81,7 +85,10 @@ public class OrderServiceImpl implements OrderService {
                 order.setProductsum(orderView.getProductsum());
                 order.setInsertime(new Date());
                 orders = purchaseDetailMapper.insertSelective(order);
-                log.info("插入：{" + orders + "}条记录...." + order.toString());
+                orderView.setOrderid(order.getId());
+                orderView.setInsertime(DateUtil.getTime());
+                orders +=orderDetailService.addOrderDetail(orderView);
+                log.info("订单增加操作完成,插入：{" + orders + "}条记录....\n" + order.toString()+"\n"+orderView.toString());
             } else {
                 log.error("无操作！");
             }
@@ -89,7 +96,6 @@ public class OrderServiceImpl implements OrderService {
             e.printStackTrace();
             log.error("增加订单异常" + e.getMessage());
         }
-        log.info("订单增加操作完成，插入：{" + orders + "}条记录." + orderView.toString());
         return orderView;
     }
 
@@ -99,7 +105,7 @@ public class OrderServiceImpl implements OrderService {
         Integer record = 0;
         if(detail!=null) {
             detail.setStatus(0);
-            record = purchaseDetailMapper.updateByPrimaryKey(detail);
+            record = purchaseDetailMapper.updateByPrimaryKeySelective(detail);
         }
         return record;
     }
@@ -152,7 +158,7 @@ public class OrderServiceImpl implements OrderService {
         if(order.getResult()!=null){
             detail.setResult(order.getResult());
         }
-        Integer key = purchaseDetailMapper.updateByPrimaryKey(detail);
+        Integer key = purchaseDetailMapper.updateByPrimaryKeySelective(detail);
         return key;
     }
 
