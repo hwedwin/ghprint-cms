@@ -43,9 +43,9 @@ public abstract class BaseAction  {
         logger.info("now enter BaseAction:execute method!");
         HttpSession session = request.getSession(false);
         logger.info("session:" + session);
-      /*  开发测试禁用
+      // 开发测试禁用
       // 网页超时
-        Boolean flags = Boolean.TRUE;
+        Boolean flags = Boolean.FALSE;
         if (session == null) {
             logger.error("session has been timeout!");
             request.setAttribute("message", "网页超时,请重新登录！");
@@ -67,7 +67,7 @@ public abstract class BaseAction  {
             logger.info("没有权限");
             request.setAttribute("message", "对不起，您没有权限！");
             return flag;
-        }*/
+        }
         logger.info("BaseAction execute method operated successfully!");
         return true;
     }
