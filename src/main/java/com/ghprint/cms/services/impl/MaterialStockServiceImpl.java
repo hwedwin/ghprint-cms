@@ -44,23 +44,20 @@ public class MaterialStockServiceImpl  implements MaterialStockService{
     @Override
     public Integer updateMaterialStock(TMaterialStock materialStock) {
         TMaterialStock   materialStocks =  this.getMaterialStockById(materialStock.getId());
-        Float sum = materialStock.getMaterialsum();
-        if(sum>=0) {
+            Float sum = materialStock.getMaterialsum();
             Float change = materialStock.getMaterialsum() - materialStocks.getMaterialsum();
             TMaterialCost materialCost = new TMaterialCost(materialStock.getId(), materialStock.getName(), sum);
             Integer record = materialStockMapper.updateByPrimaryKey(materialStock);
             if (change > 0) {
                 materialCost.setIncome(change);
-                record += materialCostService.additems(materialCost);
+                record +=materialCostService.additems(materialCost);
             }
             if (change < 0) {
                 materialCost.setOutcount(-change);
-                record += materialCostService.additems(materialCost);
+                record +=materialCostService.additems(materialCost);
             }
         return  record;
-        }else {
-            return -1;
-        }
+
     }
 
     @Override

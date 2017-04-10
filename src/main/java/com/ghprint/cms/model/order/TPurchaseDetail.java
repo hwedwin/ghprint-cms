@@ -300,6 +300,31 @@ public class TPurchaseDetail {
     public TPurchaseDetail() {
     }
 
+    public TPurchaseDetail(Integer companyid, Integer productid, Integer stockid, Integer standardid, Integer spellcount, Float proportion, Float height, Float thickness, Integer ordercount, Date orderdate, Date deline, Integer print, Integer open, Integer merge, Integer cut, Integer stable, Integer repeat, String delivery, String logistics, String express, String expressnum, String result) {
+        this.companyid = companyid;
+        this.productid = productid;
+        this.stockid = stockid;
+        this.standardid = standardid;
+        this.spellcount = spellcount;
+        this.proportion = proportion;
+        this.height = height;
+        this.thickness = thickness;
+        this.ordercount = ordercount;
+        this.orderdate = orderdate;
+        this.deline = deline;
+        this.print = print;
+        this.open = open;
+        this.merge = merge;
+        this.cut = cut;
+        this.stable = stable;
+        this.repeat = repeat;
+        this.delivery = delivery;
+        this.logistics = logistics;
+        this.express = express;
+        this.expressnum = expressnum;
+        this.result = result;
+    }
+
     public TPurchaseDetail(Integer companyid, Integer productid, Integer stockid, Integer standardid, Integer spellcount, Float proportion, Float height, Float thickness, Integer ordercount, Date orderdate, Date deline) {
         this.companyid = companyid;
         this.productid = productid;

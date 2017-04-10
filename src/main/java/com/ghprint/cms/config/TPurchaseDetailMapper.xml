@@ -206,10 +206,10 @@
         print,
       </if>
       <if test="open != null" >
-        open,
+        `open`,
       </if>
       <if test="merge != null" >
-        merge,
+        `merge`,
       </if>
       <if test="cut != null" >
         cut,
@@ -218,7 +218,7 @@
         stable,
       </if>
       <if test="repeat != null" >
-        repeat,
+        `repeat`,
       </if>
       <if test="delivery != null" >
         delivery,
@@ -233,7 +233,7 @@
         expressnum,
       </if>
       <if test="status != null" >
-        status,
+        `status`,
       </if>
       <if test="result != null" >
         result,

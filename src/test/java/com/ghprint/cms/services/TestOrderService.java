@@ -47,11 +47,10 @@ public class TestOrderService {
         OrderView orderView = orderService.CheckMaterialStocks(11, 999.00f);
         System.out.println(orderView);
     }
-
     @Test
     public  void  testaddOrderItem(){
-        TPurchaseDetail O = new TPurchaseDetail();
-       // OrderView orderView = orderService.addOrderItem(O);
+        TPurchaseDetail O = new TPurchaseDetail(3, 3,1,1,1,1f,1f,1f, 100,new Date(), new Date(), 1,1, 1,1, 1,1,  "delivery",  "logistics",  "express",  "expressnum",  "result");
+       OrderView orderView = orderService.addOrderItem(O);
         String jsonString = JSON.toJSONString(O);
         System.out.println(jsonString);
     }
