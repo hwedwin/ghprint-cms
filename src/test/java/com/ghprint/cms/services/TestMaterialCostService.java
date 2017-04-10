@@ -37,7 +37,7 @@ public class TestMaterialCostService {
 
     @Test
     public  void testselectitems(){
-        List<TMaterialCost> list = materialCostService.selectitems(1, null, null);
+        List<TMaterialCost> list = materialCostService.selectitems(11, null, null);
         Iterator iterator = list.iterator();
         while ( iterator.hasNext()){
             System.out.println(iterator.next());

@@ -3,6 +3,7 @@ package com.ghprint.cms.controller.biz.Order;
 import com.ghprint.cms.common.AuthorityKey;
 import com.ghprint.cms.controller.BaseAction;
 import com.ghprint.cms.pagination.DataGridResult;
+import com.ghprint.cms.services.OrderDetailService;
 import com.ghprint.cms.services.OrderService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,6 +26,8 @@ public class QueryOrderController extends BaseAction {
 
     @Autowired
     private OrderService orderService;
+    @Autowired
+    private OrderDetailService orderDetailService;
 
     @RequestMapping(value = "/orders/selectorders.do", method = RequestMethod.GET, produces = "application/json; charset=utf-8")
     @ResponseBody
@@ -58,6 +61,44 @@ public class QueryOrderController extends BaseAction {
             log.error("查询订单列表失败=:", e);
             dataGridResult.setSuccess(Boolean.FALSE);
             dataGridResult.setMessage("查询订单列表异常");
+            return  dataGridResult;
+        }
+
+    }
+
+
+    @RequestMapping(value = "/orders/selectdetail.do", method = RequestMethod.GET, produces = "application/json; charset=utf-8")
+    @ResponseBody
+    public DataGridResult getOrdersDetailList(HttpServletRequest request, HttpServletResponse response ,
+                                        @RequestParam(value = "key")String key , @RequestParam(value = "value")String value,
+                                        @RequestParam(value = "page")Integer page , @RequestParam(value = "rows")Integer rows){
+        DataGridResult dataGridResult = new DataGridResult();
+        try {
+            Assert.hasText(String.valueOf(page), "page  is null or 空字符串。");
+            Assert.hasText(String.valueOf(rows), "rows  is null or 空字符串。");
+            log.info("getOrdersDetailList request Param:key {},value {},page {},rows {}", new String[]{key,value, String.valueOf(page), String.valueOf(rows)});
+            Boolean flag = super.execute(request, response);
+            if (flag) {
+                if(key.equals("")){key=null;}
+                if(value.equals("")){value=null;}
+                dataGridResult =  orderDetailService.selectOrderDetailList( key ,value, page ,rows);
+                if(dataGridResult!=null) {
+                    dataGridResult.setSuccess(Boolean.TRUE);
+                }else{
+                    dataGridResult.setSuccess(Boolean.FALSE);
+                }
+                log.info("getOrdersDetailList response Param:{}", dataGridResult.toString());
+                return dataGridResult;
+            } else {
+                dataGridResult.setSuccess(Boolean.FALSE);
+                dataGridResult.setMessage(request.getAttribute("message").toString());
+                return dataGridResult;
+            }
+
+        }catch (Exception e) {
+            log.error("查询订单明细列表失败=:", e);
+            dataGridResult.setSuccess(Boolean.FALSE);
+            dataGridResult.setMessage("查询订单明细列表异常");
             return  dataGridResult;
         }
 

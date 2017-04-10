@@ -240,19 +240,23 @@
       insertime = #{insertime,jdbcType=DATE}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  <sql id="Column_List">
+     a.id,a.name,a.specification,b.income,b.outcount,b.sumcount,b.insertime
+  </sql>
   <select id="selectitems" resultMap="BaseResultMap" parameterType="java.lang.String">
     SELECT
-    <include refid="Base_Column_List" />
-    from t_material_cost t
+    <include refid="Column_List" />
+    from  t_material_stock a ,t_material_cost b
     <where>
       <if test="stockid != null">
-        t.stockid = #{stockid}
+       a.id =  b.stockid  AND b.stockid =#{stockid}
       </if>
       <if test="startime != null and endtime != null" >
-      AND t.insertime BETWEEN  #{startime} AND  #{endtime}
+      AND b.insertime BETWEEN  #{startime} AND  #{endtime}
     </if>
     </where>
-    ORDER BY  t.insertime DESC
+    GROUP  BY  b.id
+    ORDER BY  b.insertime DESC
   </select>
   <select id="getOneitem" resultMap="BaseResultMap" parameterType="java.lang.String">
     SELECT

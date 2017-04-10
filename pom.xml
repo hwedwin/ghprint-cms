@@ -308,7 +308,28 @@
                     </execution>
                 </executions>
             </plugin>
-
+            <!-- git插件 -->
+            <plugin>
+                <groupId>pl.project13.maven</groupId>
+                <artifactId>git-commit-id-plugin</artifactId>
+                <version>2.1.5</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>revision</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <dateFormat>yyyyMMddHHmmss</dateFormat>
+                    <!-- ".git"文件路径；默认值：${project.basedir}/.git; -->
+                    <dotGitDirectory>${project.basedir}/../.git</dotGitDirectory>
+                    <!-- 若项目打包类型为pom，是否取消构建。默认值：true -->
+                    <skipPoms>false</skipPoms>
+                    <!-- 是否生成“git.properties”文件，默认值：false -->
+                    <generateGitPropertiesFile>false</generateGitPropertiesFile>
+                </configuration>
+            </plugin>
         </plugins>
         <!-- resources 配置 -->
         <resources>
