@@ -35,6 +35,7 @@ public class AddMaterialController extends BaseAction{
         log.info("MaterialStockAdd request param:{}",materialStock.toString());
         try {
             Assert.hasText(materialStock.getName(), "materialStock 中 NAME  is null or 空字符串。");
+            Assert.hasText(materialStock.getMaterialsum().toString(), "materialStock 中 Materialsum  is null or 空字符串。");
             Assert.hasText(String.valueOf(materialStock.getSpecification()), "materialStock 中 Specification  is null or 空字符串。");
             Boolean flag = super.execute(request, response);
             if (flag) {

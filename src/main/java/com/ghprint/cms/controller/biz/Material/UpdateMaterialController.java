@@ -67,6 +67,7 @@ public class UpdateMaterialController extends BaseAction {
         Response<String> responses = new Response<>();
         try {
             Assert.hasText(String.valueOf(materialStock.getId()), " 主键 id  is null or 空字符串。");
+            Assert.hasText(materialStock.getMaterialsum().toString(), "materialStock 中 Materialsum  is null or 空字符串。");
             log.info("MaterialStockUpdate request param:{}", materialStock.toString());
             Boolean flag = super.execute(request, response);
             if (flag) {
