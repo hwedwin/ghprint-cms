@@ -1,0 +1,19 @@
+<link rel="stylesheet" href="./five/Login/Login.css">
+
+
+<form ng-submit="login()">
+    <div class="login" ng-submit="login()">
+        <div class="buildding clearfix" ></div>
+
+       <div class="right">
+           <img class="logo" src="./five/img/logo.png" />
+        <div class="loginBox">
+        <div class="loginName"><input type="text" placeholder="请输入用户名" ng-model="login_phone" maxlength="20"></div>
+        <div class="loginPsw">
+            <input  type="password" placeholder="请输入6位密码" ng-model="login_pw">
+        </div>
+        <input class="loginBtn loginblue" type="submit" ng-disabled="myForm.$invalid" value="登录">
+            <span ng-show="errorCall" class="error">{{errorMSG}}</span>
+    </div></div>
+
+</div></form>

@@ -1,0 +1,182 @@
+<link rel="stylesheet" href="./five/system/system.css">
+
+<ul class="title">
+    <li class="leftTitle clearfix">光华彩印库存管理系统</li>
+    <li class="rightTitle clearfix">欢迎您！{{username}}</li>
+    <li class="rightTitle clearfix" ng-click="reset()">注销</li>
+</ul>
+
+
+<ul class="section clearfix">
+    <li ng-click="jump('Home')">
+
+        <div class="orderSearch"></div>
+        订单查询
+    </li>
+    <li ng-click="jump('warehouse')">
+        <div class="warehouse"></div>
+        库存查询</li>
+    <li ng-click="jump('qualityForm')">
+        <div class="qualityFormIcon"></div>
+
+        质量标准</li>
+    <li ng-click="jump('system')">
+        <div class="role"></div>
+        系统管理
+        <div class="under"></div>
+    </li>
+</ul>
+
+<div class="details">
+    <div class="up searchSuject">
+        <!--<span>角色</span>-->
+    <!--<div class="options">-->
+        <!--<select  class="selectOption" ng-init="selectedName = selectOption[0]" ng-model="selectedName" ng-options="x.rolename for x in selectOption">-->
+        <!--</select>-->
+    <!--</div>-->
+
+        <div class="search" ng-click="newOrder=true">添加</div>
+    <!--<div class="search" ng-click="app('搜索')">搜索</div>
+     <div class="aptkMaskBox" >
+            <div class="aptkMaskTitle">新增订单</div>
+            <div>-->
+
+    </div>
+
+
+    <div class="down">
+        <table class="sujectTitle">
+            <tr>
+            <td class="sujectOption">账号</td>
+            <td class="sujectOption">姓名</td>
+            <td class="sujectOption">手机号码</td>
+            <td class="sujectOption">角色</td>
+            <td class="sujectOption">编辑</td>
+            </tr>
+
+
+            <tr ng-repeat="nameList in nameDatas track by $index">
+                <td class="sujectOption sujectOptionng">{{nameList.tSysUser.userid}}</td>
+                <td class="sujectOption sujectOptionng" >{{nameList.tSysUser.username}}</td>
+                <td class="sujectOption sujectOptionng">{{nameList.tSysUser.phone}}</td>
+                <td class="sujectOption sujectOptionng">{{nameList.rolename}}</td>
+                <td class="sujectOption sujectOptionng"><div ng-click="modifyUserBox($index)" class="EditButton point"/>   <div ng-click="deleUserBox($index)" class="DeleteButton point"/></td>
+
+
+            </tr>
+        </table>
+
+    </div>
+
+    <div class="bottom">
+        <a href=""><div ng-click="pagesearch(1)">首页</div></a>
+        <div class="page">
+            <a href=""><span ng-repeat="page in pages" ng-click="pagesearch($index+1)" class="pageCount">
+                {{page}}</span></a><!--页数按钮-->
+            <!--<span class="pageCount" ng-click="pagesearch($index)">{{page}}</span>-->
+        </div>
+        <a href=""><div ng-click="pagesearch(p_all_page)">尾页</div></a>
+        <div>共：{{totalCount}} 条</div>
+    </div>
+</div>
+
+
+
+
+<div class="applyTickmask" ng-show="newOrder">
+    <div class="roleForm contentForm" ng-show="newOrder" id="newUser">
+            <div class="aptkMaskTitle">新增用户</div>
+        <div class="string">姓名
+            <input type="text" maxlength="5" ng-model="newUsername"/>
+        </div>
+        <div class="string">手机号码
+            <input type="text" onkeyup="value=value.replace(/[^\d]/g,'');" maxlength="15" ng-model="phone"/>
+        </div>
+        <div class="string">登录名
+            <input type="text" maxlength="15" ng-model="userid"/>
+        </div>
+        <div class="string">角色
+
+            <select class="options" ng-model="selected">
+                <option ng-repeat="x in selectOption" value="{{x.id}}">{{x.rolename}}</option>
+            </select>
+          <!--  <div class="options">
+                <select  class="selectOption" ng-init="selectedName = x.rolename" ng-model="selectedName" ng-options="x.rolename for x in selectOption">
+                </select>
+            </div>-->
+        </div>
+        <div class="string">密码
+            <input type="password"  ng-model="password" maxlength="15" ng-model="userid"/>
+        </div>
+        <div class="string">电子邮件
+            <input type="email"  ng-model="email" maxlength="30" />
+        </div>
+
+        <div class="roleFormbutton">
+            <span class="search " ng-click="commitUser()">确定</span>
+            <span class="search" ng-click="newOrder=false">取消</span>
+        </div>
+
+    </div>
+
+</div>
+
+<div class="applyTickmask" ng-show="windowState" ng-click="windowState=false">
+    <div class="roleForm" ng-show="windowState" >
+        <div class="aptkMaskTitle">{{formTitle}}</div>
+        <div class="controlUser">{{controlUsertips}}</div>
+
+    </div>
+</div>
+
+
+<div class="applyTickmask" ng-show="tipsState" ng-click="windowState=false">
+    <div class="roleForm" ng-show="tipsState" >
+        <div class="aptkMaskTitle">{{tipsTitle}}</div>
+        <div class="controlUser">{{tipsContent}}</div>
+        <div class="tipsbutton">
+            <span  class="search " ng-click="deleUser(deleindex)">确定</span>
+            <span class="search" ng-click="tipsState=false">取消</span>
+        </div>
+    </div>
+
+</div>
+
+<div class="applyTickmask" ng-show="modifyUser">
+    <div class="roleForm contentForm" ng-show="modifyUser" >
+        <div class="aptkMaskTitle">修改用户</div>
+        <div class="string">姓名
+            <input type="text" maxlength="5" ng-model="modifyUserContent.tSysUser.username"/>
+        </div>
+        <div class="string">手机号码
+            <input type="text" onkeyup="value=value.replace(/[^\d]/g,'');" maxlength="15" ng-model="modifyUserContent.tSysUser.phone"/>
+        </div>
+        <div class="string">登录名
+            <input type="text" maxlength="15" ng-model="modifyUserContent.tSysUser.userid"/>
+        </div>
+        <div class="string">角色
+
+            <select class="options" ng-model="selected">
+                <option ng-repeat="x in selectOption" value="{{x.id}}">{{x.rolename}}</option>
+            </select>
+            <!--  <div class="options">
+                  <select  class="selectOption" ng-init="selectedName = x.rolename" ng-model="selectedName" ng-options="x.rolename for x in selectOption">
+                  </select>
+              </div>-->
+        </div>
+        <!--<div class="string">密码
+            <input type="password"  ng-model="modifyUserContent.tSysUser.password" maxlength="15" ng-model="userid"/>
+        </div>-->
+        <div class="string">电子邮件
+            <input type="email"  ng-model="modifyUserContent.tSysUser.email" maxlength="30" />
+        </div>
+
+        <div class="roleFormbutton">
+            <span  class="search " ng-click="modifyUserList()">确定</span>
+            <span class="search" ng-click="modifyUser=false">取消</span>
+        </div>
+
+    </div></div>
+
+
+</div>

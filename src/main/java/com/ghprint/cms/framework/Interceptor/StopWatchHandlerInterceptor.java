@@ -78,7 +78,7 @@ public class StopWatchHandlerInterceptor extends HandlerInterceptorAdapter {
         TSysUser tSysUser = (TSysUser) request.getSession().getAttribute("USER_ID");
         //如果用户未登录
         if (tSysUser==null){
-            response.sendRedirect(request.getContextPath()+"/login.jsp");
+            response.sendRedirect(request.getContextPath()+"/index.html");
             return false;
         }
         return true;//继续流程  

@@ -16,11 +16,10 @@
 	</context:component-scan> 
 	
 	<mvc:annotation-driven conversion-service="conversionService"/>
-	
+
 	<!-- 处理 静态文件不能访问--> 
 	<mvc:default-servlet-handler/>
-	
-    <!-- json 自动转换功能的实现 --> 
+	<!-- json 自动转换功能的实现 -->
     <bean id="jsonHttpMessageConverter" class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter" />
     <bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
         <property name="messageConverters">
@@ -31,13 +30,13 @@
         </property>
     </bean>
 
-    <mvc:interceptors>
-        <!-- 使用bean定义一个Interceptor，直接定义在mvc:interceptors根下面的Interceptor将拦截所有的请求 -->
-        <mvc:interceptor>
-            <mvc:mapping path="/**"/>
-            <bean id="StopWatchHandlerInterceptor" class="com.ghprint.cms.framework.Interceptor.StopWatchHandlerInterceptor"/>
-        </mvc:interceptor>
-    </mvc:interceptors>
+    <!--<mvc:interceptors>-->
+        <!--&lt;!&ndash; 使用bean定义一个Interceptor，直接定义在mvc:interceptors根下面的Interceptor将拦截所有的请求 &ndash;&gt;-->
+        <!--<mvc:interceptor>-->
+            <!--<mvc:mapping path="/**"/>-->
+            <!--<bean id="StopWatchHandlerInterceptor" class="com.ghprint.cms.framework.Interceptor.StopWatchHandlerInterceptor"/>-->
+        <!--</mvc:interceptor>-->
+    <!--</mvc:interceptors>-->
     <!-- 自定义转换器用于把字符串转化为数组 --> 
     <bean id="conversionService"
 		class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
