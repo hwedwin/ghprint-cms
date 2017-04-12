@@ -312,7 +312,7 @@
         ${key} like CONCAT('%',#{value},'%')
       </if>
     </where>
-    ORDER BY p.`stockid`
+    ORDER BY p.id DESC
     limit #{pageOffset,jdbcType=INTEGER},#{pageSize,jdbcType=INTEGER}
   </select>
   <select id="getlistcount" resultType="java.lang.Integer"  parameterType="java.lang.String">
@@ -324,6 +324,6 @@
         ${key} like CONCAT('%',#{value},'%')
       </if>
     </where>
-    ORDER BY p.`stockid`
+    ORDER BY p.id DESC
   </select>
 </mapper>
