@@ -10,7 +10,7 @@ define(['angular', 'require', 'app', 'flexible', 'angular-route'], function (ang
 
                     var routeMap = {       //在主页引入
                         '/login': {
-                            path: 'five/Login/login.js',
+                            path: 'five/Login/Login.js',
                             controller: 'LoginController'
                         },
                         '/Home': {

@@ -30,13 +30,13 @@
         </property>
     </bean>
 
-    <!--<mvc:interceptors>-->
-        <!--&lt;!&ndash; 使用bean定义一个Interceptor，直接定义在mvc:interceptors根下面的Interceptor将拦截所有的请求 &ndash;&gt;-->
-        <!--<mvc:interceptor>-->
-            <!--<mvc:mapping path="/**"/>-->
-            <!--<bean id="StopWatchHandlerInterceptor" class="com.ghprint.cms.framework.Interceptor.StopWatchHandlerInterceptor"/>-->
-        <!--</mvc:interceptor>-->
-    <!--</mvc:interceptors>-->
+    <mvc:interceptors>
+        <!-- 使用bean定义一个Interceptor，直接定义在mvc:interceptors根下面的Interceptor将拦截所有的请求 -->
+        <mvc:interceptor>
+            <mvc:mapping path="/**"/>
+            <bean id="StopWatchHandlerInterceptor" class="com.ghprint.cms.framework.Interceptor.StopWatchHandlerInterceptor"/>
+        </mvc:interceptor>
+    </mvc:interceptors>
     <!-- 自定义转换器用于把字符串转化为数组 --> 
     <bean id="conversionService"
 		class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
