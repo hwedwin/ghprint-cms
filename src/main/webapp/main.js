@@ -46,7 +46,7 @@
 
     require.config(config);
 
-    require(['jquery','angular', 'router-cfg-version','base'], function($,angular){
+    require(['jquery','angular', 'router-cfg-version','base','text'], function($,angular){
         angular.bootstrap(document, ['webapp']);
     });
 
