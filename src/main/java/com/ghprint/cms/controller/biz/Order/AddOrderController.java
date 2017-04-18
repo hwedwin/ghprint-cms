@@ -40,6 +40,7 @@ public class AddOrderController extends BaseAction{
             Assert.hasText(order.getStockid().toString(), "order 中 原材料ID  is null or 空字符串。");
             Assert.hasText(order.getProductid().toString(), "order 中 成品ID  is null or 空字符串。");
             Assert.hasText(order.getStandardid().toString(), "order 中 生产标准ID  is null or 空字符串。");
+            Assert.hasText(order.getOrderid().toString(), "order 中 订单ID  is null or 空字符串。");
             Assert.hasText(order.getSpellcount().toString(), "order 中 拼数  is null or 空字符串。");
             Assert.hasText(order.getProportion().toString(), "order 中 比重  is null or 空字符串。");
             Assert.hasText(order.getHeight().toString(), "order 中 高度  is null or 空字符串。");

@@ -49,7 +49,7 @@ public class TestOrderService {
     }
     @Test
     public  void  testaddOrderItem(){
-        TPurchaseDetail O = new TPurchaseDetail(3, 3,1,1,1,1f,1f,1f, 100,new Date(), new Date(), 1,1, 1,1, 1,1,  "delivery",  "logistics",  "express",  "expressnum",  "result");
+        TPurchaseDetail O = new TPurchaseDetail(3, 3,1,1,2222,1,1f,1f,1f, 100,new Date(), new Date(), 1,1, 1,1, 1,1,  "delivery",  "logistics",  "express",  "expressnum",  "result");
        OrderView orderView = orderService.addOrderItem(O);
         String jsonString = JSON.toJSONString(O);
         System.out.println(jsonString);
@@ -57,7 +57,7 @@ public class TestOrderService {
 
     @Test
     public  void testselectOrderList(){
-        DataGridResult orderList = orderService.selectOrderList(null,null, 1, 10);
+        DataGridResult orderList = orderService.selectOrderList(null,null, 1, 30);
         List list = orderList.getRows();
         Iterator<TPurchaseDetail> iter = list.iterator();
         while (iter.hasNext()) {
@@ -81,13 +81,13 @@ public class TestOrderService {
 
     @Test
     public  void testdelOrder(){
-        Integer item = orderService.delOrderItem(26);
+        Integer item = orderService.delOrderItem(30);
         System.out.println(item);
     }
 
     @Test
     public  void testupdateOrderItem(){
-        OrderEdit orderEdit = new OrderEdit(23,3, 3, new Date(), new Date(), 1,1, 1,1, 1,1,  "delivery",  "logistics",  "express",  "expressnum",  "result");
+        OrderEdit orderEdit = new OrderEdit(23,3, 3,323243, new Date(), new Date(), 1,1, 1,1, 1,1,  "delivery",  "logistics",  "express",  "expressnum",  "result");
         Integer item = orderService.updateOrderItem(orderEdit);
         String jsonString = JSON.toJSONString(orderEdit);
         System.out.println(jsonString);

@@ -9,6 +9,8 @@ public class OrderInfo {
 
     private Integer oid;
 
+    private  Integer orderid;
+
     private Integer companycode;
 
     private String companyname;
@@ -347,6 +349,14 @@ public class OrderInfo {
         this.insertime = insertime;
     }
 
+    public Integer getOrderid() {
+        return orderid;
+    }
+
+    public void setOrderid(Integer orderid) {
+        this.orderid = orderid;
+    }
+
     public OrderInfo() {
     }
 
@@ -354,6 +364,7 @@ public class OrderInfo {
     public String toString() {
         return "OrderInfo{" +
                 "oid=" + oid +
+                ", orderid=" + orderid +
                 ", companycode=" + companycode +
                 ", companyname='" + companyname + '\'' +
                 ", provider='" + provider + '\'' +

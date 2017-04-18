@@ -432,6 +432,66 @@ public class TPurchaseDetailExample {
             return (Criteria) this;
         }
 
+        public Criteria andOrderidIsNull() {
+            addCriterion("orderid is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrderidIsNotNull() {
+            addCriterion("orderid is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrderidEqualTo(Integer value) {
+            addCriterion("orderid =", value, "orderid");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrderidNotEqualTo(Integer value) {
+            addCriterion("orderid <>", value, "orderid");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrderidGreaterThan(Integer value) {
+            addCriterion("orderid >", value, "orderid");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrderidGreaterThanOrEqualTo(Integer value) {
+            addCriterion("orderid >=", value, "orderid");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrderidLessThan(Integer value) {
+            addCriterion("orderid <", value, "orderid");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrderidLessThanOrEqualTo(Integer value) {
+            addCriterion("orderid <=", value, "orderid");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrderidIn(List<Integer> values) {
+            addCriterion("orderid in", values, "orderid");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrderidNotIn(List<Integer> values) {
+            addCriterion("orderid not in", values, "orderid");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrderidBetween(Integer value1, Integer value2) {
+            addCriterion("orderid between", value1, value2, "orderid");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrderidNotBetween(Integer value1, Integer value2) {
+            addCriterion("orderid not between", value1, value2, "orderid");
+            return (Criteria) this;
+        }
+
         public Criteria andSpellcountIsNull() {
             addCriterion("spellcount is null");
             return (Criteria) this;

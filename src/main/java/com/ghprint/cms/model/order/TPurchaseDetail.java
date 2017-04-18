@@ -8,6 +8,8 @@ import java.util.Date;
 public class TPurchaseDetail {
     private Integer id;
 
+    private Integer orderid;
+
     private Integer companyid;
 
     private Integer productid;
@@ -297,14 +299,23 @@ public class TPurchaseDetail {
         this.insertime = insertime;
     }
 
+    public Integer getOrderid() {
+        return orderid;
+    }
+
+    public void setOrderid(Integer orderid) {
+        this.orderid = orderid;
+    }
+
     public TPurchaseDetail() {
     }
 
-    public TPurchaseDetail(Integer companyid, Integer productid, Integer stockid, Integer standardid, Integer spellcount, Float proportion, Float height, Float thickness, Integer ordercount, Date orderdate, Date deline, Integer print, Integer open, Integer merge, Integer cut, Integer stable, Integer repeat, String delivery, String logistics, String express, String expressnum, String result) {
+    public TPurchaseDetail(Integer companyid, Integer productid, Integer stockid, Integer standardid,Integer orderid, Integer spellcount, Float proportion, Float height, Float thickness, Integer ordercount, Date orderdate, Date deline, Integer print, Integer open, Integer merge, Integer cut, Integer stable, Integer repeat, String delivery, String logistics, String express, String expressnum, String result) {
         this.companyid = companyid;
         this.productid = productid;
         this.stockid = stockid;
         this.standardid = standardid;
+        this.orderid = orderid;
         this.spellcount = spellcount;
         this.proportion = proportion;
         this.height = height;
@@ -325,9 +336,10 @@ public class TPurchaseDetail {
         this.result = result;
     }
 
-    public TPurchaseDetail(Integer companyid, Integer productid, Integer stockid, Integer standardid, Integer spellcount, Float proportion, Float height, Float thickness, Integer ordercount, Date orderdate, Date deline) {
+    public TPurchaseDetail(Integer companyid, Integer productid, Integer stockid, Integer standardid, Integer orderid,Integer spellcount, Float proportion, Float height, Float thickness, Integer ordercount, Date orderdate, Date deline) {
         this.companyid = companyid;
         this.productid = productid;
+        this.orderid = orderid;
         this.stockid = stockid;
         this.standardid = standardid;
         this.spellcount = spellcount;
@@ -343,6 +355,7 @@ public class TPurchaseDetail {
     public String toString() {
         return "TPurchaseDetail{" +
                 "id=" + id +
+                ", orderid=" + orderid +
                 ", companyid=" + companyid +
                 ", productid=" + productid +
                 ", stockid=" + stockid +

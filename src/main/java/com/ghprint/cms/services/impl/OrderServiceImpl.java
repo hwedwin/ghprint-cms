@@ -95,6 +95,7 @@ public class OrderServiceImpl implements OrderService {
         } catch (Exception e) {
             e.printStackTrace();
             log.error("增加订单异常" + e.getMessage());
+            return  null;
         }
         return orderView;
     }
@@ -157,6 +158,9 @@ public class OrderServiceImpl implements OrderService {
         }
         if(order.getResult()!=null){
             detail.setResult(order.getResult());
+        }
+        if(order.getOrderid()!=null){
+            detail.setOrderid(order.getOrderid());
         }
         Integer key = purchaseDetailMapper.updateByPrimaryKeySelective(detail);
         return key;
