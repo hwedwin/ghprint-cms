@@ -44,7 +44,7 @@
     <!-- 视图解析配置 -->
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver"
 		p:order="100" p:viewClass="org.springframework.web.servlet.view.JstlView"
-		p:prefix="/WEB-INF/" p:suffix=".jsp" />
+		p:prefix="/WEB-INF/" p:suffix=".html" />
 
     <!-- 文件上传所需的配置 -->
 	<bean id="multipartResolver"
