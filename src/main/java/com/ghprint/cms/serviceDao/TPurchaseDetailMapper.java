@@ -1,5 +1,6 @@
 package com.ghprint.cms.serviceDao;
 
+import com.ghprint.cms.model.order.OrderEdit;
 import com.ghprint.cms.model.order.OrderInfo;
 import com.ghprint.cms.model.order.TPurchaseDetail;
 import com.ghprint.cms.model.order.TPurchaseDetailExample;
@@ -34,5 +35,7 @@ public interface TPurchaseDetailMapper {
     Integer getlistcount(@Param("key")String key,@Param("value")String value);
 
     OrderInfo getOneitem(@Param("id")Integer id);
+
+    OrderEdit getEditOrder(@Param("id")Integer id);
 
 }

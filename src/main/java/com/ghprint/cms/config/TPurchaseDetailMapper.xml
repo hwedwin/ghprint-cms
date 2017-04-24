@@ -710,4 +710,25 @@
     </where>
   </select>
 
+
+
+  <select id="getEditOrder"   resultType="com.ghprint.cms.model.order.OrderEdit" parameterType="java.lang.Integer">
+    SELECT
+    <include refid="Base_Column_List"/>
+    FROM t_purchase_detail t
+    LEFT JOIN t_customer_info b
+    ON t.companyid = b.id
+    LEFT JOIN  t_production_stock  c
+    ON  t.productid = c.id
+    LEFT JOIN  t_material_stock d
+    ON  t.stockid = d.id
+
+    <where>
+      t.status = 1
+      <if test="id != null">
+        and t.id =  #{id,jdbcType=INTEGER}
+      </if>
+    </where>
+
+  </select>
 </mapper>

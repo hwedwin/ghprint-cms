@@ -29,14 +29,14 @@ public class UpdateOrderController extends BaseAction{
 
     @RequestMapping(value = "/orders/editorder.do", method = RequestMethod.GET, produces = "application/json; charset=utf-8")
     @ResponseBody
-    public Response<OrderInfo> OrderDetailEdit(HttpServletRequest request, HttpServletResponse response, @RequestParam(value = "orderId") Integer orderId) {
-        Response<OrderInfo> responses = new Response<>();
+    public Response<OrderEdit> OrderDetailEdit(HttpServletRequest request, HttpServletResponse response, @RequestParam(value = "orderId") Integer orderId) {
+        Response<OrderEdit> responses = new Response<>();
         try {
             Assert.hasText(String.valueOf(orderId), "orderId  is null or 空字符串。");
             log.info("OrderDetailEdit request param:{}", orderId);
             Boolean flag = super.execute(request, response);
             if (flag) {
-                OrderInfo orderInfo = orderService.getOrderItemById(orderId);
+                OrderEdit orderInfo = orderService.getOrderEdit(orderId);
                 if (orderInfo != null) {
                     responses.setErrorCode(Constant.errorCodeEnum.SUCCESS.getCode());
                     responses.setErrorMsg(Constant.errorCodeEnum.SUCCESS.getName());

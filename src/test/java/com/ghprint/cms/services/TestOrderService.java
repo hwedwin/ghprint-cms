@@ -92,4 +92,12 @@ public class TestOrderService {
         String jsonString = JSON.toJSONString(orderEdit);
         System.out.println(jsonString);
     }
+
+    @Test
+    public  void testgetOrderEdit(){
+        OrderEdit orderEdit = orderService.getOrderEdit(23);
+        System.out.println(orderEdit);
+        OrderInit productionInit = orderService.getProductionInit(true, false, false, true);
+        System.out.println(productionInit);
+    }
 }

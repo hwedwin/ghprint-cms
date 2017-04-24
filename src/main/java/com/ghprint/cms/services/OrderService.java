@@ -35,5 +35,8 @@ public interface OrderService {
     /*字典
     * */
     public OrderInit getProductionInit(Boolean company , Boolean product , Boolean material , Boolean standard);
+    /*查询单条记录修改附外键
+    * */
+    public OrderEdit getOrderEdit(Integer orderId);
 
 }

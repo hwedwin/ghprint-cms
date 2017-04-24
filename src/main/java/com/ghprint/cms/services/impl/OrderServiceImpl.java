@@ -324,4 +324,27 @@ public class OrderServiceImpl implements OrderService {
         }
         return orderInit;
     }
+
+    @Override
+    public OrderEdit getOrderEdit(Integer orderId) {
+        OrderEdit order = purchaseDetailMapper.getEditOrder(orderId);
+        OrderInit orderInit = this.getProductionInit(true, false, false, true);
+                    if (orderInit != null && order != null) {
+                        List<OrderDictionary> company = orderInit.getCompany();
+                        for (int i = 0; i < company.size(); i++) {
+                            if (company.get(i).getId() == order.getCompanyid()) {
+                                log.info("公司ID：{} ，INDEX：{}",order.getCompanyid(),i+1);
+                               order.setCompanyid(i + 1);
+                            }
+                        }
+                        List<OrderDictionary>  standard= orderInit.getStandard();
+                        for(int i=0;i<standard.size(); i++){
+                            if(standard.get(i).getId() ==  order.getStandardid()){
+                                log.info("生产标准ID：{} ，INDEX：{}",order.getStandardid(),i+1);
+                                order.setStandardid(i+1);
+                            }
+                        }
+                    }
+        return   order==null?null : order ;
+    }
 }
