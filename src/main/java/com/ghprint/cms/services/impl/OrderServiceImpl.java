@@ -162,7 +162,7 @@ public class OrderServiceImpl implements OrderService {
         if(order.getOrderid()!=null){
             detail.setOrderid(order.getOrderid());
         }
-        Integer key = purchaseDetailMapper.updateByPrimaryKeySelective(detail);
+        Integer key = purchaseDetailMapper.updateByPrimaryKey(detail);
         return key;
     }
 
