@@ -52,6 +52,7 @@ public class OrderInfo {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @JsonFormat(pattern="yyyy-MM-dd",timezone = "GMT+8")
     private Date orderdate;
+
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @JsonFormat(pattern="yyyy-MM-dd",timezone = "GMT+8")
     private Date deline;
