@@ -1,5 +1,8 @@
 package com.ghprint.cms.model.order;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.util.Date;
 
 /**
@@ -46,9 +49,11 @@ public class OrderInfo {
     private Integer stockcount = 0;
 
     private Integer productsum = 0;
-
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @JsonFormat(pattern="yyyy-MM-dd",timezone = "GMT+8")
     private Date orderdate;
-
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @JsonFormat(pattern="yyyy-MM-dd",timezone = "GMT+8")
     private Date deline;
 
     private Integer print;
@@ -74,7 +79,8 @@ public class OrderInfo {
     private Integer status =1;
 
     private String result;
-
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @JsonFormat(pattern="yyyy-MM-dd",timezone = "GMT+8")
     private Date insertime;
 
     public Integer getOid() {

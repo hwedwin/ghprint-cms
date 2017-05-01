@@ -1,5 +1,8 @@
 package com.ghprint.cms.model.order;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.util.Date;
 
 /**
@@ -13,7 +16,8 @@ public class OrderEdit {
     private Integer standardid;
 
     private Integer orderid;
-
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @JsonFormat(pattern="yyyy-MM-dd",timezone = "GMT+8")
     private Date orderdate;
 
     private Date deline;
