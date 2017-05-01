@@ -140,7 +140,7 @@ public class UpdateMaterialController extends BaseAction {
             Boolean flag = super.execute(request, response);
             if (flag) {
                 float record = materialStockService.subMaterialStocksum(mid,sum);
-                if (record > 0) {
+                if (record >=0) {
                     responses.setErrorCode(Constant.errorCodeEnum.SUCCESS.getCode());
                     responses.setErrorMsg(Constant.errorCodeEnum.SUCCESS.getName());
                     responses.setResult(String.valueOf(record));

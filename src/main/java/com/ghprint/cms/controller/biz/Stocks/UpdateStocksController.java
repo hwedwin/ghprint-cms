@@ -139,7 +139,7 @@ public class UpdateStocksController extends BaseAction {
             Boolean flag = super.execute(request, response);
             if (flag) {
                 Integer record = proStockService.subStocksum(sid,sum);
-                if (record > 0) {
+                if (record >=0) {
                     responses.setErrorCode(Constant.errorCodeEnum.SUCCESS.getCode());
                     responses.setErrorMsg(Constant.errorCodeEnum.SUCCESS.getName());
                     responses.setResult(String.valueOf(record));
