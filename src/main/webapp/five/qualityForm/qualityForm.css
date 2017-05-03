@@ -12,7 +12,8 @@ body{
 
 .rightTitle{
     float: right;
-
+    cursor: pointer;
+    margin-right: 0.5rem;
 }
 
 .pointer{
@@ -114,11 +115,11 @@ table{
 }
 
 .qualityForm{
-    width: 25%;
+    width: 45%;
     overflow: auto;
     min-width: 4rem;
     background: #fff;
-    margin: 10% 32%;
+    margin: 10% 28%;
     height: 4rem;
     /*text-align: center;*/
 }
@@ -128,12 +129,20 @@ table{
 }
 
 .EditForm{
-    width: 30%;
+/*    width: 30%;
     min-width: 6rem;
     background: #fff;
     margin: 10% 32%;
+    position: relative;
     height: 4rem;
+    overflow: auto;*/
+    width: 45%;
     overflow: auto;
+    background: #fff;
+    margin: auto;
+    margin-top: 15%;
+    position: relative;
+    height: 35%;
 }
 
 .FormTitle{
@@ -168,6 +177,7 @@ table{
 .string{
     width: 3rem;
     height: 0.7rem;
+    /*float: left;*/
     display: inline-block;
     padding: 0.3rem 0.5rem;
 }
@@ -186,6 +196,8 @@ table{
 .up{
     padding: 0.2rem 1rem;
 }
+
+
 
 .selectOption{
     height: 0.4rem;
@@ -273,4 +285,31 @@ table{
     color: #0998CE;
     text-align: center;
     border-bottom: 1px solid #ECEFF3;
+}
+
+
+
+.close{
+    position: absolute;
+    background: url(../../libs/img/close.png) no-repeat center;
+    width: 1rem;
+    height: 0.6rem;
+    background-size: 0.4rem;
+    top:0;
+    left:0;
+
+}
+.errorTip{
+    float: left;
+}
+
+/*Çå¸¡¶¯*/
+.clearfix:after {
+    content: " ";
+    display: block;
+    clear: both;
+    height: 0;
+}
+.clearfix {
+    zoom: 1;
 }

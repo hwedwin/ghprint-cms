@@ -1,14 +1,14 @@
 <link rel="stylesheet" href="./five/qualityForm/qualityForm.css">
 
 <ul class="title">
-    <!--<li class="leftTitle clearfix">光华彩印库存管理系统</li>-->
+    <li class="leftTitle clearfix">光华彩印库存管理系统</li>
     <li class="rightTitle clearfix">欢迎您！{{username}}</li>
     <li class="reset rightTitle clearfix" ng-click="reset()">注销</li>
 </ul>
 
 
 <ul class="section clearfix">
-    <li ng-click="jump('Home')">
+    <li ng-click="jump('Order')">
 
         <div class="orderSearch"></div>
         订单查询
@@ -39,7 +39,7 @@
             <input type="text" placeholder="产品编号"  ng-show="selectedName=='产品编号'" ng-model="selectValue"/>
             <input type="text" placeholder="产品名称" ng-show="selectedName=='产品名称'" ng-model="selectValue"/>
             <input type="text" placeholder="客户名称" ng-show="selectedName=='客户名称'" ng-model="selectValue"/>
-            <input type="date" placeholder="出货日期" ng-show="selectedName=='出货日期'" ng-model="selectDate"/>
+            <input id="dateSelect" type="date" placeholder="出货日期" ng-show="selectedName=='出货日期'" ng-model="selectDate"/>
         </span>
 
 
@@ -74,7 +74,7 @@
         <div class="bottom">
             <a href=""><div ng-click="p_index(1)">首页</div></a>
             <div class="page">
-                <a href=""><span ng-repeat="page in pages" ng-click="searchqualitySpitList($index+1)" class="pageCount">
+                <a href=""><span ng-repeat="page in pages" ng-click="load_page($index+1)" class="pageCount">
                 {{page}}</span></a><!--页数按钮-->
                 <!--<span class="pageCount" ng-click="pagesearch($index)">{{page}}</span>-->
             </div>
@@ -113,41 +113,60 @@
 <div class="applyTickmask" ng-show="qualityFormShow" >
     <div class="EditForm" ng-show="qualityFormShow" id="newOrder">
         <div class="aptkMaskTitle" ng-show="qualityFormShow">新增标准</div>
-        <div class="string" >客户名称
-            <input type="text" ng-model="newForm.customerInfo.companyname" maxlength="20"/>
-            (必填)
+        <p>
+            <span class="close" ng-click="qualityFormShow=false"/>
+
+        </p>
+        <form name="newQualityForm" novalidate>
+
+        <div class="string" >公司名称：(必填)
+            <input type="text" name="companyname" ng-model="newForm.customerInfo.companyname" maxlength="30" required/>
+   <span style="color:red" ng-show="newQualityForm.companyname.$dirty &&newQualityForm.companyname.$invalid">
+                <span class="errorTip clearfix" ng-show="newQualityForm.companyname.$dirty &&newQualityForm.companyname.$error.required">公司名称是必须的。</span>
+                </span>
         </div>
-        <div class="string" >客户ID
-            <input type="text" ng-model="newForm.customerInfo.clientID" maxlength="20"/>
-            (必填)
+        <div class="string" >客户ID：(必填)
+            <input type="text" name="clientID" onkeyup="value=value.replace(/[^\d]/g,''); " ng-model="newForm.customerInfo.clientID" maxlength="15" required/>
+               <span style="color:red" ng-show="newQualityForm.clientID.$dirty &&newQualityForm.clientID.$invalid">
+                <span class="errorTip clearfix" ng-show="newQualityForm.clientID.$dirty &&newQualityForm.clientID.$error.required">客户ID是必须的。</span>
+                </span>
         </div>
-        <div class="string" >公司ID
-            <input type="text" ng-model="newForm.customerInfo.companycode" maxlength="15"/>
-            (必填)
+        <div class="string" >公司代码：(必填)
+            <input type="text" name="companycode" onkeyup="value=value.replace(/[^\d]/g,'');" ng-model="newForm.customerInfo.companycode" maxlength="15" required/>
+               <span style="color:red" ng-show="newQualityForm.companycode.$dirty &&newQualityForm.companycode.$invalid">
+                <span class="errorTip clearfix" ng-show="newQualityForm.companycode.$dirty &&newQualityForm.companycode.$error.required">公司代码是必须的。</span>
+                </span>
         </div>
-        <div class="string" >产品名称
-            <input type="text" ng-model="newForm.productInfo.productname" maxlength="20"/>
-            (必填)
+        <div class="string" >产品名称： (必填)
+            <input type="text" name="productname" ng-model="newForm.productInfo.productname" maxlength="20" required/>
+<span style="color:red" ng-show="newQualityForm.productname.$dirty &&newQualityForm.productname.$invalid">
+                <span class="errorTip clearfix" ng-show="newQualityForm.productname.$dirty &&newQualityForm.productname.$error.required">产品名称是必须的。</span>
+                </span>
         </div>
-        <div class="string" >产品编码
-            <input type="text" ng-model="newForm.productionStandard.codeid" maxlength="32"/>
-            (必填)
+        <div class="string" >产品编码：(必填)
+            <input type="text"  name="codeid" ng-model="newForm.productionStandard.codeid" maxlength="32" required/>
+            <span style="color:red" ng-show="newQualityForm.codeid.$dirty &&newQualityForm.codeid.$invalid">
+                <span class="errorTip clearfix" ng-show="newQualityForm.codeid.$dirty &&newQualityForm.codeid.$error.required">产品编码是必须的。</span>
+                </span>
         </div>
-        <div class="string" >编码
-            <input type="text" ng-model="newForm.productInfo.productcode" maxlength="20"/>
+        <div class="string" >编码：(必填)
+            <input type="text" ng-model="newForm.productInfo.productcode" maxlength="20" required/>
+             <span style="color:red" ng-show="newQualityForm.productcode.$dirty &&newQualityForm.productcode.$invalid">
+                <span class="errorTip clearfix" ng-show="newQualityForm.productcode.$dirty &&newQualityForm.productcode.$error.required">编码是必须的。</span>
+                </span>
         </div>
         <div class="string">印刷方式
             <select ng-model="newForm.productionStandard.PrintMethod" ng-options="x for (x, y) in selectPrintOption">
             </select>
         </div>
         <div class="string">材料性质
-            <input type="text" ng-model="newForm.productionStandard.material" maxlength="20"/>
+            <input type="text" ng-model="newForm.productionStandard.material" maxlength="10"/>
         </div>
         <div class="string">横向收缩率
-            <input type="text" ng-model="newForm.productionStandard.crosswiseshrink" maxlength="5" onkeyup="value=value.replace(/[^\d]/g,'');"/>
+            <input type="text" ng-model="newForm.productionStandard.crosswiseshrink" maxlength="5" onkeyup="value=value.replace(/[^\d.]/g,'')"/>
         </div>
         <div class="string">纵向收缩率
-            <input type="text" onkeyup="value=value.replace(/[^\d]/g,''); " maxlength="5" ng-model="newForm.productionStandard.portraitshrink" onkeyup="value=value.replace(/[^\d]/g,'');"/>
+            <input type="text"  maxlength="5" ng-model="newForm.productionStandard.portraitshrink" onkeyup="value=value.replace(/[^\d.]/g,'')"/>
         </div>
 
 
@@ -155,7 +174,7 @@
 
 
         <div class="string">版号
-            <input type="text" ng-model="newForm.printingData.templatenum" onkeyup="value=value.replace(/[^\d]/g,'');"/>
+            <input type="text" ng-model="newForm.printingData.templatenum" maxlength="10" onkeyup="value=value.replace(/[^\d.]/g,'')"/>
         </div>
         <div class="string">印刷尺寸
             <input type="text" ng-model="newForm.printingData.printsize" maxlength="10"/>
@@ -169,14 +188,16 @@
         <div class="string">拼数
             <input type="text" ng-model="newForm.printingData.spellcount" maxlength="5"/>
         </div>
-        <div class="string">版辊数
-            <input type="text" ng-model="newForm.printingData.bankuncount" maxlength="10"/>
-            <span>必填</span>
+        <div class="string">版辊数:(必填)
+            <input type="text" name="bankuncount" onkeyup="value=value.replace(/[^\d.]/g,'')" ng-model="newForm.printingData.bankuncount" maxlength="10" required/>
+            <span style="color:red" ng-show="newQualityForm.bankuncount.$dirty &&newQualityForm.bankuncount.$invalid">
+                <span class="errorTip clearfix" ng-show="newQualityForm.bankuncount.$dirty &&newQualityForm.bankuncount.$error.required">版辊数是必须的。</span>
+                </span>
         </div>
         <div class="string">颜色
             <input type="text" ng-model="newForm.printingData.color" maxlength="20"/>
         </div>
-        <div class="string">备注
+        <div class="string">印刷资料备注
             <input type="text" ng-model="newForm.printingData.printnote" maxlength="50"/>
         </div>
 
@@ -190,18 +211,20 @@
         <div class="string">材料规格
             <input type="text" ng-model="newForm.printingProcedure.specification" maxlength="10"/>
         </div>
-        <div class="string">印刷数量
-            <input type="text" ng-model="newForm.printingProcedure.printamount" maxlength="10"/>
-            <span class="string">必填</span>
+        <div class="string">印刷数量：(必填)
+            <input type="text" onkeyup="value=value.replace(/[^\d.]/g,'')" name="printamount" ng-model="newForm.printingProcedure.printamount" maxlength="10" required/>
+             <span style="color:red" ng-show="newQualityForm.printamount.$dirty &&newQualityForm.printamount.$invalid">
+                <span class="errorTip clearfix" ng-show="newQualityForm.printamount.$dirty &&newQualityForm.printamount.$error.required">印刷数量是必须的。</span>
+                </span>
         </div>
         <div class="string">印刷重量
-            <input type="text" ng-model="newForm.printingProcedure.printweight" maxlength="15"/>
+            <input type="text" ng-model="newForm.printingProcedure.printweight" onkeyup="value=value.replace(/[^\d.]/g,'')" maxlength="15"/>
         </div>
         <div class="string">印刷数量（米）
-            <input type="text" ng-model="newForm.printingProcedure.printmeter" maxlength="15"/>
+            <input type="text" ng-model="newForm.printingProcedure.printmeter" onkeyup="value=value.replace(/[^\d.]/g,'')" maxlength="10"/>
         </div>
         <div class="string">损耗%
-            <input type="text" ng-model="newForm.printingProcedure.wastage" maxlength="5"/>
+            <input type="text" ng-model="newForm.printingProcedure.wastage" onkeyup="value=value.replace(/[^\d.]/g,'')" maxlength="5"/>
         </div>
         <div class="string">备注
             <input type="text" ng-model="newForm.printingProcedure.procedurenote" maxlength="50"/>
@@ -214,10 +237,10 @@
 
         <div class="FormTitle">分条</div>
         <div class="string">分切尺寸
-            <input type="text" ng-model="newForm.printingProcedureafter.splitsizr" maxlength="10"/>
+            <input type="text" ng-model="newForm.printingProcedureafter.splitsizr" onkeyup="value=value.replace(/[^\d.]/g,'')" maxlength="10"/>
         </div>
         <div class="string">透明边留位
-            <input type="text" ng-model="newForm.printingProcedureafter.transparentkeep" maxlength="10"/>
+            <input type="text" ng-model="newForm.printingProcedureafter.transparentkeep" onkeyup="value=value.replace(/[^\d.]/g,'')" maxlength="10"/>
         </div>
 
         <div class="FormTitle">合掌</div>
@@ -225,7 +248,7 @@
             <input type="text" ng-model="newForm.printingProcedureafter.mergesize" maxlength="20"/>
         </div>
         <div class="string">切高
-            <input type="text" ng-model="newForm.printingProcedureafter.splithigh" maxlength="10"/>
+            <input type="text" ng-model="newForm.printingProcedureafter.splithigh"  onkeyup="value=value.replace(/[^\d.]/g,'')" maxlength="10"/>
         </div>
         <div class="string">胶水位置
             <input type="text" ng-model="newForm.printingProcedureafter.glueplace" maxlength="20"/>
@@ -242,19 +265,11 @@
 
         <div class="FormTitle">重卷</div>
         <div class="string">成品型式
-            <!--<select class="options" ng-model="newForm.printingProcedureafter.newProductStyle">-->
-            <!--<option ng-repeat="x in selectProductStyleOption track by $index" value="{{x.choice}}">{{x.name}}</option>-->
-            <!--</select>-->
 
             <select ng-model="newForm.printingProcedureafter.newProductStyle" ng-options="x for (x, y) in selectProductStyleOption">
             </select>
         </div>
         <div class="string">出卷方向
-            <!--
-            <select class="options" ng-model="newForm.printingProcedureafter.scrolldirection">
-                <option ng-repeat="x in selectDirectionOption track by $index" value="{{x.choice}}">{{x.name}}</option>
-            </select>-->
-
             <select ng-model="newForm.printingProcedureafter.scrolldirection" ng-options="x for (x, y) in selectDirectionOption">
             </select>
         </div>
@@ -263,12 +278,14 @@
         </div>
 
         <div class="string">装箱方式
-            <input type="text" ng-model="newForm.printingProcedureafter.boxway" maxlength="20"/>
+            <input type="text" ng-model="newForm.printingProcedureafter.boxway" maxlength="50"/>
         </div>
 
-        <div class="string">纸箱规格
-            <input type="text" ng-model="newForm.printingProcedureafter.boxsize" maxlength="20"/>
-        <span class="string">必填</span>
+        <div class="string">纸箱规格:(必填)
+            <input type="text" ng-model="newForm.printingProcedureafter.boxsize" maxlength="50" required name="boxsize"/>
+         <span style="color:red" ng-show="newQualityForm.boxsize.$dirty &&newQualityForm.boxsize.$invalid">
+                <span class="errorTip clearfix" ng-show="newQualityForm.boxsize.$dirty &&newQualityForm.boxsize.$error.required">纸箱规格是必须的。</span>
+                </span>
         </div>
 
         <div class="string">重卷规格
@@ -279,7 +296,7 @@
             <input type="text" ng-model="newForm.printingProcedureafter.proceduresum" maxlength="20"/>
         </div>
         <div class="string">驳口数
-            <input type="text" ng-model="newForm.printingProcedureafter.interfacecount" maxlength="10"/>
+            <input type="text" ng-model="newForm.printingProcedureafter.interfacecount" onkeyup="value=value.replace(/[^\d.]/g,'')"  maxlength="10"/>
         </div>
         <div class="string">备注(品检)
             <input type="text" ng-model="newForm.productionStandard.note" maxlength="50"/>
@@ -299,7 +316,7 @@
         <!--<div class="FormTitle">封切</div>-->
 
         <div class="string">折边
-            <input type="text"  maxlength="10" ng-model="newForm.printingProcedureafter.hemcount" onkeyup="value=value.replace(/[^\d]/g,'');"/>
+            <input type="text"  maxlength="10" ng-model="newForm.printingProcedureafter.hemcount" onkeyup="value=value.replace(/[^\d.]/g,'')"/>
         </div>
         <div class="string">共用模具
             <input type="text" maxlength="20" ng-model="newForm.printingProcedureafter.mould" />
@@ -311,23 +328,39 @@
                   <option ng-repeat="x in packageOption track by $index" value="{{x.choice}}">{{x.name}}</option>
               </select>-->
 
-            <select ng-model="newForm.productionStandard.packaging" ng-options="x for (x, y) in packageOption">
+            <select ng-init="newForm.productionStandard.packaging" ng-model="newForm.productionStandard.packaging" ng-options="x.name for x in selectPrintOption"></select>
+
+
+            <select ng-model="newForm.productionStandard.packaging" ng-options="x.name for x in packageOption">
             </select>
         </div>
         <div class="string">备注(纸箱)
             <input type="text" ng-model="newForm.printingProcedureafter.note" maxlength="50"/>
         </div>
         <div class="string">编单人：
-            <input type="text" ng-model="newForm.productionStandard.createauthor" maxlength="10"/>
+            <input type="text" ng-model="newForm.productionStandard.createauthor" maxlength="30"/>
         </div>
 
 
 
 
         <div class="qualityFormbutton">
-            <span class="search " ng-click="newQualityForm()">确定</span>
-            <span class="search" ng-click="qualityFormShow=false">取消</span>
+            <!--<span class="search " ng-click="newQualityForm()">确定</span>-->
+            <!--<span class="search" ng-click="qualityFormShow=false">取消</span>-->
+            <p>
+                <input type="submit" ng-click="addForm()"
+                       ng-disabled="newQualityForm.companyname.$invalid
+                       ||newQualityForm.clientID.$invalid
+                       ||newQualityForm.companycode.$invalid
+                       || newQualityForm.productname.$invalid
+                       ||newQualityForm.codeid.$invalid
+                       ||newQualityForm.bankuncount.$invalid
+                       ||newQualityForm.printamount.$invalid
+                       ||newQualityForm.boxsize.$invalid
+                       ">
+            </p>
         </div>
+            </form>
     </div></div>
 
 <div class="applyTickmask" ng-show="EditFormshow" >
@@ -335,54 +368,54 @@
         <div class="aptkMaskTitle" ng-show="EditFormshow">修改标准</div>
 
         <p>
-            <span class="close" ng-click="EditFormshow=false"/>
+            <span class="close clearfix" ng-click="EditFormshow=false"/>
 
         </p>
         <form name="modifyForm" novalidate>
-         <span class="string">
-                <p>客户名称：(必填)</p>
-                <input type="text" name="clientName" ng-model="modifyContent.customerInfo.companyname" required/>
-                <span style="color:red" ng-show="modifyForm.clientName.$dirty && modifyForm.clientName.$invalid">
-               <span  class="errorTip clearfix" ng-show="modifyForm.clientName.$error.required">客户名称是必填的。</span>
-            </span>
 
-            </span>
+        <div class="string" >公司名称: (必填)
+            <input type="text" name="clientName"  maxlength="30" ng-model="modifyContent.customerInfo.companyname" required/>
+             <span style="color:red" ng-show="modifyForm.clientName.$dirty && modifyForm.clientName.$invalid">
+               <span  class="errorTip clearfix" ng-show="modifyForm.clientName.$error.required">公司名称是必填的。</span>   </span>
+        </div>
+        <div class="string" >客户ID: (必填)
+            <input type="text" name="customerid" onkeyup="value=value.replace(/[^\d]/g,'');" maxlength="15" ng-model="modifyContent.productInfo.customerid" required/>
+                       <span style="color:red" ng-show="modifyForm.customerid.$dirty && modifyForm.customerid.$invalid">
+               <span  class="errorTip clearfix" ng-show="modifyForm.customerid.$error.required">客户ID是必填的。</span>   </span>
+        </div>
+        <div class="string" >公司代码: (必填)
+            <input type="text" name="companycode" maxlength="15" ng-model="modifyContent.customerInfo.companycode" onkeyup="value=value.replace(/[^\d.]/g,'')" required/>
+                   <span style="color:red" ng-show="modifyForm.companycode.$dirty && modifyForm.companycode.$invalid">
+               <span  class="errorTip clearfix" ng-show="modifyForm.companycode.$error.required">公司代码是必填的。</span>   </span>
+        </div>
+        <div class="string" >产品名称: (必填)
+            <input type="text" name="productname"  ng-model="modifyContent.productInfo.productname" maxlength="20" required/>
+                   <span style="color:red" ng-show="modifyForm.productname.$dirty && modifyForm.productname.$invalid">
+               <span  class="errorTip clearfix" ng-show="modifyForm.productname.$error.required">产品名称是必填的。</span>   </span>
 
-        <div class="string" >客户名称
-            <input type="text" ng-model="modifyContent.customerInfo.companyname" />
-            (必填)
         </div>
-        <div class="string" >客户ID
-            <input type="text" ng-model="modifyContent.customerInfo.customerid" />
-            (必填)
-        </div>
-        <div class="string" >公司ID
-            <input type="text" ng-model="modifyContent.customerInfo.companycode" />
-            (必填)
-        </div>
-        <div class="string" >产品名称
-            <input type="text" ng-model="modifyContent.productInfo.productname" />
-            (必填)
-        </div>
-        <div class="string" >产品编码
-            <input type="text" ng-model="modifyContent.productionStandard.codeid" />
-            (必填)
+        <div class="string" >产品编码: (必填)
+            <input type="text" name="codeid" ng-model="modifyContent.productionStandard.codeid" maxlength="32" required/>
+                   <span style="color:red" ng-show="modifyForm.codeid.$dirty && modifyForm.codeid.$invalid">
+               <span  class="errorTip clearfix" ng-show="modifyForm.codeid.$error.required">产品编码是必填的。</span>   </span>
         </div>
 
-        <div class="string" >编码
-            <input type="text" ng-model="modifyContent.productInfo.productcode" />
+        <div class="string" >编码: (必填)
+            <input type="text" ng-model="modifyContent.productInfo.productcode" name="productcode" maxlength="20" required/>
+                    <span style="color:red" ng-show="modifyForm.productcode.$dirty && modifyForm.productcode.$invalid">
+               <span  class="errorTip clearfix" ng-show="modifyForm.productcode.$error.required">编码是必填的。</span>   </span>
         </div>
         <div class="string">印刷方式
             <select ng-init="modifyContent.productionStandard.printingmode" ng-model="modifyContent.productionStandard.printingmode" ng-options="x.name for x in selectPrintOption"></select>
         </div>
         <div class="string">材料性质
-            <input type="text" ng-model="modifyContent.productionStandard.material"/>
+            <input type="text" ng-model="modifyContent.productionStandard.material" maxlength="10"/>
         </div>
         <div class="string">横向收缩率
-            <input type="text" ng-model="modifyContent.productionStandard.crosswiseshrink" onkeyup="value=value.replace(/[^\d]/g,'');"/>
+            <input type="text" ng-model="modifyContent.productionStandard.crosswiseshrink" maxlength="5" onkeyup="value=value.replace(/[^\d.]/g,'')"/>
         </div>
         <div class="string">纵向收缩率
-            <input type="text" onkeyup="value=value.replace(/[^\d]/g,''); "  ng-model="modifyContent.productionStandard.portraitshrink" onkeyup="value=value.replace(/[^\d]/g,'');"/>
+            <input type="text"  maxlength="5" ng-model="modifyContent.productionStandard.portraitshrink" onkeyup="value=value.replace(/[^\d.]/g,'')"/>
         </div>
 
 
@@ -390,87 +423,92 @@
 
 
         <div class="string">版号
-            <input type="text" ng-model="modifyContent.printingData.templatenum" onkeyup="value=value.replace(/[^\d]/g,'');"/>
+            <input type="text" ng-model="modifyContent.printingData.templatenum" onkeyup="value=value.replace(/[^\d.]/g,'')" maxlength="10"/>
         </div>
         <div class="string">印刷尺寸
-            <input type="text" ng-model="modifyContent.printingData.printsize"/>
+            <input type="text" ng-model="modifyContent.printingData.printsize" maxlength="10"/>
         </div>
         <div class="string">版长
-            <input type="text" ng-model="modifyContent.printingData.templatelength" />
+            <input type="text" ng-model="modifyContent.printingData.templatelength" maxlength="10"/>
         </div>
         <div class="string">版周
-            <input type="text" ng-model="modifyContent.printingData.templateperimeter" >
+            <input type="text" ng-model="modifyContent.printingData.templateperimeter" maxlength="10">
         </div>
         <div class="string">拼数
-            <input type="text" ng-model="modifyContent.printingData.spellcount" />
+            <input type="text" ng-model="modifyContent.printingData.spellcount" maxlength="5"/>
         </div>
-        <div class="string">版辊数
-            <input type="text" ng-model="modifyContent.printingData.bankuncount" />
+        <div class="string">版辊数:(必填)
+            <input type="text" name="bankuncount" onkeyup="value=value.replace(/[^\d.]/g,'')" maxlength="10" ng-model="modifyContent.printingData.bankuncount" required/>
+               <span style="color:red" ng-show="modifyForm.bankuncount.$dirty && modifyForm.bankuncount.$invalid">
+               <span  class="errorTip clearfix" ng-show="modifyForm.bankuncount.$error.required">版辊数是必填的。</span>   </span>
         </div>
         <div class="string">颜色
-            <input type="text" ng-model="modifyContent.printingData.color" />
+            <input type="text" ng-model="modifyContent.printingData.color" maxlength="20"/>
         </div>
         <div class="string">备注
-            <input type="text" ng-model="modifyContent.printingData.printnote" />
+            <input type="text" ng-model="modifyContent.printingData.printnote" maxlength="50"/>
         </div>
 
 
         <div class="FormTitle">印刷工序</div>
 
 
-        <div class="string">印刷方向
-            <input type="text" ng-model="modifyContent.printingProcedure.printdirect" />
+        <div class="string">印刷方向:
+            <input type="text" name="printdirect" ng-model="modifyContent.printingProcedure.printdirect"  maxlength="5" />
         </div>
         <div class="string">材料规格
-            <input type="text" ng-model="modifyContent.printingProcedure.specification"/>
+            <input type="text" ng-model="modifyContent.printingProcedure.specification" maxlength="10"/>
         </div>
-        <div class="string">印刷数量
-            <input type="text" ng-model="modifyContent.printingProcedure.printamount" />
+        <div class="string">印刷数量: (必填)
+            <input type="text" name="printingProcedure" ng-model="modifyContent.printingProcedure.printamount" onkeyup="value=value.replace(/[^\d.]/g,'')" maxlength="10" required/>
+            <span style="color:red" ng-show="modifyForm.printamount.$dirty &&modifyForm.printamount.$invalid">
+                <span class="errorTip clearfix" ng-show="modifyForm.printamount.$dirty &&modifyForm.printamount.$error.required">印刷数量是必须的。</span>
+                </span>
         </div>
         <div class="string">印刷重量
-            <input type="text" ng-model="modifyContent.printingProcedure.printweight" />
+            <input type="text" ng-model="modifyContent.printingProcedure.printweight" maxlength="15"/>
         </div>
         <div class="string">印刷数量（米）
-            <input type="text" ng-model="modifyContent.printingProcedure.printmeter" />
+            <input type="text" ng-model="modifyContent.printingProcedure.printmeter" onkeyup="value=value.replace(/[^\d.]/g,'')" maxlength="10"/>
         </div>
         <div class="string">损耗%
-            <input type="text" ng-model="modifyContent.printingProcedure.wastage" />
+            <input type="text" ng-model="modifyContent.printingProcedure.wastage" maxlength="5" onkeyup="value=value.replace(/[^\d.]/g,'')"/>
         </div>
         <div class="string">备注
-            <input type="text" ng-model="modifyContent.printingProcedure.procedurenote" />
+            <input type="text" ng-model="modifyContent.printingProcedure.procedurenote" maxlength="50"/>
         </div>
 
         <div class="FormTitle">后工序</div>
         <div class="string">品检
-            <input type="text" ng-model="modifyContent.printingProcedureafter.qualitycheck" />
+            <input type="text" ng-model="modifyContent.printingProcedureafter.qualitycheck" maxlength="50"/>
         </div>
 
         <div class="FormTitle">分条</div>
         <div class="string">分切尺寸
-            <input type="text" ng-model="modifyContent.printingProcedureafter.splitsizr" />
+            <input type="text" ng-model="modifyContent.printingProcedureafter.splitsizr" onkeyup="value=value.replace(/[^\d.]/g,'')" maxlength="10"/>
         </div>
         <div class="string">透明边留位
-            <input type="text" ng-model="modifyContent.printingProcedureafter.transparentkeep" />
+            <input type="text" ng-model="modifyContent.printingProcedureafter.transparentkeep" maxlength="10"/>
         </div>
 
         <div class="FormTitle">合掌</div>
         <div class="string">合掌尺寸
-            <input type="text" ng-model="modifyContent.printingProcedureafter.mergesize" />
+            <input type="text" ng-model="modifyContent.printingProcedureafter.mergesize" maxlength="20"/>
         </div>
         <div class="string">切高
-            <input type="text" ng-model="modifyContent.printingProcedureafter.splithigh" />
+            <input type="text" ng-model="modifyContent.printingProcedureafter.splithigh" onkeyup="value=value.replace(/[^\d.]/g,'')" maxlength="10"/>
         </div>
         <div class="string">胶水位置
-            <input type="text" ng-model="modifyContent.printingProcedureafter.glueplace" />
+            <input type="text" ng-model="modifyContent.printingProcedureafter.glueplace" maxlength="20"/>
         </div>
         <div class="string">折位
-            <input type="text" ng-model="modifyContent.printingProcedureafter.foldplace" />
+            <input type="text" ng-model="modifyContent.printingProcedureafter.foldplace" maxlength="20"/>
         </div>
         <div class="string">撕口线规格
-            <input type="text" ng-model="modifyContent.printingProcedureafter.tearlinesize"/>
+            <input type="text" ng-model="modifyContent.printingProcedureafter.tearlinesize"maxlength="20"/>
         </div>
         <div class="string">撕口线位置
-            <input type="text" ng-model="modifyContent.printingProcedureafter.tearlineplace" />
+            <input type="text" ng-model="modifyContent.printingProcedureafter.tearlineplace" maxlength="20"/>
         </div>
 
         <div class="FormTitle">重卷</div>
@@ -483,29 +521,32 @@
             <select ng-init="modifyContent.printingProcedureafter.scrolldirection" ng-model="modifyContent.printingProcedureafter.scrolldirection" ng-options="x.name for x in selectDirectionOption"></select>
         </div>
         <div class="string">卷标长度
-            <input type="text" ng-model="modifyContent.printingProcedureafter.scrolllength" />
+            <input type="text" ng-model="modifyContent.printingProcedureafter.scrolllength"  maxlength="20"/>
         </div>
 
         <div class="string">装箱方式
-            <input type="text" ng-model="modifyContent.printingProcedureafter.boxway" />
+            <input type="text" ng-model="modifyContent.printingProcedureafter.boxway" maxlength="50"/>
         </div>
 
-        <div class="string">纸箱规格
-            <input type="text" ng-model="modifyContent.printingProcedureafter.boxsize" />
+        <div class="string">纸箱规格:(必填)
+            <input type="text" name="boxsize" ng-model="modifyContent.printingProcedureafter.boxsize" maxlength="50" required/>
+             <span style="color:red" ng-show="modifyForm.boxsize.$dirty &&modifyForm.boxsize.$invalid">
+                <span class="errorTip clearfix" ng-show="modifyForm.boxsize.$dirty &&modifyForm.boxsize.$error.required">印刷数量是必须的。</span>
+                </span>
         </div>
 
         <div class="string">重卷规格
-            <input type="text" ng-model="modifyContent.printingProcedureafter.repeatscrollsize" />
+            <input type="text" ng-model="modifyContent.printingProcedureafter.repeatscrollsize" maxlength="20"/>
         </div>
 
         <div class="string">成品数量
-            <input type="text" ng-model="modifyContent.printingProcedureafter.proceduresum" />
+            <input type="text" ng-model="modifyContent.printingProcedureafter.proceduresum" maxlength="20" />
         </div>
         <div class="string">驳口数
-            <input type="text" ng-model="modifyContent.printingProcedureafter.interfacecount" />
+            <input type="text" ng-model="modifyContent.printingProcedureafter.interfacecount"  maxlength="10" onkeyup="value=value.replace(/[^\d.]/g,'')" />
         </div>
         <div class="string">备注(品检)
-            <input type="text" ng-model="modifyContent.productionStandard.note" />
+            <input type="text" ng-model="modifyContent.productionStandard.note" maxlength="50" />
         </div>
 
         <div class="FormTitle">封切</div>
@@ -519,10 +560,10 @@
         <!--<div class="FormTitle">封切</div>-->
 
         <div class="string">折边
-            <input type="text"  ng-model="modifyContent.printingProcedureafter.hemcount" onkeyup="value=value.replace(/[^\d]/g,'');"/>
+            <input type="text"  ng-model="modifyContent.printingProcedureafter.hemcount" onkeyup="value=value.replace(/[^\d.]/g,'')"  maxlength="9"/>
         </div>
         <div class="string">共用模具
-            <input type="text" ng-model="modifyContent.printingProcedureafter.mould" />
+            <input type="text" ng-model="modifyContent.printingProcedureafter.mould" maxlength="20" />
         </div>
 
 
@@ -531,29 +572,44 @@
             </select>
         </div>
         <div class="string">备注(纸箱)
-            <input type="text" ng-model="modifyContent.printingProcedureafter.note" />
+            <input type="text" ng-model="modifyContent.printingProcedureafter.note" maxlength="50" />
         </div>
         <div class="string">编单人：
-            <input type="text" ng-model="modifyContent.productionStandard.createauthor" />
+            <input type="text" ng-model="modifyContent.productionStandard.createauthor" maxlength="30"/>
         </div>
 
         <div class="qualityFormbutton">
-            <span class="search " ng-click="EditFormCommit(shareIndex)">确定</span>
-            <span class="search" ng-click="EditFormshow=false">取消</span>
-        </div>
+            <!--<span class="search " ng-click="EditFormCommit(shareIndex)">确定</span>-->
+            <!--<span class="search" ng-click="EditFormshow=false">取消</span>-->
 
+            <p>
+                <input type="submit" ng-click="EditFormCommit(shareIndex)"
+                       ng-disabled="modifyForm.clientName.$error.required
+                       ||modifyForm.customerid.$error.required
+                       ||modifyForm.companycode.$error.required
+                       ||modifyForm.productname.$error.required
+                       ||modifyForm.codeid.$error.required
+                       ||modifyForm.productcode.$error.required
+                       ||modifyForm.bankuncount.$error.required
+                       ||modifyForm.printingProcedure.$error.required
+                       ||modifyForm.boxsize.$error.required
+                       ||modifyForm.printdirect.$error.required
+                       ">
+            </p>
+        </div>
+</form>
     </div></div>
 
 <div class="applyTickmask" ng-show="showFormDetailBox" >
     <div class="qualityForm" ng-show="showFormDetailBox" >
         <div class="aptkMaskTitle" ng-show="showFormDetailBox">标准详情</div>
-        <div class="string" >客户名称:
+        <div class="string" >公司名称:
             <div>{{formDatasArr.customerInfo.companyname}}</div>
         </div>
         <div class="string" >客户ID:
-            <div >{{formDatasArr.customerInfo.customerid}}</div>
+            <div >{{formDatasArr.productInfo.customerid}}</div>
         </div>
-        <div class="string" >公司ID:
+        <div class="string" >公司代码:
             <div >{{formDatasArr.customerInfo.companycode}}</div>
         </div>
         <div class="string" >产品名称:
@@ -633,7 +689,7 @@
         <div class="string">损耗%:
             <div>{{formDatasArr.printingProcedure.wastage}}</div>
         </div>
-        <div class="string">备注:
+        <div class="string">印刷工序备注:
             <div>{{formDatasArr.printingProcedure.procedurenote}}</div>
         </div>
 
@@ -734,3 +790,50 @@
 
     </div>
 </div>
+
+
+<!--日期组件代码-->
+<style>
+    body{font-family:'microsoft yahei';}
+    em{font-style:normal;font-size:14px;}
+    .form-group {position: relative;width:140px;}
+    .form-group-txt{height:32px;line-height:32px;padding:0 10px;}
+    .form-group-select {/*padding-left: 1px;*/}
+    .form-control,
+    .simulation-input {
+        width: 100%;
+        line-height: 16px;
+        font-size: 12px;
+        color: #4b555b;
+        background: none;
+        outline: none;
+        border: 1px solid #d3dcdd;
+        background-color: #fff;
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        -ms-box-sizing: border-box;
+        box-sizing: border-box;
+        margin: 0 -1px;
+        padding: 7px 8px;
+        *padding-left: 0;
+        *padding-right: 0;
+        *text-indent: 8px;
+        *float: left;
+        transition: border-color 0.15s ease-in-out 0s, box-shadow 0.15s ease-in-out 0s;
+    }
+    .float-left{float:left;}
+</style>
+
+<script>
+
+        $("#dateSelect").on("click",function(e){
+e.stopPropagation();
+$(this).lqdatetimepicker({
+css : 'datetime-day',
+dateType : 'D',
+selectback : function(){
+        console.log("date==================="+e)
+}
+});
+
+});</script>

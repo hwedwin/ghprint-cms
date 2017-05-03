@@ -36,7 +36,7 @@ define(['angular', 'text!five/Login/Login.html'], function (angular, tpl) {
                     if(req.data.success){
                         console.log(req.data.result.username);
                         $rootScope.username = req.data.result.username
-                        $location.path("/Home")
+                        $location.path("/Order")
                     }else{
                         $scope.errorCall=true;
                         $scope.errorMSG=req.data.errorMsg;

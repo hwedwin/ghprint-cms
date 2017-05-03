@@ -1,13 +1,13 @@
 <link rel="stylesheet" href="./five/warehouse/warehouse.css">
 
 <ul class="title">
-    <!--<li class="leftTitle clearfix">光华彩印库存管理系统</li>-->
+    <li class="leftTitle clearfix">光华彩印库存管理系统</li>
     <li class="rightTitle clearfix">欢迎您！{{username}}</li>
     <li class="rightTitle clearfix" ng-click="reset()">注销</li></ul>
 
 
 <ul class="section clearfix">
-    <li ng-click="jump('Home')">
+    <li ng-click="jump('Order')">
 
         <div class="orderSearch"></div>
         订单查询
@@ -26,7 +26,7 @@
         系统管理</li>
 </ul>
 
-<div class="details">
+<div class="details" ng-show="ProductTab">
     <div class="up searchSuject">
         <div class="options">
             <select  class="selectOption" ng-init="selectedName = selectOption1[0]" ng-model="selectedName" ng-options="x for x in selectOption1">
@@ -43,38 +43,53 @@
 
     <div class="search point" ng-click="searchOnKey(selectValue)">搜索</div>
         <div class="search point" ng-click="showBox(1)">添加</div>
+
+
     </div>
 
 
     <div class="down">
-        <table  class="sujectTitle">
+        <ul >
+            <li ng-class="getClass(1)" ng-click="showTab(1)">纸箱库存</li>
+            <li ng-class="getClass(2)" ng-click="showTab(2)">原材料库存</li>
+            <li ng-class="getClass(3)" ng-click="showTab(3)">成品库存</li>
+        </ul>
+
+        <table   class="sujectTitle">
             <tr>
-                <td class="sujectOption">编 号</td>
+                <td class="sujectOption" ng-click="sort='id';desc=!desc">编 号</td>
                 <td class="sujectOption">材料名称</td>
                 <td class="sujectOption">颜色</td>
                 <td class="sujectOption">箱数</td>
-                <td class="sujectOption">库存数量</td>
-                <td class="sujectOption">材料ID</td>
-                <td class="sujectOption">装箱数量</td>
-                <td class="sujectOption">尾 数</td>
-                <td class="sujectOption">单价</td>
-                <td class="sujectOption">金额</td>
+                <td class="sujectOption" ng-click="sort='stocksum';desc=!desc">库存总数量</td>
+                <td class="sujectOption" ng-click="sort='stockid';desc=!desc">材料ID</td>
+                <td class="sujectOption" ng-click="sort='boxcount';desc=!desc">装箱数量</td>
+                <td class="sujectOption" ng-click="sort='remain';desc=!desc">尾 数</td>
+                <td class="sujectOption"  ng-click="sort='price';desc=!desc">单价</td>
+                <td class="sujectOption" ng-click="sort='amount;desc=!desc'">金额</td>
                 <td class="sujectOption">编辑</td>
             </tr>
 
 
-            <tr ng-repeat="companyList in companyData track by $index">
+            <tr ng-repeat="companyList in companyData | orderBy:sort:desc">
                 <td class="sujectOption sujectOptionng">{{companyList.id}}</td>
                 <td class="sujectOption sujectOptionng" >{{companyList.stockname}}</td>
                 <td class="sujectOption sujectOptionng">{{companyList.color}}</td>
                 <td class="sujectOption sujectOptionng">{{companyList.count}}</td>
-                <td class="sujectOption sujectOptionng">{{companyList.stocksum}}</td>
+                <td class="sujectOption sujectOptionng">
+                <div class="ediSum">
+                    <span ng-click="addProductSum($index)" class="addButton clearfix"/>
+                    <input class="sum "  type="text" ng-model="companyList.stocksum" readonly/>
+                    <span ng-click="cutProductSum($index)" class="cutButton clearfix"/>
+                </div>
+
+                </td>
                 <td class="sujectOption sujectOptionng">{{companyList.stockid}}</td>
                 <td class="sujectOption sujectOptionng">{{companyList.boxcount}}</td>
                 <td class="sujectOption sujectOptionng">{{companyList.remain}}</td>
                 <td class="sujectOption sujectOptionng">{{companyList.price}}</td>
                 <td class="sujectOption sujectOptionng">{{companyList.amount}}</td>
-                <td class="sujectOption sujectOptionng" ><div ng-click="edit($index,1)" class="EditButton"/>   <div ng-click="dele(1,$index)" class="DeleteButton"/></td>
+                <td class="sujectOption sujectOptionng" ><div ng-click="edit(companyList,1)" class="EditButton"/>   <div ng-click="dele(1,companyList)" class="DeleteButton"/></td>
 
             </tr>
         </table>
@@ -119,15 +134,20 @@
             </span>
 
             <span class="string">
-                <!--纸箱-->数量：<input type="text" ng-model="newPaperBox.count"/>
+                <!--纸箱-->数量：<input type="text" onkeyup="value=value.replace(/[^\d]/g,'');"  ng-model="newPaperBox.count"/>
             </span>
 
                <span class="string">
-                件数：<input type="text" ng-model="newPaperBox.packages"/>
+                         件数：(必填)<input name="packages " onkeyup="value=value.replace(/[^\d]/g,'');" type="number" ng-model="newPaperBox.packages" required/>
+                 <span style="color:red" ng-show="newbox.packages.$dirty && newbox.packages.$invalid">
+                 <span class="errorTip clearfix" ng-show="newbox.packages.$error.required">件数是必须的。</span>
+                     </span>
+
+                <!--件数：<input type="text" ng-model="newPaperBox.packages"/>-->
             </span>
 
             <span class="string">
-               单价：<input name="Single"type="text" ng-model="newPaperBox.price" required/>
+               单价：(必填)<input name="Single"type="number" onkeyup="value=value.replace(/[^\d]/g,'');" ng-model="newPaperBox.price" required/>
                  <span style="color:red" ng-show="newbox.Single.$dirty && newbox.Single.$invalid">
                  <span class="errorTip clearfix" ng-show="newbox.Single.$error.required">单价是必须的。</span>
                      </span>
@@ -136,7 +156,7 @@
 
 
              <span class="string">
-               金额：<input name="Amount"type="text" ng-model="newPaperBox.amount" required/>
+               金额：(必填)<input name="Amount"type="number" onkeyup="value=value.replace(/[^\d]/g,'');" ng-model="newPaperBox.amount" required/>
                  <span style="color:red" ng-show="newbox.Amount.$dirty && newbox.Amount.$invalid">
                  <span class="errorTip clearfix" ng-show="newbox.Amount.$error.required">金额是必须的。</span>
                      </span>
@@ -148,7 +168,7 @@
         <div class="qualityFormbutton">
             <p>
                 <input type="submit" ng-click="addProductMethod(2)"
-                       ng-disabled="newbox.Single.$invalid ||newbox.Amount.$invalid ||newbox.boxsize.$invalid">
+                       ng-disabled="newbox.packages.$invalid ||newbox.Single.$invalid ||newbox.Amount.$invalid ||newbox.boxsize.$invalid">
             </p>
 
                 <!--<p>-->
@@ -189,43 +209,38 @@
                      </span>
             </span>
 
-            <!--<span class="string" >-->
-                <!--供应商：<input type="text" ng-model="newAtom.newProvider"/>-->
-            <!--</span>-->
-
-            <!--<span class="string">-->
-               <!--材料名称：<input type="text" ng-model="newAtom.newAtomName"/>-->
-            <!--</span>-->
-
-
              <span class="string">
-                材料规格：<input type="number" ng-model="newAtom.newSpecification"/>
+                材料规格：<input type="text" onkeyup="value=value.replace(/[^\d]/g,'');"  ng-model="newAtom.newSpecification"/>
             </span>
 
              <span class="string">
-                厚度：<input type="number" ng-model="newAtom.newPLY"/>
+                厚度：<input type="text"  onkeyup="value=value.replace(/[^\d]/g,'');" ng-model="newAtom.newPLY"/>
             </span>
 
 
              <span class="string">
-                纵向：<input type="text" ng-model="newAtom.newPortrait"/>
+                纵向：<input type="text" onkeyup="value=value.replace(/[^\d]/g,'');" ng-model="newAtom.newPortrait"/>
             </span>
 
              <span class="string">
-                横向：<input type="number" ng-model="newAtom.newInfeed"/>
+                横向：<input type="text" onkeyup="value=value.replace(/[^\d]/g,'');"  ng-model="newAtom.newInfeed"/>
             </span>
 
              <span class="string">
-                库存总数量：<input type="number"  ng-model="newAtom.newStockSum"/>
+                 <p>库存总数量：(必填)</p>
+                <input type="text" name="AtomName"  onkeyup="value=value.replace(/[^\d]/g,'');" ng-model="newAtom.newStockSum" required/>
+                 <span style="color:red" ng-show="newAtom.newStockSum.$dirty && newAtom.newStockSum.$invalid">
+               <span  class="errorTip clearfix" ng-show="newAtom.newStockSum.$error.required">库存总数量是必填的。</span>
+                     </span>
             </span>
 
              <span class="string">
-                件数：<input type="number" ng-model="newAtom.newPackages"/>
+                件数：<input type="text" onkeyup="value=value.replace(/[^\d]/g,'');" ng-model="newAtom.newPackages"/>
             </span>
 
 
                 <span class="string">
-                <p>单价：(必填)</p><input type="number" name="singleprice" ng-model="newAtom.newPrice" required/>
+                <p>单价：(必填)</p><input type="text" onkeyup="value=value.replace(/[^\d]/g,'');" name="singleprice" ng-model="newAtom.newPrice" required/>
                    <span style="color:red" ng-show="newAtom.singleprice.$dirty && newAtom.singleprice.$invalid">
                <span  class="errorTip clearfix" ng-show="newAtom.singleprice.$error.required">单价是必填的。</span>
                      </span>
@@ -233,20 +248,16 @@
 
               <span class="string">
                 <p> 金额：(必填)</p>
-               <input type="number" name="total" ng-model="newAtom.newAmount" required/>
+               <input type="number" name="total" onkeyup="value=value.replace(/[^\d]/g,'');"  ng-model="newAtom.newAmount" required/>
                 <span style="color:red" ng-show="newAtom.total.$dirty && newAtom.total.$invalid">
                <span  class="errorTip clearfix" ng-show="newAtom.total.$error.required">金额是必填的。</span></span>
             </span>
 
 
         <div class="qualityFormbutton">
-            <!--<span class="search " ng-click="addProductMethod(3)">确定</span>-->
-            <!--<span class="search" ng-click="company=false">取消</span>-->
-
-
             <p>
                 <input type="submit" ng-click="addProductMethod(3)"
-                       ng-disabled="newAtom.sum.$invalid ||newAtom.total.$invalid ||newAtom.provider.$invalid || newAtom.AtomName.$invalid ||newAtom.singleprice.$invalid ">
+                       ng-disabled="newAtom.newStockSum.$invalid ||  newAtom.sum.$invalid ||newAtom.total.$invalid ||newAtom.provider.$invalid || newAtom.AtomName.$invalid ||newAtom.singleprice.$invalid ">
             </p>
             <!--ng-disabled="atomCotent.sum.$invalid ||atomCotent.total.$invalid ||atomCotent.provider.$invalid || atomCotent.AtomName.$invalid ||atomCotent.singleprice.$invalid ">-->
 
@@ -260,7 +271,7 @@
 
 
 <!--               纸箱模块-->
-<div class="details">
+<div class="details" ng-show="BoxTab">
     <div class="up searchSuject top">
         <div class="options">
             <select  class="selectOption" ng-init="selectedName2 = selectOption2[0]" ng-model="selectedName2" ng-options="x for x in selectOption2">
@@ -268,40 +279,52 @@
         </div>
 
           <span >
-              <!--<input type="text" placeholder="全部"  ng-show="selectedName2=='全部'" ng-model="selectValue2"/>-->
             <input type="number" placeholder="单价" ng-show="selectedName2=='单价'" ng-model="selectValue2forNum"/>
             <input type="number" placeholder="金额" ng-show="selectedName2=='金额'" ng-model="selectValue2forNum"/>
             <input type="text" placeholder="纸箱规格" ng-show="selectedName2=='纸箱规格'" ng-model="selectValue2"/>
         </span>
 
-        <!--<div class="options">-->
-            <!--<input class="selectOption" type="text"/>-->
-        <!--</div>-->
 
         <div class="search point" ng-click="searchOnKeyBox()">搜索</div>
         <div class="search point" ng-click="showBox(2)">添加</div>
+
+
     </div>
 
 
     <div class="down">
+        <ul>
+            <li ng-class="getClass(1)" ng-click="showTab(1)">纸箱库存</li>
+            <li ng-class="getClass(2)" ng-click="showTab(2)">原材料库存</li>
+            <li ng-class="getClass(3)" ng-click="showTab(3)">成品库存</li>
+        </ul>
+
+
         <table  ng-show="companyForm" class="sujectTitle">
             <tr>
-                <td class="sujectOption">纸箱规格</td>
-                <td class="sujectOption">数量/个</td>
-                <td class="sujectOption">件数</td>
-                <td class="sujectOption">单价</td>
-                <td class="sujectOption">金额</td>
-                <td class="sujectOption">编辑</td>
+                <td class="sujectOption" ng-click="sort='boxsize';desc=!desc">纸箱规格</td>
+                <td class="sujectOption" ng-click="sort='count';desc=!desc">数量/个</td>
+                <td class="sujectOption" ng-click="sort='packages';desc=!desc">件数</td>
+                <td class="sujectOption" ng-click="sort='price';desc=!desc">单价</td>
+                <td class="sujectOption" ng-click="price='amount';desc=!desc">金额</td>
+                <td class="sujectOption" >编辑</td>
             </tr>
 
 
-            <tr ng-repeat="paperBoxList in paperBoxData track by $index">
+            <tr ng-repeat="paperBoxList in paperBoxData | orderBy:sort:desc">
                 <td class="sujectOption sujectOptionng">{{paperBoxList.boxsize}}</td>
                 <td class="sujectOption sujectOptionng" >{{paperBoxList.count}}</td>
-                <td class="sujectOption sujectOptionng">{{paperBoxList.packages}}</td>
+                <td class="sujectOption sujectOptionng">
+                    <div class="ediSum">
+                        <span ng-click="addBoxSum($index)" class="addButton clearfix"/>
+                        <input class="sum "  type="text" ng-model="paperBoxList.packages" readonly/>
+                        <span ng-click="cutBoxSum($index)" class="cutButton clearfix"/>
+                    </div>
+                </td>
+
                 <td class="sujectOption sujectOptionng">{{paperBoxList.price}}</td>
                 <td class="sujectOption sujectOptionng">{{paperBoxList.amount}}</td>
-                <td class="sujectOption sujectOptionng" ><div ng-click="edit($index,2)" class="EditButton"/>   <div ng-click="dele(2,$index)" class="DeleteButton"/></td>
+                <td class="sujectOption sujectOptionng" ><div ng-click="edit(paperBoxList,2)" class="EditButton"/>   <div ng-click="dele(2,paperBoxList)" class="DeleteButton"/></td>
 
             </tr>
         </table>
@@ -315,7 +338,7 @@
         <div class="bottom">
             <a href=""><div ng-click="p_index2(1)">首页</div></a>
             <div class="page">
-                <a href=""><span ng-repeat="page in pages" ng-click="load_page2($index+1)" class="pageCount">
+                <a href=""><span ng-repeat="page in pages2" ng-click="load_page2($index+1)" class="pageCount">
                 {{page}}</span></a><!--页数按钮-->
                 <!--<span class="pageCount" ng-click="pagesearch($index)">{{page}}</span>-->
             </div>
@@ -341,7 +364,7 @@
 
             <span class="string">
                 <span >客户ID：(必填)</span>
-                <input type="text" name="ClientID" ng-model="newProduct.customerid" required/>
+                <input type="text" onkeyup="value=value.replace(/[^\d]/g,'');" name="ClientID" ng-model="newProduct.customerid" required/>
                 <span style="color:red" ng-show="newProduct.ClientID.$dirty &&newProduct.ClientID.$invalid">
                 <span class="errorTip clearfix" ng-show="newProduct.ClientID.$dirty &&newProduct.ClientID.$error.required">客户ID是必须的。</span>
                 </span>
@@ -359,13 +382,13 @@
 
             <span class="string">
                 <span >库存总数量：(必填)</span>
-                <input type="text" name="Stocksum" ng-model="newProduct.stocksum" required/>
+                <input type="text" onkeyup="value=value.replace(/[^\d]/g,'');" name="Stocksum" ng-model="newProduct.stocksum" required/>
                 <span style="color:red" ng-show="newProduct.Stocksum.$dirty &&newProduct.Stocksum.$invalid">
                 <span class="errorTip clearfix" ng-show="newProduct.Stocksum.$dirty &&newProduct.Stocksum.$error.required">材料ID是必须的。</span>
                 </span>
             </span>
          <span class="string">
-                箱数：<input type="number" ng-model="newProduct.count"/>
+                箱数：<input type="text" onkeyup="value=value.replace(/[^\d]/g,'');"  ng-model="newProduct.count"/>
             </span>
 
             <span class="string">
@@ -377,25 +400,25 @@
             </span>
 
              <span class="string">
-                装箱数量：<input type="number" ng-model="newProduct.boxcount"/>
+                装箱数量：<input type="text" onkeyup="value=value.replace(/[^\d]/g,'');" ng-model="newProduct.boxcount"/>
             </span>
 
 
              <span class="string">
-                尾 数：<input type="number" ng-model="newProduct.remain"/>
+                尾 数：<input type="text" onkeyup="value=value.replace(/[^\d]/g,'');" ng-model="newProduct.remain"/>
             </span>
 
 
             <span class="string">
                 <span >单价：(必填)</span>
-                <input type="text" name="singlePrice" ng-model="newProduct.price" required/>
+                <input type="text" name="singlePrice" onkeyup="value=value.replace(/[^\d]/g,'');" ng-model="newProduct.price" required/>
                 <span style="color:red" ng-show="newProduct.singlePrice.$dirty &&newProduct.singlePrice.$invalid">
                 <span class="errorTip clearfix" ng-show="newProduct.singlePrice.$dirty &&newProduct.singlePrice.$error.required">单价是必须的。</span>
                 </span>
             </span>
 
              <span class="string">
-                金额：<input type="number" name="Amount" ng-model="newProduct.amount" required/>
+                金额：(必填)<input type="text" name="Amount" onkeyup="value=value.replace(/[^\d]/g,'');" ng-model="newProduct.amount" required/>
                  <span style="color:red" ng-show="newProduct.Amount.$dirty &&newProduct.Amount.$invalid">
                 <span class="errorTip clearfix" ng-show="newProduct.Amount.$dirty &&newProduct.Amount.$error.required">金额是必须的。</span>
                 </span>
@@ -416,11 +439,11 @@
 
 
 
-<!--//========================-->
+<!--//============原材料============-->
 
 
 
-<div class="details">
+<div class="details" ng-show="AtomTab">
     <div class="up searchSuject top">
         <div class="options">
             <select  class="selectOption" ng-init="selectedName3 = selectOption3[0]" ng-model="selectedName3" ng-options="x for x in selectOption3">
@@ -434,44 +457,62 @@
             <input type="text" placeholder="金额" ng-show="selectedName3=='金额'" ng-model="selectValue3"/>
         </span>
 
-        <!--<div class="options">-->
-            <!--<input class="selectOption" type="date"/>-->
-        <!--</div>-->
 
         <div class="search point" ng-click="searchAtomOnKey(selectValue3)">搜索</div>
         <div class="search point" ng-click="showBox(3)">添加</div>
+
+
     </div>
 
 
     <div class="down">
+        <ul>
+            <li ng-class="getClass(1)" ng-click="showTab(1)">纸箱库存</li>
+            <li ng-class="getClass(2)" ng-click="showTab(2)">原材料库存</li>
+            <li ng-class="getClass(3)" ng-click=" showTab(3)">成品库存</li>
+        </ul>
+
         <table  ng-show="companyForm" class="sujectTitle">
             <tr>
-                <td class="sujectOption">供应商</td>
-                <td class="sujectOption">材料名称</td>
-                <td class="sujectOption">材料规格</td>
-                <td class="sujectOption">厚度</td>
-                <td class="sujectOption">纵向</td>
-                <td class="sujectOption">横向</td>
-                <td class="sujectOption">库存总数量</td>
-                <td class="sujectOption">件数</td>
-                <td class="sujectOption">单价</td>
-                <td class="sujectOption">金额</td>
+                <td class="sujectOption"   ng-click="sort='provider';desc=!desc" >供应商</td>
+                <td class="sujectOption"  ng-click="sort='name';desc=!desc">材料名称</td>
+                <td class="sujectOption"  ng-click="sort='specification';desc=!desc">材料规格</td>
+                <td class="sujectOption"  ng-click="sort='ply';desc=!desc">厚度</td>
+                <td class="sujectOption"  ng-click="sort='portrait';desc=!desc">纵向</td>
+                <td class="sujectOption"  ng-click="sort='infeed';desc=!desc">横向</td>
+                <td class="sujectOption"  ng-click="sort='materialsum';desc=!desc">库存总数量</td>
+                <td class="sujectOption"  ng-click="sort='packages';desc=!desc">件数</td>
+                <td class="sujectOption"  ng-click="sort='price';desc=!desc">单价</td>
+                <td class="sujectOption"  ng-click="sort='amount';desc=!desc">金额</td>
                 <td class="sujectOption">编辑</td>
             </tr>
 
 
-            <tr ng-repeat="AtomList in AtomData track by $index">
+            <!--<div class="ediSum">-->
+                <!--<span ng-click="addAtomSum($index)" class="EditButton addSum clearfix"/>-->
+                <!--<input class="sum "  type="text" ng-model="AtomList.materialsum" readonly/>-->
+                <!--<span ng-click="cutAtomSum($index)" class="EditButton cutSum clearfix"/>-->
+            <!--</div>-->
+
+            <tr ng-repeat="AtomList in AtomData | orderBy:sort:desc">
                 <td class="sujectOption sujectOptionng" >{{AtomList.provider}}</td>
                 <td class="sujectOption sujectOptionng">{{AtomList.name}}</td>
                 <td class="sujectOption sujectOptionng">{{AtomList.specification}}</td>
                 <td class="sujectOption sujectOptionng">{{AtomList.ply}}</td>
                 <td class="sujectOption sujectOptionng">{{AtomList.portrait}}</td>
                 <td class="sujectOption sujectOptionng">{{AtomList.infeed}}</td>
-                <td class="sujectOption sujectOptionng">{{AtomList.materialsum}}</td>
+                <td class="sujectOption sujectOptionng">
+                    <div class="ediSum">
+                    <span ng-click="addAtomSum($index)" class="addButton clearfix"/>
+                    <input class="sum "  type="text" ng-model="AtomList.materialsum" readonly/>
+                    <span ng-click="cutAtomSum($index)" class="cutButton clearfix"/>
+                    </div>
+
+                </td>
                 <td class="sujectOption sujectOptionng">{{AtomList.packages}}</td>
                 <td class="sujectOption sujectOptionng">{{AtomList.price}}</td>
                 <td class="sujectOption sujectOptionng">{{AtomList.amount}}</td>
-                <td class="sujectOption sujectOptionng" ><div ng-click="edit($index,3)" class="EditButton"/>   <div ng-click="dele(3,$index)" class="DeleteButton"/></td>
+                <td class="sujectOption sujectOptionng" ><div ng-click="edit(AtomList,3)" class="EditButton"/>   <div ng-click="dele(3,AtomList)" class="DeleteButton"/></td>
 
             </tr>
         </table>
@@ -504,7 +545,7 @@
 
              <span class="string">
                 <span >客户ID：(必填)</span>
-                <input type="text" name="customerid" ng-model="ModifyGoodsContent.customerid" required/>
+                <input type="text" onkeyup="value=value.replace(/[^\d]/g,'');" name="customerid" ng-model="ModifyGoodsContent.customerid" required/>
                 <span style="color:red" ng-show="ModifyProduct.customerid.$dirty &&ModifyProduct.customerid.$invalid">
                 <span class="errorTip clearfix" ng-show="ModifyProduct.customerid.$dirty &&ModifyProduct.customerid.$error.required">客户ID是必须的。</span>
                 </span>
@@ -525,20 +566,27 @@
                      </span>
             </span>
 
-
-
-             <span class="string">
-                装箱数量：<input type="number" ng-model="ModifyGoodsContent.boxcount"/>
+            <span class="string">
+                <p>库存总数量：(必填)</p>
+                 <input type="text"  onkeyup="value=value.replace(/[^\d]/g,'');" name="sum" ng-model="ModifyGoodsContent.stocksum" required/>
+                   <span style="color:red" ng-show="ModifyProduct.sum.$dirty && ModifyProduct.sum.$invalid">
+               <span  class="errorTip clearfix" ng-show="ModifyProduct.sum.$error.required">库存是必填的。</span>
+                     </span>
             </span>
 
 
              <span class="string">
-                尾 数：<input type="number" ng-model="ModifyGoodsContent.remain"/>
+                装箱数量：<input type="text" onkeyup="value=value.replace(/[^\d]/g,'');" ng-model="ModifyGoodsContent.boxcount"/>
             </span>
 
 
              <span class="string">
-                单价：<input name="Singleprice"type="text" ng-model="ModifyGoodsContent.price" required/>
+                尾 数：<input type="text" onkeyup="value=value.replace(/[^\d]/g,'');" ng-model="ModifyGoodsContent.remain"/>
+            </span>
+
+
+             <span class="string">
+                单价：<input name="Singleprice"type="text" onkeyup="value=value.replace(/[^\d]/g,'');" ng-model="ModifyGoodsContent.price" required/>
                  <span style="color:red" ng-show="ModifyProduct.Singleprice.$dirty && ModifyProduct.Singleprice.$invalid">
                  <span class="errorTip clearfix" ng-show="ModifyProduct.Singleprice.$error.required">单价是必须的。</span>
                      </span>
@@ -546,7 +594,7 @@
 
 
             <span class="string">
-                金额：<input name="Amount"type="text" ng-model="ModifyGoodsContent.amount" required/>
+                金额：<input name="Amount"type="text" onkeyup="value=value.replace(/[^\d]/g,'');" ng-model="ModifyGoodsContent.amount" required/>
                  <span style="color:red" ng-show="ModifyProduct.Amount.$dirty && ModifyProduct.Amount.$invalid">
                  <span class="errorTip clearfix" ng-show="ModifyProduct.Amount.$error.required">金额是必须的。</span>
                      </span>
@@ -554,12 +602,9 @@
 
 
         <div class="qualityFormbutton">
-            <!--<span class="search " ng-click="modifyProduct(1)">确定</span>-->
-            <!--<span class="search" ng-click="ModifyGoods=false">取消</span>-->
-            <!--newProduct.ClientID.$error.required || newProduct.newStockid.$error.required-->
             <p>
                 <input type="submit" ng-click="modifyProduct(1)"
-                       ng-disabled="ModifyProduct.Singleprice.$invalid || ModifyProduct.Amount.$invalid || ModifyProduct.customerid.$invalid || ModifyProduct.stockid.$error.required">
+                       ng-disabled="ModifyProduct.sum.$invalid ||ModifyProduct.Singleprice.$invalid || ModifyProduct.Amount.$invalid || ModifyProduct.customerid.$invalid || ModifyProduct.stockid.$error.required">
             </p>
         </div>
 </form>
@@ -584,15 +629,19 @@
             </span>
 
             <span class="string">
-                <!--纸箱-->数量：<input type="number" ng-model="ModifyBoxContent.count"/>
+                <!--纸箱-->数量：<input type="text" onkeyup="value=value.replace(/[^\d]/g,'');" ng-model="ModifyBoxContent.count"/>
             </span>
-
+`
                <span class="string">
-                件数：<input type="number" ng-model="ModifyBoxContent.packages"/>
+                <!--件数：<input type="number" ng-model="ModifyBoxContent.packages"/>-->
+                       件数：(必填)<input name="packages"type="text"  onkeyup="value=value.replace(/[^\d]/g,'');" ng-model="ModifyBoxContent.packages" required/>
+                 <span style="color:red" ng-show="box.packages.$dirty && box.packages.$invalid">
+                 <span  class="errorTip clearfix" ng-show="box.packages.$error.required">件数是必须的。</span>
+                     </span>
             </span>
 
              <span class="string">
-               单价：<input name="Single"type="text" ng-model="ModifyBoxContent.price" required/>
+               单价：(必填)<input name="Single"type="text" onkeyup="value=value.replace(/[^\d]/g,'');"  ng-model="ModifyBoxContent.price" required/>
                  <span style="color:red" ng-show="box.Single.$dirty && box.Single.$invalid">
                  <span class="errorTip clearfix" ng-show="box.Single.$error.required">金额是必须的。</span>
                      </span>
@@ -600,7 +649,7 @@
 
 
                 <span class="string">
-               金额：<input name="Amount"type="text" ng-model="ModifyBoxContent.amount" required/>
+               金额：(必填)<input name="Amount"type="text" onkeyup="value=value.replace(/[^\d]/g,'');" ng-model="ModifyBoxContent.amount" required/>
                  <span style="color:red" ng-show="box.Amount.$dirty && box.Amount.$invalid">
                  <span class="errorTip clearfix" ng-show="box.Amount.$error.required">金额是必须的。</span>
                      </span>
@@ -610,7 +659,7 @@
         <div class="qualityFormbutton">
             <p>
                 <input type="submit" ng-click="modifyProduct(2)"
-                       ng-disabled="box.Amount.$invalid ||box.Single.$invalid ||box.boxsize.$invalid">
+                       ng-disabled="box.packages.$invalid ||box.Amount.$invalid ||box.Single.$invalid ||box.boxsize.$invalid">
             </p>
             <!--<span class="search " ng-click="modifyProduct(2)">确定</span>-->
             <!--<span class="search" ng-click="ModifyBoxCount=false">取消</span>-->
@@ -644,36 +693,36 @@
             </span>
 
               <span class="string">
-                材料规格：<input type="number" ng-model="ModifyAtomContent.specification"/>
+                材料规格：<input type="text"  onkeyup="value=value.replace(/[^\d]/g,'');" ng-model="ModifyAtomContent.specification"/>
             </span>
 
              <span class="string">
-                厚度：<input type="number" ng-model="ModifyAtomContent.ply"/>
+                厚度：<input type="text"  onkeyup="value=value.replace(/[^\d]/g,'');" ng-model="ModifyAtomContent.ply"/>
             </span>
 
 
              <span class="string">
-                纵向：<input type="text" ng-model="ModifyAtomContent.portrait"/>
+                纵向：<input type="text" onkeyup="value=value.replace(/[^\d]/g,'');" ng-model="ModifyAtomContent.portrait"/>
             </span>
 
              <span class="string">
-                横向：<input type="number" ng-model="ModifyAtomContent.infeed"/>
+                横向：<input type="text" onkeyup="value=value.replace(/[^\d]/g,'');" ng-model="ModifyAtomContent.infeed"/>
             </span>
 
              <span class="string">
                 <p>库存总数量：(必填)</p>
-                 <input type="number"  name="sum" ng-model="ModifyAtomContent.materialsum" required/>
+                 <input type="text"   onkeyup="value=value.replace(/[^\d]/g,'');" name="sum" ng-model="ModifyAtomContent.materialsum" required/>
                    <span style="color:red" ng-show="atomCotent.sum.$dirty && atomCotent.sum.$invalid">
                <span  class="errorTip clearfix" ng-show="atomCotent.sum.$error.required">库存是必填的。</span>
                      </span>
             </span>
 
              <span class="string">
-                件数：<input type="number" ng-model="ModifyAtomContent.packages"/>
+                件数：<input type="text"  onkeyup="value=value.replace(/[^\d]/g,'');" ng-model="ModifyAtomContent.packages"/>
             </span>
 
               <span class="string">
-                <p>单价：(必填)</p><input type="number" name="singleprice" ng-model="ModifyAtomContent.price" required/>
+                <p>单价：(必填)</p><input type="text" name="singleprice"  onkeyup="value=value.replace(/[^\d]/g,'');" ng-model="ModifyAtomContent.price" required/>
                    <span style="color:red" ng-show="atomCotent.singleprice.$dirty && atomCotent.singleprice.$invalid">
                <span  class="errorTip clearfix" ng-show="atomCotent.singleprice.$error.required">单价是必填的。</span>
                      </span>
@@ -682,7 +731,7 @@
 
             <span class="string">
                 <p> 金额：(必填)</p>
-               <input type="number" name="total" ng-model="ModifyAtomContent.amount" required/>
+               <input type="text" name="total"  onkeyup="value=value.replace(/[^\d]/g,'');" ng-model="ModifyAtomContent.amount" required/>
                 <span style="color:red" ng-show="atomCotent.total.$dirty && atomCotent.total.$invalid">
                <span  class="errorTip clearfix" ng-show="atomCotent.total.$error.required">金额是必填的。</span></span>
             </span>

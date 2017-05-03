@@ -2,10 +2,9 @@ define(['angular', 'text!five/qualityForm/qualityForm.html'], function (angular,
     //angular会自动根据controller函数的参数名，导入相应的服务
     return {
         controller: function ($rootScope,$scope,$location, $routeParams, $http, $interval) {
-         //真实环境需把代码注释去掉，检查用户是否有刷新
-         /*   if(!$rootScope.username){
+            if(!$rootScope.username){
                 $location.path("/login")
-            }*/
+            }
 
 
             //查看详情
@@ -76,6 +75,7 @@ define(['angular', 'text!five/qualityForm/qualityForm.html'], function (angular,
                         $scope.tipsState=true;
                         $scope.tipsTitle = "系统提示";
                         $scope.tipsContent = "数据获取失败，请重试";
+                        $scope.EditFormshow=false;
                     }
 
 
@@ -128,11 +128,24 @@ define(['angular', 'text!five/qualityForm/qualityForm.html'], function (angular,
                 //$scope.EditFormContent =angular.copy($scope.EditFormContent=angular.copy(arr));
                 var timestamp=new Date().getTime();   //获取时间戳，建单时间
 
-                $scope.modifyContent.productionStandard.printingmode=  $scope.modifyContent.productionStandard.printingmode.choice
-                $scope.modifyContent.printingProcedureafter.splitsum = $scope.modifyContent.printingProcedureafter.splitsum.choice
-                $scope.modifyContent.printingProcedureafter.scrolldirection = $scope.modifyContent.printingProcedureafter.scrolldirection.choice
-                $scope.modifyContent.productionStandard.packaging = $scope.modifyContent.productionStandard.packaging.choice
-                $scope.modifyContent.printingProcedureafter.productstyle = $scope.modifyContent.printingProcedureafter.productstyle.choice
+                if(arr.productionStandard.printingmode){
+                    $scope.modifyContent.productionStandard.printingmode=  $scope.modifyContent.productionStandard.printingmode.choice
+
+                }if(arr.printingProcedureafter.splitsum){
+                    $scope.modifyContent.printingProcedureafter.splitsum = $scope.modifyContent.printingProcedureafter.splitsum.choice
+
+                }if(arr.printingProcedureafter.scrolldirection){
+                    $scope.modifyContent.printingProcedureafter.scrolldirection = $scope.modifyContent.printingProcedureafter.scrolldirection.choice
+
+                }if(arr.productionStandard.packaging){
+
+                    $scope.modifyContent.productionStandard.packaging = $scope.modifyContent.productionStandard.packaging.choice
+                }if(arr.printingProcedureafter.productstyle){
+
+                    $scope.modifyContent.printingProcedureafter.productstyle = $scope.modifyContent.printingProcedureafter.productstyle.choice
+                }
+
+
 
 
                   $http({
@@ -145,8 +158,10 @@ define(['angular', 'text!five/qualityForm/qualityForm.html'], function (angular,
 
                   }).then(function successCallback(response) {
                       console.log( response);
+                      $scope.EditFormshow=false;
+
                       if(response.data.success){
-                          $scope.qualityFormShow=false;
+                          //$scope.qualityFormShow=false;
                           $scope.tipsState=true;
                           $scope.tipsTitle = "操作提示";
                           $scope.tipsContent = "操作成功";
@@ -161,6 +176,7 @@ define(['angular', 'text!five/qualityForm/qualityForm.html'], function (angular,
 
                   }, function errorCallback(response) {
                       console.log(response);
+                      $scope.EditFormshow=false
                       $scope.tipsState=true;
                       $scope.tipsTitle = "操作提示";
                       $scope.tipsContent = "系统报错，建议重新登录";
@@ -194,7 +210,7 @@ define(['angular', 'text!five/qualityForm/qualityForm.html'], function (angular,
                         $scope.tipsTitle = "删除提示"
                         $scope.tipsContent = "操作成功";
                     }else{
-                        //查询角色列表失败
+                        //查询角色列表失败f
                         console.log("查询角色失败，请联系管理员！")
                     }
                     searchqualityList(1,"","");
@@ -206,33 +222,29 @@ define(['angular', 'text!five/qualityForm/qualityForm.html'], function (angular,
             }
             $scope.searchOnKey = function(){
                 var urlKey;
-                if($scope.selectedName=='产品编号'){
-                    urlKey = "codeid"
-                }else if($scope.selectedName=='产品名称'){
+                 if($scope.selectedName=='产品名称'){
+                    $rootScope.selectedName= $scope.selectedName
+                     $rootScope.selectValue =  $scope.selectValue
                     urlKey = "productname"
-                }else if($scope.selectedName=='客户名称'){
-                    urlKey = "companyname"
-                }else if($scope.selectedName=='出货日期'){
-                    urlKey = "customerid"
-                    var time = $scope.selectDate
-                    //time = time.substr(0,10)
-                    console.log("time++++++++++++"+$scope.selectDate)
-                    $scope.selectValue  = $scope.selectDate
-                }else{
-                    $scope.formTitle="错误提示"
-                    $scope.controlUsertips="参数不齐"
-                    $scope.windowState=true
-                }
-                //searchqualityList(1,urlKey,$scope.selectValue);
+                     searchqualityList(1,urlKey,$rootScope.selectValue);
+                 }else if($scope.selectedName=='全部'){
+                     $rootScope.selectedName= ""
+                     $rootScope.selectValue =""
+                     searchqualityList(1,"","");
+                 }else{
+                     $scope.formTitle="错误提示"
+                     $scope.controlUsertips="参数不齐"
+                     $scope.windowState=true
+                 }
             }
 
 
             //新增生产质量列表
             //$scope.newForm.customerInfo=""
-           $scope.newQualityForm = function(){
+           $scope.addForm = function(){
                var timestamp=new Date().getTime();   //获取时间戳，建单时间
                //从输入数据转到上传参数
-               if(
+        /*       if(
                    $scope.newForm.printingProcedure.printamount||
                    $scope.newForm.printingData.bankuncount||
                 $scope.newForm.customerInfo.companycode||
@@ -243,7 +255,7 @@ define(['angular', 'text!five/qualityForm/qualityForm.html'], function (angular,
                 $scope.controlUsertips="参数不齐"
                 $scope.windowState=true
 
-            }
+            }*/
                //必填：printamount  backun   box  印刷数量
                 console.log("准备请求新增接口");
                 $http({
@@ -285,7 +297,8 @@ define(['angular', 'text!five/qualityForm/qualityForm.html'], function (angular,
                             "mergesize":$scope.newForm.printingProcedureafter.mergesize,
                             "mould":$scope.newForm.printingProcedureafter.mould,
                             "proceduresum":$scope.newForm.printingProcedureafter.proceduresum,
-                            "productstyle":$scope.newForm.printingProcedureafter.productStyle,                            "qualitycheck":$scope.newForm.printingProcedureafter.qualitycheck,
+                            "productstyle":$scope.newForm.printingProcedureafter.productStyle,
+                            "qualitycheck":$scope.newForm.printingProcedureafter.qualitycheck,
                             "repeatscrollsize":$scope.newForm.printingProcedureafter.repeatscrollsize,
                             "scrolldirection":$scope.newForm.printingProcedureafter.scrolldirection,//出卷方向
                             "scrolllength":$scope.newForm.printingProcedureafter.scrolllength,
@@ -337,6 +350,7 @@ define(['angular', 'text!five/qualityForm/qualityForm.html'], function (angular,
 
                 }, function errorCallback(response) {
                     console.log(response);
+                    $scope.qualityFormShow=false;
                     $scope.tipsState=true;
                     $scope.tipsTitle = "操作提示";
                     $scope.tipsContent = "系统报错，建议重新登录";
@@ -386,7 +400,7 @@ define(['angular', 'text!five/qualityForm/qualityForm.html'], function (angular,
            //印刷方式
             $scope.selectPrintOption = [{name:"里印",choice:"1"},{name:"表印",choice:"2"}];
 
-            $scope.selectOption = ["产品编号","出货日期","产品名称","客户名称"];
+            $scope.selectOption = ["全部","产品名称"];
             //成品型式
             $scope.selectProductStyleOption = [{name:"切片",choice:"1"},{name:"卷装",choice:"2"},{name:"大纸芯12.5CM",choice:"3"},{name:"大纸芯15CM",choice:"4"},{name:"小纸芯",choice:"5"}];
             //出卷方向
@@ -417,6 +431,7 @@ define(['angular', 'text!five/qualityForm/qualityForm.html'], function (angular,
 
             $scope.jump = function(a) {
                 $location.path("/"+a)
+                $rootScope.selectedName = ""
             };
 
 
@@ -431,17 +446,54 @@ define(['angular', 'text!five/qualityForm/qualityForm.html'], function (angular,
             $scope.p_all_page =0;
             //首页
             $scope.p_index = function(){
-                searchqualityList(1,"","");
+                var urlKey;
+                if($rootScope.selectedName=='产品名称'){
+                    urlKey = "productname"
+                    searchqualityList(1,urlKey,$rootScope.selectValue);
+                }else if($rootScope.selectedName=='全部'){
+                    $rootScope.selectedName= ""
+                    $rootScope.selectValue =""
+                    searchqualityList(1,"","");
+                }else{
+                    $scope.formTitle="错误提示"
+                    $scope.controlUsertips="参数不齐"
+                    $scope.windowState=true
+                }
             }
 
             //尾页
             $scope.p_last = function(){
-                searchqualityList($scope.p_all_page,"","");
+                var urlKey;
+                if($rootScope.selectedName=='产品名称'){
+                    urlKey = "productname"
+                    searchqualityList($scope.p_all_page,urlKey,$rootScope.selectValue);
+                }else if($rootScope.selectedName=='全部'){
+                    $rootScope.selectedName= ""
+                    $rootScope.selectValue =""
+                    searchqualityList($scope.p_all_page,"","");
+                }else{
+                    $scope.formTitle="错误提示"
+                    $scope.controlUsertips="参数不齐"
+                    $scope.windowState=true
+                }
             }
 
             //加载某一页
             $scope.load_page = function(page){
-                searchqualityList(page,"","");
+                var urlKey;
+                if($rootScope.selectedName=='产品名称'){
+
+                    urlKey = "productname"
+                    searchqualityList(page,urlKey,$rootScope.selectValue);
+                }else if($rootScope.selectedName=='全部'){
+                    $rootScope.selectedName= ""
+                    $rootScope.selectValue =""
+                    searchqualityList(page,"","");
+                }else{
+                    $scope.formTitle="错误提示"
+                    $scope.controlUsertips="参数不齐"
+                    $scope.windowState=true
+                }
             };
 
             //初始化页码

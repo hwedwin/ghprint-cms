@@ -3,7 +3,7 @@
  * 更适合团队配合的配置版router
  * 彻底解耦，按需加载，router的配置可以放到服务器直出，更便于团队合作
  */
-define(['angular', 'require', 'app', 'flexible', 'angular-route'], function (angular, require, app) {
+define(['angular', 'require', 'app', 'flexible','selectUi','angular-route'], function (angular, require, app) {
 
             app.config(['$routeProvider', '$controllerProvider',
                 function($routeProvider, $controllerProvider) {
@@ -13,9 +13,9 @@ define(['angular', 'require', 'app', 'flexible', 'angular-route'], function (ang
                             path: 'five/Login/Login.js',
                             controller: 'LoginController'
                         },
-                        '/Home': {
-                            path: 'five/Home/Home.js',
-                            controller: 'HomeController'
+                        '/Order': {
+                            path: 'five/Order/Order.js',
+                            controller: 'OrderController'
                         },
                             '/warehouse': {
                                 path: 'five/warehouse/warehouse.js',
@@ -23,7 +23,7 @@ define(['angular', 'require', 'app', 'flexible', 'angular-route'], function (ang
                             },
                             '/qualityForm': {
                                 path: 'five/qualityForm/qualityForm.js',
-                                controller: 'HomeController'
+                                controller: 'qualityFormController'
                             },
                             '/system': {
                                 path: 'five/system/system.js',

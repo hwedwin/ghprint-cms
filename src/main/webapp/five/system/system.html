@@ -8,7 +8,7 @@
 
 
 <ul class="section clearfix">
-    <li ng-click="jump('Home')">
+    <li ng-click="jump('Order')">
 
         <div class="orderSearch"></div>
         订单查询
@@ -60,7 +60,7 @@
                 <td class="sujectOption sujectOptionng" >{{nameList.tSysUser.username}}</td>
                 <td class="sujectOption sujectOptionng">{{nameList.tSysUser.phone}}</td>
                 <td class="sujectOption sujectOptionng">{{nameList.rolename}}</td>
-                <td class="sujectOption sujectOptionng"><div ng-click="modifyUserBox($index)" class="EditButton point"/>   <div ng-click="deleUserBox($index)" class="DeleteButton point"/></td>
+                <td class="sujectOption sujectOptionng"><div ng-click="modifyUserBox(nameList)" class="EditButton point"/>   <div ng-click="deleUserBox($index)" class="DeleteButton point"/></td>
 
 
             </tr>
@@ -86,37 +86,61 @@
 <div class="applyTickmask" ng-show="newOrder">
     <div class="roleForm contentForm" ng-show="newOrder" id="newUser">
             <div class="aptkMaskTitle">新增用户</div>
-        <div class="string">姓名
-            <input type="text" maxlength="5" ng-model="newUsername"/>
+
+        <p>
+            <span class="close" ng-click="newOrder=false"/>
+
+        </p>
+        <form  name="newUser" novalidate>
+
+        <div class="string">姓名:(必填)
+            <input type="text" maxlength="5" name="newname" ng-model="newname" required/>
+              <span style="color:red" ng-show="newUser.newname.$dirty &&newUser.newname.$invalid">
+                <span class="errorTip clearfix" ng-show="newUser.newname.$error.required">姓名是必须的。</span>
+                </span>
         </div>
         <div class="string">手机号码
             <input type="text" onkeyup="value=value.replace(/[^\d]/g,'');" maxlength="15" ng-model="phone"/>
         </div>
-        <div class="string">登录名
-            <input type="text" maxlength="15" ng-model="userid"/>
+        <div class="string">登录名(必填)
+            <input type="text" maxlength="15" name="userid" ng-model="userid" required/>
+             <span style="color:red" ng-show="newUser.userid.$dirty &&newUser.userid.$invalid">
+                <span class="errorTip clearfix" ng-show="newUser.userid.$error.required">登录名是必须的。</span>
+                </span>
         </div>
-        <div class="string">角色
+        <div class="string">角色(必填)
 
-            <select class="options" ng-model="selected">
+            <select class="options" ng-model="selected" required name="role">
                 <option ng-repeat="x in selectOption" value="{{x.id}}">{{x.rolename}}</option>
             </select>
+            <span style="color:red" ng-show="newUser.role.$dirty &&newUser.role.$invalid">
+                <span class="errorTip clearfix" ng-show="newUser.role.$error.required">角色是必须的。</span>
+                </span>
           <!--  <div class="options">
                 <select  class="selectOption" ng-init="selectedName = x.rolename" ng-model="selectedName" ng-options="x.rolename for x in selectOption">
                 </select>
             </div>-->
         </div>
-        <div class="string">密码
-            <input type="password"  ng-model="password" maxlength="15" ng-model="userid"/>
+        <div class="string">密码:(必填)
+            <input type="password"  ng-model="password" maxlength="8" name="password" required />
+               <span style="color:red" ng-show="newUser.password.$dirty &&newUser.password.$invalid">
+                <span class="errorTip clearfix" ng-show="newUser.password.$error.required">密码是必须的。</span>
+                </span>
         </div>
         <div class="string">电子邮件
             <input type="email"  ng-model="email" maxlength="30" />
         </div>
 
         <div class="roleFormbutton">
-            <span class="search " ng-click="commitUser()">确定</span>
-            <span class="search" ng-click="newOrder=false">取消</span>
-        </div>
+            <p>
+                <input type="submit" ng-click="commitUser()"
+                       ng-disabled="newUser.newUsername.$error.required||newUser.role.$error.required||newUser.password.$error.required">
+            </p>
 
+            <!--<span class="search " ng-click="commitUser()">确定</span>-->
+            <!--<span class="search" ng-click="newOrder=false">取消</span>-->
+        </div>
+        </form>
     </div>
 
 </div>
@@ -142,23 +166,37 @@
 
 </div>
 
-<div class="applyTickmask" ng-show="modifyUser">
-    <div class="roleForm contentForm" ng-show="modifyUser" >
+<div class="applyTickmask" ng-show="EdiUser">
+    <div class="roleForm contentForm" ng-show="EdiUser" >
         <div class="aptkMaskTitle">修改用户</div>
-        <div class="string">姓名
-            <input type="text" maxlength="5" ng-model="modifyUserContent.tSysUser.username"/>
+        <p>
+            <span class="close" ng-click="EdiUser=false"/>
+
+        </p>
+        <form name="modifyUser" novalidate>
+        <div class="string" >姓名
+            <input name="userName" type="text" maxlength="5" ng-model="modifyUserContent.tSysUser.username" required/>
+              <span style="color:red" ng-show="modifyUser.userName.$dirty &&modifyUser.userName.$invalid">
+                <span class="errorTip clearfix" ng-show="modifyUser.userName.$dirty &&modifyUser.userName.$error.required">姓名是必须的。</span>
+                </span>
         </div>
         <div class="string">手机号码
             <input type="text" onkeyup="value=value.replace(/[^\d]/g,'');" maxlength="15" ng-model="modifyUserContent.tSysUser.phone"/>
         </div>
         <div class="string">登录名
-            <input type="text" maxlength="15" ng-model="modifyUserContent.tSysUser.userid"/>
+            <input type="text" name="loginName" maxlength="15" ng-model="modifyUserContent.tSysUser.userid" required/>
+            <span style="color:red" ng-show="modifyUser.loginName.$dirty &&modifyUser.loginName.$invalid">
+                <span class="errorTip clearfix" ng-show="modifyUser.loginName.$dirty &&modifyUser.loginName.$error.required">登录名是必须的。</span>
+                </span>
         </div>
         <div class="string">角色
 
-            <select class="options" ng-model="selected">
+            <select class="options" ng-model="selected" name="role" required>
                 <option ng-repeat="x in selectOption" value="{{x.id}}">{{x.rolename}}</option>
             </select>
+               <span style="color:red" ng-show="modifyUser.role.$dirty &&modifyUser.role.$invalid">
+                <span class="errorTip clearfix" ng-show="modifyUser.role.$error.required">角色是必须的。</span>
+                </span>
             <!--  <div class="options">
                   <select  class="selectOption" ng-init="selectedName = x.rolename" ng-model="selectedName" ng-options="x.rolename for x in selectOption">
                   </select>
@@ -167,15 +205,21 @@
         <!--<div class="string">密码
             <input type="password"  ng-model="modifyUserContent.tSysUser.password" maxlength="15" ng-model="userid"/>
         </div>-->
-        <div class="string">电子邮件
+        <!--<div class="string">电子邮件
             <input type="email"  ng-model="modifyUserContent.tSysUser.email" maxlength="30" />
-        </div>
+        </div>-->
 
         <div class="roleFormbutton">
-            <span  class="search " ng-click="modifyUserList()">确定</span>
-            <span class="search" ng-click="modifyUser=false">取消</span>
-        </div>
+            <p>
+                <input type="submit" ng-click="modifyUserList()"
+                       ng-disabled="modifyUser.userName.$error.required||modifyUser.role.$error.required">
+            </p>
 
+
+            <!--<span  class="search " ng-click="modifyUserList()">确定</span>-->
+            <!--<span class="search" ng-click="modifyUser=false">取消</span>-->
+        </div>
+        </form>
     </div></div>
 
 

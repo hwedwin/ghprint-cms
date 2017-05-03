@@ -2,9 +2,9 @@ define(['angular', 'text!five/warehouse/warehouse.html'], function (angular, tpl
     //angular会自动根据controller函数的参数名，导入相应的服务
     return {
         controller: function ($rootScope,$scope,$location, $routeParams, $http, $interval) {
-            //if(!$rootScope.username){
-            //    $location.path("/login")
-            //}
+            if(!$rootScope.username){
+                $location.path("/login")
+            }
 
             //做法：先把3个模块的增删改查函数分开
 
@@ -15,16 +15,230 @@ define(['angular', 'text!five/warehouse/warehouse.html'], function (angular, tpl
             //     $scope.newPaperBox.packages = ""
             //     $scope.newPaperBox.price =""
             //     $scope.newPaperBox.amount =""
+
+            //排序
+            $scope.desc = 0;//默认排序条件升序
+
+                    $scope.sort='stockid';
+            //设置tab效果
+            $scope.ProductTab = true
+            $scope.BoxTab = false
+            $scope.AtomTab = false
             //不同的模块搜索变量
             $scope.searchKey3="";
             $scope.selectValue3="";
-            $scope.searchKey2="";
-            $scope.selectValue2="";
+            //$scope.searchKey2="";
+            //$scope.selectValue2="";
             $scope.searchKey="",
                 $scope.selectValue = ""
             $scope.selectOption1 = ["全部","编码","材料ID", "材料名称", "颜色"];
             $scope.selectOption2 = ["全部","单价", "金额", "纸箱规格"];
             $scope.selectOption3 = ["全部","供应商", "材料名称", "金额"];
+
+
+//            控制tab样式
+            $scope.getClass = function(tabState){
+                if($scope.BoxTab &&tabState=='1'){
+                    return 'tab1'
+                }
+                else if($scope.AtomTab&&tabState=='2'){
+                    return 'tab1'
+                }else if( $scope.ProductTab&&tabState=='3'){
+                    return 'tab1'
+                }else{
+
+                }
+                return 'tab'
+            }
+//            显示Tab
+            $scope.showTab = function(index){
+                if(index=='1'){
+                    $scope.ProductTab = false
+                    $scope.BoxTab = true
+                    $scope.AtomTab = false
+                }else if(index=='2'){
+                    $scope.ProductTab = false
+                    $scope.BoxTab = false
+                    $scope.AtomTab = true
+                }else if(index=='3'){
+                    $scope.ProductTab = true
+                    $scope.BoxTab = false
+                    $scope.AtomTab = false
+                }
+                else{
+                    $scope.tipsState = true;
+                    $scope.tipsTitle = "系统提示";
+                    $scope.tipsContent = "操作失败，请重试";
+                }
+            }
+//修改库存add
+            $scope.addAtomSum = function(index){
+                var mid = $scope.AtomData[index].id
+                console.log("packages===="+mid)
+                var url= baseUrl+"/ghprint-cms/materialstocks/addstocksum.do?mid="+mid+"&sum=1";
+                console.log(url);
+                $http({
+                    method: 'GET',
+                    url: url,
+                }).then(function successCallback(response) {
+                    console.log(response);
+                    if(response.data.success){
+                        $scope.AtomData[index].materialsum = response.data.result
+                    }else{
+                        $scope.tipsState = true;
+                        $scope.tipsTitle = "系统提示";
+                        $scope.tipsContent = "操作失败，请重试";
+                    }
+
+
+                }, function errorCallback(response) {
+                    console.log(response);
+                    $scope.tipsState = true;
+                    $scope.tipsTitle = "系统提示";
+                    $scope.tipsContent = "系统报错，建议重新登录";
+                });
+            }
+
+
+            $scope.addBoxSum = function(index){
+                //var stocksum = $scope.companyData[index].stocksum
+                var sid = $scope.paperBoxData[index].id
+                console.log("packages===="+sid)
+                var url= baseUrl+"/ghprint-cms/cartonstocks/addstocksum.do?cid="+sid+"&sum=1";
+                console.log(url);
+                $http({
+                    method: 'GET',
+                    url: url,
+                }).then(function successCallback(response) {
+                    console.log(response);
+                    if(response.data.success){
+                        $scope.paperBoxData[index].packages = response.data.result
+                    }else{
+                        $scope.tipsState = true;
+                        $scope.tipsTitle = "系统提示";
+                        $scope.tipsContent = "操作失败，请重试";
+                    }
+
+
+                }, function errorCallback(response) {
+                    console.log(response);
+                    $scope.tipsState = true;
+                    $scope.tipsTitle = "系统提示";
+                    $scope.tipsContent = "系统报错，建议重新登录";
+                });
+            }
+            $scope.addProductSum = function(index){
+                //var stocksum = $scope.companyData[index].stocksum
+                var sid = $scope.companyData[index].id
+                console.log("stocksum===="+sid)
+                var url= baseUrl+"/ghprint-cms/prostocks/addstocksum.do?sid="+sid+"&sum=1";
+                console.log(url);
+                $http({
+                    method: 'GET',
+                    url: url,
+                }).then(function successCallback(response) {
+                    console.log(response);
+                    if(response.data.success){
+                        $scope.companyData[index].stocksum = response.data.result
+                    }else{
+                        $scope.tipsState = true;
+                        $scope.tipsTitle = "系统提示";
+                        $scope.tipsContent = "操作失败，请重试";
+                    }
+
+
+                }, function errorCallback(response) {
+                    console.log(response);
+                    $scope.tipsState = true;
+                    $scope.tipsTitle = "系统提示";
+                    $scope.tipsContent = "系统报错，建议重新登录";
+                });
+            }
+
+//修改库存cut
+            $scope.cutAtomSum = function(index){
+                var mid = $scope.AtomData[index].id
+                console.log("AtomData packages===="+mid)
+                var url= baseUrl+"/ghprint-cms/materialstocks/substocksum.do?mid="+mid+"&sum=1";
+                console.log(url);
+                $http({
+                    method: 'GET',
+                    url: url,
+                }).then(function successCallback(response) {
+                    console.log(response);
+                    if(response.data.success){
+                        $scope.AtomData[index].materialsum = response.data.result
+                    }else{
+                        $scope.tipsState = true;
+                        $scope.tipsTitle = "系统提示";
+                        $scope.tipsContent = "操作失败，请重试";
+                    }
+
+
+                }, function errorCallback(response) {
+                    console.log(response);
+                    $scope.tipsState = true;
+                    $scope.tipsTitle = "系统提示";
+                    $scope.tipsContent = "系统报错，建议重新登录";
+                });
+            }
+
+
+            $scope.cutBoxSum = function(index){
+                var sid = $scope.paperBoxData[index].id
+                console.log("stocksum===="+sid)
+                var url= baseUrl+"/ghprint-cms/cartonstocks/substocksum.do?cid="+sid+"&sum=1";
+                console.log(url);
+                $http({
+                    method: 'GET',
+                    url: url,
+                }).then(function successCallback(response) {
+                    console.log(response);
+                    if(response.data.success){
+                        $scope.paperBoxData[index].packages = response.data.result
+                    }else{
+                        $scope.tipsState = true;
+                        $scope.tipsTitle = "系统提示";
+                        $scope.tipsContent = "操作失败，请重试";
+                    }
+
+
+                }, function errorCallback(response) {
+                    console.log(response);
+                    $scope.tipsState = true;
+                    $scope.tipsTitle = "系统提示";
+                    $scope.tipsContent = "系统报错，建议重新登录";
+                });
+            }
+
+            $scope.cutProductSum = function(index){
+                //var stocksum = $scope.companyData[index].stocksum
+                var sid = $scope.companyData[index].id
+                console.log("stocksum===="+sid)
+                var url= baseUrl+"/ghprint-cms/prostocks/substocksum.do?sid="+sid+"&sum=1";
+                console.log(url);
+                $http({
+                    method: 'GET',
+                    url: url,
+                }).then(function successCallback(response) {
+                    console.log(response);
+                    if(response.data.success){
+                        $scope.companyData[index].stocksum = response.data.result
+                    }else{
+                        $scope.tipsState = true;
+                        $scope.tipsTitle = "系统提示";
+                        $scope.tipsContent = "操作失败，请重试";
+                    }
+
+
+                }, function errorCallback(response) {
+                    console.log(response);
+                    $scope.tipsState = true;
+                    $scope.tipsTitle = "系统提示";
+                    $scope.tipsContent = "系统报错，建议重新登录";
+                });
+            }
+
             //修改
             $scope.modifyProduct = function(model){
                 if(model=='1'){
@@ -265,7 +479,7 @@ define(['angular', 'text!five/warehouse/warehouse.html'], function (angular, tpl
                         $scope.p_current2 = response.data.currentPage;
                         $scope.totalCount2 = response.data.totalCount;
 
-                        console.log( $scope.p_all_page2+"共几多页")
+                        console.log( "$scope.p_all_page2========="+$scope.p_all_page2+"共几多页")
                         console.log( $scope.p_current2+"当前页是第几页")
                         console.log( $scope.totalCount2+"共几多条记录")
                         reloadPno2();
@@ -278,6 +492,9 @@ define(['angular', 'text!five/warehouse/warehouse.html'], function (angular, tpl
 
                     }
 
+                    //if($scope.selectValue2&&$scope.selectValue2){
+                    //
+                    //}
 
 
                 }, function errorCallback(response) {
@@ -313,6 +530,11 @@ define(['angular', 'text!five/warehouse/warehouse.html'], function (angular, tpl
 
                     }
 
+                   /* if($scope.searchKey3&&$scope.selectValue3){
+                        $rootScope.searchKey3 = $scope.searchKey3
+                        $rootScope.selectValue3 = $scope.selectValue3
+                    }*/
+
 
 
                 }, function errorCallback(response) {
@@ -320,8 +542,8 @@ define(['angular', 'text!five/warehouse/warehouse.html'], function (angular, tpl
                 });
             }
 
-
-
+            //初始搜索条件为全部
+            $rootScope.selectedName = $rootScope.selectedName2 = $rootScope.selectedName3 ='全部'
             //    成品查询请求
             searchProductList(1,"","");
             function searchProductList(page,key,value) {
@@ -347,7 +569,7 @@ define(['angular', 'text!five/warehouse/warehouse.html'], function (angular, tpl
                             console.log( $scope.p_current+"当前页是第几页")
                             console.log( $scope.totalCount+"共几多条记录")
 
-                            reloadPno1();
+                            reloadPno();
 
                     }else{
                         //$scope.DataemptyState = true;
@@ -404,18 +626,23 @@ define(['angular', 'text!five/warehouse/warehouse.html'], function (angular, tpl
                 console.log("$scope.selectedName3======="+$scope.selectedName3)
 
                 if( $scope.selectedName3=="全部"){
-                    $scope.searchKey3 = "";
-                    $scope.selectValue3 = ""
+                    $rootScope.searchKey3 = "";
+                    $rootScope.selectValue3 = ""
+                    $rootScope.selectedName3 = ""
+                    $rootScope.selectValue3 = ""
                     searchAtomList(1,"","");
                 }else if( $scope.selectedName3=="供应商"){
-                    $scope.searchKey = "provider"
-                    searchAtomList(1,"provider",$scope.selectValue3);
+                    $rootScope.selectedName3 =  $scope.selectedName3
+                    $rootScope.selectValue3 = $scope.selectValue3
+                    searchAtomList(1,"provider",$rootScope.selectValue3);
                 }else if($scope.selectedName3=="材料名称"){
-                    $scope.searchKey = "name"
-                    searchAtomList(1,"name",$scope.selectValue3);
+                    $rootScope.selectedName3 =  $scope.selectedName3
+                    $rootScope.selectValue3 = $scope.selectValue3
+                    searchAtomList(1,"name",$rootScope.selectValue3);
                 }else if($scope.selectedName3=="金额"){
-                    $scope.searchKey = "amount"
-                    searchAtomList(1,"amount",$scope.selectValue3);
+                    $rootScope.selectedName3 = "amount"
+                    $rootScope.selectValue3 = $scope.selectValue3
+                    searchAtomList(1,"amount",$rootScope.selectValue3);
                 }else{
 
                     console.log("系统出错，请联系管理员")
@@ -427,17 +654,22 @@ define(['angular', 'text!five/warehouse/warehouse.html'], function (angular, tpl
                 console.log("$scope.selectedName2======="+$scope.selectedName2)
 
                 if( $scope.selectedName2=="全部"){
-                    $scope.searchKey = "";
-                    $scope.selectValue = ""
+                    $scope.selectValue2 = ""
+
+                    $rootScope.searchKey3 = "";
+                    $rootScope.selectedName2 = ""
                     searchBoxList(1,"","");
                 }else if( $scope.selectedName2=="纸箱规格"){
-                    $scope.searchKey = "boxsize"
+                    $rootScope.selectedName2=$scope.selectedName2
+                    $rootScope.selectValue2 = $scope.selectValue2
                     searchBoxList(1,"boxsize",$scope.selectValue2);
                 }else if($scope.selectedName2=="单价"){
-                    $scope.searchKey = "price"
+                    $rootScope.selectedName2=$scope.selectedName2
+                    $rootScope.selectValue2 = $scope.selectValue2
                     searchBoxList(1,"price",$scope.selectValue2forNum);
                 }else if($scope.selectedName2=="金额"){
-                    $scope.searchKey = "amount"
+                    $rootScope.selectedName2=$scope.selectedName2
+                    $rootScope.selectValue2 = $scope.selectValue2
                     searchBoxList(1,"amount",$scope.selectValue2forNum);
                 }else{
 
@@ -453,16 +685,25 @@ define(['angular', 'text!five/warehouse/warehouse.html'], function (angular, tpl
                     $scope.selectValue = ""
                     searchProductList(1,$scope.searchKey,$scope.selectValue);
                 }else if( $scope.selectedName=="材料ID"){
-                    $scope.searchKey = "stockid"
+                    $rootScope.selectedName=$scope.selectedName
+                    $rootScope.selectValue = $scope.selectValue
                     searchProductList(1,"stockid",$scope.selectValue);
                 }else if($scope.selectedName=="材料名称"){
-                    $scope.searchKey = "stockname"
+                    $rootScope.selectedName=$scope.selectedName
+                    $rootScope.selectValue = $scope.selectValue
                     searchProductList(1,"stockname",$scope.selectValue);
                 }else if($scope.selectedName=="颜色"){
-                    $scope.searchKey = "color"
+                    $rootScope.selectedName=$scope.selectedName
+                    $rootScope.selectValue = $scope.selectValue
                     searchProductList(1,"color",$scope.selectValue);
+                }else if($scope.selectedName=="编码"){
+                    $rootScope.selectedName=$scope.selectedName
+                    $rootScope.selectValue = $scope.selectValue
+                    searchProductList(1,"id",$scope.selectValue);
+                }else{
+
+                    console.log("系统出错，请联系管理员")
                 }
-                console.log("系统出错，请联系管理员")
             };
 
             $scope.app = function(index) {
@@ -476,26 +717,28 @@ define(['angular', 'text!five/warehouse/warehouse.html'], function (angular, tpl
 
 
             $scope.edit = function(index,model) {
-
+                console.log("====index========="+index)
                 var url
                 var sid
                 if(model=='1'){
                     $scope.ModifyGoods=true;
-                    sid = $scope.companyData[index].id
+                    sid = index.id
                     console.log("sid--------------------"+sid)
                     url= baseUrl+ "/ghprint-cms/prostocks/editprostocks.do?sid="+sid;
 
 
                 }else if(model=='2'){
                     $scope.ModifyBoxCount = true;
-                    sid = $scope.paperBoxData[index].id
+                    sid = index.id
+                    console.log("sid--------------------"+sid)
                     url= baseUrl+ "/ghprint-cms/cartonstocks/editcartonstocks.do?cid="+sid;
 
                 }else if(model=='3'){
                     //sid = $scope.paperBoxData[index].id
                     //url= baseUrl+ "/ghprint-cms/cartonstocks/editcartonstocks.do?cid="+sid;
                     $scope.Modifycompany = true;
-                    sid = $scope.AtomData[index].id
+                    sid = index.id
+                    console.log("sid--------------------"+sid)
                     url= baseUrl+ "/ghprint-cms/materialstocks/editmaterialstocks.do?mid="+sid;
                 }else{
                     console.log("系统出错，请联系管理员")
@@ -518,15 +761,15 @@ define(['angular', 'text!five/warehouse/warehouse.html'], function (angular, tpl
             $scope.deleConfirm = function() {
                 var url
                 if($scope.boxIndex =='1'){
-                    var sid = $scope.companyData[$scope.deleIndex].id
+                    var sid = $scope.deleIndex.id
                     url = "/ghprint-cms/prostocks/delprostocks.do?sid="+sid;
                     console.log("url================"+url)
                 }else if($scope.boxIndex =='2'){
-                    var cid = $scope.paperBoxData[$scope.deleIndex].id
+                    var cid = $scope.deleIndex.id
                     url = "/ghprint-cms/cartonstocks/delcartonstocks.do?cid="+cid;
                     console.log("url================"+url)
                 }else if($scope.boxIndex =='3'){
-                    var mid = $scope.AtomData[$scope.deleIndex].id
+                    var mid = $scope.deleIndex.id
                     url = "/ghprint-cms/materialstocks/delmaterialstocks.do?mid="+mid;
                 }else{
                     console.log("尚未开发")
@@ -560,35 +803,66 @@ define(['angular', 'text!five/warehouse/warehouse.html'], function (angular, tpl
 
             //首页
             $scope.p_index = function(){
-                if($scope.searchKey&&$scope.selectValue){
-
-                    searchProductList(1,$scope.searchKey,$scope.selectValue);
-                }else{
+                if( $rootScope.selectedName=="全部"){
+                    $rootScope.searchKey = "";
+                    $rootScope.selectValue = ""
                     searchProductList(1,"","");
+                }else if( $rootScope.selectedName=="材料ID"){
+                    searchProductList(1,"stockid",$rootScope.selectValue);
+                }else if($rootScope.selectedName=="材料名称"){
+                    searchProductList(1,"stockname",$rootScope.selectValue);
+                }else if($rootScope.selectedName=="颜色"){
+                    searchProductList(1,"color",$rootScope.selectValue);
+                }else if($rootScope.selectedName=="编码"){
+                    searchProductList(1,"id",$rootScope.selectValue);
+                }else{
 
+                    console.log("系统出错，请联系管理员")
                 }
             }
 
             //尾页
             $scope.p_last = function(){
-                if($scope.searchKey&&$scope.selectValue){
-
-                    searchProductList($scope.p_all_page,$scope.searchKey,$scope.selectValue);
+                if( $rootScope.selectedName=="全部"){
+                    $rootScope.searchKey = "";
+                    $rootScope.selectValue = ""
+                    searchProductList($scope.p_all_page2,"","");
+                }else if( $rootScope.selectedName=="材料ID"){
+                    searchProductList($scope.p_all_page2,"stockid",$rootScope.selectValue);
+                }else if($rootScope.selectedName=="材料名称"){
+                    searchProductList($scope.p_all_page2,"stockname",$scope.selectValue);
+                }else if($rootScope.selectedName=="编码"){
+                    searchProductList($scope.p_all_page2,"id",$rootScope.selectValue);
+                }else if($scope.selectedName=="颜色"){
+                    searchProductList($scope.p_all_page2,"color",$rootScope.selectValue);
                 }else{
-                    searchProductList($scope.p_all_page,"","");
+
+                    console.log("系统出错，请联系管理员")
                 }
             }
 
             //加载某一页
             $scope.load_page = function(page){
-                if($scope.searchKey && $scope.selectValue){
-                    searchProductList(page,$scope.searchKey,$scope.selectValue);
+                if( $rootScope.selectedName=="全部"){
+                    $rootScope.searchKey = "";
+                    $rootScope.selectValue = ""
+                    searchProductList(page,"","");
+                }else if( $rootScope.selectedName=="材料ID"){
+                    searchProductList(page,"stockid",$rootScope.selectValue);
+                }else if($rootScope.selectedName=="材料名称"){
+                    searchProductList(page,"stockname",$rootScope.selectValue);
+                }else if($rootScope.selectedName=="颜色"){
+                    searchProductList(page,"color",$rootScope.selectValue);
+                }else if($rootScope.selectedName=="编码"){
+                    searchProductList(page,"id",$rootScope.selectValue);
                 }else{
-                    searchProductList(page,"","");}
+
+                    console.log("系统出错，请联系管理员")
+                }
             };
 
             //初始化页码
-            var reloadPno1 = function(){
+            var reloadPno = function(){
                 $scope.pages=calculateIndexes($scope.p_current,$scope.p_all_page ,8);
             };
 
@@ -640,36 +914,61 @@ define(['angular', 'text!five/warehouse/warehouse.html'], function (angular, tpl
 
             //首页
             $scope.p_index2 = function(){
-                if($scope.searchKey2&&$scope.selectValue2){
-
-                    searchBoxList($scope.searchKey2,$scope.selectValue2);
-                }else{
+                if( $rootScope.selectedName2=="全部"){
+                    $rootScope.searchKey2 = "";
+                    $rootScope.selectValue2 = ""
                     searchBoxList(1,"","");
+                }else if( $rootScope.selectedName2=="纸箱规格"){
+                    searchBoxList(1,"boxsize",$rootScope.selectValue2);
+                }else if($rootScope.selectedName2=="单价"){
+                    searchBoxList(1,"price",$rootScope.selectValue2forNum);
+                }else if($rootScope.selectedName2=="金额"){
+                    searchBoxList(1,"amount",$rootScope.selectValue2forNum);
+                }else{
 
+                    console.log("系统出错，请联系管理员")
                 }
             }
 
             //尾页
             $scope.p_last2 = function(){
-                if($scope.searchKey2&&$scope.selectValue2){
-
-                    searchBoxList($scope.p_all_page2,$scope.searchKey2,$scope.selectValue2);
-                }else{
+                if( $rootScope.selectedName2=="全部"){
+                    $rootScope.searchKey2 = "";
+                    $rootScope.selectValue2 = ""
                     searchBoxList($scope.p_all_page2,"","");
+                }else if( $rootScope.selectedName2=="纸箱规格"){
+                    searchBoxList($scope.p_all_page2,"boxsize",$rootScope.selectValue2);
+                }else if($rootScope.selectedName2=="单价"){
+                    searchBoxList($scope.p_all_page2,"price",$scope.selectValue2forNum);
+                }else if($rootScope.selectedName2=="金额"){
+                    searchBoxList($scope.p_all_page2,"amount",$rootScope.selectValue2forNum);
+                }else{
+
+                    console.log("系统出错，请联系管理员")
                 }
             }
 
             //加载某一页
             $scope.load_page2 = function(page){
-                if($scope.searchKey && $scope.selectValue2){
-                    searchBoxList(page,$scope.searchKey2,$scope.selectValue2);
+                if( $rootScope.selectedName2=="全部"){
+                    $rootScope.searchKey2 = "";
+                    $rootScope.selectValue2 = ""
+                    searchBoxList(page,"","");
+                }else if( $rootScope.selectedName2=="纸箱规格"){
+                    searchBoxList(page,"boxsize",$rootScope.selectValue2);
+                }else if($rootScope.selectedName2=="单价"){
+                    searchBoxList(page,"price",$rootScope.selectValue2forNum);
+                }else if($rootScope.selectedName2=="金额"){
+                    searchBoxList(page,"amount",$rootScope.selectValue2forNum);
                 }else{
-                    searchBoxList(page,"","");}
+
+                    console.log("系统出错，请联系管理员")
+                }
             };
 
             //初始化页码
             var reloadPno2 = function(){
-                $scope.pages=calculateIndexes($scope.p_current2,$scope.p_all_page2 ,8);
+                $scope.pages2=calculateIndexes($scope.p_current2,$scope.p_all_page2 ,8);
             };
 
             //============3=================
@@ -682,31 +981,55 @@ define(['angular', 'text!five/warehouse/warehouse.html'], function (angular, tpl
 
             //首页
             $scope.p_index3 = function(){
-                if($scope.searchKey3&&$scope.selectValue3){
-
-                    searchAtomList(1,$scope.searchKey3,$scope.selectValue3);
-                }else{
+                if( $rootScope.selectedName3=="全部"){
+                    $rootScope.selectedName3 = "";
+                    $rootScope.selectValue3 = ""
                     searchAtomList(1,"","");
+                }else if( $rootScope.selectedName3=="供应商"){
+                    searchAtomList(1,"provider",$rootScope.selectValue3);
+                }else if($rootScope.selectedName3=="材料名称"){
+                    searchAtomList(1,"name",$rootScope.selectValue3);
+                }else if($rootScope.selectedName3=="金额"){
+                    searchAtomList(1,"amount",$rootScope.selectValue3);
+                }else{
+
+                    console.log("系统出错，请联系管理员")
                 }
             }
 
             //尾页
             $scope.p_last3 = function(){
-                if($scope.searchKey3&&$scope.selectValue3){
-
-                    searchAtomList($scope.p_all_page3,$scope.searchKey3,$scope.selectValue3);
-                }else{
+                if( $rootScope.selectedName3=="全部"){
+                    $rootScope.searchKey3 = "";
+                    $rootScope.selectValue3 = ""
                     searchAtomList($scope.p_all_page3,"","");
+                }else if( $rootScope.selectedName3=="供应商"){
+                    searchAtomList($scope.p_all_page3,"provider",$rootScope.selectValue3);
+                }else if($rootScope.selectedName3=="材料名称"){
+                    searchAtomList($scope.p_all_page3,"name",$rootScope.selectValue3);
+                }else if($rootScope.selectedName3=="金额"){
+                    searchAtomList($scope.p_all_page3,"amount",$rootScope.selectValue3);
+                }else{
+
+                    console.log("系统出错，请联系管理员")
                 }
             }
 
             //加载某一页
             $scope.load_page3 = function(page){
-                if($scope.searchKey3&&$scope.selectValue3){
-
-                    searchAtomList(page,$scope.searchKey3,$scope.selectValue3);
-                }else{
+                if( $rootScope.selectedName3=="全部"){
+                    $rootScope.searchKey3 = "";
+                    $rootScope.selectValue3 = ""
                     searchAtomList(page,"","");
+                }else if( $rootScope.selectedName3=="供应商"){
+                    searchAtomList(page,"provider",$rootScope.selectValue3);
+                }else if($rootScope.selectedName3=="材料名称"){
+                    searchAtomList(page,"name",$rootScope.selectValue3);
+                }else if($rootScope.selectedName3=="金额"){
+                    searchAtomList(page,"amount",$rootScope.selectValue3);
+                }else{
+
+                    console.log("系统出错，请联系管理员")
                 }
             };
 

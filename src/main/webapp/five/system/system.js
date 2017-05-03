@@ -64,8 +64,8 @@ define(['angular', 'text!five/system/system.html'], function (angular, tpl) {
 
 
             $scope.modifyUserBox = function(index) {
-                $scope.modifyUser=true;
-                var arr= $scope.nameDatas[index];
+                $scope.EdiUser=true;
+                var arr= index;
                 console.log(arr+"=============");
                 $scope.modifyUserContent =angular.copy($scope.modifyUserContent=angular.copy(arr));
 
@@ -219,9 +219,9 @@ define(['angular', 'text!five/system/system.html'], function (angular, tpl) {
                 //新增用户
                 console.log($scope.userid +"$scope.userid");
                 console.log($scope.newUsername +"$scope.newUsername");
-                console.log($scope.userid +"$scope.email");
-                console.log($scope.userid +"$scope.selected");
-                console.log($scope.userid +"$scope.phone");
+                console.log($scope.email +"$scope.email");
+                console.log($scope.selected +"$scope.selected");
+                console.log($scope.phone +"$scope.phone");
                 if($scope.userid||
                         $scope.newUsername||
                         $scope.email||
@@ -274,7 +274,8 @@ define(['angular', 'text!five/system/system.html'], function (angular, tpl) {
 
             $scope.count=3;
             $scope.username=$rootScope.username;
-            //$scope.qualityFormShow=false;
+
+            $scope.EdiUser=false;
             $scope.newOrder=false;
 
             $scope.app = function(index) {
