@@ -1,11 +1,14 @@
 package com.ghprint.cms.controller.biz.Material;
 
+import cn.com.bestpay.Response;
 import com.ghprint.cms.common.AuthorityKey;
 import com.ghprint.cms.controller.BaseAction;
 import com.ghprint.cms.model.stock.TMaterialCost;
+import com.ghprint.cms.model.stock.TMaterialStock;
 import com.ghprint.cms.pagination.DataGridResult;
 import com.ghprint.cms.services.MaterialCostService;
 import com.ghprint.cms.services.MaterialStockService;
+import com.ghprint.cms.utils.Constant;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -97,6 +100,40 @@ public class QueryMaterialController extends BaseAction {
         return  null;
     }
 
+
+    @RequestMapping(value = "/materialstocks/editmaterialstocks.do", method = RequestMethod.GET, produces = "application/json; charset=utf-8")
+    @ResponseBody
+    public Response<TMaterialStock> MaterialStockEdit(HttpServletRequest request, HttpServletResponse response, @RequestParam(value = "mid") Integer mid) {
+        Response<TMaterialStock> responses = new Response<>();
+        try {
+            Assert.hasText(String.valueOf(mid), "mid  is null or 空字符串。");
+            log.info("MaterialStockEdit request param:{}", mid);
+            Boolean flag = super.execute(request, response);
+            if (flag) {
+                TMaterialStock materialStock = materialStockService.getMaterialStockById(mid);
+                if (materialStock != null) {
+                    responses.setErrorCode(Constant.errorCodeEnum.SUCCESS.getCode());
+                    responses.setErrorMsg(Constant.errorCodeEnum.SUCCESS.getName());
+                    responses.setResult(materialStock);
+                } else {
+                    responses.setErrorCode(Constant.errorCodeEnum.PARAM_ERROR.getCode());
+                    responses.setErrorMsg(Constant.errorCodeEnum.PARAM_ERROR.getName());
+                    log.info("MaterialStocEdit edit fail ,no this record");
+                }
+                return responses;
+            } else {
+                responses.setErrorCode(Constant.errorCodeEnum.LOGIN_TIMEOUT_ERROE.getCode());
+                responses.setErrorMsg(request.getAttribute("message").toString());
+                return responses;
+            }
+        } catch (Exception e) {
+            log.error("编辑原材料库存初始化失败=:", e);
+            responses.setErrorCode(Constant.errorCodeEnum.FAILURE.getCode());
+            responses.setErrorMsg("编辑原材料库存初始化异常");
+            return responses;
+        }
+
+    }
 
     @Override
     public String getAuthorityId() {
