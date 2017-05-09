@@ -335,6 +335,7 @@ public class OrderServiceImpl implements OrderService {
                             if (company.get(i).getId() == order.getCompanyid()) {
                                 log.info("公司ID：{} ，INDEX：{}",order.getCompanyid(),i+1);
                                order.setCompanyid(i + 1);
+                                break;
                             }
                         }
                         List<OrderDictionary>  standard= orderInit.getStandard();
@@ -342,6 +343,7 @@ public class OrderServiceImpl implements OrderService {
                             if(standard.get(i).getId() ==  order.getStandardid()){
                                 log.info("生产标准ID：{} ，INDEX：{}",order.getStandardid(),i+1);
                                 order.setStandardid(i+1);
+                                break;
                             }
                         }
                     }
