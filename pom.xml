@@ -298,6 +298,7 @@
                 <configuration>
                     <charset>${project.build.sourceEncoding}</charset>
                     <dest>${project.artifact.file}</dest>
+                    <userProperties>${project.basedir/antx.properties}</userProperties>
                 </configuration>
                 <executions>
                     <execution>
