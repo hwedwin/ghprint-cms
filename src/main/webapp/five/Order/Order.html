@@ -239,8 +239,7 @@
             <!--<div>-->
 
             <span class="string">
-                交货日期：<input type="text" id="delineDate" name="datepicker"  ng-model="newOrder.deline"  />
-           <pre>{{newOrder.deline}}</pre>
+                交货日期：<input type="text"  name="datepicker"  ng-model="newOrder.deline"  placeholder="2016-03-08"/>
             </span>
 
 
@@ -347,9 +346,8 @@
             </span>
 
                <span class="string">
-                订单日期：<input type="text" name="datepicker" id="orderdate"  ng-model="newOrder.orderdate"/>
+                订单日期：<input type="text" name="datepicker"  ng-model="newOrder.orderdate"placeholder="2016-03-08"/>
             </span>
-                <pre>{{newOrder.orderdate}}</pre>
 
 
              <span class="string">
@@ -367,22 +365,24 @@
 
 
               <span class="string">
-                印刷：<input type="text" maxlength="2" ng-model="newOrder.print" onkeyup="value=value.replace(/[^\d]/g,'');"/>
+                印刷：
+                  <!--<input type="text" maxlength="2" ng-model="newOrder.print" onkeyup="value=value.replace(/[^\d]/g,'');"/>-->
+                  <input type="checkbox"  ng-model="newOrder.print" ng-true-value="true" ng-false-value="false"/>
             </span>
               <span class="string">
-                开料：<input type="text"maxlength="2" ng-model="newOrder.open" onkeyup="value=value.replace(/[^\d]/g,'');"/>
+                开料：<input type="checkbox" ng-model="newOrder.open" ng-true-value="true" ng-false-value="false"/>
             </span>
                <span class="string">
-                合掌：<input type="text" ng-model="newOrder.merge" maxlength="2" onkeyup="value=value.replace(/[^\d]/g,'');"/>
+                合掌：<input type="checkbox" ng-model="newOrder.merge" ng-true-value="true" ng-false-value="false"/>
             </span>
                <span class="string">
-                切标：<input type="text" ng-model="newOrder.cut" maxlength="2" onkeyup="value=value.replace(/[^\d]/g,'');"/>
+                切标：<input type="checkbox" ng-model="newOrder.cut" ng-true-value="true" ng-false-value="false"/>
             </span>
                <span class="string">
-                定型：<input type="text" ng-model="newOrder.stable" maxlength="2" onkeyup="value=value.replace(/[^\d]/g,'');"/>
+                定型：<input type="checkbox" ng-model="newOrder.stable" ng-true-value="true" ng-false-value="false"/>
             </span>
                <span class="string">
-                复卷：<input type="text" ng-model="newOrder.repeat" maxlength="2" onkeyup="value=value.replace(/[^\d]/g,'');"/>
+                复卷：<input type="checkbox" ng-model="newOrder.repeat" ng-true-value="true" ng-false-value="false"/>
             </span>
 
 
@@ -435,8 +435,7 @@
                 <!--<div>-->
 
             <span class="string">
-                交货日期：<input type="text" id="EdiDelineDate"  ng-model="EdiOrder.deline" />
-                <pre>{{EdiOrder.deline}}</pre>
+                交货日期：<input type="text"   ng-model="EdiOrder.deline" placeholder="2016-03-08"/>
             </span>
 
 
@@ -486,7 +485,7 @@
 
 
                <span class="string">
-                订单日期：<input type="text"  id="EdiOrderdate" ng-model="EdiOrder.orderdate"/>
+                订单日期：<input type="text"  id="EdiOrderdate" ng-model="EdiOrder.orderdate"placeholder="2016-03-08"/>
             </span>
 
 
@@ -495,22 +494,28 @@
 
 
               <span class="string">
-                印刷：<input type="text" maxlength="2" ng-model="EdiOrder.print" onkeyup="value=value.replace(/[^\d]/g,'');"/>
-            </span>
+                印刷：
+            <input type="checkbox" ng-model="EdiOrder.print" ng-true-value="true" ng-false-value="false" />
+              </span>
               <span class="string">
-                开料：<input type="text"maxlength="2" ng-model="EdiOrder.open" onkeyup="value=value.replace(/[^\d]/g,'');"/>
+                开料：
+                  <input type="checkbox" ng-model="EdiOrder.open" ng-true-value="true" ng-false-value="false" />
             </span>
                <span class="string">
-                合掌：<input type="text" ng-model="EdiOrder.merge" maxlength="2" onkeyup="value=value.replace(/[^\d]/g,'');"/>
+                合掌：
+                   <input type="checkbox" ng-model="EdiOrder.merge" ng-true-value="true" ng-false-value="false" />
             </span>
                <span class="string">
-                切标：<input type="text" ng-model="EdiOrder.cut" maxlength="2" onkeyup="value=value.replace(/[^\d]/g,'');"/>
+                切标：
+                   <input type="checkbox" ng-model="EdiOrder.cut" ng-true-value="true" ng-false-value="false" />
             </span>
                <span class="string">
-                定型：<input type="text" ng-model="EdiOrder.stable" maxlength="2" onkeyup="value=value.replace(/[^\d]/g,'');"/>
+                定型：
+                   <input type="checkbox" ng-model="EdiOrder.stable" ng-true-value="true" ng-false-value="false" />
             </span>
                <span class="string">
-                复卷：<input type="text" ng-model="EdiOrder.repeat" maxlength="2" onkeyup="value=value.replace(/[^\d]/g,'');"/>
+                复卷：
+                   <input type="checkbox" ng-model="EdiOrder.repeat" ng-true-value="true" ng-false-value="false" />
             </span>
 
 
@@ -572,7 +577,7 @@
             <input type="text" placeholder="编号"  ng-model="selectValue" ng-show="selectedName=='编号'"/>
             <input type="text" placeholder="产品名称" ng-model="selectValue" ng-show="selectedName=='产品名称'"/>
             <input type="text" placeholder="客户名称"  ng-model="selectValue" ng-show="selectedName=='材料规格'"/>
-            <input type="text" placeholder="出货日期"  ng-model="selectdate" ng-show="selectedName=='交货日期'"/>
+            <input type="text" placeholder="出货日期"  ng-model="selectValue" ng-show="selectedName=='交货日期'"/>
         </span>
 
     <!--<div class="options">-->
@@ -580,7 +585,7 @@
     <!--</div>-->
 
     <div class="search point" ng-click="searchOnKey(selectedName)">搜索</div>
-        <div class="search point" ng-click="newOrderBox=true">添加</div>
+        <div class="search point" ng-click="newOrderBox=true" ng-show="username=='超级管理员'">添加</div>
     </div>
 
 
@@ -595,7 +600,7 @@
             <td class="sujectOption">产品名称</td>
             <td class="sujectOption">颜色</td>
             <td class="sujectOption">材料ID</td>
-            <td class="sujectOption">生产标准</td>
+            <td class="sujectOption" ng-show="username=='超级管理员'">生产标准</td>
             <td class="sujectOption">拼数</td>
             <td class="sujectOption">比重</td>
             <td class="sujectOption">高度</td>
@@ -621,7 +626,7 @@
                 <td class="sujectOption">物流单号</td>
                 <td class="sujectOption">订单状态</td>
                 <td class="sujectOption">建单时间</td>
-                <td class="sujectOption">编辑</td>
+                <td class="sujectOption" ng-show="username=='超级管理员'">编辑</td>
             </tr>
 
 
@@ -634,7 +639,7 @@
                 <td class="sujectOption sujectOptionng">{{orderList.stockname}}</td>
                 <td class="sujectOption sujectOptionng">{{orderList.color}}</td>
                 <td class="sujectOption sujectOptionng">{{orderList.stockid}}</td>
-                <td class="sujectOption sujectOptionng"><img ng-click="searchForm(orderList)" class="detailIcon" src="./libs/img/qualityFormIcon.png"/></td>
+                <td class="sujectOption sujectOptionng"ng-show="username=='超级管理员'"><img ng-click="searchForm(orderList)" class="detailIcon" src="./libs/img/qualityFormIcon.png"/></td>
                 <td class="sujectOption sujectOptionng">{{orderList.spellcount}}</td>
                 <td class="sujectOption sujectOptionng">{{orderList.proportion}}</td>
                 <td class="sujectOption sujectOptionng">{{orderList.height}}</td>
@@ -648,12 +653,12 @@
 
                 <td class="sujectOption sujectOptionng">{{orderList.orderdate}}</td>
                 <td class="sujectOption sujectOptionng">{{orderList.deline}}</td>
-                <td class="sujectOption sujectOptionng">{{orderList.print}}</td>
-                <td class="sujectOption sujectOptionng">{{orderList.merge}}</td>
-                <td class="sujectOption sujectOptionng">{{orderList.open}}</td>
-                <td class="sujectOption sujectOptionng">{{orderList.cut}}</td>
-                <td class="sujectOption sujectOptionng">{{orderList.stable}}</td>
-                <td class="sujectOption sujectOptionng">{{orderList.repeat}}</td>
+                <td class="sujectOption sujectOptionng"><input type="checkbox" ng-model="orderList.print" ng-true-value="true" ng-false-value="false" disabled="true"/></td>
+                <td class="sujectOption sujectOptionng"><input type="checkbox" ng-model="orderList.merge" ng-true-value="true" ng-false-value="false" disabled="true"/></td>
+                <td class="sujectOption sujectOptionng"><input type="checkbox" ng-model="orderList.open" ng-true-value="true" ng-false-value="false" disabled="true"/></td>
+                <td class="sujectOption sujectOptionng"><input type="checkbox" ng-model="orderList.cut" ng-true-value="true" ng-false-value="false" disabled="true"/></td>
+                <td class="sujectOption sujectOptionng"><input type="checkbox" ng-model="orderList.stable" ng-true-value="true" ng-false-value="false" disabled="true"/></td>
+                <td class="sujectOption sujectOptionng"><input type="checkbox" ng-model="orderList.repeat" ng-true-value="true" ng-false-value="false" disabled="true"/></td>
                 <td class="sujectOption sujectOptionng">{{orderList.delivery}}</td>
                 <td class="sujectOption sujectOptionng">{{orderList.logistics}}</td>
                 <td class="sujectOption sujectOptionng">{{orderList.express}}</td>
@@ -661,7 +666,7 @@
                 <!--<td class="sujectOption sujectOptionng">{{orderList.status}}</td>-->
                 <td class="sujectOption sujectOptionng">{{orderList.result}}</td>
                 <td class="sujectOption sujectOptionng">{{orderList.insertime}}</td>
-                <td class="sujectOption sujectOptionng"> <div class="orderEditButton point" ng-click="editReady(orderList)"></div>   <div class="orderDeleteButton point" ng-click="dele(orderList)"></div></td>
+                <td class="sujectOption sujectOptionng" ng-show="username=='超级管理员'"> <div class="orderEditButton point" ng-click="editReady(orderList)"></div>   <div class="orderDeleteButton point" ng-click="dele(orderList)"></div></td>
             </tr>
         </table>
 
@@ -669,13 +674,21 @@
 
     <div class="bottom">
         <div class="bottom">
+            <div>当前是第{{p_current}}页
+
+            </div>
             <a href=""><div ng-click="p_index(1)">首页</div></a>
+            <a href=""><div ng-click="backPage()">上页</div></a>
+            <a href=""><div ng-click="nextPage()">下页</div></a>
+
+
             <div class="page">
-                <a href=""><span ng-repeat="page in pages" ng-click="load_page($index+1)" class="pageCount">
-                {{page}}</span></a><!--页数按钮-->
+                <!--<a href=""><span ng-repeat="page in pages" ng-click="load_page($index+1)" class="pageCount">
+                {{page}}</span></a>页数按钮-->
                 <!--<span class="pageCount" ng-click="pagesearch($index)">{{page}}</span>-->
             </div>
             <a href=""><div ng-click="p_last(p_all_page)">尾页</div></a>
+            <div>共：{{p_all_page}} 页</div>
             <div>共：{{totalCount}} 条</div>
         </div>
     </div>
@@ -708,49 +721,3 @@
 </div>
 
 
-
-<script type="text/javascript">
-    $(function (){
-        $("#delineDate").on("click",function(e){
-            e.stopPropagation();
-            $(this).lqdatetimepicker({
-                css : 'datetime-day',
-                dateType : 'D'
-            });
-
-        });
-
-
-        $("#orderdate").on("click",function(e){
-            e.stopPropagation();
-            $(this).lqdatetimepicker({
-                css : 'datetime-day',
-                dateType : 'D'
-            });
-
-        });
-        $("#EdiDelineDate").on("click",function(e){
-            e.stopPropagation();
-            $(this).lqdatetimepicker({
-                css : 'datetime-day',
-                dateType : 'D'
-            });
-
-        });
-
-
-        $("#EdiOrderdate").on("click",function(e){
-            e.stopPropagation();
-            $(this).lqdatetimepicker({
-                css : 'datetime-day',
-                dateType : 'D'
-            });
-
-        });
-
-
-
-
-
-    });
-</script>

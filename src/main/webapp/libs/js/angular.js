@@ -27673,7 +27673,7 @@ var ngStyleDirective = ngDirective(function(scope, element, attr) {
         <div class="animate-switch-container"
           ng-switch on="selection">
             <div class="animate-switch" ng-switch-when="settings">Settings Div</div>
-            <div class="animate-switch" ng-switch-when="home">Home Span</div>
+            <div class="animate-switch" ng-switch-when="home">Order Span</div>
             <div class="animate-switch" ng-switch-default>default</div>
         </div>
       </div>
@@ -27727,7 +27727,7 @@ var ngStyleDirective = ngDirective(function(scope, element, attr) {
       });
       it('should change to home', function() {
         select.all(by.css('option')).get(1).click();
-        expect(switchElem.getText()).toMatch(/Home Span/);
+        expect(switchElem.getText()).toMatch(/Order Span/);
       });
       it('should select default', function() {
         select.all(by.css('option')).get(2).click();

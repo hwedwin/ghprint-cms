@@ -482,7 +482,7 @@ define(['angular', 'text!five/warehouse/warehouse.html'], function (angular, tpl
                         console.log( "$scope.p_all_page2========="+$scope.p_all_page2+"共几多页")
                         console.log( $scope.p_current2+"当前页是第几页")
                         console.log( $scope.totalCount2+"共几多条记录")
-                        reloadPno2();
+                        //reloadPno2();
 
                     }else{
                         //$scope.DataemptyState = true;
@@ -520,7 +520,7 @@ define(['angular', 'text!five/warehouse/warehouse.html'], function (angular, tpl
                         $scope.p_current3 = response.data.currentPage;
                         $scope.totalCount3 = response.data.totalCount;
 
-                        reloadPno3();
+                        //reloadPno3();
 
                     }else{
                         //$scope.DataemptyState = true;
@@ -569,7 +569,7 @@ define(['angular', 'text!five/warehouse/warehouse.html'], function (angular, tpl
                             console.log( $scope.p_current+"当前页是第几页")
                             console.log( $scope.totalCount+"共几多条记录")
 
-                            reloadPno();
+                            //reloadPno();
 
                     }else{
                         //$scope.DataemptyState = true;
@@ -676,6 +676,31 @@ define(['angular', 'text!five/warehouse/warehouse.html'], function (angular, tpl
                     console.log("系统出错，请联系管理员")
                 }
             };
+
+
+            $scope.reset = function() {
+
+                $http({
+                    method: 'GET',
+                    headers:{'Content-Type': 'application/x-www-form-urlencoded'},
+                    url: baseUrl+ '/ghprint-cms/logout.do?userAccount='+$scope.username
+                }).then(function successCallback(response) {
+                    console.log(response);
+                    if(response.data.success){
+                        $location.path("/Login")
+                    }else{
+                        console.log("注销失败")
+                        $location.path("/Login")
+                    }
+
+
+                }, function errorCallback(response) {
+                    console.log(response);
+                    $location.path("/Login")
+                });
+
+
+            }
 
 
             $scope.searchOnKey = function(index) {
@@ -842,19 +867,49 @@ define(['angular', 'text!five/warehouse/warehouse.html'], function (angular, tpl
             }
 
             //加载某一页
-            $scope.load_page = function(page){
+            $scope.backPage = function(){
+                console.log("backPage")
+                var currPage = $scope.p_current
+                currPage--
+                if(currPage==0){
+                    currPage =1;
+                }
                 if( $rootScope.selectedName=="全部"){
                     $rootScope.searchKey = "";
                     $rootScope.selectValue = ""
-                    searchProductList(page,"","");
+                    searchProductList(currPage,"","");
                 }else if( $rootScope.selectedName=="材料ID"){
-                    searchProductList(page,"stockid",$rootScope.selectValue);
+                    searchProductList(currPage,"stockid",$rootScope.selectValue);
                 }else if($rootScope.selectedName=="材料名称"){
-                    searchProductList(page,"stockname",$rootScope.selectValue);
+                    searchProductList(currPage,"stockname",$rootScope.selectValue);
                 }else if($rootScope.selectedName=="颜色"){
-                    searchProductList(page,"color",$rootScope.selectValue);
+                    searchProductList(currPage,"color",$rootScope.selectValue);
                 }else if($rootScope.selectedName=="编码"){
-                    searchProductList(page,"id",$rootScope.selectValue);
+                    searchProductList(currPage,"id",$rootScope.selectValue);
+                }else{
+
+                    console.log("系统出错，请联系管理员")
+                }
+            };
+
+            $scope.nextPage = function(){
+                var currPage = $scope.p_current
+                currPage++
+                if(currPage>=$scope.p_all_page){
+                    currPage =$scope.p_all_page;
+                }
+                if( $rootScope.selectedName=="全部"){
+                    $rootScope.searchKey = "";
+                    $rootScope.selectValue = ""
+                    searchProductList(currPage,"","");
+                }else if( $rootScope.selectedName=="材料ID"){
+                    searchProductList(currPage,"stockid",$rootScope.selectValue);
+                }else if($rootScope.selectedName=="材料名称"){
+                    searchProductList(currPage,"stockname",$rootScope.selectValue);
+                }else if($rootScope.selectedName=="颜色"){
+                    searchProductList(currPage,"color",$rootScope.selectValue);
+                }else if($rootScope.selectedName=="编码"){
+                    searchProductList(currPage,"id",$rootScope.selectValue);
                 }else{
 
                     console.log("系统出错，请联系管理员")
@@ -949,17 +1004,43 @@ define(['angular', 'text!five/warehouse/warehouse.html'], function (angular, tpl
             }
 
             //加载某一页
-            $scope.load_page2 = function(page){
+            $scope.backPage2 = function(){
+                var currPage = $scope.p_current
+                currPage--
+                if(currPage<=0){
+                    currPage =1;
+                }
                 if( $rootScope.selectedName2=="全部"){
                     $rootScope.searchKey2 = "";
                     $rootScope.selectValue2 = ""
-                    searchBoxList(page,"","");
+                    searchBoxList(currPage,"","");
                 }else if( $rootScope.selectedName2=="纸箱规格"){
-                    searchBoxList(page,"boxsize",$rootScope.selectValue2);
+                    searchBoxList(currPage,"boxsize",$rootScope.selectValue2);
                 }else if($rootScope.selectedName2=="单价"){
-                    searchBoxList(page,"price",$rootScope.selectValue2forNum);
+                    searchBoxList(currPage,"price",$rootScope.selectValue2forNum);
                 }else if($rootScope.selectedName2=="金额"){
-                    searchBoxList(page,"amount",$rootScope.selectValue2forNum);
+                    searchBoxList(currPage,"amount",$rootScope.selectValue2forNum);
+                }else{
+
+                    console.log("系统出错，请联系管理员")
+                }
+            };
+            $scope.nextPage2 = function(){
+                var currPage = $scope.p_current
+                currPage++
+                if(currPage>=$scope.p_all_page){
+                    currPage =$scope.p_all_page;
+                }
+                if( $rootScope.selectedName2=="全部"){
+                    $rootScope.searchKey2 = "";
+                    $rootScope.selectValue2 = ""
+                    searchBoxList(currPage,"","");
+                }else if( $rootScope.selectedName2=="纸箱规格"){
+                    searchBoxList(currPage,"boxsize",$rootScope.selectValue2);
+                }else if($rootScope.selectedName2=="单价"){
+                    searchBoxList(currPage,"price",$rootScope.selectValue2forNum);
+                }else if($rootScope.selectedName2=="金额"){
+                    searchBoxList(currPage,"amount",$rootScope.selectValue2forNum);
                 }else{
 
                     console.log("系统出错，请联系管理员")
@@ -1016,17 +1097,46 @@ define(['angular', 'text!five/warehouse/warehouse.html'], function (angular, tpl
             }
 
             //加载某一页
-            $scope.load_page3 = function(page){
+            $scope.backPage3 = function(page){
+                var currPage = $scope.p_current
+                currPage--
+                if(currPage<=0){
+                    currPage =1;
+                }
                 if( $rootScope.selectedName3=="全部"){
                     $rootScope.searchKey3 = "";
                     $rootScope.selectValue3 = ""
-                    searchAtomList(page,"","");
+                    searchAtomList(currPage,"","");
                 }else if( $rootScope.selectedName3=="供应商"){
-                    searchAtomList(page,"provider",$rootScope.selectValue3);
+                    searchAtomList(currPage,"provider",$rootScope.selectValue3);
                 }else if($rootScope.selectedName3=="材料名称"){
-                    searchAtomList(page,"name",$rootScope.selectValue3);
+                    searchAtomList(currPage,"name",$rootScope.selectValue3);
                 }else if($rootScope.selectedName3=="金额"){
-                    searchAtomList(page,"amount",$rootScope.selectValue3);
+                    searchAtomList(currPage,"amount",$rootScope.selectValue3);
+                }else{
+
+                    console.log("系统出错，请联系管理员")
+                }
+            };
+            $scope.nextPage3 = function(){
+                var currPage = $scope.p_current
+                currPage++
+                if(currPage>=$scope.p_all_page){
+                    currPage =$scope.p_all_page;
+                }
+
+
+
+                if( $rootScope.selectedName3=="全部"){
+                    $rootScope.searchKey3 = "";
+                    $rootScope.selectValue3 = ""
+                    searchAtomList(currPage,"","");
+                }else if( $rootScope.selectedName3=="供应商"){
+                    searchAtomList(currPage,"provider",$rootScope.selectValue3);
+                }else if($rootScope.selectedName3=="材料名称"){
+                    searchAtomList(currPage,"name",$rootScope.selectValue3);
+                }else if($rootScope.selectedName3=="金额"){
+                    searchAtomList(currPage,"amount",$rootScope.selectValue3);
                 }else{
 
                     console.log("系统出错，请联系管理员")

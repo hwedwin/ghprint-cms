@@ -8,19 +8,6 @@ define(['angular', 'text!five/Order/Order.html'], function (angular, tpl) {
             }
 
 
-            //function formatDate(now) {
-            //    var year=now.getYear();
-            //    var month=now.getMonth()+1;
-            //    var date=now.getDate();
-            //    var hour=now.getHours();
-            //    var minute=now.getMinutes();
-            //    var second=now.getSeconds();
-            //    return "20"+year+"-"+month+"-"+date+" "+hour+":"+minute+":"+second;
-            //}
-            //
-            //var d=new Date(1230999938);
-
-
             //console.log($rootScope.pagePostion);
             $scope.selectOrderOption = ["全部","编号", "交货日期", "产品名称","材料规格"];
             //$scope.newOrder.orderdate = "2017-04-04"
@@ -37,6 +24,15 @@ define(['angular', 'text!five/Order/Order.html'], function (angular, tpl) {
                 $scope.EdiOrder.standardid = $scope.EdiOrder.standardid.id
                 $scope.EdiOrder.result = $scope.EdiOrder.result.choice
 
+
+                //多选控制
+                if($scope.EdiOrder.print){$scope.EdiOrder.print = 1}else{$scope.EdiOrder.print =0}
+                if($scope.EdiOrder.open){$scope.EdiOrder.open = 1}else{$scope.EdiOrder.open = 0}
+                if($scope.EdiOrder.merge){$scope.EdiOrder.merge = 1}else{$scope.EdiOrder.merge = 0 }
+                if($scope.EdiOrder.cut){ $scope.EdiOrder.cut= 1}else{$scope.EdiOrder.cut = 0}
+                if($scope.EdiOrder.stable){ $scope.EdiOrder.stable = 1}else{ $scope.EdiOrder.stable = 0}
+                if($scope.EdiOrder.repeat){ $scope.EdiOrder.repeat = 1}else{ $scope.EdiOrder.repeat = 0}
+
                 var data  = $scope.EdiOrder
                     var url = baseUrl+'/ghprint-cms/orders/updateorder.do';
                 $http({
@@ -45,6 +41,7 @@ define(['angular', 'text!five/Order/Order.html'], function (angular, tpl) {
                     data: data
                 }).then(function successCallback(response) {
                     console.log(response);
+                    $scope.EditOrderBox=false
                     if(response.data.success){
                         $scope.tipsState=true;
                         $scope.tipsTitle = "操作提示";
@@ -56,6 +53,7 @@ define(['angular', 'text!five/Order/Order.html'], function (angular, tpl) {
                         $scope.tipsTitle = "操作提示";
                         $scope.tipsContent = "系统报错，请联系管理员";
                     }
+                    searchOrderList(1,"","")
                 }, function errorCallback(response) {
                     $scope.EditOrderBox=false
 
@@ -79,9 +77,18 @@ define(['angular', 'text!five/Order/Order.html'], function (angular, tpl) {
                         if(response.data.success){
 
                             $scope.EdiOrder = response.data.result
+
+                            if($scope.EdiOrder.print==1){$scope.EdiOrder.print = true}else{$scope.EdiOrder.print = false}
+                            if($scope.EdiOrder.merge==1){$scope.EdiOrder.merge = true}else{$scope.EdiOrder.merge = false}
+                            if($scope.EdiOrder.open==1){$scope.EdiOrder.open = true}else{$scope.EdiOrder.open = false}
+                            if($scope.EdiOrder.cut==1){$scope.EdiOrder.cut = true}else{$scope.EdiOrder.cut = false}
+                            if($scope.EdiOrder.stable==1){$scope.EdiOrder.stable = true}else{$scope.EdiOrder.stable = false}
+                            if($scope.EdiOrder.repeat==1){$scope.EdiOrder.repeat = true}else{$scope.EdiOrder.repeat = false}
+
+
                             $scope.EditOrderBox = true;
                             console.log("$scope.EditOrder.deline============"+$scope.EdiOrder.deline)
-                            $scope.EdiOrder.deline  = getLocalTime($scope.EdiOrder.deline)
+                            //$scope.EdiOrder.deline  = getLocalTime($scope.EdiOrder.deline)
 
                             //订单状态
                             var orderstate = $scope.EdiOrder.result
@@ -242,6 +249,15 @@ define(['angular', 'text!five/Order/Order.html'], function (angular, tpl) {
                 $scope.newOrder.standardid = $scope.newOrder.standardid.id
                 $scope.newOrder.result = $scope.newOrder.result.choice
 
+
+                //多选控制
+                if($scope.newOrder.print){$scope.newOrder.print = 1}else{$scope.newOrder.print =0}
+                if($scope.newOrder.open){$scope.newOrder.open = 1}else{$scope.newOrder.open = 0}
+                if($scope.newOrder.merge){$scope.newOrder.merge = 1}else{$scope.newOrder.merge = 0 }
+                if($scope.newOrder.cut){ $scope.newOrder.cut= 1}else{$scope.newOrder.cut = 0}
+                if($scope.newOrder.stable){ $scope.newOrder.stable = 1}else{ $scope.newOrder.stable = 0}
+                if($scope.newOrder.repeat){ $scope.newOrder.repeat = 1}else{ $scope.newOrder.repeat = 0}
+
                 console.log("$scope.newOrder.result========"+$scope.newOrder.result)
 
                 var data = {
@@ -322,6 +338,16 @@ define(['angular', 'text!five/Order/Order.html'], function (angular, tpl) {
                     if(response.data.success){
 
                         $scope.orderData = response.data.rows;
+                        for(i= 0;i<$scope.orderData.length;i++){
+                            if($scope.orderData[i].result==1){$scope.orderData[i].result = "进行中"}else{$scope.orderData[i].result = "已完成"}
+
+                            if($scope.orderData[i].print==1){$scope.orderData[i].print = true}else{$scope.orderData[i].print = false}
+                            if($scope.orderData[i].merge==1){$scope.orderData[i].merge = true}else{$scope.orderData[i].merge = false}
+                            if($scope.orderData[i].open==1){$scope.orderData[i].open = true}else{$scope.orderData[i].open = false}
+                            if($scope.orderData[i].cut==1){$scope.orderData[i].cut = true}else{$scope.orderData[i].cut = false}
+                            if($scope.orderData[i].stable==1){$scope.orderData[i].stable = true}else{$scope.orderData[i].stable = false}
+                            if($scope.orderData[i].repeat==1){$scope.orderData[i].repeat = true}else{$scope.orderData[i].repeat = false}
+                        }
                         //将此处的数据赋值到上面的分页变量
                         $scope.p_all_page = response.data.totalPage;
                         $scope.p_current = response.data.currentPage;
@@ -331,7 +357,7 @@ define(['angular', 'text!five/Order/Order.html'], function (angular, tpl) {
                         console.log( $scope.p_current+"当前页是第几页")
                         console.log( $scope.totalCount+"共几多条记录")
 
-                        reloadPno();
+                        //reloadPno();
 
                     }else{
                         //$scope.DataemptyState = true;
@@ -347,6 +373,11 @@ define(['angular', 'text!five/Order/Order.html'], function (angular, tpl) {
                     console.log(response);
                 });
             }
+
+            /*==============多选框===========================*/
+
+
+            /*==========*/
 
             //注销
             $scope.reset = function() {
@@ -375,25 +406,25 @@ define(['angular', 'text!five/Order/Order.html'], function (angular, tpl) {
 
             $scope.searchOnKey = function(index) {
                 if( $scope.selectedName=="全部"){
-                    $rootScope.selectedName= $scope.selectedName
-                    $rootScope.selectValue =  $scope.selectValue
-                    searchOrderList(1,$scope.searchKey,$scope.selectValue);
+                    $rootScope.selectValue =  $scope.selectValue = ""
+                    $rootScope.searchKey = $scope.searchKey = ""
+                    searchOrderList(1,$scope.searchKey,$rootScope.selectValue);
                 }else if( $scope.selectedName=="材料规格"){
-                    $rootScope.selectedName= $scope.selectedName
+                    $rootScope.searchKey= "specification"
                     $rootScope.selectValue =  $scope.selectValue
-                    searchOrderList(1,"specification",$scope.selectValue);
+                    searchOrderList(1,$rootScope.searchKey,$rootScope.selectValue);
                 }else if($scope.selectedName=="交货日期"){
-                    $rootScope.selectedName= $scope.selectedName
+                    $rootScope.searchKey= "deline"
                     $rootScope.selectValue =  $scope.selectValue
-                    searchOrderList(1,"deline",$scope.selectdate);
+                    searchOrderList(1,$rootScope.searchKey,$rootScope.selectValue);
                 }else if($scope.selectedName=="编号"){
-                    $rootScope.selectedName= $scope.selectedName
+                    $rootScope.searchKey = "orderid"
                     $rootScope.selectValue =  $scope.selectValue
-                    searchOrderList(1,"orderid",$scope.selectValue);
+                    searchOrderList(1,$rootScope.searchKey,$rootScope.selectValue);
                 }else if($scope.selectedName=="产品名称"){
-                    $rootScope.selectedName= $scope.selectedName
+                    $rootScope.searchKey = "stockname"
                     $rootScope.selectValue =  $scope.selectValue
-                    searchOrderList(1,"stockname",$scope.selectValue);
+                    searchOrderList(1, $rootScope.searchKey,$rootScope.selectValue);
                 }else {
 
                     $scope.tipsState = true;
@@ -451,24 +482,8 @@ define(['angular', 'text!five/Order/Order.html'], function (angular, tpl) {
 
             //首页
             $scope.p_index = function(){
-                if( $rootScope.selectedName=="全部"){
-                    $rootScope.searchKey = "";
-                    $rootScope.selectValue = ""
                     searchOrderList(1,$rootScope.searchKey,$rootScope.selectValue);
-                }else if( $rootScope.selectedName=="材料规格"){
-                    searchOrderList(1,"specification",$rootScope.selectValue);
-                }else if($rootScope.selectedName=="交货日期"){
-                    searchOrderList(1,"deline",$rootScope.selectdate);
-                }else if($rootScope.selectedName=="编号"){
-                    searchOrderList(1,"orderid",$rootScope.selectValue);
-                }else if($rootScope.selectedName=="产品名称"){
-                    searchOrderList(1,"stockname",$rootScope.selectValue);
-                }else{
-
-                    $scope.tipsState=true;
-                    $scope.tipsTitle = "操作提示";
-                    $scope.tipsContent = "系统报错，请联系管理员";
-            }}
+            }
 
 
 
@@ -478,40 +493,33 @@ define(['angular', 'text!five/Order/Order.html'], function (angular, tpl) {
             //尾页
             $scope.p_last = function(p_all_page){
 
-                if( $rootScope.selectedName=="全部"){
-                    searchOrderList(p_all_page,"","");
-                }else if( $rootScope.selectedName=="材料规格"){
-                    searchOrderList(p_all_page,"specification",$rootScope.selectValue);
-                }else if($rootScope.selectedName=="交货日期"){
-                    searchOrderList(p_all_page,"deline",$rootScope.selectdate);
-                }else if($rootScope.selectedName=="编号"){
-                    searchOrderList(p_all_page,"orderid",$rootScope.selectValue);
-                }else if($rootScope.selectedName=="产品名称"){
-                    searchOrderList(p_all_page,"stockname",$rootScope.selectValue);
-                }else{
-
-                    $scope.tipsState=true;
-                    $scope.tipsTitle = "操作提示";
-                    $scope.tipsContent = "系统报错，请联系管理员";}
+                    searchOrderList(p_all_page,$rootScope.searchKey,$rootScope.selectValue);
             }
 
             //加载某一页
             $scope.load_page = function(page){
-                if( $rootScope.selectedName=="全部"){
-                    searchOrderList(page,"","");
-                }else if( $rootScope.selectedName=="材料规格"){
-                    searchOrderList(page,"specification",$rootScope.selectValue);
-                }else if($rootScope.selectedName=="交货日期"){
-                    searchOrderList(page,"deline",$rootScope.selectdate);
-                }else if($rootScope.selectedName=="编号"){
-                    searchOrderList(page,"orderid",$rootScope.selectValue);
-                }else if($rootScope.selectedName=="产品名称"){
-                    searchOrderList(page,"stockname",$rootScope.selectValue);
-                }else{
+                searchOrderList(currPage,$rootScope.searchKey,$rootScope.selectValue);
 
-                    $scope.tipsState=true;
-                    $scope.tipsTitle = "操作提示";
-                    $scope.tipsContent = "系统报错，请联系管理员";}
+            };
+
+            $scope.backPage = function(){
+                var currPage = $scope.p_current
+                currPage--
+                if(currPage==0){
+                    currPage =1;
+                }
+                searchOrderList(currPage,$rootScope.searchKey,$rootScope.selectValue);
+
+            };
+
+
+            $scope.nextPage = function(){
+                var currPage = $scope.p_current
+                currPage++
+                if(currPage>=$scope.p_all_page){
+                    currPage =$scope.p_all_page;
+                }
+                    searchOrderList(currPage,$rootScope.searchKey,$rootScope.selectValue);
             };
 
             //初始化页码

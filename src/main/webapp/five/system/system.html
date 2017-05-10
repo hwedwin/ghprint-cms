@@ -35,7 +35,7 @@
         <!--</select>-->
     <!--</div>-->
 
-        <div class="search" ng-click="newOrder=true">添加</div>
+        <div class="search" ng-click="newOrder=true" ng-show="username=='超级管理员'">添加</div>
     <!--<div class="search" ng-click="app('搜索')">搜索</div>
      <div class="aptkMaskBox" >
             <div class="aptkMaskTitle">新增订单</div>
@@ -51,7 +51,7 @@
             <td class="sujectOption">姓名</td>
             <td class="sujectOption">手机号码</td>
             <td class="sujectOption">角色</td>
-            <td class="sujectOption">编辑</td>
+            <td class="sujectOption" ng-show="username=='超级管理员'" >编辑</td>
             </tr>
 
 
@@ -60,7 +60,7 @@
                 <td class="sujectOption sujectOptionng" >{{nameList.tSysUser.username}}</td>
                 <td class="sujectOption sujectOptionng">{{nameList.tSysUser.phone}}</td>
                 <td class="sujectOption sujectOptionng">{{nameList.rolename}}</td>
-                <td class="sujectOption sujectOptionng"><div ng-click="modifyUserBox(nameList)" class="EditButton point"/>   <div ng-click="deleUserBox($index)" class="DeleteButton point"/></td>
+                <td class="sujectOption sujectOptionng" ng-show="username=='超级管理员'"><div ng-click="modifyUserBox(nameList)" class="EditButton point"/>   <div ng-click="deleUserBox($index)" class="DeleteButton point"/></td>
 
 
             </tr>
@@ -69,12 +69,15 @@
     </div>
 
     <div class="bottom">
+        <div>当前是第{{p_current}}页
         <a href=""><div ng-click="pagesearch(1)">首页</div></a>
-        <div class="page">
+        <a href=""><div ng-click="backPage()">上页</div></a>
+        <a href=""><div ng-click="nextPage()">下页</div></a>
+        <!--<div class="page">
             <a href=""><span ng-repeat="page in pages" ng-click="pagesearch($index+1)" class="pageCount">
-                {{page}}</span></a><!--页数按钮-->
-            <!--<span class="pageCount" ng-click="pagesearch($index)">{{page}}</span>-->
-        </div>
+                {{page}}</span></a>&lt;!&ndash;页数按钮&ndash;&gt;
+            &lt;!&ndash;<span class="pageCount" ng-click="pagesearch($index)">{{page}}</span>&ndash;&gt;
+        </div>-->
         <a href=""><div ng-click="pagesearch(p_all_page)">尾页</div></a>
         <div>共：{{totalCount}} 条</div>
     </div>

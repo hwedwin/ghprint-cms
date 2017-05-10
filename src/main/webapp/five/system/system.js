@@ -164,7 +164,7 @@ define(['angular', 'text!five/system/system.html'], function (angular, tpl) {
                         console.log( $scope.p_all_page+"共几多页")
                         console.log( $scope.p_current+"当前页是第几页")
                         console.log( $scope.totalCount+"当前页是第几页")
-                        reloadPno();
+                        //reloadPno();
 
 
                         //$scope.pages =
@@ -307,8 +307,22 @@ define(['angular', 'text!five/system/system.html'], function (angular, tpl) {
             }
 
             //加载某一页
-            $scope.load_page = function(page){
-                searchUserList(page);
+            $scope.backPage = function(){
+                var currPage = $scope.p_current
+                currPage--
+                if(currPage==0){
+                    currPage =1;
+                }
+                searchUserList(currPage);
+            };
+
+            $scope.nextPage = function(){
+                var currPage = $scope.p_current
+                currPage++
+                if(currPage>=$scope.p_all_page){
+                    currPage =$scope.p_all_page;
+                }
+                searchUserList(currPage);
             };
 
             //初始化页码

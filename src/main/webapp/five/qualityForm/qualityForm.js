@@ -382,7 +382,7 @@ define(['angular', 'text!five/qualityForm/qualityForm.html'], function (angular,
                         console.log( $scope.p_all_page+"共几多页")
                         console.log( $scope.p_current+"当前页是第几页")
                         console.log( $scope.totalCount+"共几多条记录")
-                        reloadPno();
+                        //reloadPno();
                     }else{
                         $scope.DataemptyState = true;
                         $scope.tipsState=true;
@@ -479,22 +479,53 @@ define(['angular', 'text!five/qualityForm/qualityForm.html'], function (angular,
             }
 
             //加载某一页
-            $scope.load_page = function(page){
+            $scope.backPage = function(){
+                console.log("backPage")
+                var currPage = $scope.p_current
+                currPage--
+                if(currPage==0){
+                    currPage =1;
+                }
                 var urlKey;
                 if($rootScope.selectedName=='产品名称'){
 
                     urlKey = "productname"
-                    searchqualityList(page,urlKey,$rootScope.selectValue);
+                    searchqualityList(currPage,urlKey,$rootScope.selectValue);
                 }else if($rootScope.selectedName=='全部'){
                     $rootScope.selectedName= ""
                     $rootScope.selectValue =""
-                    searchqualityList(page,"","");
+                    searchqualityList(currPage,"","");
                 }else{
                     $scope.formTitle="错误提示"
                     $scope.controlUsertips="参数不齐"
                     $scope.windowState=true
                 }
             };
+
+            $scope.nextPage = function(){
+                console.log("nextPage")
+                var currPage = $scope.p_current
+                currPage++
+                if(currPage>=$scope.p_all_page){
+                    currPage =$scope.p_all_page;
+                }
+                var urlKey;
+                if($rootScope.selectedName=='产品名称'){
+
+                    urlKey = "productname"
+                    searchqualityList(currPage,urlKey,$rootScope.selectValue);
+                }else if($rootScope.selectedName=='全部'){
+                    $rootScope.selectedName= ""
+                    $rootScope.selectValue =""
+                    searchqualityList(currPage,"","");
+                }else{
+                    $scope.formTitle="错误提示"
+                    $scope.controlUsertips="参数不齐"
+                    $scope.windowState=true
+                }
+            };
+
+
 
             //初始化页码
             var reloadPno = function(){
