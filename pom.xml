@@ -237,6 +237,8 @@
             <groupId>cn.com.bestpay</groupId>
             <artifactId>commons</artifactId>
             <version>1.0</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/lib/commons-1.0.jar</systemPath>
         </dependency>
 
         <dependency>
@@ -289,7 +291,24 @@
                     <skip>true</skip>
                 </configuration>
             </plugin>
-
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>2.4</version>
+                <configuration>
+                    <failOnMissingWebXml>false</failOnMissingWebXml>
+                    <webResources>
+                        <resource>
+                            <directory>${project.basedir}/lib</directory>
+                            <targetPath>WEB-INF/lib</targetPath>
+                            <filtering>false</filtering>
+                            <includes>
+                                <include>**/*.jar</include>
+                            </includes>
+                        </resource>
+                    </webResources>
+                </configuration>
+            </plugin>
             <!-- autoconfig配置定义 -->
             <plugin>
                 <groupId>com.alibaba.citrus.tool</groupId>
