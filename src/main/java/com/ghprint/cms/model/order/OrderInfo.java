@@ -69,9 +69,9 @@ public class OrderInfo {
 
     private Integer repeat;
 
-    private String delivery;
+    private Integer delivery;
 
-    private String logistics;
+    private Integer logistics;
 
     private String express;
 
@@ -300,19 +300,19 @@ public class OrderInfo {
         this.repeat = repeat;
     }
 
-    public String getDelivery() {
+    public Integer getDelivery() {
         return delivery;
     }
 
-    public void setDelivery(String delivery) {
+    public void setDelivery(Integer delivery) {
         this.delivery = delivery;
     }
 
-    public String getLogistics() {
+    public Integer getLogistics() {
         return logistics;
     }
 
-    public void setLogistics(String logistics) {
+    public void setLogistics(Integer logistics) {
         this.logistics = logistics;
     }
 

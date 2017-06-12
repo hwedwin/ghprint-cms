@@ -35,9 +35,9 @@ public class OrderEdit {
 
     private Integer repeat;
 
-    private String delivery;
+    private Integer delivery;
 
-    private String logistics;
+    private Integer logistics;
 
     private String express;
 
@@ -125,19 +125,19 @@ public class OrderEdit {
         this.repeat = repeat;
     }
 
-    public String getDelivery() {
+    public Integer getDelivery() {
         return delivery;
     }
 
-    public void setDelivery(String delivery) {
+    public void setDelivery(Integer delivery) {
         this.delivery = delivery;
     }
 
-    public String getLogistics() {
+    public Integer getLogistics() {
         return logistics;
     }
 
-    public void setLogistics(String logistics) {
+    public void setLogistics(Integer logistics) {
         this.logistics = logistics;
     }
 
@@ -184,7 +184,7 @@ public class OrderEdit {
     public OrderEdit() {
     }
 
-    public OrderEdit(Integer id, Integer companyid, Integer standardid,Integer orderid, Date orderdate, Date deline, Integer print, Integer open, Integer merge, Integer cut, Integer stable, Integer repeat, String delivery, String logistics, String express, String expressnum, String result) {
+    public OrderEdit(Integer id, Integer companyid, Integer standardid,Integer orderid, Date orderdate, Date deline, Integer print, Integer open, Integer merge, Integer cut, Integer stable, Integer repeat, Integer delivery, Integer logistics, String express, String expressnum, String result) {
         this.id = id;
         this.companyid = companyid;
         this.standardid = standardid;

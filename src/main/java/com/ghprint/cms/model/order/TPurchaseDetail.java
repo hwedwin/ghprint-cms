@@ -52,9 +52,9 @@ public class TPurchaseDetail {
 
     private Integer repeat;
 
-    private String delivery;
+    private Integer delivery;
 
-    private String logistics;
+    private Integer logistics;
 
     private String express;
 
@@ -243,20 +243,20 @@ public class TPurchaseDetail {
         this.repeat = repeat;
     }
 
-    public String getDelivery() {
+    public Integer getDelivery() {
         return delivery;
     }
 
-    public void setDelivery(String delivery) {
-        this.delivery = delivery == null ? null : delivery.trim();
+    public void setDelivery(Integer delivery) {
+        this.delivery = delivery;
     }
 
-    public String getLogistics() {
+    public Integer getLogistics() {
         return logistics;
     }
 
-    public void setLogistics(String logistics) {
-        this.logistics = logistics == null ? null : logistics.trim();
+    public void setLogistics(Integer logistics) {
+        this.logistics = logistics;
     }
 
     public String getExpress() {
@@ -310,7 +310,7 @@ public class TPurchaseDetail {
     public TPurchaseDetail() {
     }
 
-    public TPurchaseDetail(Integer companyid, Integer productid, Integer stockid, Integer standardid,Integer orderid, Integer spellcount, Float proportion, Float height, Float thickness, Integer ordercount, Date orderdate, Date deline, Integer print, Integer open, Integer merge, Integer cut, Integer stable, Integer repeat, String delivery, String logistics, String express, String expressnum, String result) {
+    public TPurchaseDetail(Integer companyid, Integer productid, Integer stockid, Integer standardid,Integer orderid, Integer spellcount, Float proportion, Float height, Float thickness, Integer ordercount, Date orderdate, Date deline, Integer print, Integer open, Integer merge, Integer cut, Integer stable, Integer repeat, Integer delivery, Integer logistics, String express, String expressnum, String result) {
         this.companyid = companyid;
         this.productid = productid;
         this.stockid = stockid;

@@ -32,8 +32,8 @@ public class AddOrderController extends BaseAction{
 
     @RequestMapping(value = "/orders/addorder.do", method = RequestMethod.POST, produces = "application/json; charset=utf-8")
     @ResponseBody
-    public Response<String> OrderAdd(HttpServletRequest request, HttpServletResponse response , @RequestBody TPurchaseDetail order)  {
-        Response<String> responses = new Response<>();
+    public Response<OrderView> OrderAdd(HttpServletRequest request, HttpServletResponse response , @RequestBody TPurchaseDetail order)  {
+        Response<OrderView> responses = new Response<>();
         log.info("OrderAdd request param:{}",order.toString());
         try {
             Assert.hasText(order.getCompanyid().toString(), "order 中 公司ID  is null or 空字符串。");
@@ -52,7 +52,7 @@ public class AddOrderController extends BaseAction{
                 if(result!=null) {
                     responses.setErrorCode(Constant.errorCodeEnum.SUCCESS.getCode());
                     responses.setErrorMsg(Constant.errorCodeEnum.SUCCESS.getName());
-                    responses.setResult(result.toString());
+                    responses.setResult(result);
                 }else {
                     responses.setErrorCode(Constant.errorCodeEnum.FAILURE.getCode());
                     responses.setErrorMsg("添加订单异常");

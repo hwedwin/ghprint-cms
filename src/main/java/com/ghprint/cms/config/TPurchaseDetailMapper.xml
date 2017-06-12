@@ -25,8 +25,8 @@
     <result column="cut" property="cut" jdbcType="INTEGER" />
     <result column="stable" property="stable" jdbcType="INTEGER" />
     <result column="repeat" property="repeat" jdbcType="INTEGER" />
-    <result column="delivery" property="delivery" jdbcType="VARCHAR" />
-    <result column="logistics" property="logistics" jdbcType="VARCHAR" />
+    <result column="delivery" property="delivery" jdbcType="INTEGER" />
+    <result column="logistics" property="logistics" jdbcType="INTEGER" />
     <result column="express" property="express" jdbcType="VARCHAR" />
     <result column="expressnum" property="expressnum" jdbcType="VARCHAR" />
     <result column="status" property="status" jdbcType="INTEGER" />
@@ -145,7 +145,7 @@
     #{ordercount,jdbcType=INTEGER}, #{stockcount,jdbcType=INTEGER}, #{productsum,jdbcType=INTEGER},
     #{orderdate,jdbcType=DATE}, #{deline,jdbcType=DATE}, #{print,jdbcType=INTEGER},
     #{open,jdbcType=INTEGER}, #{merge,jdbcType=INTEGER}, #{cut,jdbcType=INTEGER}, #{stable,jdbcType=INTEGER},
-    #{repeat,jdbcType=INTEGER}, #{delivery,jdbcType=VARCHAR}, #{logistics,jdbcType=VARCHAR},
+    #{repeat,jdbcType=INTEGER}, #{delivery,jdbcType=INTEGER}, #{logistics,jdbcType=INTEGER},
     #{express,jdbcType=VARCHAR}, #{expressnum,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER},
     #{result,jdbcType=VARCHAR}, #{insertime,jdbcType=DATE})
   </insert>
@@ -317,10 +317,10 @@
         #{repeat,jdbcType=INTEGER},
       </if>
       <if test="delivery != null" >
-        #{delivery,jdbcType=VARCHAR},
+        #{delivery,jdbcType=INTEGER},
       </if>
       <if test="logistics != null" >
-        #{logistics,jdbcType=VARCHAR},
+        #{logistics,jdbcType=INTEGER},
       </if>
       <if test="express != null" >
         #{express,jdbcType=VARCHAR},
@@ -418,10 +418,10 @@
         repeat = #{record.repeat,jdbcType=INTEGER},
       </if>
       <if test="record.delivery != null" >
-        delivery = #{record.delivery,jdbcType=VARCHAR},
+        delivery = #{record.delivery,jdbcType=INTEGER},
       </if>
       <if test="record.logistics != null" >
-        logistics = #{record.logistics,jdbcType=VARCHAR},
+        logistics = #{record.logistics,jdbcType=INTEGER},
       </if>
       <if test="record.express != null" >
         express = #{record.express,jdbcType=VARCHAR},
@@ -468,8 +468,8 @@
     t.cut = #{record.cut,jdbcType=INTEGER},
     t.stable = #{record.stable,jdbcType=INTEGER},
     t.repeat = #{record.repeat,jdbcType=INTEGER},
-    t.delivery = #{record.delivery,jdbcType=VARCHAR},
-    t.logistics = #{record.logistics,jdbcType=VARCHAR},
+    t.delivery = #{record.delivery,jdbcType=INTEGER},
+    t.logistics = #{record.logistics,jdbcType=INTEGER},
     t.express = #{record.express,jdbcType=VARCHAR},
     t.expressnum = #{record.expressnum,jdbcType=VARCHAR},
     t.status = #{record.status,jdbcType=INTEGER},
@@ -550,10 +550,10 @@
         t.repeat = #{repeat,jdbcType=INTEGER},
       </if>
       <if test="delivery != null" >
-        t.delivery = #{delivery,jdbcType=VARCHAR},
+        t.delivery = #{delivery,jdbcType=INTEGER},
       </if>
       <if test="logistics != null" >
-        t.logistics = #{logistics,jdbcType=VARCHAR},
+        t.logistics = #{logistics,jdbcType=INTEGER},
       </if>
       <if test="express != null" >
         t.express = #{express,jdbcType=VARCHAR},
@@ -597,8 +597,8 @@
       cut = #{cut,jdbcType=INTEGER},
       stable = #{stable,jdbcType=INTEGER},
       `repeat` = #{repeat,jdbcType=INTEGER},
-      delivery = #{delivery,jdbcType=VARCHAR},
-      logistics = #{logistics,jdbcType=VARCHAR},
+      delivery = #{delivery,jdbcType=INTEGER},
+      logistics = #{logistics,jdbcType=INTEGER},
       express = #{express,jdbcType=VARCHAR},
       expressnum = #{expressnum,jdbcType=VARCHAR},
       `status` = #{status,jdbcType=INTEGER},
@@ -635,8 +635,8 @@
     <result column="cut" property="cut" jdbcType="INTEGER" />
     <result column="stable" property="stable" jdbcType="INTEGER" />
     <result column="repeat" property="repeat" jdbcType="INTEGER" />
-    <result column="delivery" property="delivery" jdbcType="VARCHAR" />
-    <result column="logistics" property="logistics" jdbcType="VARCHAR" />
+    <result column="delivery" property="delivery" jdbcType="INTEGER" />
+    <result column="logistics" property="logistics" jdbcType="INTEGER" />
     <result column="express" property="express" jdbcType="VARCHAR" />
     <result column="expressnum" property="expressnum" jdbcType="VARCHAR" />
     <result column="status" property="status" jdbcType="INTEGER" />
