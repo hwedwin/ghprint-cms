@@ -125,4 +125,18 @@ public class AuthorityKey {
 	* 订单参数构造器
 	* */
 	public  static  String ORDER_INIT="160000005";
+
+	/*订单明细新增
+	* */
+	public  static  String  ORDERPARAMS_ADD = "170000001";
+	/*订单明细删除
+	* */
+	public  static  String  ORDERPARAMS_DEL = "170000002";
+	/*订单明细修改
+	* */
+	public  static  String  ORDERPARAMS_UPDATE = "170000003";
+	/*订单明细查询
+	* */
+	public  static  String  ORDERPARAMS_SELECT = "170000004";
+
 }

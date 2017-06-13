@@ -611,7 +611,7 @@
     <id property="oid" column="id" jdbcType="INTEGER"/>
     <result property="companycode" column="companycode" jdbcType="VARCHAR"/>
     <result property="companyname" column="companyname" jdbcType="VARCHAR"/>
-    <result column="stockid" property="stockid" jdbcType="VARCHAR" />
+    <result column="stockid" property="stockid" jdbcType="INTEGER" />
     <result column="stockname" property="stockname" jdbcType="VARCHAR" />
     <result column="color" property="color" jdbcType="VARCHAR" />
     <result column="provider" property="provider" jdbcType="VARCHAR" />
