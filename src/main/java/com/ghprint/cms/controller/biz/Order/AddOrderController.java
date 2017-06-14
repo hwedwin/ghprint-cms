@@ -3,6 +3,7 @@ package com.ghprint.cms.controller.biz.Order;
 import cn.com.bestpay.Response;
 import com.ghprint.cms.common.AuthorityKey;
 import com.ghprint.cms.controller.BaseAction;
+import com.ghprint.cms.model.order.OrderAdd;
 import com.ghprint.cms.model.order.OrderView;
 import com.ghprint.cms.model.order.TPurchaseDetail;
 import com.ghprint.cms.services.OrderService;
@@ -32,19 +33,14 @@ public class AddOrderController extends BaseAction{
 
     @RequestMapping(value = "/orders/addorder.do", method = RequestMethod.POST, produces = "application/json; charset=utf-8")
     @ResponseBody
-    public Response<OrderView> OrderAdd(HttpServletRequest request, HttpServletResponse response , @RequestBody TPurchaseDetail order)  {
+    public Response<OrderView> OrderAdd(HttpServletRequest request, HttpServletResponse response , @RequestBody OrderAdd order)  {
         Response<OrderView> responses = new Response<>();
         log.info("OrderAdd request param:{}",order.toString());
         try {
             Assert.hasText(order.getCompanyid().toString(), "order 中 公司ID  is null or 空字符串。");
-            Assert.hasText(order.getStockid().toString(), "order 中 原材料ID  is null or 空字符串。");
-            Assert.hasText(order.getProductid().toString(), "order 中 成品ID  is null or 空字符串。");
+            Assert.hasText(order.getOrderparamsid().toString(), "order 中 订单明细ID  is null or 空字符串。");
             Assert.hasText(order.getStandardid().toString(), "order 中 生产标准ID  is null or 空字符串。");
             Assert.hasText(order.getOrderid().toString(), "order 中 订单ID  is null or 空字符串。");
-            Assert.hasText(order.getSpellcount().toString(), "order 中 拼数  is null or 空字符串。");
-            Assert.hasText(order.getProportion().toString(), "order 中 比重  is null or 空字符串。");
-            Assert.hasText(order.getHeight().toString(), "order 中 高度  is null or 空字符串。");
-            Assert.hasText(order.getThickness().toString(), "order 中 厚度  is null or 空字符串。");
             Assert.hasText(order.getOrdercount().toString(), "order 中 订单数量  is null or 空字符串。");
             Boolean flag = super.execute(request, response);
             if (flag) {

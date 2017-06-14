@@ -398,8 +398,8 @@ public class OrderInfo {
                 ", cut=" + cut +
                 ", stable=" + stable +
                 ", repeat=" + repeat +
-                ", delivery='" + delivery + '\'' +
-                ", logistics='" + logistics + '\'' +
+                ", delivery=" + delivery +
+                ", logistics=" + logistics +
                 ", express='" + express + '\'' +
                 ", expressnum='" + expressnum + '\'' +
                 ", status=" + status +

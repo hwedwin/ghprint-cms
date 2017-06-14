@@ -644,7 +644,7 @@
     <result column="insertime" property="insertime" jdbcType="DATE" />
   </resultMap>
   <sql id="Base_Column_List_base" >
-     t.id, t.standardid ,t.orderid,b.companycode ,b.companyname, c.stockid ,c.stockname ,c.color ,d.provider,d.name,d.specification,
+    t.id, t.standardid ,t.orderid,b.companycode ,b.companyname, c.stockid ,c.stockname ,c.color ,d.provider,d.name,d.specification,
     t.spellcount, t.proportion, t.height, t.thickness,
     t.materialsum, t.purchasebuy,t.ordercount, t.stockcount, t.productsum, t.orderdate, t.deline,
     t.print, t.open, t.merge, t.cut, t.stable, t.repeat, t.delivery, t.logistics, t.express, t.expressnum,

@@ -45,28 +45,38 @@ public class OrderServiceImpl implements OrderService {
 
     @Autowired
     private  OrderDetailService orderDetailService;
+    @Autowired
+    private  OrderParamsService orderParamsService;
 
     @Override
-    public OrderView addOrderItem(TPurchaseDetail order) {
+    public OrderView addOrderItem(OrderAdd order) {
         OrderView orderView = new OrderView();
+        OrderParams orderParams = new OrderParams();
         Integer orders = 0;
+        Integer proid = 0;
+        Integer mid = 0;
         try {
+             if(order.getOrderparamsid()>0 && order.getOrderparamsid()!=null){
+                 orderParams = orderParamsService.getOrderParamsById(order.getOrderparamsid());
+                 proid = orderParams.getProductid();
+                 mid = orderParams.getMaterialid();
+             }
             //成品检查以及成品抵扣操作
-            if (order.getOrdercount() > 0 && order.getProductid() != null) {
-                orderView = this.CheckProStocks(order.getProductid(), order.getOrdercount());
+            if (order.getOrdercount() > 0 && proid!= null) {
+                orderView = this.CheckProStocks(proid, order.getOrdercount());
                 if (orderView.getProdneed() > 0) {
-                    Integer record = proStockService.subStocksum(order.getProductid(), orderView.getProdneed());
-                    orderView.setNowprosum(proStockService.getProStockbyId(order.getProductid()).getStocksum());
-                    orderView.setMaterialsum(materialStockService.getMaterialStockById(order.getStockid()).getMaterialsum());
+                    Integer record = proStockService.subStocksum(proid, orderView.getProdneed());
+                    orderView.setNowprosum(proStockService.getProStockbyId(proid).getStocksum());
+                    orderView.setMaterialsum(materialStockService.getMaterialStockById(mid).getMaterialsum());
                     orderView.setNowmaterialsum(orderView.getMaterialsum());
                     log.info("抵扣成品库存成功！应抵扣量:{}", orderView.getProdneed());
                 }
                 //原材料检查以及操作
-                if (orderView.getProflag() == 0 && orderView.getProductsum() > 0 && order.getStockid() != null) {
-                    Float sub = this.materialSub(orderView.getProductsum(), order);
+                if (orderView.getProflag() == 0 && orderView.getProductsum() > 0 && mid != null) {
+                    Float sub = this.materialSub(orderView.getProductsum(), orderParams);
                     if (sub > 0) {
-                        OrderView view = this.CheckMaterialStocks(order.getStockid(), sub);
-                        float sum = materialStockService.subMaterialStocksum(order.getStockid(), sub);
+                        OrderView view = this.CheckMaterialStocks(mid, sub);
+                        float sum = materialStockService.subMaterialStocksum(mid, sub);
                         log.info("抵扣材料库存不足！应抵扣量:{},需采购量{}", view.getMaterialneed(), view.getPurchasebuy());
                         orderView.setMaterialflag(view.getMaterialflag());
                         orderView.setMaterialneed(view.getMaterialneed());
@@ -77,15 +87,29 @@ public class OrderServiceImpl implements OrderService {
                         }
                     }
                 }
-
+                TPurchaseDetail t = new TPurchaseDetail();
                 //订单入表
-                order.setMaterialsum(orderView.getNowmaterialsum());
-                order.setPurchasebuy(orderView.getPurchasebuy());
-                order.setStockcount(orderView.getNowprosum());
-                order.setProductsum(orderView.getProductsum());
-                order.setInsertime(new Date());
-                orders = purchaseDetailMapper.insertSelective(order);
-                orderView.setOrderid(order.getId());
+                t.setCompanyid(order.getCompanyid());
+                t.setOrderid(order.getOrderid());
+                t.setOrderdate(order.getOrderdate());
+                t.setStandardid(order.getStandardid());
+                t.setProductid(proid);
+                t.setStockid(mid);
+                t.setSpellcount(orderParams.getSpellcount());
+                t.setProportion(orderParams.getProportion());
+                t.setHeight(orderParams.getHeight());
+                t.setThickness(orderParams.getThickness());
+                t.setMaterialsum(orderView.getNowmaterialsum());
+                t.setPurchasebuy(orderView.getPurchasebuy());
+                t.setStockcount(orderView.getNowprosum());
+                t.setProductsum(orderView.getProductsum());
+                t.setOrdercount(order.getOrdercount());
+                t.setDeline(order.getDeline());
+                t.setResult(order.getResult());
+                t.setStatus(order.getStatus());
+                t.setInsertime(new Date());
+                orders = purchaseDetailMapper.insertSelective(t);
+                orderView.setOrderid(t.getId());
                 orderView.setInsertime(DateUtil.getTime());
                 orders +=orderDetailService.addOrderDetail(orderView);
                 log.info("订单增加操作完成,插入：{" + orders + "}条记录....\n" + order.toString()+"\n"+orderView.toString());
@@ -215,10 +239,10 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public Float materialSub(Integer needsum, TPurchaseDetail order) {
+    public Float materialSub(Integer needsum, OrderParams order) {
         float materialsub = 0f;
-        if (order.getStockid() != null && needsum > 0 && order.getSpellcount() > 0) {
-            TMaterialStock materialStock = materialStockService.getMaterialStockById(order.getStockid());
+        if (order.getMaterialid() != null && needsum > 0 && order.getSpellcount() > 0) {
+            TMaterialStock materialStock = materialStockService.getMaterialStockById(order.getMaterialid());
             Float size = materialStock.getSpecification() / order.getSpellcount();
             materialsub = needsum * size * order.getProportion() * order.getHeight() * order.getThickness();
             BigDecimal b = new BigDecimal(materialsub);
@@ -256,12 +280,13 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public OrderInit getProductionInit(Boolean company, Boolean product, Boolean material, Boolean standard) {
+    public OrderInit getProductionInit(Boolean company, Boolean product, Boolean material, Boolean standard,Boolean orderparams) {
         OrderInit orderInit = new OrderInit();
         List<OrderDictionary> list1 = new ArrayList<>();
         List<OrderDictionary> list2 = new ArrayList<>();
         List<OrderDictionary> list3 = new ArrayList<>();
         List<OrderDictionary> list4 = new ArrayList<>();
+        List<OrderDictionary> list5 = new ArrayList<>();
         if(company){
             List<TCustomerInfo> customerInfos = customerInfoService.selectCustomers();
             if(customerInfos.size()>0){
@@ -322,13 +347,27 @@ public class OrderServiceImpl implements OrderService {
             }
             orderInit.setStandard(list4);
         }
+        if(orderparams){
+            List<TOrderParams> orderParamses = orderParamsService.selectAllist();
+            if(orderParamses.size()>0){
+                for(int i = 0;i<orderParamses.size();i++){
+                    OrderDictionary orderDictionary = new OrderDictionary();
+                    orderDictionary.setId(orderParamses.get(i).getId());
+                    orderDictionary.setNote1(orderParamses.get(i).getProductid().toString());
+                    orderDictionary.setNote2(orderParamses.get(i).getMaterialid().toString());
+                    orderDictionary.setNote3(orderParamses.get(i).getNote());
+                    list5.add(orderDictionary);
+                }
+            }
+            orderInit.setOrderparams(list5);
+        }
         return orderInit;
     }
 
     @Override
     public OrderEdit getOrderEdit(Integer orderId) {
         OrderEdit order = purchaseDetailMapper.getEditOrder(orderId);
-        OrderInit orderInit = this.getProductionInit(true, false, false, true);
+        OrderInit orderInit = this.getProductionInit(true, false, false, true,false);
                     if (orderInit != null && order != null) {
                         List<OrderDictionary> company = orderInit.getCompany();
                         for (int i = 0; i < company.size(); i++) {

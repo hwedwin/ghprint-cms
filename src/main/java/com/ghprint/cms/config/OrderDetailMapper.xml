@@ -42,6 +42,9 @@
         ORDER BY t.insertime
     </select>
     <insert id="insertSelective" parameterType="com.ghprint.cms.model.order.OrderView" >
+        <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
         insert into t_order_detail
         <trim prefix="(" suffix=")" suffixOverrides="," >
             <if test="id != null" >

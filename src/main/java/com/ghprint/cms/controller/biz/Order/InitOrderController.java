@@ -32,17 +32,18 @@ public class InitOrderController extends BaseAction {
     @ResponseBody
     public Response<OrderInit> OrderInit(HttpServletRequest request, HttpServletResponse response, @RequestParam(value = "company")Boolean company,
                                          @RequestParam(value = "product")Boolean product,@RequestParam(value = "material")Boolean material,
-                                         @RequestParam(value = "standard")Boolean standard
+                                         @RequestParam(value = "standard")Boolean standard,@RequestParam(value = "orderparams")Boolean orderparams
             ){
         Response<OrderInit> responses = new Response<>();
         try {
             Assert.hasText(company.toString(), "company  is null or 空字符串。");
-            Assert.hasText(product.toString(), "company  is null or 空字符串。");
-            Assert.hasText(material.toString(), "company  is null or 空字符串。");
-            Assert.hasText(standard.toString(), "company  is null or 空字符串。");
+            Assert.hasText(product.toString(), "product  is null or 空字符串。");
+            Assert.hasText(material.toString(), "material  is null or 空字符串。");
+            Assert.hasText(standard.toString(), "standard  is null or 空字符串。");
+            Assert.hasText(orderparams.toString(), "orderparams  is null or 空字符串。");
             Boolean flag = super.execute(request, response);
             if (flag) {
-                OrderInit orderInit = orderService.getProductionInit(company, product, material, standard);
+                OrderInit orderInit = orderService.getProductionInit(company, product, material, standard,orderparams);
                     if(orderInit!=null){
                         responses.setErrorCode(Constant.errorCodeEnum.SUCCESS.getCode());
                         responses.setErrorMsg(Constant.errorCodeEnum.SUCCESS.getName());

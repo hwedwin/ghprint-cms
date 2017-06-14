@@ -10,7 +10,7 @@ public interface OrderService {
 
     /*新增订单
     * */
-    public OrderView addOrderItem(TPurchaseDetail order);
+    public OrderView addOrderItem(OrderAdd order);
     /*取消订单
     * */
     public Integer delOrderItem(Integer orderId);
@@ -28,13 +28,13 @@ public interface OrderService {
     public OrderView CheckProStocks(Integer productid , Integer ordercount);
     /*计算原材料抵扣量
     * */
-    public  Float  materialSub(Integer  needsum , TPurchaseDetail order);
+    public  Float  materialSub(Integer  needsum , OrderParams order);
     /*检查原材料库存是否足够
     * */
     public  OrderView CheckMaterialStocks(Integer stockid , Float sub);
     /*字典
     * */
-    public OrderInit getProductionInit(Boolean company , Boolean product , Boolean material , Boolean standard);
+    public OrderInit getProductionInit(Boolean company , Boolean product , Boolean material , Boolean standard,Boolean orderparams);
     /*查询单条记录修改附外键
     * */
     public OrderEdit getOrderEdit(Integer orderId);

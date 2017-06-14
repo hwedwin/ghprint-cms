@@ -11,6 +11,15 @@ public class OrderInit {
     private List<OrderDictionary>  product ;
     private List<OrderDictionary>  material ;
     private List<OrderDictionary>  standard ;
+    private List<OrderDictionary>  orderparams;
+
+    public List<OrderDictionary> getOrderparams() {
+        return orderparams;
+    }
+
+    public void setOrderparams(List<OrderDictionary> orderparams) {
+        this.orderparams = orderparams;
+    }
 
     public List<OrderDictionary> getCompany() {
         return company;
