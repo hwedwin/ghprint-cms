@@ -21,8 +21,8 @@ import javax.servlet.http.HttpServletResponse;
  */
 @RestController
 @RequestMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-public class AddOrderController  extends BaseAction{
-    private static Logger log = LoggerFactory.getLogger(AddOrderController.class);
+public class AddOrderParamsController  extends BaseAction{
+    private static Logger log = LoggerFactory.getLogger(AddOrderParamsController.class);
 
     @Autowired
     private OrderParamsService orderParamsService ;
@@ -33,12 +33,12 @@ public class AddOrderController  extends BaseAction{
         Response<String> responses = new Response<>();
         log.info("OrderParamsAdd request param:{}",order.toString());
         try {
-            Assert.hasText(order.getMaterialid().toString(), "order 中 原材料ID  is null or 空字符串。");
-            Assert.hasText(order.getProductid().toString(), "order 中 成品ID  is null or 空字符串。");
-            Assert.hasText(order.getProportion().toString(), "order 中 比重  is null or 空字符串。");
-            Assert.hasText(order.getHeight().toString(), "order 中 高度  is null or 空字符串。");
-            Assert.hasText(order.getThickness().toString(), "order 中 厚度  is null or 空字符串。");
-            Assert.hasText(order.getSpellcount().toString(), "order 中 拼数  is null or 空字符串。");
+            Assert.hasText(order.getMaterialid().toString(), "OrderParams 中 原材料ID  is null or 空字符串。");
+            Assert.hasText(order.getProductid().toString(), "OrderParams 中 成品ID  is null or 空字符串。");
+            Assert.hasText(order.getProportion().toString(), "OrderParams 中 比重  is null or 空字符串。");
+            Assert.hasText(order.getHeight().toString(), "OrderParams 中 高度  is null or 空字符串。");
+            Assert.hasText(order.getThickness().toString(), "OrderParams 中 厚度  is null or 空字符串。");
+            Assert.hasText(order.getSpellcount().toString(), "OrderParams 中 拼数  is null or 空字符串。");
             Boolean flag = super.execute(request, response);
             if (flag) {
                  Integer result = orderParamsService.addOrderParams(order);

@@ -50,6 +50,14 @@ public class OrderParamsServiceImpl implements OrderParamsService {
 
     @Override
     public Integer updateOrderParams(TOrderParams orderParams) {
+        if(orderParams.getMaterialid()!= null){
+            TMaterialStock materialStock = materialStockService.getMaterialStockById(orderParams.getMaterialid());
+            orderParams.setMaterialsum(materialStock.getMaterialsum());
+        }
+        if(orderParams.getProductid()!=null){
+            TProductionStock productionStock = proStockService.getProStockbyId(orderParams.getProductid());
+            orderParams.setStocksum(productionStock.getStocksum());
+        }
         Integer record = orderParamsMapper.updateByPrimaryKey(orderParams);
         return record;
     }

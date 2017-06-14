@@ -24,7 +24,6 @@ import javax.servlet.http.HttpServletResponse;
 @RestController
 @RequestMapping(produces = MediaType.APPLICATION_JSON_VALUE)
 public class QueryOrderController extends BaseAction {
-
     private static Logger log = LoggerFactory.getLogger(QueryOrderController.class);
 
     @Autowired
