@@ -22,15 +22,116 @@ public class OrderAdd {
     private Integer ordercount = 0;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    @JsonFormat(pattern="yyyy-MM-dd",timezone = "GMT+8")
+    @JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
     private Date orderdate;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    @JsonFormat(pattern="yyyy-MM-dd",timezone = "GMT+8")
+    @JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
     private Date deline;
 
-    private Integer status =1;
+    private Integer print;
+
+    private Integer open;
+
+    private Integer merge;
+
+    private Integer cut;
+
+    private Integer stable;
+
+    private Integer repeat;
+
+    private Integer delivery;
+
+    private Integer logistics;
+
+    private String express;
+
+    private String expressnum;
+
+
+    private Integer status = 1;
 
     private String result;
+
+    public Integer getPrint() {
+        return print;
+    }
+
+    public void setPrint(Integer print) {
+        this.print = print;
+    }
+
+    public Integer getOpen() {
+        return open;
+    }
+
+    public void setOpen(Integer open) {
+        this.open = open;
+    }
+
+    public Integer getMerge() {
+        return merge;
+    }
+
+    public void setMerge(Integer merge) {
+        this.merge = merge;
+    }
+
+    public Integer getCut() {
+        return cut;
+    }
+
+    public void setCut(Integer cut) {
+        this.cut = cut;
+    }
+
+    public Integer getStable() {
+        return stable;
+    }
+
+    public void setStable(Integer stable) {
+        this.stable = stable;
+    }
+
+    public Integer getRepeat() {
+        return repeat;
+    }
+
+    public void setRepeat(Integer repeat) {
+        this.repeat = repeat;
+    }
+
+    public Integer getDelivery() {
+        return delivery;
+    }
+
+    public void setDelivery(Integer delivery) {
+        this.delivery = delivery;
+    }
+
+    public Integer getLogistics() {
+        return logistics;
+    }
+
+    public void setLogistics(Integer logistics) {
+        this.logistics = logistics;
+    }
+
+    public String getExpress() {
+        return express;
+    }
+
+    public void setExpress(String express) {
+        this.express = express;
+    }
+
+    public String getExpressnum() {
+        return expressnum;
+    }
+
+    public void setExpressnum(String expressnum) {
+        this.expressnum = expressnum;
+    }
 
     public Integer getId() {
         return id;
@@ -137,6 +238,16 @@ public class OrderAdd {
                 ", ordercount=" + ordercount +
                 ", orderdate=" + orderdate +
                 ", deline=" + deline +
+                ", print=" + print +
+                ", open=" + open +
+                ", merge=" + merge +
+                ", cut=" + cut +
+                ", stable=" + stable +
+                ", repeat=" + repeat +
+                ", delivery=" + delivery +
+                ", logistics=" + logistics +
+                ", express='" + express + '\'' +
+                ", expressnum='" + expressnum + '\'' +
                 ", status=" + status +
                 ", result='" + result + '\'' +
                 '}';

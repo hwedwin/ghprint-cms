@@ -108,6 +108,18 @@ public class OrderServiceImpl implements OrderService {
                 t.setResult(order.getResult());
                 t.setStatus(order.getStatus());
                 t.setInsertime(new Date());
+                //选填
+                t.setPrint(order.getPrint());
+                t.setOpen(order.getOpen());
+                t.setMerge(order.getMerge());
+                t.setCut(order.getCut());
+                t.setStable(order.getStable());
+                t.setRepeat(order.getRepeat());
+                t.setDelivery(order.getDelivery());
+                t.setLogistics(order.getLogistics());
+                t.setExpress(order.getExpress());
+                t.setExpressnum(order.getExpressnum());
+
                 orders = purchaseDetailMapper.insertSelective(t);
                 orderView.setOrderid(t.getId());
                 orderView.setInsertime(DateUtil.getTime());
