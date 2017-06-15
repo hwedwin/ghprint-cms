@@ -3,7 +3,7 @@
  * 更适合团队配合的配置版router
  * 彻底解耦，按需加载，router的配置可以放到服务器直出，更便于团队合作
  */
-define(['angular', 'require', 'app', 'jquery','flexible','selectUi','angular-route'], function (angular, require, app) {
+define(['angular', 'require', 'app','flexible','selectUi','angular-route'], function (angular, require, app) {
 
             app.config(['$routeProvider', '$controllerProvider',
                 function($routeProvider, $controllerProvider) {
