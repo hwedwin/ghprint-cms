@@ -29,4 +29,7 @@ public interface OrderParamsService {
     /*查询整个列表
     * */
     public List<TOrderParams> selectAllist();
+    /*查询单条记录修改附外键
+   * */
+    public OrderParams getOrderParamsEdit(Integer opid);
 }

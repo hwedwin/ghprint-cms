@@ -75,7 +75,7 @@ public class QueryOrderParamsController  extends BaseAction{
             log.info("OrderParamsDetailEdit request param:{}", opid);
             Boolean flag = super.execute(request, response);
             if (flag) {
-                OrderParams orderInfo = orderParamsService.getOrderParamsById(opid);
+                OrderParams orderInfo = orderParamsService.getOrderParamsEdit(opid);
                 if (orderInfo != null) {
                     responses.setErrorCode(Constant.errorCodeEnum.SUCCESS.getCode());
                     responses.setErrorMsg(Constant.errorCodeEnum.SUCCESS.getName());

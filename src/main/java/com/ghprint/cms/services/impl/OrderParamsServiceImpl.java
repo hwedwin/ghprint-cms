@@ -1,19 +1,22 @@
 package com.ghprint.cms.services.impl;
 
-import com.ghprint.cms.model.order.OrderParams;
-import com.ghprint.cms.model.order.TOrderParams;
-import com.ghprint.cms.model.order.TOrderParamsExample;
+import com.ghprint.cms.model.order.*;
 import com.ghprint.cms.model.stock.TMaterialStock;
 import com.ghprint.cms.model.stock.TProductionStock;
 import com.ghprint.cms.pagination.DataGridResult;
 import com.ghprint.cms.serviceDao.TOrderParamsMapper;
 import com.ghprint.cms.services.MaterialStockService;
 import com.ghprint.cms.services.OrderParamsService;
+import com.ghprint.cms.services.OrderService;
 import com.ghprint.cms.services.ProStockService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+
+import static jdk.nashorn.internal.runtime.regexp.joni.Config.log;
 
 /**
  * Created by lipeiting on 2017/6/13.
@@ -21,12 +24,16 @@ import java.util.List;
 @Service
 public class OrderParamsServiceImpl implements OrderParamsService {
 
+    private static Logger log = LoggerFactory.getLogger(OrderParamsServiceImpl.class);
+
     @Autowired
     private TOrderParamsMapper orderParamsMapper;
     @Autowired
     private MaterialStockService materialStockService;
     @Autowired
     private ProStockService proStockService;
+    @Autowired
+    private OrderService orderService;
 
     @Override
     public Integer addOrderParams(TOrderParams orderParams) {
@@ -89,6 +96,31 @@ public class OrderParamsServiceImpl implements OrderParamsService {
         TOrderParamsExample example = new TOrderParamsExample();
         List<TOrderParams> orderParamses =  orderParamsMapper.selectByExample(example);
         return orderParamses;
+    }
+
+    @Override
+    public OrderParams getOrderParamsEdit(Integer opid) {
+        OrderParams order = orderParamsMapper.getOneitem(opid);
+        OrderInit orderInit = orderService.getProductionInit(false, true, true, false,false);
+        if (orderInit != null && order != null) {
+            List<OrderDictionary> product = orderInit.getProduct();
+            for (int i = 0; i < product.size(); i++) {
+                if (product.get(i).getId() == order.getProductid()) {
+                    log.info("成品ID：{} ，INDEX：{}",order.getProductid(),i+1);
+                    order.setProductid(i + 1);
+                    break;
+                }
+            }
+            List<OrderDictionary>  material= orderInit.getMaterial();
+            for(int i=0;i<material.size(); i++){
+                if(material.get(i).getId() ==  order.getMaterialid()){
+                    log.info("原材料ID：{} ，INDEX：{}",order.getMaterialid(),i+1);
+                    order.setMaterialid(i+1);
+                    break;
+                }
+            }
+        }
+        return   order==null?null : order ;
     }
 
 
