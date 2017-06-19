@@ -710,11 +710,13 @@
     </where>
   </select>
 
-
+  <sql id="Column_UPDATE" >
+     t.* ,e.id as opid
+  </sql>
 
   <select id="getEditOrder"   resultType="com.ghprint.cms.model.order.OrderEdit" parameterType="java.lang.Integer">
     SELECT
-    <include refid="Base_Column_List"/>
+    <include refid="Column_UPDATE"/>
     FROM t_purchase_detail t
     LEFT JOIN t_customer_info b
     ON t.companyid = b.id
@@ -722,7 +724,8 @@
     ON  t.productid = c.id
     LEFT JOIN  t_material_stock d
     ON  t.stockid = d.id
-
+    LEFT  JOIN  t_order_params e
+    on  t.productid = e.productid and t.stockid = e.materialid
     <where>
       t.status = 1
       <if test="id != null">

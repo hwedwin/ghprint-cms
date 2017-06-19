@@ -88,17 +88,18 @@ public class TestOrderService {
 
     @Test
     public void testupdateOrderItem() {
-        OrderEdit orderEdit = new OrderEdit(23, 3, 3, 323243, new Date(), new Date(), 1, 1, 1, 1, 1, 1, 1, 1, "express", "expressnum", "result");
+        OrderEdit orderEdit = orderService.getOrderEdit(40);
+        System.out.println("before:"+orderEdit);
+        orderEdit.setOpid(2);
         Integer item = orderService.updateOrderItem(orderEdit);
-        String jsonString = JSON.toJSONString(orderEdit);
-        System.out.println(jsonString);
+        System.out.println("after:"+orderEdit);
     }
 
     @Test
     public void testgetOrderEdit() {
-        OrderEdit orderEdit = orderService.getOrderEdit(23);
+        OrderEdit orderEdit = orderService.getOrderEdit(40);
         System.out.println(orderEdit);
-        OrderInit productionInit = orderService.getProductionInit(true, false, false, true,false);
-        System.out.println(productionInit);
+//        OrderInit productionInit = orderService.getProductionInit(true, false, false, true,false);
+//        System.out.println(productionInit);
     }
 }

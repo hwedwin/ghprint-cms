@@ -16,6 +16,9 @@ public class OrderEdit {
     private Integer standardid;
 
     private Integer orderid;
+
+    private  Integer opid;
+
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @JsonFormat(pattern="yyyy-MM-dd",timezone = "GMT+8")
     private Date orderdate;
@@ -181,14 +184,23 @@ public class OrderEdit {
         this.orderid = orderid;
     }
 
+    public Integer getOpid() {
+        return opid;
+    }
+
+    public void setOpid(Integer opid) {
+        this.opid = opid;
+    }
+
     public OrderEdit() {
     }
 
-    public OrderEdit(Integer id, Integer companyid, Integer standardid,Integer orderid, Date orderdate, Date deline, Integer print, Integer open, Integer merge, Integer cut, Integer stable, Integer repeat, Integer delivery, Integer logistics, String express, String expressnum, String result) {
+    public OrderEdit(Integer id, Integer companyid, Integer standardid,Integer orderid,Integer opid, Date orderdate, Date deline, Integer print, Integer open, Integer merge, Integer cut, Integer stable, Integer repeat, Integer delivery, Integer logistics, String express, String expressnum, String result) {
         this.id = id;
         this.companyid = companyid;
         this.standardid = standardid;
         this.orderid = orderid;
+        this.opid =opid;
         this.orderdate = orderdate;
         this.deline = deline;
         this.print = print;
@@ -211,6 +223,7 @@ public class OrderEdit {
                 ", companyid=" + companyid +
                 ", standardid=" + standardid +
                 ", orderid=" + orderid +
+                ", opid=" + opid +
                 ", orderdate=" + orderdate +
                 ", deline=" + deline +
                 ", print=" + print +
@@ -219,8 +232,8 @@ public class OrderEdit {
                 ", cut=" + cut +
                 ", stable=" + stable +
                 ", repeat=" + repeat +
-                ", delivery='" + delivery + '\'' +
-                ", logistics='" + logistics + '\'' +
+                ", delivery=" + delivery +
+                ", logistics=" + logistics +
                 ", express='" + express + '\'' +
                 ", expressnum='" + expressnum + '\'' +
                 ", result='" + result + '\'' +
