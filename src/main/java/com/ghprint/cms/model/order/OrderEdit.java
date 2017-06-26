@@ -17,7 +17,15 @@ public class OrderEdit {
 
     private Integer orderid;
 
-    private  Integer opid;
+    private  Integer oid;
+
+    public Integer getOid() {
+        return oid;
+    }
+
+    public void setOid(Integer oid) {
+        this.oid = oid;
+    }
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @JsonFormat(pattern="yyyy-MM-dd",timezone = "GMT+8")
@@ -184,13 +192,6 @@ public class OrderEdit {
         this.orderid = orderid;
     }
 
-    public Integer getOpid() {
-        return opid;
-    }
-
-    public void setOpid(Integer opid) {
-        this.opid = opid;
-    }
 
     public OrderEdit() {
     }
@@ -200,7 +201,7 @@ public class OrderEdit {
         this.companyid = companyid;
         this.standardid = standardid;
         this.orderid = orderid;
-        this.opid =opid;
+        this.oid =opid;
         this.orderdate = orderdate;
         this.deline = deline;
         this.print = print;
@@ -223,7 +224,7 @@ public class OrderEdit {
                 ", companyid=" + companyid +
                 ", standardid=" + standardid +
                 ", orderid=" + orderid +
-                ", opid=" + opid +
+                ", opid=" + oid +
                 ", orderdate=" + orderdate +
                 ", deline=" + deline +
                 ", print=" + print +

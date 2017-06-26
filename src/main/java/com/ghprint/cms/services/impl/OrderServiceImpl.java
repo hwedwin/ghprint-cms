@@ -89,6 +89,7 @@ public class OrderServiceImpl implements OrderService {
                 }
                 TPurchaseDetail t = new TPurchaseDetail();
                 //订单入表
+                t.setOid(orderParams.getOid());
                 t.setCompanyid(order.getCompanyid());
                 t.setOrderid(order.getOrderid());
                 t.setOrderdate(order.getOrderdate());
@@ -149,8 +150,8 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public Integer updateOrderItem(OrderEdit order) {
-        TPurchaseDetail detail = purchaseDetailMapper.selectByPrimaryKey(order.getId());
-        OrderParams params = orderParamsService.getOrderParamsById(order.getOpid());
+        TPurchaseDetail detail = purchaseDetailMapper.selectByPrimaryKey(order.getOid());
+        OrderParams params = orderParamsService.getOrderParamsById(order.getOid());
         if(order.getCompanyid()!=null) {
             detail.setCompanyid(order.getCompanyid());
         }
@@ -199,9 +200,10 @@ public class OrderServiceImpl implements OrderService {
         if(order.getOrderid()!=null){
             detail.setOrderid(order.getOrderid());
         }
-        if(order.getOpid() != null){
+        if(order.getOid() != null){
             detail.setProductid(params.getProductid());
             detail.setStockid(params.getMaterialid());
+            detail.setOid(params.getOid());
         }
         Integer key = purchaseDetailMapper.updateByPrimaryKey(detail);
         return key;
@@ -404,9 +406,9 @@ public class OrderServiceImpl implements OrderService {
                         }
                         List<OrderDictionary> params = orderInit.getOrderparams();
                         for(int i=0;i<params.size(); i++){
-                            if(params.get(i).getId() ==  order.getOpid()){
-                                log.info("订单明细ID：{} ，INDEX：{}",order.getOpid(),i+1);
-                                order.setOpid(i+1);
+                            if(params.get(i).getId() ==  order.getOid()){
+                                log.info("订单明细ID：{} ，INDEX：{}",order.getOid(),i+1);
+                                order.setOid(i+1);
                                 break;
                             }
                         }

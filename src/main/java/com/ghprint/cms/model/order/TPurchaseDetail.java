@@ -8,6 +8,8 @@ import java.util.Date;
 public class TPurchaseDetail {
     private Integer id;
 
+    private Integer oid;
+
     private Integer orderid;
 
     private Integer companyid;
@@ -307,6 +309,14 @@ public class TPurchaseDetail {
         this.orderid = orderid;
     }
 
+    public Integer getOid() {
+        return oid;
+    }
+
+    public void setOid(Integer oid) {
+        this.oid = oid;
+    }
+
     public TPurchaseDetail() {
     }
 
@@ -355,6 +365,7 @@ public class TPurchaseDetail {
     public String toString() {
         return "TPurchaseDetail{" +
                 "id=" + id +
+                ", oid=" + oid +
                 ", orderid=" + orderid +
                 ", companyid=" + companyid +
                 ", productid=" + productid +
@@ -377,8 +388,8 @@ public class TPurchaseDetail {
                 ", cut=" + cut +
                 ", stable=" + stable +
                 ", repeat=" + repeat +
-                ", delivery='" + delivery + '\'' +
-                ", logistics='" + logistics + '\'' +
+                ", delivery=" + delivery +
+                ", logistics=" + logistics +
                 ", express='" + express + '\'' +
                 ", expressnum='" + expressnum + '\'' +
                 ", status=" + status +
