@@ -95,8 +95,8 @@
   <sql id="Base_Column_List" >
     id, oid, companyid, productid, stockid, standardid, orderid, spellcount, proportion,
     height, thickness, materialsum, purchasebuy, ordercount, stockcount, productsum,
-    orderdate, deline, print, open, merge, cut, stable, repeat, delivery, logistics,
-    express, expressnum, status, result, insertime
+    orderdate, deline, print, t.open, t.merge, cut, stable, t.repeat, delivery, logistics,
+    express, expressnum, t.status, result, insertime
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ghprint.cms.model.order.TPurchaseDetailExample" >
     select

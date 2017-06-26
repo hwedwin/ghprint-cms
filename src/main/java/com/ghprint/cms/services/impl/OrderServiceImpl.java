@@ -150,8 +150,8 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public Integer updateOrderItem(OrderEdit order) {
-        TPurchaseDetail detail = purchaseDetailMapper.selectByPrimaryKey(order.getOid());
-        OrderParams params = orderParamsService.getOrderParamsById(order.getOid());
+        TPurchaseDetail detail = purchaseDetailMapper.selectByPrimaryKey(order.getId());
+        OrderParams params = orderParamsService.getOrderParamsById(detail.getOid());
         if(order.getCompanyid()!=null) {
             detail.setCompanyid(order.getCompanyid());
         }
