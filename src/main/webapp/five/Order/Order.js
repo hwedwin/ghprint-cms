@@ -136,7 +136,7 @@ define(['angular', 'text!five/Order/Order.html'], function (angular, tpl) {
             /*订单初始化数据*/
             beginOrder();
             function beginOrder() {
-                var url = baseUrl+'/ghprint-cms/orders/initorder.do?company=true&product=true&material=true&standard=true';
+                var url = baseUrl+'/ghprint-cms/orders/initorder.do?company=true&product=true&material=true&standard=true&orderparams=true';
                 $http({
                     method: 'GET',
                     url: url
@@ -327,7 +327,7 @@ define(['angular', 'text!five/Order/Order.html'], function (angular, tpl) {
             searchOrderList(1,"","");
             function searchOrderList(page,key,value) {
                 var modelUrl
-                modelUrl = baseUrl+"/ghprint-cms/orders/selectorders.do?page="+page +"&rows=5+&key="+key +"&value="+value;
+                modelUrl = baseUrl+"/ghprint-cms/orders/selectorders.do?page="+page +"&rows=5&key="+key +"&value="+value;
                 console.log("modelUrl==========="+modelUrl);
                 //console.log(url);
                 $http({
